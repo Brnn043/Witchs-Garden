@@ -51,6 +51,17 @@ public class Stick implements Collectable {
         }
     }
 
+    @Override
+    public void collected() {
+        Player player = GameController.getInstance().getPlayer();
+        if(player.getStick() != null) {
+            System.out.println("Player already have stick");
+            return;
+        }
+        player.setStick(this);
+        this.setCollected(true);
+    }
+
     public int getDamage() { return damage; }
 
     public void setDamage(int damage) { this.damage = damage; }
@@ -61,9 +72,7 @@ public class Stick implements Collectable {
 
     public int getDurability() { return durability; }
 
-    public void setDurabilty(int durabilty) {
-        this.durability = Math.max(0,durabilty);
-    }
+    public void setDurabilty(int durabilty) { this.durability = Math.max(0,durabilty); }
 
     public int getAttackRange() { return attackRange; }
 
@@ -82,11 +91,6 @@ public class Stick implements Collectable {
         setPositionX((int) ((float)Math.random()*100)* Config.gameFrameWidth/100);
         setPositionY((int) ((float)Math.random()*100)*Config.gameFrameHeight/100);
         this.setCollected(false);
-    }
-
-    @Override
-    public void collected() {
-        // haven't implement
     }
 
     @Override
