@@ -43,7 +43,7 @@ public class Stick implements Collectable {
             double disX = player.getPositionX() - zombie.getPositionX();
             double disY = player.getPositionY() - zombie.getPositionY();
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
-            if( Math.abs(distance) <= this.getAttackRange() ) {
+            if( distance <= this.getAttackRange() ) {
                 zombie.setHp( zombie.getHp() - this.getDamage() );
                 this.setDurabilty(this.getDurability() - durabilityPerAttack);
                 this.setCooldown(cooldownTime);
