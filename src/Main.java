@@ -1,6 +1,11 @@
+import Games.GameController;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Test!");
+        // GUI
+        while(! GameController.getInstance().getGameover()){
+            GameController.play();
+        }
     }
 }
 

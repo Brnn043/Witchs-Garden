@@ -23,8 +23,8 @@ public class Player extends BaseCharacter{
             double disX = GameController.getInstance().getPlayer().getPositionX() - zombie.getPositionX();
             double disY = GameController.getInstance().getPlayer().getPositionY() - zombie.getPositionY();
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
-            if( Math.abs(distance) <= this.getAttackRange() ) {
-                zombie.setHp( zombie.getHp() - this.getDamage() );
+            if( distance <= stick.getAttackRange() ) {
+                zombie.setHp( zombie.getHp() - stick.getDamage() );
                 stick.setDurability(stick.getDurability() - stick.getDurabilityPerAttack());
                 stick.setCooldown(stick.getCooldownTime());
             }

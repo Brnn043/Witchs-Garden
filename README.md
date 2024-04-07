@@ -2,6 +2,7 @@
 
 # Notes
 - ย้าย static value ของ stick ใส่ enum
-
 # Add On later
 - BaseCharacter/weatherEffected
+- เราน่าจะต้องมาตกลงกันเรื่อง weatherEffected เพิ่มด้วยๆ
+- GameController.getInstance().get() (almost done)

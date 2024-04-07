@@ -3,24 +3,20 @@ package Items.Character;
 import Games.Config;
 import Games.GameController;
 import Items.Interfaces.Attackable;
-import Items.Interfaces.Collectable;
 import Items.Interfaces.Walkable;
 import Items.Interfaces.WeatherEffectable;
 import Games.Config.*;
-import Items.Veggies.BaseVeggies;
-
-import javax.print.attribute.standard.JobKOctets;
 
 public abstract class BaseCharacter implements Walkable, Attackable, WeatherEffectable {
-    private int positionX;
-    private int positionY;
+    private float positionX;
+    private float positionY;
     private float speedRate;
     private final int MAXSPEEDRATE;
     private int attackRange;
     private int damage;
     private int attackCooldown;
 
-    protected BaseCharacter(int positionX, int positionY, int maxspeedrate, int attackRange, int damage) {
+    protected BaseCharacter(float positionX, float positionY, int maxspeedrate, int attackRange, int damage) {
         this.MAXSPEEDRATE = Math.max(0,maxspeedrate);
         this.attackRange = Math.max(0,attackRange);
         this.damage = Math.max(0,damage);
@@ -49,12 +45,12 @@ public abstract class BaseCharacter implements Walkable, Attackable, WeatherEffe
     }
 
     @Override
-    public int getPositionX() {
+    public float getPositionX() {
         return positionX;
     }
 
     @Override
-    public int getPositionY() {
+    public float getPositionY() {
         return positionY;
     }
 
@@ -64,12 +60,12 @@ public abstract class BaseCharacter implements Walkable, Attackable, WeatherEffe
     }
 
     @Override
-    public void setPositionX(int positionX) {
+    public void setPositionX(float positionX) {
         this.positionX = Math.max(0,Math.min(positionX, Config.gameFrameWidth));
     }
 
     @Override
-    public void setPositionY(int positionY) {
+    public void setPositionY(float positionY) {
         this.positionY = Math.max(0,Math.min(positionY, Config.gameFrameHeight));
     }
 

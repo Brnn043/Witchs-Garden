@@ -1,17 +1,23 @@
 package Items.Character;
 
+import Games.Config;
 import Games.GameController;
 import Items.Veggies.BaseVeggies;
 
+import java.util.ArrayList;
+
 public class Zombie extends BaseCharacter{
     private int Hp;
-
     private BaseVeggies targetVeggie;
-    public Zombie(int positionX, int positionY, int maxspeedrate, int attackRange, int damage) {
-        super(positionX, positionY, maxspeedrate, attackRange, damage);
-        setHp(((int) ((float)Math.random()*25)));
-//        setTargetVeggie(GameController.getInstance().getVeggies()); : implement later
-
+    public Zombie() {
+        super((float) (Math.random()*100*Config.gameFrameHeight/100)
+                , (float) (Math.random()*100*Config.gameFrameHeight/100)
+                , (int) ((float) (Math.random())*Config.ZOMBIEMAXSPEEDRATE)
+                , (int) ((float) (Math.random())*Config.ZOMBIEMAXDAMAGERANGE)
+                , (int) ((float) (Math.random())*Config.ZOMBIEMAXDAMAGE));
+        setHp(Math.max(5,(int) ((float)Math.random()*25)));
+        ArrayList<BaseVeggies> veggiesList= GameController.getInstance().getVeggiesList();
+        setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
     }
 
     @Override

@@ -1,9 +1,10 @@
 package Items.Interfaces;
 
 public interface Collectable {
-    void setPositionX(int positionX);
+    void setPositionX(float positionX);
 
-    void setPositionY(int positionY);
+    void setPositionY(float positionY);
+
 
     // when create item, randomly set positionX and positionY
     void spawnOnMap();
@@ -11,6 +12,6 @@ public interface Collectable {
     void collected();
     // check if it collected
     boolean isCollected();
-    public int getPositionX();
-    public int getPositionY();
+    public float getPositionX();
+    public float getPositionY();
 }

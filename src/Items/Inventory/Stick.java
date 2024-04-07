@@ -8,8 +8,8 @@ import Items.Interfaces.Collectable;
 
 public class Stick implements Collectable {
 
-    private int positionX;
-    private int positionY;
+    private float positionX;
+    private float positionY;
     private boolean isCollected;
     private int durability;
     private int attackRange;
@@ -36,6 +36,17 @@ public class Stick implements Collectable {
         this.setDamage(3);
     }
 
+    @Override
+    public void collected() {
+        Player player = GameController.getInstance().getPlayer();
+        if(player.getStick() != null) {
+            System.out.println("Player already have stick");
+            return;
+        }
+        player.setStick(this);
+        this.setCollected(true);
+    }
+
     public int getDamage() { return damage; }
 
     public void setDamage(int damage) { this.damage = damage; }
@@ -50,6 +61,7 @@ public class Stick implements Collectable {
         this.durability = Math.max(0,durability);
     }
 
+
     public int getAttackRange() { return attackRange; }
 
     public void setAttackRange(int attackRange) {
@@ -57,10 +69,10 @@ public class Stick implements Collectable {
     }
 
     @Override
-    public void setPositionX(int positionX) { this.positionX = positionX; }
+    public void setPositionX(float positionX) { this.positionX = positionX; }
 
     @Override
-    public void setPositionY(int positionY) { this.positionY = positionY; }
+    public void setPositionY(float positionY) { this.positionY = positionY; }
 
     @Override
     public void spawnOnMap() {
@@ -70,18 +82,13 @@ public class Stick implements Collectable {
     }
 
     @Override
-    public void collected() {
-        // haven't implement
-    }
-
-    @Override
     public boolean isCollected() { return isCollected; }
 
     @Override
-    public int getPositionX() { return this.positionX; }
+    public float getPositionX() { return this.positionX; }
 
     @Override
-    public int getPositionY() { return this.positionY; }
+    public float getPositionY() { return this.positionY; }
 
     public void setCollected(boolean collected) { isCollected = collected; }
 
