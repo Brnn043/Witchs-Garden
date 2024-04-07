@@ -1,5 +1,6 @@
 package Items.Character;
 
+import Games.GameController;
 import Items.Inventory.Stick;
 
 public class Player extends BaseCharacter{
@@ -17,16 +18,16 @@ public class Player extends BaseCharacter{
         if(getAttackCooldown()>0){
             return;
         }
-        if(o instanceof Zombie){
-            Zombie character = (Zombie) o;
-            if(Math.pow(this.getPositionX()-character.getPositionX(),2)
-                    + Math.pow(this.getPositionY()-character.getPositionY(),2)
-                    <= Math.pow(this.getAttackRange(),2)){
-                character.setHp(character.getHp()-this.damage);
-            }else{
-                System.out.println("Can't atttack, out of attack range.");
+
+        for(Zombie zombie : GameController.getInstance().getZombieList()) {
+            double disX = GameController.getInstance().getPlayer().getPositionX() - zombie.getPositionX();
+            double disY = GameController.getInstance().getPlayer().getPositionY() - zombie.getPositionY();
+            double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
+            if( Math.abs(distance) <= this.getAttackRange() ) {
+                zombie.setHp( zombie.getHp() - this.getDamage() );
+                stick.setDurability(stick.getDurability() - stick.getDurabilityPerAttack());
+                stick.setCooldown(stick.getCooldownTime());
             }
-            setAttackCooldown(3);
         }
     }
 

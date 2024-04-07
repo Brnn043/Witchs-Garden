@@ -1,6 +1,7 @@
 package Items.Character;
 
 import Games.Config;
+import Games.GameController;
 import Items.Interfaces.Attackable;
 import Items.Interfaces.Collectable;
 import Items.Interfaces.Walkable;
@@ -29,8 +30,7 @@ public abstract class BaseCharacter implements Walkable, Attackable, WeatherEffe
 
     @Override
     public void weatherEffected() {
-//        Weather weatherNow = GameController.getInstance().getPlayer().getWeather();
-        Weather weatherNow = Weather.RAINY;
+        Weather weatherNow = GameController.getInstance().getClock().getWeather();
         if(weatherNow == Weather.SUNNY){
             setSpeedRate((float) 0.5*MAXSPEEDRATE);
         } else if (weatherNow == Weather.RAINY) {
@@ -90,5 +90,17 @@ public abstract class BaseCharacter implements Walkable, Attackable, WeatherEffe
     @Override
     public void walk() {
         return;
+    }
+
+    public int getMAXSPEEDRATE() {
+        return MAXSPEEDRATE;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 }

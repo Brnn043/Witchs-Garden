@@ -23,32 +23,17 @@ public class Stick implements Collectable {
     private final int durabilityPerAttack = 1;
 
     public Stick() {
-        this.setDurabilty((int) (Math.random() * (maxDurability - minDurability + 1)) + minDurability);
+        this.setDurability((int) (Math.random() * (maxDurability - minDurability + 1)) + minDurability);
         this.setAttackRange((int) (Math.random() * (maxAttackRange - minAttackRange + 1)) + minAttackRange);
         this.setCooldown(cooldownTime);
         this.setDamage(3);
     }
 
     public Stick(int durability,int attackRange) {
-        this.setDurabilty(durability);
+        this.setDurability(durability);
         this.setAttackRange(attackRange);
         this.setCooldown(cooldownTime);
         this.setDamage(3);
-    }
-
-    public boolean attack() {
-        if(this.getCooldown() > 0) return false;
-        Player player = GameController.getInstance().getPlayer();
-        for(Zombie zombie : GameController.getInstance().getZombieList()) {
-            double disX = player.getPositionX() - zombie.getPositionX();
-            double disY = player.getPositionY() - zombie.getPositionY();
-            double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
-            if( Math.abs(distance) <= this.getAttackRange() ) {
-                zombie.setHp( zombie.getHp() - this.getDamage() );
-                this.setDurabilty(this.getDurability() - durabilityPerAttack);
-                this.setCooldown(cooldownTime);
-            }
-        }
     }
 
     public int getDamage() { return damage; }
@@ -61,8 +46,8 @@ public class Stick implements Collectable {
 
     public int getDurability() { return durability; }
 
-    public void setDurabilty(int durabilty) {
-        this.durability = Math.max(0,durabilty);
+    public void setDurability(int durability) {
+        this.durability = Math.max(0,durability);
     }
 
     public int getAttackRange() { return attackRange; }
@@ -99,4 +84,12 @@ public class Stick implements Collectable {
     public int getPositionY() { return this.positionY; }
 
     public void setCollected(boolean collected) { isCollected = collected; }
+
+    public int getDurabilityPerAttack() {
+        return durabilityPerAttack;
+    }
+
+    public int getCooldownTime() {
+        return cooldownTime;
+    }
 }

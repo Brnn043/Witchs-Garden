@@ -14,11 +14,16 @@ public class GameController {
     private Clock clock;
     private ArrayList<BaseVeggies> veggiesList;
 
-    // what is itemList , idk so i didn't implement it.
-
 
     public GameController() {
         // haven't implemented
+        setPlayer(new Player(0,0,20,5,3));
+        setZombieList(new ArrayList<Zombie>());
+        setVeggiesList(new ArrayList<BaseVeggies>());
+    }
+
+    public static void main(String[] args) {
+
     }
 
     public static GameController getInstance() {

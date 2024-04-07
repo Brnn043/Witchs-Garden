@@ -25,7 +25,7 @@ public class Zombie extends BaseCharacter{
             if(Math.pow(this.getPositionX()-veggie.getPositionX(),2)
                     + Math.pow(this.getPositionY()-veggie.getPositionY(),2)
                     <= Math.pow(this.getAttackRange(),2)){
-                veggie.setHp(veggie.getHp()-this.damage);
+                veggie.setHp(veggie.getHp()-this.getDamage());
             }else{
                 System.out.println("Can't attack, out of attack range.");
             }
