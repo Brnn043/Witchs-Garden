@@ -43,12 +43,23 @@ public class Stick implements Collectable {
             double disX = player.getPositionX() - zombie.getPositionX();
             double disY = player.getPositionY() - zombie.getPositionY();
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
-            if( Math.abs(distance) <= this.getAttackRange() ) {
+            if( distance <= this.getAttackRange() ) {
                 zombie.setHp( zombie.getHp() - this.getDamage() );
                 this.setDurabilty(this.getDurability() - durabilityPerAttack);
                 this.setCooldown(cooldownTime);
             }
         }
+    }
+
+    @Override
+    public void collected() {
+        Player player = GameController.getInstance().getPlayer();
+        if(player.getStick() != null) {
+            System.out.println("Player already have stick");
+            return;
+        }
+        player.setStick(this);
+        this.setCollected(true);
     }
 
     public int getDamage() { return damage; }
@@ -61,9 +72,7 @@ public class Stick implements Collectable {
 
     public int getDurability() { return durability; }
 
-    public void setDurabilty(int durabilty) {
-        this.durability = Math.max(0,durabilty);
-    }
+    public void setDurabilty(int durabilty) { this.durability = Math.max(0,durabilty); }
 
     public int getAttackRange() { return attackRange; }
 
@@ -82,11 +91,6 @@ public class Stick implements Collectable {
         setPositionX((int) ((float)Math.random()*100)* Config.gameFrameWidth/100);
         setPositionY((int) ((float)Math.random()*100)*Config.gameFrameHeight/100);
         this.setCollected(false);
-    }
-
-    @Override
-    public void collected() {
-        // haven't implement
     }
 
     @Override
