@@ -6,6 +6,7 @@ import Items.Inventory.Stick;
 public class Player extends BaseCharacter{
     private Stick stick;
     private int money;
+
     public Player(int positionX, int positionY, int maxspeedrate, int attackRange, int damage) {
         super(positionX, positionY, maxspeedrate, attackRange, damage);
         setStick(null);

@@ -34,6 +34,7 @@ public abstract class BaseVeggies implements WeatherEffectable, Collectable {
         this.MAXWATERDROPPINGRATE = waterDroppingRate;
         this.setWaterDroppingRate(MAXWATERDROPPINGRATE);
         this.setPrice(price);
+        spawnOnMap();
     }
 
     @Override

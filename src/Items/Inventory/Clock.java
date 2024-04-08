@@ -35,5 +35,5 @@ public class Clock {
 
     public int getTimer() { return timer; }
 
-    public void setTimer(int timer) { this.timer = timer; }
+    public void setTimer(int timer) { this.timer = Math.max(0, timer); }
 }

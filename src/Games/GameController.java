@@ -10,6 +10,9 @@ import Items.Veggies.Cucumber;
 import Items.Veggies.Rice;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class GameController {
     private static GameController instance;
@@ -19,6 +22,8 @@ public class GameController {
     private ArrayList<BaseVeggies> veggiesList;
     private ArrayList<Stick> stickOnGround;
     private boolean gameover;
+    private int gameTimer;
+
 
 
     public GameController() {
@@ -27,10 +32,40 @@ public class GameController {
         this.zombieList = new ArrayList<Zombie>();
         this.clock = new Clock();
         this.gameover = false;
+        this.gameTimer = 5;
         initGames();
     }
 
-    public static void play() {
+    public static void play() throws InterruptedException {
+        while(getInstance().getZombieList().size() < 5){
+            getInstance().getZombieList().add(new Zombie());
+        }
+        // testing run
+        System.out.println("---------- Timer : " + getInstance().getGameTimer() + "------------");
+        System.out.println("Entities in game");
+        Zombie zom1 = getInstance().getZombieList().get(0);
+        System.out.println("Zombie 1,  X =" + zom1.getPositionX() + " Y = " + zom1.getPositionY());
+        System.out.println("zombie 1's target veggie,  X =" + zom1.getTargetVeggie().getPositionX() + " Y = " + zom1.getTargetVeggie().getPositionY());
+
+        // set player coolDown
+        getInstance().getPlayer().setAttackCooldown(getInstance().getPlayer().getAttackCooldown() - 1);
+
+        // decreasing coolDown for zombies, delete HP<0 zombie
+        for(Zombie zombie: instance.getZombieList()){
+            zombie.setAttackCooldown(zombie.getAttackCooldown() - 1);
+            zombie.walk();
+            // delete zombie if HP is < 0
+            if(zombie.getHp() <= 0){
+                getInstance().getZombieList().remove(zombie);
+            }
+        }
+
+        // check gameTimer that will decrease every 1 second
+        TimeUnit.SECONDS.sleep(1);
+        getInstance().setGameTimer(getInstance().getGameTimer()-1);
+        if(getInstance().getGameTimer() == 0){
+            getInstance().setGameover(true);
+        }
 
     }
 
@@ -39,9 +74,6 @@ public class GameController {
         getVeggiesList().add(getNewVeggie());
         getVeggiesList().add(getNewVeggie());
         getVeggiesList().add(getNewVeggie());
-        getZombieList().add(new Zombie());
-        getZombieList().add(new Zombie());
-        getZombieList().add(new Zombie());
     }
     public BaseVeggies getNewVeggie(){
         int veggieType = (int) (Math.random()*3);
@@ -105,5 +137,17 @@ public class GameController {
 
     public void setGameover(boolean gameover) {
         this.gameover = gameover;
+    }
+
+    public boolean isGameover() {
+        return gameover;
+    }
+
+    public int getGameTimer() {
+        return gameTimer;
+    }
+
+    public void setGameTimer(int gameTimer) {
+        this.gameTimer = Math.max(0, gameTimer);
     }
 }

@@ -5,13 +5,14 @@ import Games.GameController;
 import Items.Veggies.BaseVeggies;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Zombie extends BaseCharacter{
     private int Hp;
     private BaseVeggies targetVeggie;
     public Zombie() {
-        super((float) (Math.random()*100*Config.gameFrameHeight/100)
-                , (float) (Math.random()*100*Config.gameFrameHeight/100)
+        super(((float)Math.random()*100)*Config.gameFrameWidth/100
+                , ((float)Math.random()*100)*Config.gameFrameHeight/100
                 , (int) ((float) (Math.random())*Config.ZOMBIEMAXSPEEDRATE)
                 , (int) ((float) (Math.random())*Config.ZOMBIEMAXDAMAGERANGE)
                 , (int) ((float) (Math.random())*Config.ZOMBIEMAXDAMAGE));
@@ -25,6 +26,8 @@ public class Zombie extends BaseCharacter{
         if(getAttackCooldown()>0){
             return;
         }
+
+
         // zombie attack veggie
         if(o instanceof BaseVeggies){
             BaseVeggies veggie = (BaseVeggies) o;
@@ -54,5 +57,22 @@ public class Zombie extends BaseCharacter{
 
     public void setTargetVeggie(BaseVeggies targetVeggie) {
         this.targetVeggie = targetVeggie;
+    }
+
+    @Override
+    public void walk() {
+        int walkCount = 0;
+        double disX = this.getPositionX() - targetVeggie.getPositionX();
+        double disY = this.getPositionY() - targetVeggie.getPositionY();
+        double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
+
+        while( distance > this.getAttackRange() & walkCount < 10) {
+            disX = this.getPositionX() - targetVeggie.getPositionX();
+            disY = this.getPositionY() - targetVeggie.getPositionY();
+            distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
+            this.setPositionX((float) (this.getPositionX() - (disX/disX)*(Config.ZOMBIEWALKSTEP)));
+            this.setPositionY((float) (this.getPositionY() - (disY/disY)*(Config.ZOMBIEWALKSTEP)));
+            walkCount += 1;
+        }
     }
 }
