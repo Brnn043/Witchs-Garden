@@ -70,8 +70,8 @@ public class Zombie extends BaseCharacter{
             disX = this.getPositionX() - targetVeggie.getPositionX();
             disY = this.getPositionY() - targetVeggie.getPositionY();
             distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
-            this.setPositionX((float) (this.getPositionX() - (disX/disX)*(Config.ZOMBIEWALKSTEP)));
-            this.setPositionY((float) (this.getPositionY() - (disY/disY)*(Config.ZOMBIEWALKSTEP)));
+            this.setPositionX((float) (this.getPositionX() - (Math.signum(disX))*(Config.ZOMBIEWALKSTEP)));
+            this.setPositionY((float) (this.getPositionY() - (Math.signum(disY))*(Config.ZOMBIEWALKSTEP)));
             walkCount += 1;
         }
     }
