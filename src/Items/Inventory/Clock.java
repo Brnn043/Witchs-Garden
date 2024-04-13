@@ -5,10 +5,9 @@ import Games.Config;
 public class Clock {
     private Config.Weather weather;
     private int timer;
-    private static final int cooldownTime = 15;
 
     public Clock() {
-        this.setTimer(cooldownTime);
+        this.setTimer(Config.CLOCKCOOLDOWNTIME);
         this.setWeather(Config.Weather.SUNNY);
         // by default , weather is summer.
     }
@@ -21,7 +20,7 @@ public class Clock {
         }
         if(this.getTimer()<=0) {
             this.setWeather(weather);
-            this.setTimer(cooldownTime);
+            this.setTimer(Config.CLOCKCOOLDOWNTIME);
             return true;
         } else {
             System.out.println("Cooling down clock . . .");

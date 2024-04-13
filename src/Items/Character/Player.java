@@ -1,5 +1,6 @@
 package Items.Character;
 
+import Games.Config;
 import Games.GameController;
 import Items.Inventory.Stick;
 
@@ -26,8 +27,8 @@ public class Player extends BaseCharacter{
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
             if( distance <= stick.getAttackRange() ) {
                 zombie.setHp( zombie.getHp() - stick.getDamage() );
-                stick.setDurability(stick.getDurability() - stick.getDurabilityPerAttack());
-                stick.setCooldown(stick.getCooldownTime());
+                stick.setDurability(stick.getDurability() - Config.STICKDURABILITYPERATTACK);
+                stick.setCooldown(Config.STICKCOOLDOWNTIME);
             }
         }
     }

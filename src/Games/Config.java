@@ -19,4 +19,7 @@ public class Config {
     public static final int STICKMINATTACKRANGE = 2;
     public static final int STICKDURABILITYPERATTACK = 1;
     public static final int STICKDAMAGEPERATTACK = 3;
+    public static final float VEGGIESMAXGROWTHPOINT = 25;
+    public static final int CLOCKCOOLDOWNTIME = 15;
+
 }

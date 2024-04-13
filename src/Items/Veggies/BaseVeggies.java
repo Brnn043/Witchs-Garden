@@ -11,8 +11,7 @@ public abstract class BaseVeggies implements WeatherEffectable, Collectable {
     private float positionX;
     private float positionY;
     private boolean isCollected;
-    private float growthPoint; // float might probably be better than using int?
-    private static final float MAXGROWTHPOINT = 25;
+    private float growthPoint;
     private float growthRate;
     private final float MAXGROWTHRATE;
     private int Hp;

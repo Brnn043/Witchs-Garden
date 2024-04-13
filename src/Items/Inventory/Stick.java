@@ -14,12 +14,6 @@ public class Stick implements Collectable {
     private int attackRange;
     private int damage;
     private int cooldown;
-//    private final int cooldownTime = 1;
-//    private final int maxDurability = 10;
-//    private final int minDurability = 5;
-//    private final int maxAttackRange = 10;
-//    private final int minAttackRange = 2;
-//    private final int durabilityPerAttack = 1;
 
     public Stick() { // this constructor will randomly choose durability and attack range
         this.setDurability((int) (Math.random() * (Config.STICKMAXDURABILITY - Config.STICKMINDURABILITY + 1)) + Config.STICKMINDURABILITY);
