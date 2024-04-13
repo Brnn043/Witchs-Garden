@@ -11,4 +11,12 @@ public class Config {
     public static int ZOMBIEMAXDAMAGERANGE = 2;
     public static int ZOMBIEMAXDAMAGE = 5;
     public static float ZOMBIEWALKSTEP = 2;
+
+    public static final int STICKCOOLDOWNTIME = 1;
+    public static final int STICKMAXDURABILITY = 10;
+    public static final int STICKMINDURABILITY = 5;
+    public static final int STICKMAXATTACKRANGE = 10;
+    public static final int STICKMINATTACKRANGE = 2;
+    public static final int STICKDURABILITYPERATTACK = 1;
+    public static final int STICKDAMAGEPERATTACK = 3;
 }

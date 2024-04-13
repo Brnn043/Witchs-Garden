@@ -3,7 +3,6 @@ package Items.Inventory;
 import Games.Config;
 import Games.GameController;
 import Items.Character.Player;
-import Items.Character.Zombie;
 import Items.Interfaces.Collectable;
 
 public class Stick implements Collectable {
@@ -15,25 +14,25 @@ public class Stick implements Collectable {
     private int attackRange;
     private int damage;
     private int cooldown;
-    private final int cooldownTime = 1;
-    private final int maxDurability = 10;
-    private final int minDurability = 5;
-    private final int maxAttackRange = 10;
-    private final int minAttackRange = 2;
-    private final int durabilityPerAttack = 1;
+//    private final int cooldownTime = 1;
+//    private final int maxDurability = 10;
+//    private final int minDurability = 5;
+//    private final int maxAttackRange = 10;
+//    private final int minAttackRange = 2;
+//    private final int durabilityPerAttack = 1;
 
-    public Stick() {
-        this.setDurability((int) (Math.random() * (maxDurability - minDurability + 1)) + minDurability);
-        this.setAttackRange((int) (Math.random() * (maxAttackRange - minAttackRange + 1)) + minAttackRange);
-        this.setCooldown(cooldownTime);
-        this.setDamage(3);
+    public Stick() { // this constructor will randomly choose durability and attack range
+        this.setDurability((int) (Math.random() * (Config.STICKMAXDURABILITY - Config.STICKMINDURABILITY + 1)) + Config.STICKMINDURABILITY);
+        this.setAttackRange((int) (Math.random() * (Config.STICKMAXATTACKRANGE - Config.STICKMINATTACKRANGE + 1)) + Config.STICKMINATTACKRANGE);
+        this.setCooldown(Config.STICKCOOLDOWNTIME);
+        this.setDamage(Config.STICKDAMAGEPERATTACK);
     }
 
     public Stick(int durability,int attackRange) {
         this.setDurability(durability);
         this.setAttackRange(attackRange);
-        this.setCooldown(cooldownTime);
-        this.setDamage(3);
+        this.setCooldown(Config.STICKCOOLDOWNTIME);
+        this.setDamage(Config.STICKDAMAGEPERATTACK);
     }
 
     @Override
@@ -61,7 +60,6 @@ public class Stick implements Collectable {
         this.durability = Math.max(0,durability);
     }
 
-
     public int getAttackRange() { return attackRange; }
 
     public void setAttackRange(int attackRange) {
@@ -76,8 +74,8 @@ public class Stick implements Collectable {
 
     @Override
     public void spawnOnMap() {
-        setPositionX((int) ((float)Math.random()*100)* Config.gameFrameWidth/100);
-        setPositionY((int) ((float)Math.random()*100)*Config.gameFrameHeight/100);
+        setPositionX(((float)Math.random()*100)* Config.gameFrameWidth/100);
+        setPositionY(((float)Math.random()*100)*Config.gameFrameHeight/100);
         this.setCollected(false);
     }
 
@@ -92,11 +90,4 @@ public class Stick implements Collectable {
 
     public void setCollected(boolean collected) { isCollected = collected; }
 
-    public int getDurabilityPerAttack() {
-        return durabilityPerAttack;
-    }
-
-    public int getCooldownTime() {
-        return cooldownTime;
-    }
 }
