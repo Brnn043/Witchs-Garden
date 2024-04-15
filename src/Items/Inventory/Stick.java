@@ -13,19 +13,16 @@ public class Stick implements Collectable {
     private int durability;
     private int attackRange;
     private int damage;
-    private int cooldown;
 
     public Stick() { // this constructor will randomly choose durability and attack range
         this.setDurability((int) (Math.random() * (Config.STICKMAXDURABILITY - Config.STICKMINDURABILITY + 1)) + Config.STICKMINDURABILITY);
         this.setAttackRange((int) (Math.random() * (Config.STICKMAXATTACKRANGE - Config.STICKMINATTACKRANGE + 1)) + Config.STICKMINATTACKRANGE);
-        this.setCooldown(Config.STICKCOOLDOWNTIME);
         this.setDamage(Config.STICKDAMAGEPERATTACK);
     }
 
     public Stick(int durability,int attackRange) {
         this.setDurability(durability);
         this.setAttackRange(attackRange);
-        this.setCooldown(Config.STICKCOOLDOWNTIME);
         this.setDamage(Config.STICKDAMAGEPERATTACK);
     }
 
@@ -43,10 +40,6 @@ public class Stick implements Collectable {
     public int getDamage() { return damage; }
 
     public void setDamage(int damage) { this.damage = damage; }
-
-    public int getCooldown() { return cooldown; }
-
-    public void setCooldown(int cooldown) { this.cooldown = cooldown; }
 
     public int getDurability() { return durability; }
 
