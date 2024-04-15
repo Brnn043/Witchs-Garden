@@ -67,6 +67,17 @@ public class GameController {
             getInstance().setGameover(true);
         }
 
+        // clock :
+        // haven't implemented changing the season when user click the key
+        Clock clock = getInstance().getClock();
+        clock.setTimer(clock.getTimer()-1);
+
+        // veggies :
+        ArrayList<BaseVeggies> veggies = getInstance().getVeggiesList();
+        for(BaseVeggies veggie : veggies) {
+            veggie.setWaterPoint(veggie.getWaterPoint()- veggie.getWaterDroppingRate());
+            if(veggie.getWaterPoint() <= 0) getInstance().setGameover(true);
+        }
     }
 
     public void initGames(){
