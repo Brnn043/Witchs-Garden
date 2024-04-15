@@ -63,10 +63,12 @@ public class GameController {
         // veggies :
         ArrayList<BaseVeggies> veggies = getInstance().getVeggiesList();
         for(BaseVeggies veggie : veggies) {
-            veggie.setWaterPoint(veggie.getWaterPoint()- veggie.getWaterDroppingRate());
-            if(veggie.getWaterPoint() <= 0) getInstance().setGameover(true);
-            // fix : delete veggie not game over, add new veggie()
-            // fix : add veggie growing
+            veggie.setWaterPoint(veggie.getWaterPoint() - veggie.getWaterDroppingRate());
+            veggie.setGrowthPoint(veggie.getGrowthPoint() + veggie.getGrowthRate());
+            if(veggie.getWaterPoint() <= 0) {
+                getInstance().getVeggiesList().remove(veggie);
+                veggies.add(GameController.getInstance().getNewVeggie());
+            }
         }
 
         // clock :
