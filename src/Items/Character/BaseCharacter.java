@@ -17,9 +17,9 @@ public abstract class BaseCharacter implements Walkable, Attackable, WeatherEffe
     private int attackCooldown;
 
     protected BaseCharacter(float positionX, float positionY, int maxspeedrate, int attackRange, int damage) {
-        this.MAXSPEEDRATE = Math.max(0,maxspeedrate);
-        this.attackRange = Math.max(0,attackRange);
-        this.damage = Math.max(0,damage);
+        this.MAXSPEEDRATE = Math.max(2,maxspeedrate);
+        this.attackRange = Math.max(2,attackRange);
+        this.damage = Math.max(2,damage);
         setPositionX(positionX);
         setPositionY(positionY);
     }

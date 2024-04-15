@@ -28,7 +28,8 @@ public class Player extends BaseCharacter{
             if( distance <= stick.getAttackRange() ) {
                 zombie.setHp( zombie.getHp() - stick.getDamage() );
                 stick.setDurability(stick.getDurability() - Config.STICKDURABILITYPERATTACK);
-                stick.setCooldown(Config.STICKCOOLDOWNTIME);
+                this.setAttackCooldown(Config.PLAYERCOOLDOWNTIME);
+                System.out.println("Zom1 attack veggie");
             }
         }
     }
@@ -54,4 +55,5 @@ public class Player extends BaseCharacter{
     public void setMoney(int money) {
         this.money = Math.max(0,money);
     }
+
 }

@@ -32,7 +32,7 @@ public class GameController {
         this.zombieList = new ArrayList<Zombie>();
         this.clock = new Clock();
         this.gameover = false;
-        this.gameTimer = 5;
+        this.gameTimer = 60;
         initGames();
     }
 
@@ -45,30 +45,55 @@ public class GameController {
         System.out.println("Entities in game");
         Zombie zom1 = getInstance().getZombieList().get(0);
         System.out.println("Zombie 1,  X =" + zom1.getPositionX() + " Y = " + zom1.getPositionY());
-        System.out.println("zombie 1's target veggie,  X =" + zom1.getTargetVeggie().getPositionX() + " Y = " + zom1.getTargetVeggie().getPositionY());
+        System.out.println("zombie 1's target veggie,  X =" + zom1.getTargetVeggie().getPositionX() + " Y = " + zom1.getTargetVeggie().getPositionY() + " HP :" + zom1.getTargetVeggie().getHp());
 
         // set player coolDown
         getInstance().getPlayer().setAttackCooldown(getInstance().getPlayer().getAttackCooldown() - 1);
 
         // decreasing coolDown for zombies, delete HP<0 zombie
         for(Zombie zombie: instance.getZombieList()){
+            // decrease attack cooldown
             zombie.setAttackCooldown(zombie.getAttackCooldown() - 1);
-            zombie.walk();
+
             // delete zombie if HP is < 0
             if(zombie.getHp() <= 0){
                 getInstance().getZombieList().remove(zombie);
+                continue;
+            }
+
+            // walk to target veggie & attack
+            double disX = zombie.getTargetVeggie().getPositionX() - zombie.getPositionX();
+            double disY = zombie.getTargetVeggie().getPositionY() - zombie.getPositionY();
+            int distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
+            if( (distance - zombie.getAttackRange()) <= Config.ZOMBIEWALKSTEP ) {
+                ArrayList<BaseVeggies> veggiesList= GameController.getInstance().getVeggiesList();
+                if(veggiesList.contains(zombie.getTargetVeggie())){
+                    zombie.attack(zombie.getTargetVeggie());
+                }else{
+                    zombie.setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
+                }
+            }else{
+                zombie.walk();
             }
         }
 
         // veggies :
         ArrayList<BaseVeggies> veggies = getInstance().getVeggiesList();
-        for(BaseVeggies veggie : veggies) {
+        ArrayList<BaseVeggies> delVeggie = new ArrayList<BaseVeggies>();
+
+        for(BaseVeggies veggie : getInstance().getVeggiesList()) {
             veggie.setWaterPoint(veggie.getWaterPoint() - veggie.getWaterDroppingRate());
             veggie.setGrowthPoint(veggie.getGrowthPoint() + veggie.getGrowthRate());
-            if(veggie.getWaterPoint() <= 0) {
-                getInstance().getVeggiesList().remove(veggie);
-                veggies.add(GameController.getInstance().getNewVeggie());
+            if(veggie.getWaterPoint() <= 0 || veggie.getHp() <= 0) {
+                delVeggie.add(veggie);
             }
+
+        }
+
+        // delete dead veggie
+        for(BaseVeggies veggie : delVeggie){
+            getInstance().getVeggiesList().remove(veggie);
+            getInstance().getVeggiesList().add(GameController.getInstance().getNewVeggie());
         }
 
         // clock :

@@ -10,7 +10,6 @@ public class Main {
         while(! GameController.getInstance().getGameover()){
             GameController.play();
         }
-        System.out.println("Game Over, You got money " + GameController.getInstance().getPlayer().getMoney());
     }
 }
 

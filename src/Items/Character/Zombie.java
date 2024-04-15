@@ -26,18 +26,15 @@ public class Zombie extends BaseCharacter{
         if(getAttackCooldown()>0){
             return;
         }
-
-
         // zombie attack veggie
         if(o instanceof BaseVeggies){
             BaseVeggies veggie = (BaseVeggies) o;
-            if(Math.pow(this.getPositionX()-veggie.getPositionX(),2)
-                    + Math.pow(this.getPositionY()-veggie.getPositionY(),2)
-                    <= Math.pow(this.getAttackRange(),2)){
-                veggie.setHp(veggie.getHp()-this.getDamage());
-            }else{
-                System.out.println("Can't attack, out of attack range.");
+            veggie.setHp(veggie.getHp()-this.getDamage());
+
+            if(this.equals(GameController.getInstance().getZombieList().get(0))){
+                System.out.println("Zombie ATTACK!!!");
             }
+
         }
         setAttackCooldown(5);
     }
@@ -62,14 +59,14 @@ public class Zombie extends BaseCharacter{
     @Override
     public void walk() {
         int walkCount = 0;
-        double disX = this.getPositionX() - targetVeggie.getPositionX();
-        double disY = this.getPositionY() - targetVeggie.getPositionY();
-        double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
+        double disX = this.getPositionX() - this.getTargetVeggie().getPositionX();
+        double disY = this.getPositionY() - this.getTargetVeggie().getPositionY();
+        int distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
 
-        while( distance > this.getAttackRange() & walkCount < 10) {
-            disX = this.getPositionX() - targetVeggie.getPositionX();
-            disY = this.getPositionY() - targetVeggie.getPositionY();
-            distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
+        while( (distance - this.getAttackRange()) > Config.ZOMBIEWALKSTEP & walkCount < 10) {
+            disX = this.getPositionX() - this.getTargetVeggie().getPositionX();
+            disY = this.getPositionY() - this.getTargetVeggie().getPositionY();
+            distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
             this.setPositionX((float) (this.getPositionX() - (Math.signum(disX))*(Config.ZOMBIEWALKSTEP)));
             this.setPositionY((float) (this.getPositionY() - (Math.signum(disY))*(Config.ZOMBIEWALKSTEP)));
             walkCount += 1;
