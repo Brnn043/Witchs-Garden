@@ -60,11 +60,13 @@ public class GameController {
             }
         }
 
-        // check gameTimer that will decrease every 1 second
-        TimeUnit.SECONDS.sleep(1);
-        getInstance().setGameTimer(getInstance().getGameTimer()-1);
-        if(getInstance().getGameTimer() == 0){
-            getInstance().setGameover(true);
+        // veggies :
+        ArrayList<BaseVeggies> veggies = getInstance().getVeggiesList();
+        for(BaseVeggies veggie : veggies) {
+            veggie.setWaterPoint(veggie.getWaterPoint()- veggie.getWaterDroppingRate());
+            if(veggie.getWaterPoint() <= 0) getInstance().setGameover(true);
+            // fix : delete veggie not game over, add new veggie()
+            // fix : add veggie growing
         }
 
         // clock :
@@ -72,11 +74,11 @@ public class GameController {
         Clock clock = getInstance().getClock();
         clock.setTimer(clock.getTimer()-1);
 
-        // veggies :
-        ArrayList<BaseVeggies> veggies = getInstance().getVeggiesList();
-        for(BaseVeggies veggie : veggies) {
-            veggie.setWaterPoint(veggie.getWaterPoint()- veggie.getWaterDroppingRate());
-            if(veggie.getWaterPoint() <= 0) getInstance().setGameover(true);
+        // check gameTimer that will decrease every 1 second
+        TimeUnit.SECONDS.sleep(1);
+        getInstance().setGameTimer(getInstance().getGameTimer()-1);
+        if(getInstance().getGameTimer() == 0){
+            getInstance().setGameover(true);
         }
     }
 
