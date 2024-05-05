@@ -5,17 +5,16 @@ import Games.GameController;
 import Items.Veggies.BaseVeggies;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
-public class Zombie extends BaseCharacter{
+public class Slime extends BaseCharacter{
     private int Hp;
     private BaseVeggies targetVeggie;
-    public Zombie() {
+    public Slime() {
         super(((float)Math.random()*100)*Config.gameFrameWidth/100
                 , ((float)Math.random()*100)*Config.gameFrameHeight/100
-                , (int) ((float) (Math.random())*Config.ZOMBIEMAXSPEEDRATE)
-                , (int) ((float) (Math.random())*Config.ZOMBIEMAXDAMAGERANGE)
-                , (int) ((float) (Math.random())*Config.ZOMBIEMAXDAMAGE));
+                , (int) ((float) (Math.random())*Config.SLIMEMAXSPEEDRATE)
+                , (int) ((float) (Math.random())*Config.SLIMEMAXDAMAGERANGE)
+                , (int) ((float) (Math.random())*Config.SLIMEMAXDAMAGE));
         setHp(Math.max(5,(int) ((float)Math.random()*25)));
         ArrayList<BaseVeggies> veggiesList= GameController.getInstance().getVeggiesList();
         setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
@@ -26,7 +25,7 @@ public class Zombie extends BaseCharacter{
         if(getAttackCooldown()>0){
             return;
         }
-        // zombie attack veggie
+        // SLIME attack veggie
         if(o instanceof BaseVeggies){
             BaseVeggies veggie = (BaseVeggies) o;
             veggie.setHp(veggie.getHp()-this.getDamage());
@@ -59,12 +58,12 @@ public class Zombie extends BaseCharacter{
         double disY = this.getPositionY() - this.getTargetVeggie().getPositionY();
         int distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
 
-        while( (distance - this.getAttackRange()) > Config.ZOMBIEWALKSTEP & walkCount < 10) {
+        while( (distance - this.getAttackRange()) > Config.SLIMEWALKSTEP & walkCount < 10) {
             disX = this.getPositionX() - this.getTargetVeggie().getPositionX();
             disY = this.getPositionY() - this.getTargetVeggie().getPositionY();
             distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
-            this.setPositionX((float) (this.getPositionX() - (Math.signum(disX))*(Config.ZOMBIEWALKSTEP)));
-            this.setPositionY((float) (this.getPositionY() - (Math.signum(disY))*(Config.ZOMBIEWALKSTEP)));
+            this.setPositionX((float) (this.getPositionX() - (Math.signum(disX))*(Config.SLIMEWALKSTEP)));
+            this.setPositionY((float) (this.getPositionY() - (Math.signum(disY))*(Config.SLIMEWALKSTEP)));
             walkCount += 1;
         }
     }

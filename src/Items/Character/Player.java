@@ -16,20 +16,19 @@ public class Player extends BaseCharacter{
 
     @Override
     public void attack(Object o) {
-        // player attack zombie
+        // player attack slime
         if(getAttackCooldown()>0){
             return;
         }
 
-        for(Zombie zombie : GameController.getInstance().getZombieList()) {
-            double disX = GameController.getInstance().getPlayer().getPositionX() - zombie.getPositionX();
-            double disY = GameController.getInstance().getPlayer().getPositionY() - zombie.getPositionY();
+        for(Slime slime : GameController.getInstance().getslimeList()) {
+            double disX = GameController.getInstance().getPlayer().getPositionX() - slime.getPositionX();
+            double disY = GameController.getInstance().getPlayer().getPositionY() - slime.getPositionY();
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
             if( distance <= stick.getAttackRange() ) {
-                zombie.setHp( zombie.getHp() - stick.getDamage() );
+                slime.setHp( slime.getHp() - stick.getDamage() );
                 stick.setDurability(stick.getDurability() - Config.STICKDURABILITYPERATTACK);
                 this.setAttackCooldown(Config.PLAYERCOOLDOWNTIME);
-                System.out.println("Zom1 attack veggie");
             }
         }
     }

@@ -1,7 +1,7 @@
 package Games;
 
 import Items.Character.Player;
-import Items.Character.Zombie;
+import Items.Character.Slime;
 import Items.Inventory.Clock;
 import Items.Inventory.Stick;
 import Items.Veggies.BaseVeggies;
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class GameController {
     private static GameController instance;
     private Player player;
-    private ArrayList<Zombie> zombieList;
+    private ArrayList<Slime> slimeList;
     private Clock clock;
     private ArrayList<BaseVeggies> veggiesList;
     private ArrayList<Stick> stickOnGround;
@@ -29,7 +29,7 @@ public class GameController {
     public GameController() {
         this.player = new Player(0,0,20,5,3);
         this.veggiesList = new ArrayList<BaseVeggies>();
-        this.zombieList = new ArrayList<Zombie>();
+        this.slimeList = new ArrayList<Slime>();
         this.clock = new Clock();
         this.gameover = false;
         this.gameTimer = 60;
@@ -37,43 +37,45 @@ public class GameController {
     }
 
     public static void play() throws InterruptedException {
-        while(getInstance().getZombieList().size() < 5){
-            getInstance().getZombieList().add(new Zombie());
+        while(getInstance().getslimeList().size() < 5){
+            getInstance().getslimeList().add(new Slime());
         }
         // testing run
         System.out.println("---------- Timer : " + getInstance().getGameTimer() + "------------");
         System.out.println("Entities in game");
-        Zombie zom1 = getInstance().getZombieList().get(0);
-        System.out.println("Zombie 1,  X =" + zom1.getPositionX() + " Y = " + zom1.getPositionY());
-        System.out.println("zombie 1's target veggie,  X =" + zom1.getTargetVeggie().getPositionX() + " Y = " + zom1.getTargetVeggie().getPositionY() + " HP :" + zom1.getTargetVeggie().getHp());
+        Slime slime1 = getInstance().getslimeList().get(0);
+        System.out.println("slime 1,  X =" + slime1.getPositionX() + " Y = " + slime1.getPositionY());
+        System.out.println("slime 1's target veggie,  X =" + slime1.getTargetVeggie().getPositionX() + " Y = " + slime1.getTargetVeggie().getPositionY() + " HP :" + slime1.getTargetVeggie().getHp());
 
         // set player coolDown
         getInstance().getPlayer().setAttackCooldown(getInstance().getPlayer().getAttackCooldown() - 1);
 
-        // decreasing coolDown for zombies, delete HP<0 zombie
-        for(Zombie zombie: instance.getZombieList()){
+        // decreasing coolDown for slimes, delete HP<0 slime
+        for(Slime slime: instance.getslimeList()){
             // decrease attack cooldown
-            zombie.setAttackCooldown(zombie.getAttackCooldown() - 1);
+            slime.setAttackCooldown(slime.getAttackCooldown() - 1);
 
-            // delete zombie if HP is < 0
-            if(zombie.getHp() <= 0){
-                getInstance().getZombieList().remove(zombie);
+            // delete slime if HP is < 0
+            if(slime.getHp() <= 0){
+                getInstance().getslimeList().remove(slime);
                 continue;
             }
 
             // walk to target veggie & attack
-            double disX = zombie.getTargetVeggie().getPositionX() - zombie.getPositionX();
-            double disY = zombie.getTargetVeggie().getPositionY() - zombie.getPositionY();
+            double disX = slime.getTargetVeggie().getPositionX() - slime.getPositionX();
+            double disY = slime.getTargetVeggie().getPositionY() - slime.getPositionY();
             int distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
-            if( (distance - zombie.getAttackRange()) <= Config.ZOMBIEWALKSTEP ) {
+            if( (distance - slime.getAttackRange()) <= Config.SLIMEWALKSTEP ) {
                 ArrayList<BaseVeggies> veggiesList= GameController.getInstance().getVeggiesList();
-                if(veggiesList.contains(zombie.getTargetVeggie())){
-                    zombie.attack(zombie.getTargetVeggie());
+                if(veggiesList.contains(slime.getTargetVeggie())){
+                    slime.attack(slime.getTargetVeggie());
+                    System.out.println("slime ATTACK!!!");
                 }else{
-                    zombie.setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
+                    slime.setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
+                    System.out.println("slime find new target");
                 }
             }else{
-                zombie.walk();
+                slime.walk();
             }
         }
 
@@ -94,6 +96,7 @@ public class GameController {
         for(BaseVeggies veggie : delVeggie){
             getInstance().getVeggiesList().remove(veggie);
             getInstance().getVeggiesList().add(GameController.getInstance().getNewVeggie());
+            System.out.println("veggie dead");
         }
 
         // clock :
@@ -131,9 +134,9 @@ public class GameController {
         return instance;
     }
 
-    public ArrayList<Zombie> getZombieList() { return zombieList; }
+    public ArrayList<Slime> getslimeList() { return slimeList; }
 
-    public void setZombieList(ArrayList<Zombie> zombieList) { this.zombieList = zombieList; }
+    public void setslimeList(ArrayList<Slime> slimeList) { this.slimeList = slimeList; }
 
     public Player getPlayer() {
         return player;

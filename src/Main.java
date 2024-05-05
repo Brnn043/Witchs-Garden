@@ -1,6 +1,6 @@
 import Games.Config;
 import Games.GameController;
-import Items.Character.Zombie;
+import Items.Character.Slime;
 
 import java.util.concurrent.TimeUnit;
 
