@@ -31,10 +31,6 @@ public class Zombie extends BaseCharacter{
             BaseVeggies veggie = (BaseVeggies) o;
             veggie.setHp(veggie.getHp()-this.getDamage());
 
-            if(this.equals(GameController.getInstance().getZombieList().get(0))){
-                System.out.println("Zombie ATTACK!!!");
-            }
-
         }
         setAttackCooldown(5);
     }
