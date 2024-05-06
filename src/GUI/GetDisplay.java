@@ -1,4 +1,4 @@
-package GUI;
+package GUI.graphic;
 
 public class GetDisplay {
 }
