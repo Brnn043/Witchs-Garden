@@ -62,12 +62,12 @@ public abstract class BaseCharacter extends Entity implements Walkable, Attackab
 
     @Override
     public void setPositionX(float positionX) {
-        this.positionX = Math.max(0,Math.min(positionX, Config.gameFrameWidth));
+        this.positionX = Math.max(0,Math.min(positionX, Config.GAMEFRAMEWIDTH));
     }
 
     @Override
     public void setPositionY(float positionY) {
-        this.positionY = Math.max(0,Math.min(positionY, Config.gameFrameHeight));
+        this.positionY = Math.max(0,Math.min(positionY, Config.GAMEFRAMEHEIGHT));
     }
 
     @Override

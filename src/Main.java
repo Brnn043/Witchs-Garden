@@ -1,6 +1,7 @@
 import GUI.GameScreen;
 import GUISharedObject.InputUtility;
 import GUISharedObject.RenderableHolder;
+import Games.Config;
 import Games.GameController;
 import Items.Character.Slime;
 import Items.Inventory.Clock;
@@ -25,8 +26,9 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setTitle("Witch's Garden");
 
-        GameController gameController = new GameController();
-        GameScreen gameScreen = new GameScreen(640, 480);
+        GameController.getInstance();
+
+        GameScreen gameScreen = new GameScreen(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         root.getChildren().add(gameScreen);
         gameScreen.requestFocus();
 
@@ -78,14 +80,20 @@ public class Main extends Application {
         timer.start();
 
 
-        AnimationTimer animation = new AnimationTimer() {
+        AnimationTimer animation;
+        animation = new AnimationTimer() {
             public void handle(long now) {
-                try {
-                    gameScreen.paintComponent();
-                    GameController.play();
-                    RenderableHolder.getInstance().update();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                if(GameController.getInstance().isGameover()){
+                    this.stop();
+
+                }else {
+                    try {
+                        gameScreen.paintComponent();
+                        GameController.play();
+                        RenderableHolder.getInstance().update();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         };

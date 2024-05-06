@@ -43,15 +43,15 @@ public abstract class BaseVeggies implements WeatherEffectable, Collectable {
     public float getPositionY() { return positionY; }
 
     @Override
-    public void setPositionX(float positionX) { this.positionX = Math.max(0,Math.min(positionX, Config.gameFrameWidth)); }
+    public void setPositionX(float positionX) { this.positionX = Math.max(0,Math.min(positionX, Config.GAMEFRAMEWIDTH)); }
 
     @Override
-    public void setPositionY(float positionY) { this.positionY = Math.max(0,Math.min(positionY, Config.gameFrameHeight)); }
+    public void setPositionY(float positionY) { this.positionY = Math.max(0,Math.min(positionY, Config.GAMEFRAMEHEIGHT)); }
 
     @Override
     public void spawnOnMap() {
-        setPositionX(((float)Math.random()*100)*Config.gameFrameWidth/100);
-        setPositionY(((float)Math.random()*100)*Config.gameFrameHeight/100);
+        setPositionX(((float)Math.random()*100)*Config.GAMEFRAMEWIDTH/100);
+        setPositionY(((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100);
         this.setCollected(false);
     }
 

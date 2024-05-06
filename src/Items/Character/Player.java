@@ -1,6 +1,7 @@
 package Items.Character;
 
 import GUISharedObject.InputUtility;
+import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
 import Items.Inventory.Stick;
@@ -71,7 +72,8 @@ public class Player extends BaseCharacter{
     @Override
     public void draw(GraphicsContext gc) {
         gc.setFill(Color.RED);
-        gc.fillArc(getPositionX() - 10, getPositionY() - 10, 10 * 2, 10 * 2, 0, 360, ArcType.OPEN);
+//        gc.fillOval(getPositionX() - 10, getPositionY() - 10, 20, 20);
+        gc.drawImage(RenderableHolder.playerSprite, getPositionX() - 30, getPositionY() - 50,30,50);
     }
 
     public Stick getStick() {

@@ -5,8 +5,9 @@ public class Config {
         SUNNY, SNOWY, RAINY
     }
 
-    public static int gameFrameWidth = 800;
-    public static int gameFrameHeight = 500;
+
+    public static int GAMEFRAMEWIDTH = 640;
+    public static int GAMEFRAMEHEIGHT = 480;
     public static int SLIMEMAXSPEEDRATE = 12;
     public static int SLIMEMAXDAMAGERANGE = 4;
     public static int SLIMEMAXDAMAGE = 5;

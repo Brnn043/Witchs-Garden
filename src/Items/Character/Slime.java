@@ -10,8 +10,8 @@ public class Slime extends BaseCharacter{
     private int Hp;
     private BaseVeggies targetVeggie;
     public Slime() {
-        super(((float)Math.random()*100)*Config.gameFrameWidth/100
-                , ((float)Math.random()*100)*Config.gameFrameHeight/100
+        super(((float)Math.random()*100)*Config.GAMEFRAMEWIDTH/100
+                , ((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100
                 , (int) ((float) (Math.random())*Config.SLIMEMAXSPEEDRATE)
                 , (int) ((float) (Math.random())*Config.SLIMEMAXDAMAGERANGE)
                 , (int) ((float) (Math.random())*Config.SLIMEMAXDAMAGE));

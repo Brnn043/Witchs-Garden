@@ -29,7 +29,8 @@ public class GameScreen extends Canvas {
 
     public void paintComponent() {
         GraphicsContext gc = this.getGraphicsContext2D();
-        gc.setFill(Color.BLACK);
+        gc.clearRect(0, 0, this.getWidth(), this.getHeight());
+
         for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
             if (entity.isVisible() && !entity.isDestroyed()) {
                 entity.draw(gc);

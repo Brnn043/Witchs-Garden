@@ -28,7 +28,7 @@ public class GameController {
 
 
     public GameController() {
-        this.player = new Player(50,50,20,5,3);
+        this.player = new Player(50,50,5,5,3);
         this.veggiesList = new ArrayList<BaseVeggies>();
         this.slimeList = new ArrayList<Slime>();
         this.clock = new Clock();

@@ -8,6 +8,12 @@
 - GameController.getInstance().get() (almost done)
 
 # Update 6/5/24
-- change clock.getTimer -< getCoolDown
-- วงกลมมันตาม
+- เราย้ายตัว timer มาที่ timerThread ใน main
+- ลองดูการคุมเคลื่อนไหวใน walk ของ player
+- ถ้าสร้างตัวละครต้องใส่ใส่ Irenderable ไปด้วย + RenderableHolder.getInstance().add(this.player);
+- ต้อง implement การ draw ของตัวละคร ดูใน player ได้
 - set isDestroy = true ในตัวที่ตายแล้ว
+
+[bug report]
+- change clock.getTimer -< getCoolDown
+- implement ตัวละครชนขอบซ้าย-ขวา

@@ -61,8 +61,8 @@ public class Stick implements Collectable {
 
     @Override
     public void spawnOnMap() {
-        setPositionX(((float)Math.random()*100)* Config.gameFrameWidth/100);
-        setPositionY(((float)Math.random()*100)*Config.gameFrameHeight/100);
+        setPositionX(((float)Math.random()*100)* Config.GAMEFRAMEWIDTH/100);
+        setPositionY(((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100);
         this.setCollected(false);
     }
 
