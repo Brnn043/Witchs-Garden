@@ -17,6 +17,7 @@ public class RenderableHolder {
     private Comparator<IRenderable> comparator;
     public static Image playerSprite;
 //    public static AudioClip explosionSound;
+    public static Image sunnyBackground;
 
     static {
         loadResource();

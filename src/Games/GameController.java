@@ -1,5 +1,7 @@
 package Games;
 
+import GUI.Map.BackgroundImage;
+import GUI.Map.House;
 import GUISharedObject.RenderableHolder;
 import Items.Character.Player;
 import Items.Character.Slime;
@@ -24,7 +26,8 @@ public class GameController {
     private ArrayList<Stick> stickOnGround;
     private boolean gameover;
     private int gameTimer;
-
+    private BackgroundImage backgroundImage;
+    private House house;
 
 
     public GameController() {
@@ -34,10 +37,14 @@ public class GameController {
         this.clock = new Clock();
         this.gameover = false;
         this.gameTimer = 10;
+        this.backgroundImage = new BackgroundImage();
+        this.house = new House();
         initGames();
 
         // add player in GUI
         RenderableHolder.getInstance().add(this.player);
+        RenderableHolder.getInstance().add(this.backgroundImage);
+        RenderableHolder.getInstance().add(this.house);
     }
 
     public static void play() throws InterruptedException {
