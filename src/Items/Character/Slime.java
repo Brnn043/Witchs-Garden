@@ -21,17 +21,30 @@ public class Slime extends BaseCharacter{
     }
 
     @Override
-    public void attack(Object o) {
+    public void attack() {
         if(getAttackCooldown()>0){
             return;
         }
-        // SLIME attack veggie
-        if(o instanceof BaseVeggies){
-            BaseVeggies veggie = (BaseVeggies) o;
-            veggie.setHp(veggie.getHp()-this.getDamage());
 
+        // check if target veggie still in game
+        ArrayList<BaseVeggies> veggiesList= GameController.getInstance().getVeggiesList();
+        if(!veggiesList.contains(this.getTargetVeggie())){
+            this.setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
+            System.out.println("slime find new target");
         }
-        setAttackCooldown(5);
+
+        // calculate distance from target veggie
+        double disX = this.getTargetVeggie().getPositionX() - this.getPositionX();
+        double disY = this.getTargetVeggie().getPositionY() - this.getPositionY();
+        int distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
+
+        // attack veggie
+        if( (distance - this.getAttackRange()) <= Config.SLIMEWALKSTEP ) {
+            this.getTargetVeggie().setHp(this.getTargetVeggie().getHp()-this.getDamage());
+            setAttackCooldown(5);
+            System.out.println("slime ATTACK!!!");
+        }
+
     }
 
     public int getHp() {

@@ -6,3 +6,8 @@
 - BaseCharacter/weatherEffected
 - เราน่าจะต้องมาตกลงกันเรื่อง weatherEffected เพิ่มด้วยๆ
 - GameController.getInstance().get() (almost done)
+
+# Update 6/5/24
+- change clock.getTimer -< getCoolDown
+- วงกลมมันตาม
+- set isDestroy = true ในตัวที่ตายแล้ว

@@ -1,27 +1,42 @@
 package Items.Character;
 
+import GUISharedObject.InputUtility;
 import Games.Config;
 import Games.GameController;
 import Items.Inventory.Stick;
+import javafx.application.Platform;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
 public class Player extends BaseCharacter{
     private Stick stick;
     private int money;
 
-    public Player(int positionX, int positionY, int maxspeedrate, int attackRange, int damage) {
-        super(positionX, positionY, maxspeedrate, attackRange, damage);
+    public Player(int positionX, int positionY, int maxSpeedRate, int attackRange, int damage) {
+        super(positionX, positionY, maxSpeedRate, attackRange, damage);
         setStick(null);
         setMoney(0);
+        System.out.println(getSpeedRate());
     }
 
     @Override
-    public void attack(Object o) {
+    public void attack() {
         // player attack slime
         if(getAttackCooldown()>0){
             return;
         }
 
-        for(Slime slime : GameController.getInstance().getslimeList()) {
+        if (! InputUtility.getKeyPressed(KeyCode.Q)) {
+            return;
+        }
+
+        if(this.getStick() == null){
+            return;
+        }
+
+        for(Slime slime : GameController.getInstance().getSlimeList()) {
             double disX = GameController.getInstance().getPlayer().getPositionX() - slime.getPositionX();
             double disY = GameController.getInstance().getPlayer().getPositionY() - slime.getPositionY();
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
@@ -33,10 +48,30 @@ public class Player extends BaseCharacter{
         }
     }
 
+    public void action(){
+        weatherEffected();
+        walk();
+        attack();
+    }
+
     @Override
     public void walk() {
-        // WASD implement after get GUI
-        this.setPositionX(this.getPositionX()+(int)this.getSpeedRate());
+        // WASD to walk in map
+        if (InputUtility.getKeyPressed(KeyCode.W)) {
+            setPositionY(getPositionY()-(int)this.getSpeedRate());
+        }else if (InputUtility.getKeyPressed(KeyCode.A)) {
+            setPositionX(getPositionX()-(int)this.getSpeedRate());
+        } else if (InputUtility.getKeyPressed(KeyCode.S)) {
+            setPositionY(getPositionY()+(int)this.getSpeedRate());
+        }else if (InputUtility.getKeyPressed(KeyCode.D)) {
+            setPositionX(getPositionX()+(int)this.getSpeedRate());
+        }
+    }
+
+    @Override
+    public void draw(GraphicsContext gc) {
+        gc.setFill(Color.RED);
+        gc.fillArc(getPositionX() - 10, getPositionY() - 10, 10 * 2, 10 * 2, 0, 360, ArcType.OPEN);
     }
 
     public Stick getStick() {

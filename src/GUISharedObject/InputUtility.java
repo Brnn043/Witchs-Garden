@@ -1,4 +1,4 @@
-package GUI;
+package GUISharedObject;
 
 import javafx.scene.input.KeyCode;
 
@@ -10,6 +10,9 @@ public class InputUtility {
     public static boolean getKeyPressed(KeyCode keycode) {
         return keyPressed.contains(keycode);
     }
+    public static ArrayList<KeyCode> getKeys(){
+        return keyPressed;
+    }
     public static void setKeyPressed(KeyCode keycode,boolean pressed) {
         if(pressed){
             if(!keyPressed.contains(keycode)){
@@ -18,7 +21,6 @@ public class InputUtility {
         }else{
             keyPressed.remove(keycode);
         }
-        System.out.println(keyPressed);
     }
 
 }

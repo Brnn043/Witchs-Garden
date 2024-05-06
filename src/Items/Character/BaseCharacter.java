@@ -1,5 +1,6 @@
 package Items.Character;
 
+import GUISharedObject.Entity;
 import Games.Config;
 import Games.GameController;
 import Items.Interfaces.Attackable;
@@ -7,7 +8,7 @@ import Items.Interfaces.Walkable;
 import Items.Interfaces.WeatherEffectable;
 import Games.Config.*;
 
-public abstract class BaseCharacter implements Walkable, Attackable, WeatherEffectable {
+public abstract class BaseCharacter extends Entity implements Walkable, Attackable, WeatherEffectable {
     private float positionX;
     private float positionY;
     private float speedRate;
@@ -83,10 +84,13 @@ public abstract class BaseCharacter implements Walkable, Attackable, WeatherEffe
         this.attackRange = attackRange;
     }
 
+    public abstract void attack();
+
     @Override
     public void walk() {
         return;
     }
+
 
     public int getMAXSPEEDRATE() {
         return MAXSPEEDRATE;

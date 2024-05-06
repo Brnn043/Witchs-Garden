@@ -1,10 +1,9 @@
-package GUI;
+package GUISharedObject;
 
 import Items.Character.Player;
 import Items.Character.Slime;
 import Items.Veggies.BaseVeggies;
 import javafx.scene.image.Image;
-import javafx.scene.media.AudioClip;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,7 +49,6 @@ public class RenderableHolder {
             if(x instanceof Player) System.out.println("player");
             if(x instanceof Slime) System.out.println("slime");
             if(x instanceof BaseVeggies) System.out.println("veggie");
-
         }
     }
 
