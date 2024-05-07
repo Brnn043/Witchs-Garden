@@ -1,5 +1,6 @@
 package Items.Character;
 
+import GUISharedObject.CollidableEntity;
 import GUISharedObject.Entity;
 import Games.Config;
 import Games.GameController;
@@ -8,7 +9,7 @@ import Items.Interfaces.Walkable;
 import Items.Interfaces.WeatherEffectable;
 import Games.Config.*;
 
-public abstract class BaseCharacter extends Entity implements Walkable, Attackable, WeatherEffectable {
+public abstract class BaseCharacter extends CollidableEntity implements Walkable, Attackable, WeatherEffectable {
     private float speedRate;
     private final float MAXSPEEDRATE;
     private int attackRange;
@@ -16,7 +17,7 @@ public abstract class BaseCharacter extends Entity implements Walkable, Attackab
     private int attackCooldown;
 
     protected BaseCharacter(float positionX, float positionY, int maxspeedrate, int attackRange, int damage) {
-        super(positionX,positionY);
+        super(positionX,positionY,0,0);
         this.MAXSPEEDRATE = Math.max(2,maxspeedrate);
         this.attackRange = Math.max(2,attackRange);
         this.damage = Math.max(2,damage);

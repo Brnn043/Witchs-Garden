@@ -51,4 +51,24 @@ public class CollidableEntity extends Entity {
                 thisTop < otherBottom &&
                 thisBottom > otherTop;
     }
+
+    public boolean collideWith(CollidableEntity other, double x,double y) {
+        // Calculate the bounding box of this entity
+        double thisLeft = getX();
+        double thisRight = getX() + width;
+        double thisTop = getY();
+        double thisBottom = getY() + height;
+
+        // Calculate the bounding box of the other entity
+        double otherLeft = other.getX()-x;
+        double otherRight = other.getX() + other.getWidth()-x;
+        double otherTop = other.getY()-y;
+        double otherBottom = other.getY() + other.getHeight()-y;
+
+        // Check for collision
+        return thisLeft < otherRight &&
+                thisRight > otherLeft &&
+                thisTop < otherBottom &&
+                thisBottom > otherTop;
+    }
 }

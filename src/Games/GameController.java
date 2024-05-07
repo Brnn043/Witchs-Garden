@@ -31,7 +31,7 @@ public class GameController {
 
 
     public GameController() {
-        this.player = new Player(50,50,5,5,3);
+        this.player = new Player(400,300,5,5,3);
         this.veggiesList = new ArrayList<BaseVeggies>();
         this.slimeList = new ArrayList<Slime>();
         this.clock = new Clock();
@@ -188,5 +188,7 @@ public class GameController {
         this.gameTimer = Math.max(0, gameTimer);
     }
 
-
+    public House getHouse() {
+        return house;
+    }
 }

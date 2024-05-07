@@ -76,25 +76,60 @@ public class Player extends BaseCharacter{
         attack();
     }
 
-    @Override
-    public void walk() {
-        // WASD to walk in map
-        if (InputUtility.getKeyPressed(KeyCode.W)) {
-            setY(getY()-(int)this.getSpeedRate());
-            setWalk(true);
-        }else if (InputUtility.getKeyPressed(KeyCode.A)) {
-            setX(getX()-(int)this.getSpeedRate());
-            setWalk(true);
-        } else if (InputUtility.getKeyPressed(KeyCode.S)) {
-            setY(getY()+(int)this.getSpeedRate());
-            setWalk(true);
-        }else if (InputUtility.getKeyPressed(KeyCode.D)) {
-            setX(getX()+(int)this.getSpeedRate());
-            setWalk(true);
-        }else{
+//    @Override
+//    public void walk() {
+//        // WASD to walk in map
+//        if (InputUtility.getKeyPressed(KeyCode.W)) {
+//            setY(getY()-(int)this.getSpeedRate());
+//            setWalk(true);
+//        }else if (InputUtility.getKeyPressed(KeyCode.A)) {
+//            setX(getX()-(int)this.getSpeedRate());
+//            setWalk(true);
+//        } else if (InputUtility.getKeyPressed(KeyCode.S)) {
+//            setY(getY()+(int)this.getSpeedRate());
+//            setWalk(true);
+//        }else if (InputUtility.getKeyPressed(KeyCode.D)) {
+//            setX(getX()+(int)this.getSpeedRate());
+//            setWalk(true);
+//        }else{
+//            setWalk(false);
+//        }
+//    }
+@Override
+public void walk() {
+    // WASD to walk in map
+    if (InputUtility.getKeyPressed(KeyCode.W)) {
+        if (collideWith(GameController.getInstance().getHouse(),0,-(int)this.getSpeedRate())) {
             setWalk(false);
+            return;
         }
+        setY(getY()-(int)this.getSpeedRate());
+        setWalk(true);
+    }else if (InputUtility.getKeyPressed(KeyCode.A)) {
+        if (collideWith(GameController.getInstance().getHouse(),-(int)this.getSpeedRate(),0)) {
+            setWalk(false);
+            return;
+        }
+        setX(getX()-(int)this.getSpeedRate());
+        setWalk(true);
+    } else if (InputUtility.getKeyPressed(KeyCode.S)) {
+        if (collideWith(GameController.getInstance().getHouse(),0,(int)this.getSpeedRate())) {
+            setWalk(false);
+            return;
+        }
+        setY(getY()+(int)this.getSpeedRate());
+        setWalk(true);
+    }else if (InputUtility.getKeyPressed(KeyCode.D)) {
+        if (collideWith(GameController.getInstance().getHouse(),(int)this.getSpeedRate(),0)) {
+            setWalk(false);
+            return;
+        }
+        setX(getX()+(int)this.getSpeedRate());
+        setWalk(true);
+    }else{
+        setWalk(false);
     }
+}
 
     @Override
     public void draw(GraphicsContext gc) {
