@@ -3,6 +3,9 @@ package Items.Character;
 import Games.Config;
 import Games.GameController;
 import Items.Veggies.BaseVeggies;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
 import java.util.ArrayList;
 
@@ -66,18 +69,20 @@ public class Slime extends BaseCharacter{
 
     @Override
     public void walk() {
-        int walkCount = 0;
+
         double disX = this.getPositionX() - this.getTargetVeggie().getPositionX();
         double disY = this.getPositionY() - this.getTargetVeggie().getPositionY();
         int distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
 
-        while( (distance - this.getAttackRange()) > Config.SLIMEWALKSTEP & walkCount < 10) {
-            disX = this.getPositionX() - this.getTargetVeggie().getPositionX();
-            disY = this.getPositionY() - this.getTargetVeggie().getPositionY();
-            distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
-            this.setPositionX((float) (this.getPositionX() - (Math.signum(disX))*(Config.SLIMEWALKSTEP)));
-            this.setPositionY((float) (this.getPositionY() - (Math.signum(disY))*(Config.SLIMEWALKSTEP)));
-            walkCount += 1;
+        if( distance - this.getAttackRange() > Config.SLIMEWALKSTEP ){
+            this.setPositionX((float) (this.getPositionX() - (Math.signum(disX))*(Config.SLIMEWALKSTEP * this.getSpeedRate())));
+            this.setPositionY((float) (this.getPositionY() - (Math.signum(disY))*(Config.SLIMEWALKSTEP * this.getSpeedRate())));
         }
+    }
+
+    @Override
+    public void draw(GraphicsContext gc) {
+        gc.setFill(Color.RED);
+        gc.fillArc(getPositionX() - 10, getPositionY() - 10, 10 * 2, 10 * 2, 0, 360, ArcType.OPEN);
     }
 }

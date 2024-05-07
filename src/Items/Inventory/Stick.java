@@ -1,11 +1,18 @@
 package Items.Inventory;
 
+import GUISharedObject.Entity;
+import GUISharedObject.InputUtility;
+import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
 import Items.Character.Player;
 import Items.Interfaces.Collectable;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
-public class Stick implements Collectable {
+public class Stick extends Entity implements Collectable {
 
     private float positionX;
     private float positionY;
@@ -18,6 +25,8 @@ public class Stick implements Collectable {
         this.setDurability((int) (Math.random() * (Config.STICKMAXDURABILITY - Config.STICKMINDURABILITY + 1)) + Config.STICKMINDURABILITY);
         this.setAttackRange((int) (Math.random() * (Config.STICKMAXATTACKRANGE - Config.STICKMINATTACKRANGE + 1)) + Config.STICKMINATTACKRANGE);
         this.setDamage(Config.STICKDAMAGEPERATTACK);
+        this.setPositionX((float)Math.random()*100*Config.GAMEFRAMEWIDTH/100);
+        this.setPositionY((float)Math.random()*100*Config.GAMEFRAMEHEIGHT/100);
     }
 
     public Stick(int durability,int attackRange) {
@@ -28,13 +37,27 @@ public class Stick implements Collectable {
 
     @Override
     public void collected() {
+        if (! InputUtility.getKeyPressed(KeyCode.E)) {
+           return;
+        }
         Player player = GameController.getInstance().getPlayer();
+        double disX = GameController.getInstance().getPlayer().getPositionX() - this.getPositionX();
+        double disY = GameController.getInstance().getPlayer().getPositionY() - this.getPositionY();
+        double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
+        if( distance >= 60 ) {
+            return;
+        }
         if(player.getStick() != null) {
             System.out.println("Player already have stick");
             return;
         }
         player.setStick(this);
         this.setCollected(true);
+        RenderableHolder.getInstance().getEntities().remove(this);
+    }
+
+    public void draw(GraphicsContext gc) {
+        gc.drawImage(RenderableHolder.stickSprite, getPositionX() - 45, getPositionY() - 20,30,45);
     }
 
     public int getDamage() { return damage; }

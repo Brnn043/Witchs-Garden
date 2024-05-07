@@ -1,12 +1,13 @@
 package Items.Veggies;
 
+import GUISharedObject.Entity;
 import Games.Config;
 import Games.GameController;
 import Items.Character.Player;
 import Items.Interfaces.Collectable;
 import Items.Interfaces.WeatherEffectable;
 
-public abstract class BaseVeggies implements WeatherEffectable, Collectable {
+public abstract class BaseVeggies extends Entity implements WeatherEffectable, Collectable {
 
     private float positionX;
     private float positionY;
