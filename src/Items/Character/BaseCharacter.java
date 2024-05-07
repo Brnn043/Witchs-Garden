@@ -12,12 +12,12 @@ public abstract class BaseCharacter extends Entity implements Walkable, Attackab
     private float positionX;
     private float positionY;
     private float speedRate;
-    private final int MAXSPEEDRATE;
+    private final float MAXSPEEDRATE;
     private int attackRange;
     private int damage;
     private int attackCooldown;
 
-    protected BaseCharacter(float positionX, float positionY, int maxspeedrate, int attackRange, int damage) {
+    protected BaseCharacter(float positionX, float positionY, float maxspeedrate, int attackRange, int damage) {
         this.MAXSPEEDRATE = Math.max(2,maxspeedrate);
         this.attackRange = Math.max(2,attackRange);
         this.damage = Math.max(2,damage);
@@ -92,7 +92,7 @@ public abstract class BaseCharacter extends Entity implements Walkable, Attackab
     }
 
 
-    public int getMAXSPEEDRATE() {
+    public float getMAXSPEEDRATE() {
         return MAXSPEEDRATE;
     }
 
