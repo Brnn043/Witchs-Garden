@@ -56,7 +56,6 @@ public class GameController {
 //        System.out.println("slime 1,  X =" + slime1.getPositionX() + " Y = " + slime1.getPositionY());
 //        System.out.println("slime 1's target veggie,  X =" + slime1.getTargetVeggie().getPositionX() + " Y = " + slime1.getTargetVeggie().getPositionY() + " HP :" + slime1.getTargetVeggie().getHp());
 
-        GameController.getInstance().getPlayer().action();
 
         // add a slime
         while(getInstance().getSlimeList().size() < 5){

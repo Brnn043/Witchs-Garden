@@ -79,6 +79,21 @@ public class Main extends Application {
         });
         timer.start();
 
+        Thread playerAction = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!GameController.getInstance().isGameover()){
+                    try {
+                        Thread.sleep(20);
+                        GameController.getInstance().getPlayer().action();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+        playerAction.start();
+
 
         AnimationTimer animation;
         animation = new AnimationTimer() {
