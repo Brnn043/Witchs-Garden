@@ -11,6 +11,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 
+import static GUISharedObject.RenderableHolder.*;
+
 public class GameScreen extends Canvas {
 
     public GameScreen(double width, double height) {
@@ -33,7 +35,8 @@ public class GameScreen extends Canvas {
         GraphicsContext gc = this.getGraphicsContext2D();
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
 
-        for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
+        for (int i =0; i< getInstance().getEntities().size(); i+=1) {
+            IRenderable entity = getInstance().getEntities().get(i);
             if (entity.isVisible() && !entity.isDestroyed()) {
                 entity.draw(gc);
             }

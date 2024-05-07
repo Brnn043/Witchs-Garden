@@ -10,7 +10,7 @@ import Games.Config.*;
 
 public abstract class BaseCharacter extends Entity implements Walkable, Attackable, WeatherEffectable {
     private float speedRate;
-    private final int MAXSPEEDRATE;
+    private final float MAXSPEEDRATE;
     private int attackRange;
     private int damage;
     private int attackCooldown;
@@ -67,8 +67,7 @@ public abstract class BaseCharacter extends Entity implements Walkable, Attackab
     public void walk() {
         return;
     }
-
-    public int getMAXSPEEDRATE() {
+    public float getMAXSPEEDRATE() {
         return MAXSPEEDRATE;
     }
 

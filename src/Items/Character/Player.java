@@ -14,11 +14,16 @@ import javafx.scene.shape.ArcType;
 public class Player extends BaseCharacter{
     private Stick stick;
     private int money;
+    private boolean isWalk;
+    private boolean isAttack;
+    private final int witchHeight = 70;
+    private final int witchWidth = 50;
 
     public Player(int positionX, int positionY, int maxSpeedRate, int attackRange, int damage) {
         super(positionX, positionY, maxSpeedRate, attackRange, damage);
         setStick(null);
         setMoney(0);
+        setWalk(false);
         System.out.println(getSpeedRate());
     }
 
@@ -37,14 +42,30 @@ public class Player extends BaseCharacter{
             return;
         }
 
+
+
         for(Slime slime : GameController.getInstance().getSlimeList()) {
             double disX = GameController.getInstance().getPlayer().getX() - slime.getX();
             double disY = GameController.getInstance().getPlayer().getY() - slime.getY();
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
             if( distance <= stick.getAttackRange() ) {
-                slime.setHp( slime.getHp() - stick.getDamage() );
-                stick.setDurability(stick.getDurability() - Config.STICKDURABILITYPERATTACK);
-                this.setAttackCooldown(Config.PLAYERCOOLDOWNTIME);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            slime.setHp( slime.getHp() - stick.getDamage() );
+                            stick.setDurability(stick.getDurability() - Config.STICKDURABILITYPERATTACK);
+                            setAttackCooldown(Config.PLAYERCOOLDOWNTIME);
+                            setAttack(true);
+                            Thread.sleep(300);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        setAttack(false);
+                    }
+                }).start();
+
+
             }
         }
     }
@@ -60,20 +81,41 @@ public class Player extends BaseCharacter{
         // WASD to walk in map
         if (InputUtility.getKeyPressed(KeyCode.W)) {
             setY(getY()-(int)this.getSpeedRate());
+            setWalk(true);
         }else if (InputUtility.getKeyPressed(KeyCode.A)) {
             setX(getX()-(int)this.getSpeedRate());
+            setWalk(true);
         } else if (InputUtility.getKeyPressed(KeyCode.S)) {
             setY(getY()+(int)this.getSpeedRate());
+            setWalk(true);
         }else if (InputUtility.getKeyPressed(KeyCode.D)) {
             setX(getX()+(int)this.getSpeedRate());
+            setWalk(true);
+        }else{
+            setWalk(false);
         }
     }
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.setFill(Color.RED);
-//        gc.fillOval(getX() - 10, getY() - 10, 20, 20);
-        gc.drawImage(RenderableHolder.playerSprite, getX() - 30, getY() - 50,30,50);
+        if(isAttack()){
+            gc.drawImage(RenderableHolder.witchAttackSprite, getX() - witchWidth/2, getY() - witchHeight/2,witchWidth,witchHeight);
+            return;
+        }
+
+        if(isWalk()){
+            if(getStick()==null){
+                gc.drawImage(RenderableHolder.witchWalkSprite, getX() - witchWidth/2, getY() - witchHeight/2,witchWidth,witchHeight);
+            }else{
+                gc.drawImage(RenderableHolder.witchWalkBroomSprite, getX() - witchWidth/2, getY() - witchHeight/2,witchWidth,witchHeight);
+            }
+        }else{
+            if(getStick()==null){
+                gc.drawImage(RenderableHolder.witchSprite, getX() - witchWidth/2, getY() - witchHeight/2,witchWidth,witchHeight);
+            }else{
+                gc.drawImage(RenderableHolder.witchBroomSprite, getX() - witchWidth/2, getY() - witchHeight/2,witchWidth,witchHeight);
+            }
+        }
     }
 
     public Stick getStick() {
@@ -92,4 +134,19 @@ public class Player extends BaseCharacter{
         this.money = Math.max(0,money);
     }
 
+    public boolean isWalk() {
+        return isWalk;
+    }
+
+    public void setWalk(boolean walk) {
+        isWalk = walk;
+    }
+
+    public boolean isAttack() {
+        return isAttack;
+    }
+
+    public void setAttack(boolean attack) {
+        isAttack = attack;
+    }
 }

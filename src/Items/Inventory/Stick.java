@@ -1,10 +1,14 @@
 package Items.Inventory;
 
 import GUISharedObject.Entity;
+import GUISharedObject.InputUtility;
+import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
 import Items.Character.Player;
 import Items.Interfaces.Collectable;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 
 public class Stick extends Entity implements Collectable {
     private boolean isCollected;
@@ -30,13 +34,27 @@ public class Stick extends Entity implements Collectable {
 
     @Override
     public void collected() {
+        if (! InputUtility.getKeyPressed(KeyCode.E)) {
+           return;
+        }
         Player player = GameController.getInstance().getPlayer();
+        double disX = GameController.getInstance().getPlayer().getX() - this.getX();
+        double disY = GameController.getInstance().getPlayer().getY() - this.getY();
+        double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
+        if( distance >= 60 ) {
+            return;
+        }
         if(player.getStick() != null) {
             System.out.println("Player already have stick");
             return;
         }
         player.setStick(this);
         this.setCollected(true);
+        RenderableHolder.getInstance().getEntities().remove(this);
+    }
+
+    public void draw(GraphicsContext gc) {
+        gc.drawImage(RenderableHolder.stickSprite, getX() - 45, getY() - 20,30,45);
     }
 
     public int getDamage() { return damage; }

@@ -36,9 +36,10 @@ public class GameController {
         this.slimeList = new ArrayList<Slime>();
         this.clock = new Clock();
         this.gameover = false;
-        this.gameTimer = 10;
+        this.gameTimer = 30;
         this.backgroundImage = new BackgroundImage();
         this.house = new House();
+        this.stickOnGround = new ArrayList<Stick>();
         initGames();
 
         // add player in GUI
@@ -50,29 +51,33 @@ public class GameController {
     public static void play() throws InterruptedException {
 
         // testing run
-//        System.out.println("---------- Timer : " + getInstance().getGameTimer() + "------------");
-//        System.out.println("Entities in game");
-//        Slime slime1 = getInstance().getslimeList().get(0);
-//        System.out.println("slime 1,  X =" + slime1.getPositionX() + " Y = " + slime1.getPositionY());
-//        System.out.println("slime 1's target veggie,  X =" + slime1.getTargetVeggie().getPositionX() + " Y = " + slime1.getTargetVeggie().getPositionY() + " HP :" + slime1.getTargetVeggie().getHp());
+
+//        try{
+//            Slime slime1 = getInstance().getSlimeList().get(0);
+//            System.out.println("slime 1,  X =" + slime1.getPositionX() + " Y = " + slime1.getPositionY());
+//            System.out.println("slime 1's target veggie,  X =" + slime1.getTargetVeggie().getPositionX() + " Y = " + slime1.getTargetVeggie().getPositionY() + " HP :" + slime1.getTargetVeggie().getHp());
+//        }catch (Exception e){
+//            System.out.println("");
+//        }
 
 
         // add a slime
         while(getInstance().getSlimeList().size() < 5){
-            getInstance().getSlimeList().add(new Slime());
+            Slime slime = new Slime();
+            getInstance().getSlimeList().add(slime);
+            RenderableHolder.getInstance().add(slime);
         }
 
-        // decreasing coolDown for slimes, delete HP<0 slime
-        for(Slime slime: instance.getSlimeList()){
+
+        for (int i = 0; i < instance.getSlimeList().size(); i++) {
             // delete slime if HP is < 0
+            Slime slime = instance.getSlimeList().get(i);
             if(slime.getHp() <= 0){
                 getInstance().getSlimeList().remove(slime);
+                RenderableHolder.getInstance().getEntities().remove(slime);
                 continue;
             }
-
-            // walk to target veggie & attack
-            slime.walk();
-            slime.attack();
+            slime.weatherEffected();
         }
 
         // veggies :
@@ -89,26 +94,37 @@ public class GameController {
         // delete dead veggie
         for(BaseVeggies veggie : delVeggie){
             getInstance().getVeggiesList().remove(veggie);
-            getInstance().getVeggiesList().add(GameController.getInstance().getNewVeggie());
-//            System.out.println("veggie dead");
+            getInstance().getNewVeggie();
+        }
+
+
+        for(Stick stick: GameController.getInstance().stickOnGround){
+            stick.collected();
         }
     }
 
     public void initGames(){
-        getVeggiesList().add(getNewVeggie());
-        getVeggiesList().add(getNewVeggie());
-        getVeggiesList().add(getNewVeggie());
-        getVeggiesList().add(getNewVeggie());
+        getNewVeggie();
+        getNewVeggie();
+        getNewVeggie();
+        getNewVeggie();
     }
-    public BaseVeggies getNewVeggie(){
+    public void getNewVeggie(){
         int veggieType = (int) (Math.random()*3);
         if (veggieType == 0) {
-            return new Bean();
+            Bean bean = new Bean();
+            getVeggiesList().add(bean);
+            RenderableHolder.getInstance().add(bean);
         }else if(veggieType == 1){
-            return new Cucumber();
+            Cucumber cucumber = new Cucumber();
+            getVeggiesList().add(cucumber);
+            RenderableHolder.getInstance().add(cucumber);
         }else{
-            return new Rice();
+            Rice rice = new Rice();
+            getVeggiesList().add(rice);
+            RenderableHolder.getInstance().add(rice);
         }
+        return ;
     }
 
     public static GameController getInstance() {
@@ -152,10 +168,6 @@ public class GameController {
         return stickOnGround;
     }
 
-    public void setStickOnGround(ArrayList<Stick> stickOnGround) {
-        this.stickOnGround = stickOnGround;
-    }
-
     public boolean getGameover() {
         return gameover;
     }
@@ -175,4 +187,6 @@ public class GameController {
     public void setGameTimer(int gameTimer) {
         this.gameTimer = Math.max(0, gameTimer);
     }
+
+
 }

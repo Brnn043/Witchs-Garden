@@ -5,6 +5,7 @@ import Games.Config;
 import Games.GameController;
 import Items.Character.Slime;
 import Items.Inventory.Clock;
+import Items.Inventory.Stick;
 import Items.Veggies.BaseVeggies;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -26,8 +27,8 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setTitle("Witch's Garden");
 
-        GameController.getInstance();
 
+        GameController game = GameController.getInstance();
         GameScreen gameScreen = new GameScreen(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         root.getChildren().add(gameScreen);
         gameScreen.requestFocus();
@@ -40,8 +41,8 @@ public class Main extends Application {
         Thread timer = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (!GameController.getInstance().isGameover()){
-                    Clock clock = GameController.getInstance().getClock();
+                while (!game.isGameover()){
+                    Clock clock = game.getClock();
 
                     try {
                         Thread.sleep(1000);
@@ -49,31 +50,40 @@ public class Main extends Application {
                         throw new RuntimeException(e);
                     }
 
+                    // spaw stick every 10 second
+                    if(game.getGameTimer()%10 == 0){
+                        Stick stick = new Stick();
+                        game.getStickOnGround().add(stick);
+                        RenderableHolder.getInstance().add(stick);
+                    }
+
                     // set clock timer coolDown
                     clock.setTimer(clock.getTimer()-1);
 
                     // set player coolDown
-                    GameController.getInstance().getPlayer().setAttackCooldown(
-                            GameController.getInstance().getPlayer().getAttackCooldown() - 1);
+                    game.getPlayer().setAttackCooldown(
+                            game.getPlayer().getAttackCooldown() - 1);
 
                     // decrease slime attack coolDown
-                    for(Slime slime: GameController.getInstance().getSlimeList()) {
+                    for(Slime slime: game.getSlimeList()) {
                         slime.setAttackCooldown(slime.getAttackCooldown() - 1);
+                        slime.walk();
+                        slime.attack();
                     }
 
                     // decrease veggie water & add growth point
-                    for(BaseVeggies veggie : GameController.getInstance().getVeggiesList()) {
+                    for(BaseVeggies veggie : game.getVeggiesList()) {
                         veggie.setWaterPoint(veggie.getWaterPoint() - veggie.getWaterDroppingRate());
                         veggie.setGrowthPoint(veggie.getGrowthPoint() + veggie.getGrowthRate());
                     }
 
                     // check if gameTimer == 0
-                    GameController.getInstance().setGameTimer(GameController.getInstance().getGameTimer()-1);
-                    if(GameController.getInstance().getGameTimer() == 0){
-                        GameController.getInstance().setGameover(true);
+                    game.setGameTimer(game.getGameTimer()-1);
+                    if(game.getGameTimer() == 0){
+                        game.setGameover(true);
                     }
 
-                    System.out.println("TIMER : "+ GameController.getInstance().getGameTimer());
+                    System.out.println("TIMER : "+ game.getGameTimer());
                 }
             }
         });
@@ -82,10 +92,10 @@ public class Main extends Application {
         Thread playerAction = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (!GameController.getInstance().isGameover()){
+                while (!game.isGameover()){
                     try {
                         Thread.sleep(20);
-                        GameController.getInstance().getPlayer().action();
+                        game.getPlayer().action();
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
@@ -98,13 +108,12 @@ public class Main extends Application {
         AnimationTimer animation;
         animation = new AnimationTimer() {
             public void handle(long now) {
-                if(GameController.getInstance().isGameover()){
+                if(game.isGameover()){
                     this.stop();
-
                 }else {
                     try {
                         gameScreen.paintComponent();
-                        GameController.play();
+                        game.play();
                         RenderableHolder.getInstance().update();
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
