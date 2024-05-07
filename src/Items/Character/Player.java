@@ -38,8 +38,8 @@ public class Player extends BaseCharacter{
         }
 
         for(Slime slime : GameController.getInstance().getSlimeList()) {
-            double disX = GameController.getInstance().getPlayer().getPositionX() - slime.getPositionX();
-            double disY = GameController.getInstance().getPlayer().getPositionY() - slime.getPositionY();
+            double disX = GameController.getInstance().getPlayer().getX() - slime.getX();
+            double disY = GameController.getInstance().getPlayer().getY() - slime.getY();
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
             if( distance <= stick.getAttackRange() ) {
                 slime.setHp( slime.getHp() - stick.getDamage() );
@@ -59,21 +59,21 @@ public class Player extends BaseCharacter{
     public void walk() {
         // WASD to walk in map
         if (InputUtility.getKeyPressed(KeyCode.W)) {
-            setPositionY(getPositionY()-(int)this.getSpeedRate());
+            setY(getY()-(int)this.getSpeedRate());
         }else if (InputUtility.getKeyPressed(KeyCode.A)) {
-            setPositionX(getPositionX()-(int)this.getSpeedRate());
+            setX(getX()-(int)this.getSpeedRate());
         } else if (InputUtility.getKeyPressed(KeyCode.S)) {
-            setPositionY(getPositionY()+(int)this.getSpeedRate());
+            setY(getY()+(int)this.getSpeedRate());
         }else if (InputUtility.getKeyPressed(KeyCode.D)) {
-            setPositionX(getPositionX()+(int)this.getSpeedRate());
+            setX(getX()+(int)this.getSpeedRate());
         }
     }
 
     @Override
     public void draw(GraphicsContext gc) {
         gc.setFill(Color.RED);
-//        gc.fillOval(getPositionX() - 10, getPositionY() - 10, 20, 20);
-        gc.drawImage(RenderableHolder.playerSprite, getPositionX() - 30, getPositionY() - 50,30,50);
+//        gc.fillOval(getX() - 10, getY() - 10, 20, 20);
+        gc.drawImage(RenderableHolder.playerSprite, getX() - 30, getY() - 50,30,50);
     }
 
     public Stick getStick() {

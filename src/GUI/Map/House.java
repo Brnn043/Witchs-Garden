@@ -6,7 +6,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class House extends Entity {
-    public House() {}
 
     @Override
     public int getZ() {

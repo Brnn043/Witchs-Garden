@@ -1,29 +1,31 @@
 package Items.Inventory;
 
+import GUISharedObject.Entity;
 import Games.Config;
 import Games.GameController;
 import Items.Character.Player;
 import Items.Interfaces.Collectable;
 
-public class Stick implements Collectable {
-
-    private float positionX;
-    private float positionY;
+public class Stick extends Entity implements Collectable {
     private boolean isCollected;
     private int durability;
     private int attackRange;
     private int damage;
 
     public Stick() { // this constructor will randomly choose durability and attack range
+        super();
         this.setDurability((int) (Math.random() * (Config.STICKMAXDURABILITY - Config.STICKMINDURABILITY + 1)) + Config.STICKMINDURABILITY);
         this.setAttackRange((int) (Math.random() * (Config.STICKMAXATTACKRANGE - Config.STICKMINATTACKRANGE + 1)) + Config.STICKMINATTACKRANGE);
         this.setDamage(Config.STICKDAMAGEPERATTACK);
+        spawnOnMap();
     }
 
     public Stick(int durability,int attackRange) {
+        super();
         this.setDurability(durability);
         this.setAttackRange(attackRange);
         this.setDamage(Config.STICKDAMAGEPERATTACK);
+        spawnOnMap();
     }
 
     @Override
@@ -54,27 +56,14 @@ public class Stick implements Collectable {
     }
 
     @Override
-    public void setPositionX(float positionX) { this.positionX = positionX; }
-
-    @Override
-    public void setPositionY(float positionY) { this.positionY = positionY; }
-
-    @Override
     public void spawnOnMap() {
-        setPositionX(((float)Math.random()*100)* Config.GAMEFRAMEWIDTH/100);
-        setPositionY(((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100);
+        setX(((float)Math.random()*100)* Config.GAMEFRAMEWIDTH/100);
+        setY(((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100);
         this.setCollected(false);
     }
 
     @Override
     public boolean isCollected() { return isCollected; }
-
-    @Override
-    public float getPositionX() { return this.positionX; }
-
-    @Override
-    public float getPositionY() { return this.positionY; }
-
     public void setCollected(boolean collected) { isCollected = collected; }
 
 }
