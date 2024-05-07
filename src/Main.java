@@ -1,19 +1,16 @@
 import GUI.GameScreen;
-import GUISharedObject.InputUtility;
 import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
 import Items.Character.Slime;
 import Items.Inventory.Clock;
-import Items.Inventory.Stick;
+import Items.Inventory.Broom;
 import Items.Veggies.BaseVeggies;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
-import java.util.concurrent.TimeUnit;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -50,11 +47,11 @@ public class Main extends Application {
                         throw new RuntimeException(e);
                     }
 
-                    // spaw stick every 10 second
+                    // spaw broom every 10 second
                     if(game.getGameTimer()%10 == 0){
-                        Stick stick = new Stick();
-                        game.getStickOnGround().add(stick);
-                        RenderableHolder.getInstance().add(stick);
+                        Broom broom = new Broom();
+                        game.getBroomOnGround().add(broom);
+                        RenderableHolder.getInstance().add(broom);
                     }
 
                     // set clock timer coolDown

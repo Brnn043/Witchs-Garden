@@ -4,26 +4,25 @@ import GUISharedObject.InputUtility;
 import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
-import Items.Inventory.Stick;
-import javafx.application.Platform;
+import Items.Inventory.Broom;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
 
 public class Player extends BaseCharacter{
-    private Stick stick;
+    private Broom broom;
     private int money;
     private boolean isWalk;
     private boolean isAttack;
-    private final int witchHeight = 70;
-    private final int witchWidth = 50;
+//    private final int getHeight() = 70;
+//    private final int getWidth() = 50;
 
     public Player(int positionX, int positionY, int maxSpeedRate, int attackRange, int damage) {
         super(positionX, positionY, maxSpeedRate, attackRange, damage);
-        setStick(null);
+        setBroom(null);
         setMoney(0);
         setWalk(false);
+        setWidth(50);
+        setHeight(70);
         System.out.println(getSpeedRate());
     }
 
@@ -38,7 +37,7 @@ public class Player extends BaseCharacter{
             return;
         }
 
-        if(this.getStick() == null){
+        if(this.getBroom() == null){
             return;
         }
 
@@ -48,13 +47,13 @@ public class Player extends BaseCharacter{
             double disX = GameController.getInstance().getPlayer().getX() - slime.getX();
             double disY = GameController.getInstance().getPlayer().getY() - slime.getY();
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
-            if( distance <= stick.getAttackRange() ) {
+            if( distance <= broom.getAttackRange() ) {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            slime.setHp( slime.getHp() - stick.getDamage() );
-                            stick.setDurability(stick.getDurability() - Config.STICKDURABILITYPERATTACK);
+                            slime.setHp( slime.getHp() - broom.getDamage() );
+                            broom.setDurability(broom.getDurability() - Config.BROOMDURABILITYPERATTACK);
                             setAttackCooldown(Config.PLAYERCOOLDOWNTIME);
                             setAttack(true);
                             Thread.sleep(300);
@@ -95,70 +94,70 @@ public class Player extends BaseCharacter{
 //            setWalk(false);
 //        }
 //    }
-@Override
-public void walk() {
-    // WASD to walk in map
-    if (InputUtility.getKeyPressed(KeyCode.W)) {
-        if (collideWith(GameController.getInstance().getHouse(),0,-(int)this.getSpeedRate())) {
+    @Override
+    public void walk() {
+        // WASD to walk in map
+        if (InputUtility.getKeyPressed(KeyCode.W)) {
+            if (collideWith(GameController.getInstance().getHouse(),0,-(int)this.getSpeedRate())) {
+                setWalk(false);
+                return;
+            }
+            setY(getY()-(int)this.getSpeedRate());
+            setWalk(true);
+        }else if (InputUtility.getKeyPressed(KeyCode.A)) {
+            if (collideWith(GameController.getInstance().getHouse(),-(int)this.getSpeedRate(),0)) {
+                setWalk(false);
+                return;
+            }
+            setX(getX()-(int)this.getSpeedRate());
+            setWalk(true);
+        } else if (InputUtility.getKeyPressed(KeyCode.S)) {
+            if (collideWith(GameController.getInstance().getHouse(),0,(int)this.getSpeedRate())) {
+                setWalk(false);
+                return;
+            }
+            setY(getY()+(int)this.getSpeedRate());
+            setWalk(true);
+        }else if (InputUtility.getKeyPressed(KeyCode.D)) {
+            if (collideWith(GameController.getInstance().getHouse(),(int)this.getSpeedRate(),0)) {
+                setWalk(false);
+                return;
+            }
+            setX(getX()+(int)this.getSpeedRate());
+            setWalk(true);
+        }else{
             setWalk(false);
-            return;
         }
-        setY(getY()-(int)this.getSpeedRate());
-        setWalk(true);
-    }else if (InputUtility.getKeyPressed(KeyCode.A)) {
-        if (collideWith(GameController.getInstance().getHouse(),-(int)this.getSpeedRate(),0)) {
-            setWalk(false);
-            return;
-        }
-        setX(getX()-(int)this.getSpeedRate());
-        setWalk(true);
-    } else if (InputUtility.getKeyPressed(KeyCode.S)) {
-        if (collideWith(GameController.getInstance().getHouse(),0,(int)this.getSpeedRate())) {
-            setWalk(false);
-            return;
-        }
-        setY(getY()+(int)this.getSpeedRate());
-        setWalk(true);
-    }else if (InputUtility.getKeyPressed(KeyCode.D)) {
-        if (collideWith(GameController.getInstance().getHouse(),(int)this.getSpeedRate(),0)) {
-            setWalk(false);
-            return;
-        }
-        setX(getX()+(int)this.getSpeedRate());
-        setWalk(true);
-    }else{
-        setWalk(false);
     }
-}
 
     @Override
     public void draw(GraphicsContext gc) {
         if(isAttack()){
-            gc.drawImage(RenderableHolder.witchAttackSprite, getX() - witchWidth/2, getY() - witchHeight/2,witchWidth,witchHeight);
+            gc.drawImage(RenderableHolder.witchAttackSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             return;
         }
 
         if(isWalk()){
-            if(getStick()==null){
-                gc.drawImage(RenderableHolder.witchWalkSprite, getX() - witchWidth/2, getY() - witchHeight/2,witchWidth,witchHeight);
+            if(getBroom()==null){
+                gc.drawImage(RenderableHolder.witchWalkSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             }else{
-                gc.drawImage(RenderableHolder.witchWalkBroomSprite, getX() - witchWidth/2, getY() - witchHeight/2,witchWidth,witchHeight);
+                gc.drawImage(RenderableHolder.witchWalkBroomSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             }
         }else{
-            if(getStick()==null){
-                gc.drawImage(RenderableHolder.witchSprite, getX() - witchWidth/2, getY() - witchHeight/2,witchWidth,witchHeight);
+            if(getBroom()==null){
+                gc.drawImage(RenderableHolder.witchSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             }else{
-                gc.drawImage(RenderableHolder.witchBroomSprite, getX() - witchWidth/2, getY() - witchHeight/2,witchWidth,witchHeight);
+                gc.drawImage(RenderableHolder.witchBroomSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             }
         }
     }
 
-    public Stick getStick() {
-        return stick;
+    public Broom getBroom() {
+        return broom;
     }
 
-    public void setStick(Stick stick) {
-        this.stick = stick;
+    public void setBroom(Broom broom) {
+        this.broom = broom;
     }
 
     public int getMoney() {

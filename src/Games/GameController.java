@@ -5,17 +5,14 @@ import GUI.Map.House;
 import GUISharedObject.RenderableHolder;
 import Items.Character.Player;
 import Items.Character.Slime;
+import Items.Inventory.Broom;
 import Items.Inventory.Clock;
-import Items.Inventory.Stick;
 import Items.Veggies.BaseVeggies;
 import Items.Veggies.Bean;
 import Items.Veggies.Cucumber;
 import Items.Veggies.Rice;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 public class GameController {
     private static GameController instance;
@@ -23,7 +20,7 @@ public class GameController {
     private ArrayList<Slime> slimeList;
     private Clock clock;
     private ArrayList<BaseVeggies> veggiesList;
-    private ArrayList<Stick> stickOnGround;
+    private ArrayList<Broom> broomOnGround;
     private boolean gameover;
     private int gameTimer;
     private BackgroundImage backgroundImage;
@@ -39,7 +36,7 @@ public class GameController {
         this.gameTimer = 30;
         this.backgroundImage = new BackgroundImage();
         this.house = new House();
-        this.stickOnGround = new ArrayList<Stick>();
+        this.broomOnGround = new ArrayList<Broom>();
         initGames();
 
         // add player in GUI
@@ -98,8 +95,8 @@ public class GameController {
         }
 
 
-        for(Stick stick: GameController.getInstance().stickOnGround){
-            stick.collected();
+        for(Broom broom : GameController.getInstance().broomOnGround){
+            broom.collected();
         }
     }
 
@@ -164,8 +161,8 @@ public class GameController {
         this.veggiesList = veggiesList;
     }
 
-    public ArrayList<Stick> getStickOnGround() {
-        return stickOnGround;
+    public ArrayList<Broom> getBroomOnGround() {
+        return broomOnGround;
     }
 
     public boolean getGameover() {

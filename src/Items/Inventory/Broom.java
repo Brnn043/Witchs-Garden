@@ -10,25 +10,25 @@ import Items.Interfaces.Collectable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 
-public class Stick extends Entity implements Collectable {
+public class Broom extends Entity implements Collectable {
     private boolean isCollected;
     private int durability;
     private int attackRange;
     private int damage;
 
-    public Stick() { // this constructor will randomly choose durability and attack range
+    public Broom() { // this constructor will randomly choose durability and attack range
         super();
-        this.setDurability((int) (Math.random() * (Config.STICKMAXDURABILITY - Config.STICKMINDURABILITY + 1)) + Config.STICKMINDURABILITY);
-        this.setAttackRange((int) (Math.random() * (Config.STICKMAXATTACKRANGE - Config.STICKMINATTACKRANGE + 1)) + Config.STICKMINATTACKRANGE);
-        this.setDamage(Config.STICKDAMAGEPERATTACK);
+        this.setDurability((int) (Math.random() * (Config.BROOMMAXDURABILITY - Config.BROOMMINDURABILITY + 1)) + Config.BROOMMINDURABILITY);
+        this.setAttackRange((int) (Math.random() * (Config.BROOMMAXATTACKRANGE - Config.BROOMMINATTACKRANGE + 1)) + Config.BROOMMINATTACKRANGE);
+        this.setDamage(Config.BROOMDAMAGEPERATTACK);
         spawnOnMap();
     }
 
-    public Stick(int durability,int attackRange) {
+    public Broom(int durability, int attackRange) {
         super();
         this.setDurability(durability);
         this.setAttackRange(attackRange);
-        this.setDamage(Config.STICKDAMAGEPERATTACK);
+        this.setDamage(Config.BROOMDAMAGEPERATTACK);
         spawnOnMap();
     }
 
@@ -44,17 +44,17 @@ public class Stick extends Entity implements Collectable {
         if( distance >= 60 ) {
             return;
         }
-        if(player.getStick() != null) {
-            System.out.println("Player already have stick");
+        if(player.getBroom() != null) {
+            System.out.println("Player already have BROOM");
             return;
         }
-        player.setStick(this);
+        player.setBroom(this);
         this.setCollected(true);
         RenderableHolder.getInstance().getEntities().remove(this);
     }
 
     public void draw(GraphicsContext gc) {
-        gc.drawImage(RenderableHolder.stickSprite, getX() - 45, getY() - 20,30,45);
+        gc.drawImage(RenderableHolder.broomSprite, getX() - 45, getY() - 20,30,45);
     }
 
     public int getDamage() { return damage; }

@@ -2,7 +2,7 @@ package GUISharedObject;
 
 import Items.Character.Player;
 import Items.Character.Slime;
-import Items.Inventory.Stick;
+import Items.Inventory.Broom;
 import Items.Veggies.BaseVeggies;
 import javafx.scene.image.Image;
 
@@ -21,7 +21,7 @@ public class RenderableHolder {
     public static Image witchBroomSprite;
     public static Image witchWalkBroomSprite;
     public static Image witchAttackSprite;
-    public static Image stickSprite;
+    public static Image broomSprite;
 //    public static AudioClip explosionSound;
     public static Image sunnyBackground;
 
@@ -49,13 +49,13 @@ public class RenderableHolder {
         witchBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_broom.png").toString());
         witchWalkBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_walk_broom.GIF").toString());
         witchAttackSprite = new Image(ClassLoader.getSystemResource("Witch/witch_attack.GIF").toString());
-        stickSprite = new Image(ClassLoader.getSystemResource("Broom.png").toString());
+        broomSprite = new Image(ClassLoader.getSystemResource("Broom.png").toString());
 //        explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
     }
 
     public void add(IRenderable entity) {
         if(entity instanceof Player) System.out.println("add player");
-        if(entity instanceof Stick) System.out.println("add broom");
+        if(entity instanceof Broom) System.out.println("add broom");
         if(entity instanceof Slime) System.out.println("add slime");
         if(entity instanceof BaseVeggies) System.out.println("add veggie");
 
