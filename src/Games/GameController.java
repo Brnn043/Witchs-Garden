@@ -84,6 +84,7 @@ public class GameController {
         for(BaseVeggies veggie : getInstance().getVeggiesList()) {
             if(veggie.getWaterPoint() <= 0 || veggie.getHp() <= 0) {
                 delVeggie.add(veggie);
+                RenderableHolder.getInstance().getEntities().remove(veggie);
             }
 
         }
