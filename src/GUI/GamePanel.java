@@ -48,6 +48,7 @@ public class GamePanel extends HBox {
     }
 
     public void handleSunnyButton() {
+        gameController.getClock().setWeather(Config.Weather.SUNNY);
         gameController.getBackgroundImage().changeWeather(Config.Weather.SUNNY);
         gameScreenWithEffect.getChildren().clear();
         gameScreenWithEffect.getChildren().addAll(gameScreen);
@@ -55,6 +56,7 @@ public class GamePanel extends HBox {
     }
 
     public void handleSnowyButton() {
+        gameController.getClock().setWeather(Config.Weather.SNOWY);
         gameController.getBackgroundImage().changeWeather(Config.Weather.SNOWY);
         gameScreenWithEffect.getChildren().clear();
         gameScreenWithEffect.getChildren().addAll(gameScreen,new SnowyCanvas());
@@ -62,6 +64,7 @@ public class GamePanel extends HBox {
     }
 
     public void handleRainyButton() {
+        gameController.getClock().setWeather(Config.Weather.RAINY);
         gameController.getBackgroundImage().changeWeather(Config.Weather.RAINY);
         gameScreenWithEffect.getChildren().clear();
         gameScreenWithEffect.getChildren().addAll(gameScreen,new BlurCanvas(),new RainyCanvas());
