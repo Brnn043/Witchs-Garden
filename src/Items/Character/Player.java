@@ -111,7 +111,7 @@ public class Player extends BaseCharacter{
 
     @Override
     public void draw(GraphicsContext gc) {
-        if(isAttack()){
+        if(isAttack() && getBroom()!=null){
             gc.drawImage(RenderableHolder.witchAttackSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             gc.setStroke(Color.RED);
             gc.setLineWidth(2);
