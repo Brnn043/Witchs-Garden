@@ -3,7 +3,6 @@ import GUI.GameScreen;
 import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
-import Games.GamePanelController;
 import Items.Character.Slime;
 import Items.Inventory.Clock;
 import Items.Inventory.Broom;
@@ -16,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -61,10 +59,17 @@ public class Main extends Application {
 
         root.setAlignment(Pos.CENTER);
         GameController game = GameController.getInstance();
-        GamePanelController gamePanelController = new GamePanelController();
-        GamePanel gamePanel = gamePanelController.getGamePanel();
         GameScreen gameScreen = new GameScreen(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
-        root.getChildren().addAll(gamePanel,gameScreen);
+
+        StackPane gameScreenWithEffect = new StackPane();
+        gameScreenWithEffect.setAlignment(Pos.CENTER);
+
+        gameScreenWithEffect.getChildren().addAll(gameScreen);
+        // add more with sunny snowy rainy effect
+
+        GamePanel gamePanel = new GamePanel(game,gameScreen,gameScreenWithEffect);
+
+        root.getChildren().addAll(gamePanel,gameScreenWithEffect);
         gameScreen.requestFocus();
 
 
@@ -116,7 +121,7 @@ public class Main extends Application {
                         game.setGameover(true);
                     }
 
-                    gamePanelController.updateTimerBar(game.getGameTimer());
+                    gamePanel.updateTimerBar(game.getGameTimer());
                     System.out.println("TIMER : "+ game.getGameTimer());
                 }
             }
