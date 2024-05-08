@@ -1,5 +1,6 @@
 package Items.Character;
 
+import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
 import Items.Veggies.BaseVeggies;
@@ -10,20 +11,22 @@ import javafx.scene.shape.ArcType;
 
 import java.util.ArrayList;
 
-public class Slime extends BaseCharacter{
+public abstract class Slime extends BaseCharacter{
     private int Hp;
     private BaseVeggies targetVeggie;
     private final int SLIMEMAXHP;
-    public Slime() {
+    public Slime(int speedRate) {
         super(((float)Math.random()*100)*Config.GAMEFRAMEWIDTH/100
                 , ((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100
-                , (int) ((float) Math.max(Config.SLIMEMINSPEEDRATE, (Math.random())*Config.SLIMEMAXSPEEDRATE))
+                , speedRate
                 , (int) ((float)  Math.max(Config.SLIMEMAXSPEEDRATE, (Math.random())*Config.SLIMEMAXDAMAGERANGE))
                 , (int) ((float) (Math.random())*Config.SLIMEMAXDAMAGE));
         this.SLIMEMAXHP = Math.max(10,(int) ((float)Math.random()*20));
         setHp(SLIMEMAXHP);
         ArrayList<BaseVeggies> veggiesList= GameController.getInstance().getVeggiesList();
         setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
+        setWidth(30);
+        setHeight(30);
         this.z = getZ() + 400;
     }
 
@@ -87,8 +90,15 @@ public class Slime extends BaseCharacter{
     @Override
     public void draw(GraphicsContext gc) {
         // Draw slime
-        gc.setFill(Color.RED);
-        gc.fillArc(getX() - 10, getY() - 10, 10 * 2, 10 * 2, 0, 360, ArcType.OPEN);
+        if(this instanceof NormalSlime){
+            gc.drawImage(RenderableHolder.normalSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+        }
+        if(this instanceof TeleportSlime){
+            gc.drawImage(RenderableHolder.teleportSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+        }
+        if(this instanceof SpeedSlime){
+            gc.drawImage(RenderableHolder.speedSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+        }
 
         // Calculate the width of the progress bar
         double HPPercentage = (double) getHp() / SLIMEMAXHP; // Get HP percentage

@@ -3,8 +3,7 @@ package Games;
 import GUI.Map.BackgroundImage;
 import GUI.Map.House;
 import GUISharedObject.RenderableHolder;
-import Items.Character.Player;
-import Items.Character.Slime;
+import Items.Character.*;
 import Items.Inventory.Broom;
 import Items.Inventory.Clock;
 import Items.Veggies.BaseVeggies;
@@ -66,9 +65,7 @@ public class GameController {
         }
         // add a slime
         while(getInstance().getSlimeList().size() < 5){
-            Slime slime = new Slime();
-            getInstance().getSlimeList().add(slime);
-            RenderableHolder.getInstance().add(slime);
+            getInstance().getNewSlime();
         }
 
 
@@ -115,19 +112,31 @@ public class GameController {
     }
     public void getNewVeggie(){
         int veggieType = (int) (Math.random()*3);
+        BaseVeggies veggie;
         if (veggieType == 0) {
-            Bean bean = new Bean();
-            getVeggiesList().add(bean);
-            RenderableHolder.getInstance().add(bean);
+            veggie = new Bean();
         }else if(veggieType == 1){
-            Cucumber cucumber = new Cucumber();
-            getVeggiesList().add(cucumber);
-            RenderableHolder.getInstance().add(cucumber);
+            veggie = new Cucumber();
         }else{
-            Rice rice = new Rice();
-            getVeggiesList().add(rice);
-            RenderableHolder.getInstance().add(rice);
+            veggie = new Rice();
         }
+        getVeggiesList().add(veggie);
+        RenderableHolder.getInstance().add(veggie);
+    }
+
+    public void getNewSlime(){
+        int slimeType = (int) (Math.random()*3);
+        Slime slime;
+        System.out.println(slimeType);
+        if (slimeType == 0) {
+            slime = new NormalSlime();
+        }else if(slimeType == 1){
+            slime = new TeleportSlime();
+        }else{
+            slime = new SpeedSlime();
+        }
+        getInstance().getSlimeList().add(slime);
+        RenderableHolder.getInstance().add(slime);
     }
 
     public static GameController getInstance() {

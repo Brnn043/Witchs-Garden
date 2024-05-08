@@ -22,6 +22,9 @@ public class RenderableHolder {
     public static Image witchWalkBroomSprite;
     public static Image witchAttackSprite;
     public static Image broomSprite;
+    public static Image normalSlimeSprite;
+    public static Image teleportSlimeSprite;
+    public static Image speedSprite;
 //    public static AudioClip explosionSound;
     public static Image sunnyBackground;
 
@@ -50,6 +53,9 @@ public class RenderableHolder {
         witchWalkBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_walk_broom.GIF").toString());
         witchAttackSprite = new Image(ClassLoader.getSystemResource("Witch/witch_attack.GIF").toString());
         broomSprite = new Image(ClassLoader.getSystemResource("Broom/AnimatedBroom.gif").toString());
+        normalSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime1.png").toString());
+        teleportSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime2.png").toString());
+        speedSprite = new Image(ClassLoader.getSystemResource("Slime/slime3.png").toString());
 //        explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
     }
 
