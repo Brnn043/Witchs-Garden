@@ -9,9 +9,30 @@ public class Entity implements IRenderable{
     protected int z;
     protected boolean visible,destroyed;
 
+    protected Entity(double x,double y){
+        setX(x);
+        setY(y);
+        visible = true;
+        destroyed = false;
+    }
+
     protected Entity(){
         visible = true;
         destroyed = false;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) { this.x = x; }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 
     @Override

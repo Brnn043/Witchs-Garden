@@ -1,15 +1,16 @@
 package Items.Veggies;
 
+import GUISharedObject.Entity;
 import Games.Config;
 import Games.GameController;
 import Items.Character.Player;
 import Items.Interfaces.Collectable;
 import Items.Interfaces.WeatherEffectable;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
-public abstract class BaseVeggies implements WeatherEffectable, Collectable {
-
-    private float positionX;
-    private float positionY;
+public abstract class BaseVeggies extends Entity implements WeatherEffectable, Collectable {
     private boolean isCollected;
     private float growthPoint;
     private float growthRate;
@@ -20,12 +21,15 @@ public abstract class BaseVeggies implements WeatherEffectable, Collectable {
     private final float MAXWATERDROPPINGRATE;
     private final float MAXWATER;
     private int price;
+    private final int MAXHP;
 
     // haven't implemented veggieHpBar yet
 
 
     public BaseVeggies(int hp,float maxWater,float growthRate,float waterDroppingRate,int price){
-        this.setHp(hp);
+        super();
+        this.MAXHP = hp;
+        this.setHp(this.MAXHP);
         this.MAXWATER = maxWater;
         this.setWaterPoint(MAXWATER);
         this.MAXGROWTHRATE = growthRate;
@@ -34,24 +38,13 @@ public abstract class BaseVeggies implements WeatherEffectable, Collectable {
         this.setWaterDroppingRate(MAXWATERDROPPINGRATE);
         this.setPrice(price);
         spawnOnMap();
+        this.z = getZ() + 600;
     }
 
     @Override
-    public float getPositionX() { return positionX; }
-
-    @Override
-    public float getPositionY() { return positionY; }
-
-    @Override
-    public void setPositionX(float positionX) { this.positionX = Math.max(0,Math.min(positionX, Config.GAMEFRAMEWIDTH)); }
-
-    @Override
-    public void setPositionY(float positionY) { this.positionY = Math.max(0,Math.min(positionY, Config.GAMEFRAMEHEIGHT)); }
-
-    @Override
     public void spawnOnMap() {
-        setPositionX(((float)Math.random()*100)*Config.GAMEFRAMEWIDTH/100);
-        setPositionY(((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100);
+        setX(((float)Math.random()*100)*Config.GAMEFRAMEWIDTH/100);
+        setY(((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100);
         this.setCollected(false);
     }
 
@@ -81,6 +74,42 @@ public abstract class BaseVeggies implements WeatherEffectable, Collectable {
         }
     }
 
+    @Override
+    public void draw(GraphicsContext gc) {
+        if(this instanceof Bean){ gc.setFill(Color.GREEN); }
+        if(this instanceof Cucumber){ gc.setFill(Color.LIGHTGREEN); }
+        if(this instanceof Rice){ gc.setFill(Color.DARKGREEN); }
+
+        gc.fillArc(getX() - 20, getY() - 20, 10 * 2, 10 * 2, 0, 360, ArcType.OPEN);
+
+        // Calculate the width of the progress bar
+        double HPPercentage = (double) getHp() / getMAXHP(); // Get HP percentage
+        double HPBarWidth = 20 * HPPercentage; // Calculate progress bar width
+
+        // Draw the progress bar
+        double HPBarX = getX() - 20; // Start of progress bar
+        double HPBarY = getY() + 12; // Position below the circle
+
+        gc.setFill(Color.GRAY);
+        gc.fillRect(HPBarX, HPBarY, 20, 5);
+        gc.setFill(Color.ORANGERED);
+        gc.fillRect(HPBarX, HPBarY, HPBarWidth, 5);
+
+
+        // Calculate the width of the water bar
+        double waterPercentage = (double) getWaterPoint() / getMAXWATER(); // Get HP percentage
+        double waterBarWidth = 20 * waterPercentage; // Calculate progress bar width
+
+        // Draw the progress bar
+        double waterBarX = getX() - 20; // Start of progress bar
+        double waterBarY = getY() + 20; // Position below the circle
+
+        gc.setFill(Color.GRAY);
+        gc.fillRect(waterBarX, waterBarY, 20, 5);
+        gc.setFill(Color.CORNFLOWERBLUE);
+        gc.fillRect(waterBarX, waterBarY, waterBarWidth, 5);
+    }
+
     public float getGrowthRate() { return growthRate; }
 
     public void setGrowthRate(float growthRate) { this.growthRate = growthRate; }
@@ -107,4 +136,10 @@ public abstract class BaseVeggies implements WeatherEffectable, Collectable {
 
     public void setPrice(int price) { this.price = price; }
 
+    public int getMAXHP() {
+        return MAXHP;
+    }
+    public float getMAXWATER() {
+        return MAXWATER;
+    }
 }

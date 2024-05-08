@@ -3,21 +3,28 @@ package Items.Character;
 import Games.Config;
 import Games.GameController;
 import Items.Veggies.BaseVeggies;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
 import java.util.ArrayList;
 
 public class Slime extends BaseCharacter{
     private int Hp;
     private BaseVeggies targetVeggie;
+    private final int SLIMEMAXHP;
     public Slime() {
         super(((float)Math.random()*100)*Config.GAMEFRAMEWIDTH/100
                 , ((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100
-                , (int) ((float) (Math.random())*Config.SLIMEMAXSPEEDRATE)
-                , (int) ((float) (Math.random())*Config.SLIMEMAXDAMAGERANGE)
+                , (int) ((float) Math.max(Config.SLIMEMINSPEEDRATE, (Math.random())*Config.SLIMEMAXSPEEDRATE))
+                , (int) ((float)  Math.max(Config.SLIMEMAXSPEEDRATE, (Math.random())*Config.SLIMEMAXDAMAGERANGE))
                 , (int) ((float) (Math.random())*Config.SLIMEMAXDAMAGE));
-        setHp(Math.max(5,(int) ((float)Math.random()*25)));
+        this.SLIMEMAXHP = Math.max(10,(int) ((float)Math.random()*20));
+        setHp(SLIMEMAXHP);
         ArrayList<BaseVeggies> veggiesList= GameController.getInstance().getVeggiesList();
         setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
+        this.z = getZ() + 400;
     }
 
     @Override
@@ -34,8 +41,8 @@ public class Slime extends BaseCharacter{
         }
 
         // calculate distance from target veggie
-        double disX = this.getTargetVeggie().getPositionX() - this.getPositionX();
-        double disY = this.getTargetVeggie().getPositionY() - this.getPositionY();
+        double disX = this.getTargetVeggie().getX() - this.getX();
+        double disY = this.getTargetVeggie().getY() - this.getY();
         int distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
 
         // attack veggie
@@ -52,7 +59,7 @@ public class Slime extends BaseCharacter{
     }
 
     public void setHp(int hp) {
-        this.Hp = Math.max(0, hp);
+        this.Hp = Math.max(0, Math.min(hp, SLIMEMAXHP));
     }
 
 
@@ -66,18 +73,34 @@ public class Slime extends BaseCharacter{
 
     @Override
     public void walk() {
-        int walkCount = 0;
-        double disX = this.getPositionX() - this.getTargetVeggie().getPositionX();
-        double disY = this.getPositionY() - this.getTargetVeggie().getPositionY();
+
+        double disX = this.getX() - this.getTargetVeggie().getX();
+        double disY = this.getY() - this.getTargetVeggie().getY();
         int distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
 
-        while( (distance - this.getAttackRange()) > Config.SLIMEWALKSTEP & walkCount < 10) {
-            disX = this.getPositionX() - this.getTargetVeggie().getPositionX();
-            disY = this.getPositionY() - this.getTargetVeggie().getPositionY();
-            distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
-            this.setPositionX((float) (this.getPositionX() - (Math.signum(disX))*(Config.SLIMEWALKSTEP)));
-            this.setPositionY((float) (this.getPositionY() - (Math.signum(disY))*(Config.SLIMEWALKSTEP)));
-            walkCount += 1;
+        if( distance - this.getAttackRange() > Config.SLIMEWALKSTEP ){
+            this.setX((float) (this.getX() - (Math.signum(disX))*(Config.SLIMEWALKSTEP * this.getSpeedRate() * 0.2)));
+            this.setY((float) (this.getY() - (Math.signum(disY))*(Config.SLIMEWALKSTEP * this.getSpeedRate() * 0.2)));
         }
+    }
+
+    @Override
+    public void draw(GraphicsContext gc) {
+        // Draw slime
+        gc.setFill(Color.RED);
+        gc.fillArc(getX() - 10, getY() - 10, 10 * 2, 10 * 2, 0, 360, ArcType.OPEN);
+
+        // Calculate the width of the progress bar
+        double HPPercentage = (double) getHp() / SLIMEMAXHP; // Get HP percentage
+        double HPBarWidth = 20 * HPPercentage; // Calculate progress bar width
+
+        // Draw the progress bar
+        double HPBarX = getX() - 10; // Start of progress bar
+        double HPBarY = getY() + 15; // Position below the circle
+
+        gc.setFill(Color.GRAY);
+        gc.fillRect(HPBarX, HPBarY, 20, 5);
+        gc.setFill(Color.ORANGERED);
+        gc.fillRect(HPBarX, HPBarY, HPBarWidth, 5);
     }
 }
