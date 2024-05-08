@@ -10,12 +10,6 @@ public class CollidableEntity extends Entity {
         this.height = height;
     }
 
-    protected CollidableEntity(double width,double height){
-        super();
-        this.width = width;
-        this.height = height;
-    }
-
     public double getWidth() {
         return width;
     }
@@ -32,7 +26,7 @@ public class CollidableEntity extends Entity {
         this.height = height;
     }
 
-    public boolean collideWith(CollidableEntity other) {
+    public boolean collideWith(double otherLeft,double otherTop,double otherWidth,double otherHeight) {
         // Calculate the bounding box of this entity
         double thisLeft = getX();
         double thisRight = getX() + width;
@@ -40,10 +34,8 @@ public class CollidableEntity extends Entity {
         double thisBottom = getY() + height;
 
         // Calculate the bounding box of the other entity
-        double otherLeft = other.getX();
-        double otherRight = other.getX() + other.getWidth();
-        double otherTop = other.getY();
-        double otherBottom = other.getY() + other.getHeight();
+        double otherRight = otherLeft + otherWidth;
+        double otherBottom = otherTop + otherHeight;
 
         // Check for collision
         return thisLeft < otherRight &&

@@ -15,12 +15,15 @@ public class Broom extends Entity implements Collectable {
     private int durability;
     private int attackRange;
     private int damage;
+    private int width,height;
 
     public Broom() { // this constructor will randomly choose durability and attack range
         super();
-        this.setDurability((int) (Math.random() * (Config.BROOMMAXDURABILITY - Config.BROOMMINDURABILITY + 1)) + Config.BROOMMINDURABILITY);
-        this.setAttackRange((int) (Math.random() * (Config.BROOMMAXATTACKRANGE - Config.BROOMMINATTACKRANGE + 1)) + Config.BROOMMINATTACKRANGE);
-        this.setDamage(Config.BROOMDAMAGEPERATTACK);
+        setDurability( (int) (Math.random() * (Config.BROOMMAXDURABILITY - Config.BROOMMINDURABILITY + 1) ) + Config.BROOMMINDURABILITY);
+        setAttackRange( (int) (Math.random() * (Config.BROOMMAXATTACKRANGE - Config.BROOMMINATTACKRANGE + 1) ) + Config.BROOMMINATTACKRANGE);
+        setDamage(Config.BROOMDAMAGEPERATTACK);
+        width = 70;
+        height = 35;
         spawnOnMap();
         this.z = this.getZ() + 800;
     }
@@ -55,9 +58,12 @@ public class Broom extends Entity implements Collectable {
     }
 
     public void draw(GraphicsContext gc) {
-    gc.drawImage(RenderableHolder.broomSprite, getX() - 45, getY() - 20,70,35);
-
+        gc.drawImage(RenderableHolder.broomSprite, getX() - 45, getY() - 20,getWidth(),getHeight());
     }
+
+    public int getWidth() { return width; }
+
+    public int getHeight() { return height; }
 
     public int getDamage() { return damage; }
 
@@ -77,12 +83,9 @@ public class Broom extends Entity implements Collectable {
 
     @Override
     public void spawnOnMap() {
-//        setX(((float)Math.random()*100)* Config.GAMEFRAMEWIDTH/100);
-//        setY(((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100);
-//        this.setCollected(false);
         double posX = ((float)Math.random()*100)* Config.GAMEFRAMEWIDTH/100;
         double posY = ((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
-        while (!GameController.getInstance().spawnAble(posX,posY)) {
+        while (!GameController.getInstance().isPositionAccesible(posX,posY,width,height)) {
             posX = ((float)Math.random()*100)* Config.GAMEFRAMEWIDTH/100;
             posY = ((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
             System.out.println("Broom cannot be spawn here. Find new pos...");

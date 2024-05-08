@@ -3,6 +3,7 @@
 # Notes
 - ย้าย static value ของ broom ใส่ enum
 - should i load map resource by RenderableHolder like others?
+- packageต้องเปนตัวพิมพ์เล็กมั้ยนะ
 # Add On later
 - BaseCharacter/weatherEffected
 - เราน่าจะต้องมาตกลงกันเรื่อง weatherEffected เพิ่มด้วยๆ

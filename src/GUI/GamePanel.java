@@ -13,12 +13,11 @@ import javafx.scene.text.Text;
 import javafx.scene.control.ProgressBar;
 
 public class GamePanel extends HBox {
-    private GameController gameController;
-    private GameScreen gameScreen;
-    private StackPane gameScreenWithEffect;
-    private ProgressBar timerBar;
-    private Button sunnyButton,rainyButton,snowyButton;
-    private Text clockTimer;
+    private final GameController gameController;
+    private final GameScreen gameScreen;
+    private final StackPane gameScreenWithEffect;
+    private final ProgressBar timerBar;
+    private final Text clockTimer;
 
     public GamePanel(GameController gameController,GameScreen gameScreen,StackPane gameScreenWithEffect) {
         super();
@@ -33,9 +32,9 @@ public class GamePanel extends HBox {
         timerBar.setStyle("-fx-accent: violet;");
         timerBar.setProgress(1);
 
-        sunnyButton = new Button("Sunny");
-        snowyButton = new Button("Snowy");
-        rainyButton = new Button("Rainy");
+        Button sunnyButton = new Button("Sunny");
+        Button snowyButton = new Button("Snowy");
+        Button rainyButton = new Button("Rainy");
 
         sunnyButton.setOnAction(event -> handleSunnyButton());
         snowyButton.setOnAction(event -> handleSnowyButton());

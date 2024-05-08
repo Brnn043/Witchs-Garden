@@ -148,6 +148,12 @@ public class GameController {
         if(instance == null) instance = new GameController();
         return instance;
     }
+    public boolean isPositionAccesible(double x,double y,double width,double height){
+        for (Tree tree:trees) {
+            if (tree.collideWith(x,y,width,height)) return false;
+        }
+        return !house.collideWith(x,y,width,height);
+    }
 
     public ArrayList<Slime> getSlimeList() { return slimeList; }
 
@@ -221,12 +227,4 @@ public class GameController {
         this.house = house;
     }
 
-    public boolean spawnAble(double x,double y){
-        double houseX = house.getX();
-        double houseY = house.getY();
-        double houseWidth = house.getWidth();
-        double houseHeight = house.getHeight();
-
-        return !(x >= houseX) || !(x <= houseX + houseWidth) || !(y >= houseY) || !(y <= houseY + houseHeight); // Not spawnable
-    }
 }
