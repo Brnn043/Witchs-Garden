@@ -27,6 +27,10 @@
 [นีร]
 - ทำจอให้ใหญ่ขึ้น [done]
 - HP bar & water bar [done]
-- Z alignment
+- Z alignment [done]
+  - player 999
+  - broom 8**
+  - slime 4**
+  - veggie 6**
 - ใส่ภาพสไลม์&พีช
 - สไลม์ 3 สายพันธ์

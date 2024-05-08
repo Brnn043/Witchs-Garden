@@ -24,6 +24,7 @@ public class Slime extends BaseCharacter{
         setHp(SLIMEMAXHP);
         ArrayList<BaseVeggies> veggiesList= GameController.getInstance().getVeggiesList();
         setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
+        this.z = getZ() + 400;
     }
 
     @Override

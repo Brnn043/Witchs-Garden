@@ -22,6 +22,7 @@ public class Broom extends Entity implements Collectable {
         this.setAttackRange((int) (Math.random() * (Config.BROOMMAXATTACKRANGE - Config.BROOMMINATTACKRANGE + 1)) + Config.BROOMMINATTACKRANGE);
         this.setDamage(Config.BROOMDAMAGEPERATTACK);
         spawnOnMap();
+        this.z = this.getZ() + 800;
     }
 
     public Broom(int durability, int attackRange) {

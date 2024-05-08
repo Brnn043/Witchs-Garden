@@ -21,6 +21,7 @@ public class Player extends BaseCharacter{
         setWalk(false);
         setWidth(70);
         setHeight(100);
+        this.z = 999;
     }
 
     @Override
