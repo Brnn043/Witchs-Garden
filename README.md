@@ -17,3 +17,15 @@
 [bug report]
 - change clock.getTimer -< getCoolDown
 - implement ตัวละครชนขอบซ้าย-ขวา
+
+# Update 8/5/24
+[บีม]
+- เขียนดักขอบเกม
+- implement weather
+- ดักการสุ่มเกิดในบ้าน
+
+[นีร]
+- ทำจอให้ใหญ่ขึ้น
+- HP bar & water bar
+- ใส่ภาพสไลม์&พีช
+- สไลม์ 3 สายพันธ์
