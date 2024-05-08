@@ -188,4 +188,16 @@ public class GameController {
     public House getHouse() {
         return house;
     }
+
+    public BackgroundImage getBackgroundImage() {
+        return backgroundImage;
+    }
+
+    public void setBackgroundImage(BackgroundImage backgroundImage) {
+        this.backgroundImage = backgroundImage;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
+    }
 }

@@ -1,15 +1,23 @@
+import GUI.GamePanel;
 import GUI.GameScreen;
 import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
+import Games.GamePanelController;
 import Items.Character.Slime;
 import Items.Inventory.Clock;
 import Items.Inventory.Broom;
 import Items.Veggies.BaseVeggies;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -18,16 +26,34 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
-        StackPane root = new StackPane();
+    public void start(Stage primaryStage) {
+        Button startButton = new Button("Start Game");
+        startButton.setOnAction(e -> startGame(primaryStage));
+
+        // Create layout and add the start button
+        VBox root = new VBox(20);
+        root.getChildren().add(startButton);
+
+        // Set scene and show the main window
+        Scene scene = new Scene(root, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Main Menu");
+        primaryStage.show();
+    }
+
+    private void startGame(Stage primaryStage) {
+        primaryStage.close();
+        Stage stage = new Stage();
+        VBox root = new VBox();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Witch's Garden");
 
-
+        root.setAlignment(Pos.CENTER);
         GameController game = GameController.getInstance();
+        GamePanel gamePanel = new GamePanel();
         GameScreen gameScreen = new GameScreen(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
-        root.getChildren().add(gameScreen);
+        root.getChildren().addAll(gamePanel,gameScreen);
         gameScreen.requestFocus();
 
 

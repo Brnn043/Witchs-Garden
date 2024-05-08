@@ -2,14 +2,9 @@ package GUI;
 
 import GUISharedObject.IRenderable;
 import GUISharedObject.InputUtility;
-import GUISharedObject.RenderableHolder;
-import Games.Config;
-import Games.GameController;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.image.Image;
 
 import static GUISharedObject.RenderableHolder.*;
 
