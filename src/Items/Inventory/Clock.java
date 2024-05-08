@@ -9,6 +9,7 @@ public class Clock {
     public Clock() {
         this.setTimer(Config.CLOCKCOOLDOWNTIME);
         this.setWeather(Config.Weather.SUNNY);
+        System.out.println("Weather is set to "+getWeather());
         // by default , weather is summer.
     }
 
@@ -24,6 +25,7 @@ public class Clock {
         }
         setWeather(weather);
         setTimer(Config.CLOCKCOOLDOWNTIME);
+        System.out.println("Weather is changed to "+getWeather());
         return true;
     }
 
