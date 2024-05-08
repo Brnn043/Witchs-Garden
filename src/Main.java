@@ -138,7 +138,7 @@ public class Main extends Application {
                 }else {
                     try {
                         gameScreen.paintComponent();
-                        game.play();
+                        GameController.play();
                         RenderableHolder.getInstance().update();
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
