@@ -112,7 +112,11 @@ public class Main extends Application {
 
                     // decrease veggie water & add growth point
                     for(BaseVeggies veggie : game.getVeggiesList()) {
-                        veggie.setWaterPoint(veggie.getWaterPoint() - veggie.getWaterDroppingRate());
+                        if (game.getClock().getWeather() == Config.Weather.RAINY) {
+                            veggie.setWaterPoint(veggie.getMAXWATER());
+                        } else {
+                            veggie.setWaterPoint(veggie.getWaterPoint() - veggie.getWaterDroppingRate());
+                        }
                         veggie.setGrowthPoint(veggie.getGrowthPoint() + veggie.getGrowthRate());
                     }
 

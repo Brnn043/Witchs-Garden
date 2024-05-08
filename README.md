@@ -6,6 +6,7 @@
 - BaseCharacter/weatherEffected
 - เราน่าจะต้องมาตกลงกันเรื่อง weatherEffected เพิ่มด้วยๆ
 - GameController.getInstance().get() (almost done)
+- we should add growthBar for each veggie
 
 # Update 6/5/24
 - เราย้ายตัว timer มาที่ timerThread ใน main
