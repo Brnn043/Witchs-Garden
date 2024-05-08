@@ -51,7 +51,8 @@ public class Main extends Application {
 
         root.setAlignment(Pos.CENTER);
         GameController game = GameController.getInstance();
-        GamePanel gamePanel = new GamePanel();
+        GamePanelController gamePanelController = new GamePanelController();
+        GamePanel gamePanel = gamePanelController.getGamePanel();
         GameScreen gameScreen = new GameScreen(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         root.getChildren().addAll(gamePanel,gameScreen);
         gameScreen.requestFocus();
@@ -106,6 +107,7 @@ public class Main extends Application {
                         game.setGameover(true);
                     }
 
+                    gamePanelController.updateTimerBar(game.getGameTimer());
                     System.out.println("TIMER : "+ game.getGameTimer());
                 }
             }

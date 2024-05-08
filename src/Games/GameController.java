@@ -33,7 +33,7 @@ public class GameController {
         this.slimeList = new ArrayList<Slime>();
         this.clock = new Clock();
         this.gameover = false;
-        this.gameTimer = 30;
+        this.gameTimer = Config.GAMETIMER;
         this.backgroundImage = new BackgroundImage();
         this.house = new House();
         this.broomOnGround = new ArrayList<Broom>();

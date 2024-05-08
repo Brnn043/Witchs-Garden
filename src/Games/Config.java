@@ -10,6 +10,7 @@ public class Config {
 //    public static int GAMEFRAMEHEIGHT = 480;
     public static int GAMEFRAMEWIDTH = 750;
     public static int GAMEFRAMEHEIGHT = 412;
+    public static int GAMETIMER = 30;
     public static float SLIMEMAXSPEEDRATE = (float) 0.12;
     public static int SLIMEMAXDAMAGERANGE = 4;
     public static int SLIMEMAXDAMAGE = 5;

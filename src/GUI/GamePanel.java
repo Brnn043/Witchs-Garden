@@ -1,24 +1,35 @@
 package GUI;
 
 import Games.Config;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.control.ProgressBar;
 
-public class GamePanel extends Canvas {
+public class GamePanel extends HBox {
+    private ProgressBar timerBar;
     public GamePanel() {
-        super(Config.GAMEFRAMEWIDTH, 100);
-        GraphicsContext gc = getGraphicsContext2D();
-
-        // Fill background color
-        gc.setFill(Color.rgb(128, 88, 63));
-        gc.fillRect(0, 0, getWidth(), getHeight());
-
-        // Set font and draw text
-        gc.setFont(Font.font("Arial", 20));
-        gc.setFill(Color.BLACK); // Set text color
-        gc.fillText("Game Panel", 150, 50);
+        super();
+        setAlignment(Pos.CENTER);
+        setWidth(Config.GAMEFRAMEWIDTH);
+        Text text = new Text("Timer : ");
+        timerBar = new ProgressBar();
+        timerBar.setPrefWidth(Config.GAMEFRAMEWIDTH-50);
+        timerBar.setStyle("-fx-accent: violet;");
+        timerBar.setProgress(1);
+        getChildren().addAll(text,timerBar);
     }
 
+    public ProgressBar getTimerBar() {
+        return timerBar;
+    }
+
+    public void setTimerBar(ProgressBar timerBar) {
+        this.timerBar = timerBar;
+    }
 }
