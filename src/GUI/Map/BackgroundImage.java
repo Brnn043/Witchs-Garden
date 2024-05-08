@@ -10,11 +10,15 @@ public class BackgroundImage extends Entity {
     private String imagePath;
 
     public BackgroundImage() {
-        this.imagePath = "Background/Sunny_Background.png";
+        super(0,0);
+        changeWeather(Config.Weather.SUNNY);
     }
 
-    public BackgroundImage(String imagePath) {
-        this.imagePath = imagePath;
+    public void changeWeather(Config.Weather weather) {
+        if (weather == Config.Weather.SUNNY) imagePath = "Background/Sunny_Background.png";
+        else if (weather == Config.Weather.RAINY) imagePath = "Background/Sunny_Background.png";
+        else imagePath = "Background/Sunny_Background.png";
+        //change later
     }
 
     @Override
@@ -25,6 +29,6 @@ public class BackgroundImage extends Entity {
     @Override
     public void draw(GraphicsContext gc) {
         Image backgroundImage = new Image(ClassLoader.getSystemResource(imagePath).toString(), Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT,true,false);
-        gc.drawImage(backgroundImage,0,0,Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
+        gc.drawImage(backgroundImage,getX(),getY(),Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
     }
 }

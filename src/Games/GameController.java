@@ -20,7 +20,7 @@ public class GameController {
     private ArrayList<Slime> slimeList;
     private Clock clock;
     private ArrayList<BaseVeggies> veggiesList;
-    private ArrayList<Broom> broomOnGround;
+    private final ArrayList<Broom> broomOnGround;
     private boolean gameover;
     private int gameTimer;
     private BackgroundImage backgroundImage;
@@ -37,12 +37,13 @@ public class GameController {
         this.backgroundImage = new BackgroundImage();
         this.house = new House();
         this.broomOnGround = new ArrayList<Broom>();
-        initGames();
 
         // add player in GUI
         RenderableHolder.getInstance().add(this.player);
         RenderableHolder.getInstance().add(this.backgroundImage);
         RenderableHolder.getInstance().add(this.house);
+
+        initGames();
     }
 
     public static void play() throws InterruptedException {
@@ -122,7 +123,6 @@ public class GameController {
             getVeggiesList().add(rice);
             RenderableHolder.getInstance().add(rice);
         }
-        return ;
     }
 
     public static GameController getInstance() {
@@ -200,5 +200,14 @@ public class GameController {
 
     public void setHouse(House house) {
         this.house = house;
+    }
+
+    public boolean spawnAble(double x,double y){
+        double houseX = house.getX();
+        double houseY = house.getY();
+        double houseWidth = house.getWidth();
+        double houseHeight = house.getHeight();
+
+        return !(x >= houseX) || !(x <= houseX + houseWidth) || !(y >= houseY) || !(y <= houseY + houseHeight); // Not spawnable
     }
 }
