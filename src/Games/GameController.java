@@ -25,8 +25,7 @@ public class GameController {
     private int gameTimer;
     private BackgroundImage backgroundImage;
     private House house;
-    private ArrayList<Tree> trees;
-
+    private final ArrayList<Tree> trees;
 
     public GameController() {
         player = new Player(400,300,5,5,3);
@@ -47,7 +46,6 @@ public class GameController {
         RenderableHolder.getInstance().add(house);
         for (Tree tree:trees) RenderableHolder.getInstance().add(tree);
 
-        initGames();
     }
 
     public static void play() throws InterruptedException {

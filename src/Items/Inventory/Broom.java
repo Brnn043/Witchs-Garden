@@ -58,7 +58,7 @@ public class Broom extends Entity implements Collectable {
     }
 
     public void draw(GraphicsContext gc) {
-        gc.drawImage(RenderableHolder.broomSprite, getX() - 45, getY() - 20,getWidth(),getHeight());
+        gc.drawImage(RenderableHolder.broomSprite, getX() - (double) getWidth() /2, getY() - (double) getHeight() /2,getWidth(),getHeight());
     }
 
     public int getWidth() { return width; }
@@ -85,7 +85,7 @@ public class Broom extends Entity implements Collectable {
     public void spawnOnMap() {
         double posX = ((float)Math.random()*100)* Config.GAMEFRAMEWIDTH/100;
         double posY = ((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
-        while (!GameController.getInstance().isPositionAccesible(posX,posY,width,height)) {
+        while (!GameController.getInstance().isPositionAccesible(posX- (double) getWidth() /2,posY- (double) getHeight() /2,getWidth(),getHeight())) {
             posX = ((float)Math.random()*100)* Config.GAMEFRAMEWIDTH/100;
             posY = ((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
             System.out.println("Broom cannot be spawn here. Find new pos...");

@@ -59,6 +59,7 @@ public class Main extends Application {
 
         root.setAlignment(Pos.CENTER);
         GameController game = GameController.getInstance();
+        game.initGames();
         GameScreen gameScreen = new GameScreen(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
 
         StackPane gameScreenWithEffect = new StackPane();

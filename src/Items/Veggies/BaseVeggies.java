@@ -22,30 +22,41 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
     private final float MAXWATER;
     private int price;
     private final int MAXHP;
+    private final int width;
+    private final int height;
 
     // haven't implemented veggieHpBar yet
 
 
     public BaseVeggies(int hp,float maxWater,float growthRate,float waterDroppingRate,int price){
         super();
-        this.MAXHP = hp;
-        this.setHp(this.MAXHP);
-        this.MAXWATER = maxWater;
-        this.setWaterPoint(MAXWATER);
-        this.MAXGROWTHRATE = growthRate;
-        this.setGrowthRate(MAXGROWTHRATE);
-        this.MAXWATERDROPPINGRATE = waterDroppingRate;
-        this.setWaterDroppingRate(MAXWATERDROPPINGRATE);
-        this.setPrice(price);
+        MAXHP = hp;
+        setHp(MAXHP);
+        MAXWATER = maxWater;
+        setWaterPoint(MAXWATER);
+        MAXGROWTHRATE = growthRate;
+        setGrowthRate(MAXGROWTHRATE);
+        MAXWATERDROPPINGRATE = waterDroppingRate;
+        setWaterDroppingRate(MAXWATERDROPPINGRATE);
+        setPrice(price);
         spawnOnMap();
-        this.z = getZ() + 600;
+        z = getZ() + 600;
+        width = 10 * 2;
+        height = 10 * 2;
     }
 
     @Override
     public void spawnOnMap() {
-        setX(((float)Math.random()*100)*Config.GAMEFRAMEWIDTH/100);
-        setY(((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100);
-        this.setCollected(false);
+        double posX = ((float)Math.random()*100)* Config.GAMEFRAMEWIDTH/100;
+        double posY = ((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
+        while (!GameController.getInstance().isPositionAccesible(posX- (double) getWidth() /2,posY- (double) getHeight() /2,getWidth(),getHeight())) {
+            posX = ((float)Math.random()*100)* Config.GAMEFRAMEWIDTH/100;
+            posY = ((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
+            System.out.println("Veggie cannot be spawn here. Find new pos...");
+        }
+        setX(posX);
+        setY(posY);
+        setCollected(false);
     }
 
     @Override
@@ -80,7 +91,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
         if(this instanceof Cucumber){ gc.setFill(Color.LIGHTGREEN); }
         if(this instanceof Rice){ gc.setFill(Color.DARKGREEN); }
 
-        gc.fillArc(getX() - 20, getY() - 20, 10 * 2, 10 * 2, 0, 360, ArcType.OPEN);
+        gc.fillArc(getX() - getWidth(), getY() - getHeight(), getWidth(), getHeight(), 0, 360, ArcType.OPEN);
 
         // Calculate the width of the progress bar
         double HPPercentage = (double) getHp() / getMAXHP(); // Get HP percentage
@@ -109,6 +120,10 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
         gc.setFill(Color.CORNFLOWERBLUE);
         gc.fillRect(waterBarX, waterBarY, waterBarWidth, 5);
     }
+
+    public int getWidth() { return width; }
+
+    public int getHeight() { return height; }
 
     public float getGrowthRate() { return growthRate; }
 
