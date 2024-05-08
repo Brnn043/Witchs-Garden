@@ -13,11 +13,10 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -28,14 +27,25 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         Button startButton = new Button("Start Game");
+        startButton.setFont(Font.font("Consolas", 18));
+        startButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
+        startButton.setPrefWidth(180);
+        startButton.setPrefHeight(50);
+        startButton.setOnMouseEntered(e -> {
+            startButton.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(5), null)));
+        });
+        startButton.setOnMouseExited(e -> {
+            startButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
+        });
         startButton.setOnAction(e -> startGame(primaryStage));
 
         // Create layout and add the start button
         VBox root = new VBox(20);
+        root.setAlignment(Pos.CENTER);
         root.getChildren().add(startButton);
 
         // Set scene and show the main window
-        Scene scene = new Scene(root, 300, 200);
+        Scene scene = new Scene(root, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Main Menu");
         primaryStage.show();

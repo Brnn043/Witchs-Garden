@@ -13,17 +13,15 @@ public class Player extends BaseCharacter{
     private int money;
     private boolean isWalk;
     private boolean isAttack;
-//    private final int getHeight() = 70;
-//    private final int getWidth() = 50;
 
     public Player(int positionX, int positionY, int maxSpeedRate, int attackRange, int damage) {
         super(positionX, positionY, maxSpeedRate, attackRange, damage);
         setBroom(null);
         setMoney(0);
         setWalk(false);
-        setWidth(50);
-        setHeight(70);
-        System.out.println(getSpeedRate());
+        setWidth(70);
+        setHeight(100);
+        this.z = 999;
     }
 
     @Override
