@@ -1,15 +1,13 @@
 package Items.Veggies;
 
+import GUISharedObject.Entity;
 import Games.Config;
 import Games.GameController;
 import Items.Character.Player;
 import Items.Interfaces.Collectable;
 import Items.Interfaces.WeatherEffectable;
 
-public abstract class BaseVeggies implements WeatherEffectable, Collectable {
-
-    private float positionX;
-    private float positionY;
+public abstract class BaseVeggies extends Entity implements WeatherEffectable, Collectable {
     private boolean isCollected;
     private float growthPoint;
     private float growthRate;
@@ -25,6 +23,7 @@ public abstract class BaseVeggies implements WeatherEffectable, Collectable {
 
 
     public BaseVeggies(int hp,float maxWater,float growthRate,float waterDroppingRate,int price){
+        super();
         this.setHp(hp);
         this.MAXWATER = maxWater;
         this.setWaterPoint(MAXWATER);
@@ -37,21 +36,9 @@ public abstract class BaseVeggies implements WeatherEffectable, Collectable {
     }
 
     @Override
-    public float getPositionX() { return positionX; }
-
-    @Override
-    public float getPositionY() { return positionY; }
-
-    @Override
-    public void setPositionX(float positionX) { this.positionX = Math.max(0,Math.min(positionX, Config.GAMEFRAMEWIDTH)); }
-
-    @Override
-    public void setPositionY(float positionY) { this.positionY = Math.max(0,Math.min(positionY, Config.GAMEFRAMEHEIGHT)); }
-
-    @Override
     public void spawnOnMap() {
-        setPositionX(((float)Math.random()*100)*Config.GAMEFRAMEWIDTH/100);
-        setPositionY(((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100);
+        setX(((float)Math.random()*100)*Config.GAMEFRAMEWIDTH/100);
+        setY(((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100);
         this.setCollected(false);
     }
 

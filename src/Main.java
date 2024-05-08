@@ -1,18 +1,24 @@
+import GUI.GamePanel;
 import GUI.GameScreen;
-import GUISharedObject.InputUtility;
 import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
+import Games.GamePanelController;
 import Items.Character.Slime;
 import Items.Inventory.Clock;
+import Items.Inventory.Broom;
 import Items.Veggies.BaseVeggies;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.util.concurrent.TimeUnit;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -20,16 +26,35 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
-        StackPane root = new StackPane();
+    public void start(Stage primaryStage) {
+        Button startButton = new Button("Start Game");
+        startButton.setOnAction(e -> startGame(primaryStage));
+
+        // Create layout and add the start button
+        VBox root = new VBox(20);
+        root.getChildren().add(startButton);
+
+        // Set scene and show the main window
+        Scene scene = new Scene(root, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Main Menu");
+        primaryStage.show();
+    }
+
+    private void startGame(Stage primaryStage) {
+        primaryStage.close();
+        Stage stage = new Stage();
+        VBox root = new VBox();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Witch's Garden");
 
-        GameController.getInstance();
-
+        root.setAlignment(Pos.CENTER);
+        GameController game = GameController.getInstance();
+        GamePanelController gamePanelController = new GamePanelController();
+        GamePanel gamePanel = gamePanelController.getGamePanel();
         GameScreen gameScreen = new GameScreen(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
-        root.getChildren().add(gameScreen);
+        root.getChildren().addAll(gamePanel,gameScreen);
         gameScreen.requestFocus();
 
 
@@ -40,8 +65,8 @@ public class Main extends Application {
         Thread timer = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (!GameController.getInstance().isGameover()){
-                    Clock clock = GameController.getInstance().getClock();
+                while (!game.isGameover()){
+                    Clock clock = game.getClock();
 
                     try {
                         Thread.sleep(1000);
@@ -49,31 +74,41 @@ public class Main extends Application {
                         throw new RuntimeException(e);
                     }
 
+                    // spaw broom every 10 second
+                    if(game.getGameTimer()%10 == 0){
+                        Broom broom = new Broom();
+                        game.getBroomOnGround().add(broom);
+                        RenderableHolder.getInstance().add(broom);
+                    }
+
                     // set clock timer coolDown
                     clock.setTimer(clock.getTimer()-1);
 
                     // set player coolDown
-                    GameController.getInstance().getPlayer().setAttackCooldown(
-                            GameController.getInstance().getPlayer().getAttackCooldown() - 1);
+                    game.getPlayer().setAttackCooldown(
+                            game.getPlayer().getAttackCooldown() - 1);
 
                     // decrease slime attack coolDown
-                    for(Slime slime: GameController.getInstance().getSlimeList()) {
+                    for(Slime slime: game.getSlimeList()) {
                         slime.setAttackCooldown(slime.getAttackCooldown() - 1);
+                        slime.walk();
+                        slime.attack();
                     }
 
                     // decrease veggie water & add growth point
-                    for(BaseVeggies veggie : GameController.getInstance().getVeggiesList()) {
+                    for(BaseVeggies veggie : game.getVeggiesList()) {
                         veggie.setWaterPoint(veggie.getWaterPoint() - veggie.getWaterDroppingRate());
                         veggie.setGrowthPoint(veggie.getGrowthPoint() + veggie.getGrowthRate());
                     }
 
                     // check if gameTimer == 0
-                    GameController.getInstance().setGameTimer(GameController.getInstance().getGameTimer()-1);
-                    if(GameController.getInstance().getGameTimer() == 0){
-                        GameController.getInstance().setGameover(true);
+                    game.setGameTimer(game.getGameTimer()-1);
+                    if(game.getGameTimer() == 0){
+                        game.setGameover(true);
                     }
 
-                    System.out.println("TIMER : "+ GameController.getInstance().getGameTimer());
+                    gamePanelController.updateTimerBar(game.getGameTimer());
+                    System.out.println("TIMER : "+ game.getGameTimer());
                 }
             }
         });
@@ -82,10 +117,10 @@ public class Main extends Application {
         Thread playerAction = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (!GameController.getInstance().isGameover()){
+                while (!game.isGameover()){
                     try {
                         Thread.sleep(20);
-                        GameController.getInstance().getPlayer().action();
+                        game.getPlayer().action();
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
@@ -98,13 +133,12 @@ public class Main extends Application {
         AnimationTimer animation;
         animation = new AnimationTimer() {
             public void handle(long now) {
-                if(GameController.getInstance().isGameover()){
+                if(game.isGameover()){
                     this.stop();
-
                 }else {
                     try {
                         gameScreen.paintComponent();
-                        GameController.play();
+                        game.play();
                         RenderableHolder.getInstance().update();
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);

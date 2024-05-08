@@ -3,6 +3,9 @@ package Items.Character;
 import Games.Config;
 import Games.GameController;
 import Items.Veggies.BaseVeggies;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
 import java.util.ArrayList;
 
@@ -34,8 +37,8 @@ public class Slime extends BaseCharacter{
         }
 
         // calculate distance from target veggie
-        double disX = this.getTargetVeggie().getPositionX() - this.getPositionX();
-        double disY = this.getTargetVeggie().getPositionY() - this.getPositionY();
+        double disX = this.getTargetVeggie().getX() - this.getX();
+        double disY = this.getTargetVeggie().getY() - this.getY();
         int distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
 
         // attack veggie
@@ -66,18 +69,20 @@ public class Slime extends BaseCharacter{
 
     @Override
     public void walk() {
-        int walkCount = 0;
-        double disX = this.getPositionX() - this.getTargetVeggie().getPositionX();
-        double disY = this.getPositionY() - this.getTargetVeggie().getPositionY();
+
+        double disX = this.getX() - this.getTargetVeggie().getX();
+        double disY = this.getY() - this.getTargetVeggie().getY();
         int distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
 
-        while( (distance - this.getAttackRange()) > Config.SLIMEWALKSTEP & walkCount < 10) {
-            disX = this.getPositionX() - this.getTargetVeggie().getPositionX();
-            disY = this.getPositionY() - this.getTargetVeggie().getPositionY();
-            distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
-            this.setPositionX((float) (this.getPositionX() - (Math.signum(disX))*(Config.SLIMEWALKSTEP)));
-            this.setPositionY((float) (this.getPositionY() - (Math.signum(disY))*(Config.SLIMEWALKSTEP)));
-            walkCount += 1;
+        if( distance - this.getAttackRange() > Config.SLIMEWALKSTEP ){
+            this.setX((float) (this.getX() - (Math.signum(disX))*(Config.SLIMEWALKSTEP * this.getSpeedRate())));
+            this.setY((float) (this.getY() - (Math.signum(disY))*(Config.SLIMEWALKSTEP * this.getSpeedRate())));
         }
+    }
+
+    @Override
+    public void draw(GraphicsContext gc) {
+        gc.setFill(Color.RED);
+        gc.fillArc(getX() - 10, getY() - 10, 10 * 2, 10 * 2, 0, 360, ArcType.OPEN);
     }
 }
