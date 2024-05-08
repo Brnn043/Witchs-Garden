@@ -98,6 +98,7 @@ public class Main extends Application {
 
                     // set clock timer coolDown
                     clock.setTimer(clock.getTimer()-1);
+                    gamePanel.updateClockTimer();
 
                     // set player coolDown
                     game.getPlayer().setAttackCooldown(

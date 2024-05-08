@@ -18,6 +18,7 @@ public class GamePanel extends HBox {
     private StackPane gameScreenWithEffect;
     private ProgressBar timerBar;
     private Button sunnyButton,rainyButton,snowyButton;
+    private Text clockTimer;
 
     public GamePanel(GameController gameController,GameScreen gameScreen,StackPane gameScreenWithEffect) {
         super();
@@ -40,34 +41,43 @@ public class GamePanel extends HBox {
         snowyButton.setOnAction(event -> handleSnowyButton());
         rainyButton.setOnAction(event -> handleRainyButton());
 
-        getChildren().addAll(text,timerBar,sunnyButton,snowyButton,rainyButton);
+        clockTimer  = new Text(Integer.toString(gameController.getClock().getTimer()));
+
+        getChildren().addAll(text,timerBar,sunnyButton,snowyButton,rainyButton,clockTimer);
     }
 
-    public void updateTimerBar(double time){
+    public void updateTimerBar(double time) {
         timerBar.setProgress(time/Config.GAMETIMER);
     }
 
+    public void updateClockTimer() {
+        clockTimer.setText(Integer.toString(gameController.getClock().getTimer()));
+    }
+
     public void handleSunnyButton() {
-        gameController.getClock().setWeather(Config.Weather.SUNNY);
-        gameController.getBackgroundImage().changeWeather(Config.Weather.SUNNY);
-        gameScreenWithEffect.getChildren().clear();
-        gameScreenWithEffect.getChildren().addAll(gameScreen);
+        if (gameController.getClock().changeSeason(Config.Weather.SUNNY)) {
+            gameController.getBackgroundImage().changeWeather(Config.Weather.SUNNY);
+            gameScreenWithEffect.getChildren().clear();
+            gameScreenWithEffect.getChildren().addAll(gameScreen);
+        }
         gameScreen.requestFocus();
     }
 
     public void handleSnowyButton() {
-        gameController.getClock().setWeather(Config.Weather.SNOWY);
-        gameController.getBackgroundImage().changeWeather(Config.Weather.SNOWY);
-        gameScreenWithEffect.getChildren().clear();
-        gameScreenWithEffect.getChildren().addAll(gameScreen,new SnowyCanvas());
+        if (gameController.getClock().changeSeason(Config.Weather.SNOWY)) {
+            gameController.getBackgroundImage().changeWeather(Config.Weather.SNOWY);
+            gameScreenWithEffect.getChildren().clear();
+            gameScreenWithEffect.getChildren().addAll(gameScreen,new SnowyCanvas());
+        }
         gameScreen.requestFocus();
     }
 
     public void handleRainyButton() {
-        gameController.getClock().setWeather(Config.Weather.RAINY);
-        gameController.getBackgroundImage().changeWeather(Config.Weather.RAINY);
-        gameScreenWithEffect.getChildren().clear();
-        gameScreenWithEffect.getChildren().addAll(gameScreen,new BlurCanvas(),new RainyCanvas());
+        if (gameController.getClock().changeSeason(Config.Weather.RAINY)) {
+            gameController.getBackgroundImage().changeWeather(Config.Weather.RAINY);
+            gameScreenWithEffect.getChildren().clear();
+            gameScreenWithEffect.getChildren().addAll(gameScreen,new BlurCanvas(),new RainyCanvas());
+        }
         gameScreen.requestFocus();
     }
 }
