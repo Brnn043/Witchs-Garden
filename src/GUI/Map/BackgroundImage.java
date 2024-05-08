@@ -10,7 +10,7 @@ public class BackgroundImage extends Entity {
     private String imagePath;
 
     public BackgroundImage() {
-        this.imagePath = "Sunny_Background.png";
+        this.imagePath = "Background/Sunny_Background.png";
     }
 
     public BackgroundImage(String imagePath) {

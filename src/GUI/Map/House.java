@@ -20,7 +20,7 @@ public class House extends CollidableEntity {
 
     @Override
     public void draw(GraphicsContext gc) {
-        String imagePath = "House.png";
+        String imagePath = "House/AnimatedHouse.gif";
         Image houseImage = new Image(ClassLoader.getSystemResource(imagePath).toString(), Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT,true,false);
         gc.drawImage(houseImage,getX(),getY(),getWidth(),getHeight());
     }

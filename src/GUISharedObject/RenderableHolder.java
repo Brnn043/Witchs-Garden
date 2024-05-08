@@ -49,7 +49,7 @@ public class RenderableHolder {
         witchBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_broom.png").toString());
         witchWalkBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_walk_broom.GIF").toString());
         witchAttackSprite = new Image(ClassLoader.getSystemResource("Witch/witch_attack.GIF").toString());
-        broomSprite = new Image(ClassLoader.getSystemResource("Broom.png").toString());
+        broomSprite = new Image(ClassLoader.getSystemResource("Broom/AnimatedBroom.gif").toString());
 //        explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
     }
 
