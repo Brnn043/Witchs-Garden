@@ -39,7 +39,7 @@ public class GameController {
         house = new House();
         broomOnGround = new ArrayList<Broom>();
         trees = new ArrayList<>();
-        trees.add(new Tree(300,300,100,120,1));
+        trees.add(new Tree(500,400,100,120,1));
 
         // add player in GUI
         RenderableHolder.getInstance().add(player);
