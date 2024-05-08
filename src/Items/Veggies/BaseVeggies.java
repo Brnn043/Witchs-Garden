@@ -18,13 +18,15 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
     private final float MAXWATERDROPPINGRATE;
     private final float MAXWATER;
     private int price;
+    private final int MAXHP;
 
     // haven't implemented veggieHpBar yet
 
 
     public BaseVeggies(int hp,float maxWater,float growthRate,float waterDroppingRate,int price){
         super();
-        this.setHp(hp);
+        this.MAXHP = hp;
+        this.setHp(this.MAXHP);
         this.MAXWATER = maxWater;
         this.setWaterPoint(MAXWATER);
         this.MAXGROWTHRATE = growthRate;
@@ -94,4 +96,10 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
 
     public void setPrice(int price) { this.price = price; }
 
+    public int getMAXHP() {
+        return MAXHP;
+    }
+    public float getMAXWATER() {
+        return MAXWATER;
+    }
 }

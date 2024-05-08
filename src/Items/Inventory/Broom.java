@@ -54,7 +54,7 @@ public class Broom extends Entity implements Collectable {
     }
 
     public void draw(GraphicsContext gc) {
-        gc.drawImage(RenderableHolder.broomSprite, getX() - 45, getY() - 20,30,45);
+        gc.drawImage(RenderableHolder.broomSprite, getX() - 45, getY() - 20,35,55);
     }
 
     public int getDamage() { return damage; }
