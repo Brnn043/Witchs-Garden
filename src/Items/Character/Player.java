@@ -7,6 +7,7 @@ import Games.GameController;
 import Items.Inventory.Broom;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 
 public class Player extends BaseCharacter{
     private Broom broom;
@@ -72,26 +73,6 @@ public class Player extends BaseCharacter{
         walk();
         attack();
     }
-
-//    @Override
-//    public void walk() {
-//        // WASD to walk in map
-//        if (InputUtility.getKeyPressed(KeyCode.W)) {
-//            setY(getY()-(int)this.getSpeedRate());
-//            setWalk(true);
-//        }else if (InputUtility.getKeyPressed(KeyCode.A)) {
-//            setX(getX()-(int)this.getSpeedRate());
-//            setWalk(true);
-//        } else if (InputUtility.getKeyPressed(KeyCode.S)) {
-//            setY(getY()+(int)this.getSpeedRate());
-//            setWalk(true);
-//        }else if (InputUtility.getKeyPressed(KeyCode.D)) {
-//            setX(getX()+(int)this.getSpeedRate());
-//            setWalk(true);
-//        }else{
-//            setWalk(false);
-//        }
-//    }
     @Override
     public void walk() {
         // WASD to walk in map
@@ -132,6 +113,9 @@ public class Player extends BaseCharacter{
     public void draw(GraphicsContext gc) {
         if(isAttack()){
             gc.drawImage(RenderableHolder.witchAttackSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+            gc.setStroke(Color.RED);
+            gc.setLineWidth(2);
+            gc.strokeOval(getX()- getBroom().getAttackRange(), getY()- getBroom().getAttackRange(), getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2);
             return;
         }
 
@@ -140,12 +124,18 @@ public class Player extends BaseCharacter{
                 gc.drawImage(RenderableHolder.witchWalkSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             }else{
                 gc.drawImage(RenderableHolder.witchWalkBroomSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+                gc.setStroke(Color.WHITE);
+                gc.setLineWidth(2);
+                gc.strokeOval(getX() - getBroom().getAttackRange(), getY()- getBroom().getAttackRange(), getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2);
             }
         }else{
             if(getBroom()==null){
                 gc.drawImage(RenderableHolder.witchSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             }else{
                 gc.drawImage(RenderableHolder.witchBroomSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+                gc.setStroke(Color.WHITE);
+                gc.setLineWidth(2);
+                gc.strokeOval(getX()- getBroom().getAttackRange(), getY()- getBroom().getAttackRange(), getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2);
             }
         }
     }

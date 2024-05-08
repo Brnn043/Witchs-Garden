@@ -58,7 +58,12 @@ public class GameController {
 //            System.out.println("");
 //        }
 
-
+        // check if broom's duration == 0
+        if(getInstance().getPlayer().getBroom() != null){
+            if(getInstance().getPlayer().getBroom().getDurability() == 0){
+                getInstance().getPlayer().setBroom(null);
+            }
+        }
         // add a slime
         while(getInstance().getSlimeList().size() < 5){
             Slime slime = new Slime();

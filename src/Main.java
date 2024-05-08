@@ -101,7 +101,6 @@ public class Main extends Application {
                     // decrease slime attack coolDown
                     for(Slime slime: game.getSlimeList()) {
                         slime.setAttackCooldown(slime.getAttackCooldown() - 1);
-                        slime.walk();
                         slime.attack();
                     }
 
@@ -139,8 +138,22 @@ public class Main extends Application {
         });
         playerAction.start();
 
+        Thread slimeWalk = new Thread(()->{
+            while (!game.isGameover()) {
+                try {
+                    Thread.sleep(100);
+                    for (Slime slime : game.getSlimeList()) {
+                        slime.walk();
+                    }
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        slimeWalk.start();
 
-        AnimationTimer animation;
+
+    AnimationTimer animation;
         animation = new AnimationTimer() {
             public void handle(long now) {
                 if(game.isGameover()){

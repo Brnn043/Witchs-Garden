@@ -6,6 +6,6 @@ import javafx.scene.shape.ArcType;
 
 public class Bean extends BaseVeggies{
     public Bean() {
-        super(10, 30, 2, 1, 5);
+        super(10, 300, 2, 5, 5);
     }
 }
