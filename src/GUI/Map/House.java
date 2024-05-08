@@ -1,7 +1,6 @@
 package GUI.Map;
 
 import GUISharedObject.CollidableEntity;
-import GUISharedObject.Entity;
 import Games.Config;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -18,10 +17,9 @@ public class House extends CollidableEntity {
     public int getZ() { return 0; }
 
     public void changeWeather(Config.Weather weather) {
-        if (weather == Config.Weather.SUNNY) imagePath = "House/AnimatedHouse.gif";
-        else if (weather == Config.Weather.RAINY) imagePath = "House/AnimatedHouse.gif";
-        else imagePath = "House/AnimatedHouse.gif";
-        //change later
+        if (weather == Config.Weather.SUNNY) imagePath = "House/Animated_House_Sunny.gif";
+        else if (weather == Config.Weather.RAINY) imagePath = "House/Animated_House_Sunny.gif";
+        else imagePath = "House/Animated_House_Snowy.gif";
     }
 
     @Override

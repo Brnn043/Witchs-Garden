@@ -18,7 +18,6 @@ public class BackgroundImage extends Entity {
         if (weather == Config.Weather.SUNNY) imagePath = "Background/Sunny_Background.png";
         else if (weather == Config.Weather.RAINY) imagePath = "Background/Sunny_Background.png";
         else imagePath = "Background/Snowy_Background.png";
-        //change later
     }
 
     @Override

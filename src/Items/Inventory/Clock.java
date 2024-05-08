@@ -8,7 +8,7 @@ public class Clock {
 
     public Clock() {
         this.setTimer(Config.CLOCKCOOLDOWNTIME);
-        this.setWeather(Config.Weather.SUNNY);
+        this.weather = Config.Weather.SUNNY;
         System.out.println("Weather is set to "+getWeather());
         // by default , weather is summer.
     }
@@ -23,15 +23,13 @@ public class Clock {
             System.out.println("Cannot change into the same season!!");
             return false;
         }
-        setWeather(weather);
+        this.weather = weather;
         setTimer(Config.CLOCKCOOLDOWNTIME);
         System.out.println("Weather is changed to "+getWeather());
         return true;
     }
 
     public Config.Weather getWeather() { return weather; }
-
-    private void setWeather(Config.Weather weather) { this.weather = weather; }
 
     public int getTimer() { return timer; }
 

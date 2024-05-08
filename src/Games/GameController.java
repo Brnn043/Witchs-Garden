@@ -2,6 +2,7 @@ package Games;
 
 import GUI.Map.BackgroundImage;
 import GUI.Map.House;
+import GUI.Map.Tree;
 import GUISharedObject.RenderableHolder;
 import Items.Character.*;
 import Items.Inventory.Broom;
@@ -24,23 +25,27 @@ public class GameController {
     private int gameTimer;
     private BackgroundImage backgroundImage;
     private House house;
+    private ArrayList<Tree> trees;
 
 
     public GameController() {
-        this.player = new Player(400,300,5,5,3);
-        this.veggiesList = new ArrayList<BaseVeggies>();
-        this.slimeList = new ArrayList<Slime>();
-        this.clock = new Clock();
-        this.gameover = false;
-        this.gameTimer = Config.GAMETIMER;
-        this.backgroundImage = new BackgroundImage();
-        this.house = new House();
-        this.broomOnGround = new ArrayList<Broom>();
+        player = new Player(400,300,5,5,3);
+        veggiesList = new ArrayList<BaseVeggies>();
+        slimeList = new ArrayList<Slime>();
+        clock = new Clock();
+        gameover = false;
+        gameTimer = Config.GAMETIMER;
+        backgroundImage = new BackgroundImage();
+        house = new House();
+        broomOnGround = new ArrayList<Broom>();
+        trees = new ArrayList<>();
+        trees.add(new Tree(300,300,100,120,1));
 
         // add player in GUI
-        RenderableHolder.getInstance().add(this.player);
-        RenderableHolder.getInstance().add(this.backgroundImage);
-        RenderableHolder.getInstance().add(this.house);
+        RenderableHolder.getInstance().add(player);
+        RenderableHolder.getInstance().add(backgroundImage);
+        RenderableHolder.getInstance().add(house);
+        for (Tree tree:trees) RenderableHolder.getInstance().add(tree);
 
         initGames();
     }

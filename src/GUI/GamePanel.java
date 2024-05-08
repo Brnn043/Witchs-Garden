@@ -57,6 +57,7 @@ public class GamePanel extends HBox {
     public void handleSunnyButton() {
         if (gameController.getClock().changeSeason(Config.Weather.SUNNY)) {
             gameController.getBackgroundImage().changeWeather(Config.Weather.SUNNY);
+            gameController.getHouse().changeWeather(Config.Weather.SUNNY);
             gameScreenWithEffect.getChildren().clear();
             gameScreenWithEffect.getChildren().addAll(gameScreen);
         }
@@ -66,6 +67,7 @@ public class GamePanel extends HBox {
     public void handleSnowyButton() {
         if (gameController.getClock().changeSeason(Config.Weather.SNOWY)) {
             gameController.getBackgroundImage().changeWeather(Config.Weather.SNOWY);
+            gameController.getHouse().changeWeather(Config.Weather.SNOWY);
             gameScreenWithEffect.getChildren().clear();
             gameScreenWithEffect.getChildren().addAll(gameScreen,new SnowyCanvas());
         }
@@ -75,6 +77,7 @@ public class GamePanel extends HBox {
     public void handleRainyButton() {
         if (gameController.getClock().changeSeason(Config.Weather.RAINY)) {
             gameController.getBackgroundImage().changeWeather(Config.Weather.RAINY);
+            gameController.getHouse().changeWeather(Config.Weather.SUNNY);
             gameScreenWithEffect.getChildren().clear();
             gameScreenWithEffect.getChildren().addAll(gameScreen,new BlurCanvas(),new RainyCanvas());
         }
