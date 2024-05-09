@@ -30,6 +30,7 @@ public abstract class Slime extends BaseCharacter{
         while (!GameController.getInstance().isPositionAccesible(posX-getWidth()/2,posY-getHeight()/2,getWidth(),getHeight())){
             posX = (Math.random()*100)*Config.GAMEFRAMEWIDTH/100;
             posY = (Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
+            System.out.println("Slime cannot be spawn here. Find new pos...");
         }
         setX(posX);
         setY(posY);
