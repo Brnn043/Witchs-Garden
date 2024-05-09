@@ -1,8 +1,8 @@
 package GUI;
 
-import GUI.WeatherCanvas.BlurCanvas;
-import GUI.WeatherCanvas.RainyCanvas;
-import GUI.WeatherCanvas.SnowyCanvas;
+import GUI.weatherCanvas.BlurCanvas;
+import GUI.weatherCanvas.RainyCanvas;
+import GUI.weatherCanvas.SnowyCanvas;
 import Games.Config;
 import Games.GameController;
 import javafx.geometry.Insets;
@@ -101,9 +101,8 @@ public class GamePanel extends HBox {
         if (gameController.getClock().changeSeason(Config.Weather.SUNNY)) {
             gameController.getBackgroundImage().changeWeather(Config.Weather.SUNNY);
             gameController.getHouse().changeWeather(Config.Weather.SUNNY);
-            gameController.getGameBackground().paintComponent();
             gameScreenWithEffect.getChildren().clear();
-            gameScreenWithEffect.getChildren().addAll(gameController.getGameBackground(),gameScreen);
+            gameScreenWithEffect.getChildren().addAll(gameController.getSunnyBackground(),gameScreen);
         }
         gameScreen.requestFocus();
     }
@@ -112,9 +111,8 @@ public class GamePanel extends HBox {
         if (gameController.getClock().changeSeason(Config.Weather.SNOWY)) {
             gameController.getBackgroundImage().changeWeather(Config.Weather.SNOWY);
             gameController.getHouse().changeWeather(Config.Weather.SNOWY);
-            gameController.getGameBackground().paintComponent();
             gameScreenWithEffect.getChildren().clear();
-            gameScreenWithEffect.getChildren().addAll(gameController.getGameBackground(),gameScreen,new SnowyCanvas());
+            gameScreenWithEffect.getChildren().addAll(gameController.getSnowyBackground(),gameScreen,new SnowyCanvas());
         }
         gameScreen.requestFocus();
     }
@@ -123,9 +121,8 @@ public class GamePanel extends HBox {
         if (gameController.getClock().changeSeason(Config.Weather.RAINY)) {
             gameController.getBackgroundImage().changeWeather(Config.Weather.RAINY);
             gameController.getHouse().changeWeather(Config.Weather.SUNNY);
-            gameController.getGameBackground().paintComponent();
             gameScreenWithEffect.getChildren().clear();
-            gameScreenWithEffect.getChildren().addAll(gameController.getGameBackground(),gameScreen,new BlurCanvas(),new RainyCanvas());
+            gameScreenWithEffect.getChildren().addAll(gameController.getRainyBackground(),gameScreen,new BlurCanvas(),new RainyCanvas());
         }
         gameScreen.requestFocus();
     }

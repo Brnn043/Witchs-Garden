@@ -1,10 +1,12 @@
 package Games;
 
-import GUI.GameBackground;
-import GUI.Map.BackgroundImage;
-import GUI.Map.Bush;
-import GUI.Map.House;
-import GUI.Map.Tree;
+import GUI.gameBackground.RainyBackground;
+import GUI.gameBackground.SnowyBackground;
+import GUI.gameBackground.SunnyBackground;
+import GUI.map.BackgroundImage;
+import GUI.map.Bush;
+import GUI.map.House;
+import GUI.map.Tree;
 import GUISharedObject.RenderableHolder;
 import Items.Character.*;
 import Items.Inventory.Broom;
@@ -29,7 +31,9 @@ public class GameController {
     private House house;
     private final ArrayList<Tree> trees;
     private final ArrayList<Bush> bushes;
-    private GameBackground gameBackground;
+    private final SunnyBackground sunnyBackground;
+    private final SnowyBackground snowyBackground;
+    private final RainyBackground rainyBackground;
 
     public GameController() {
         player = new Player(400, 300, 5, 5, 3);
@@ -68,6 +72,10 @@ public class GameController {
         RenderableHolder.getInstance().addBackground(house);
         for (Tree tree : trees) RenderableHolder.getInstance().addBackground(tree);
         for (Bush bush : bushes) RenderableHolder.getInstance().addBackground(bush);
+
+        sunnyBackground = new SunnyBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
+        snowyBackground = new SnowyBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
+        rainyBackground = new RainyBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
     }
 
     public static void play() throws InterruptedException {
@@ -244,9 +252,15 @@ public class GameController {
         return backgroundImage;
     }
 
-    public GameBackground getGameBackground() { return gameBackground; }
+    public SunnyBackground getSunnyBackground() {
+        return sunnyBackground;
+    }
 
-    public void setGameBackground(GameBackground gameBackground) {
-        this.gameBackground = gameBackground;
+    public SnowyBackground getSnowyBackground() {
+        return snowyBackground;
+    }
+
+    public RainyBackground getRainyBackground() {
+        return rainyBackground;
     }
 }

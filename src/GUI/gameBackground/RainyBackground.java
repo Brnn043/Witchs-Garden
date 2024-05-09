@@ -1,28 +1,23 @@
-package GUI;
+package GUI.gameBackground;
 
-import GUISharedObject.Entity;
+import GUI.map.WeatherChangeable;
 import GUISharedObject.IRenderable;
-import GUISharedObject.RenderableHolder;
+import Games.Config;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-
 
 import static GUISharedObject.RenderableHolder.getInstance;
 
-public class GameBackground extends Canvas {
-    public GameBackground(double width,double height) {
+public class RainyBackground extends Canvas {
+    public RainyBackground(double width, double height) {
         super(width, height);
-        setVisible(true);
-        paintComponent();
-    }
-
-    public void paintComponent() {
         GraphicsContext gc = getGraphicsContext2D();
         gc.clearRect(0, 0, getWidth(), getHeight());
         for (int i =0; i< getInstance().getBackgroundEntities().size(); i+=1) {
             IRenderable entity = getInstance().getBackgroundEntities().get(i);
+            ( (WeatherChangeable) entity ).changeWeather(Config.Weather.RAINY);
             entity.draw(gc);
         }
+        setVisible(true);
     }
 }

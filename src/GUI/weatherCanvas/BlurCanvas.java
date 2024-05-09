@@ -1,4 +1,4 @@
-package GUI.WeatherCanvas;
+package GUI.weatherCanvas;
 
 import Games.Config;
 import javafx.scene.canvas.Canvas;

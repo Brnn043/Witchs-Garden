@@ -1,5 +1,4 @@
-package GUI.WeatherCanvas;
-
+package GUI.weatherCanvas;
 import Games.Config;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -10,34 +9,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class RainyCanvas extends Canvas {
+public class SnowyCanvas extends Canvas {
+    private static final int NUM_SNOWFLAKES = 300;
+    private List<Snowflake> snowflakes = new ArrayList<>();
 
-    private static final double MAX_SPEED = 15.0;
-    private static final int NUM_RAINDROPS = 200;
-
-    private List<Raindrop> raindrops = new ArrayList<>();
-
-    public RainyCanvas() {
+    public SnowyCanvas() {
         super(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
 
-        // Generate initial raindrops
-        for (int i = 0; i < NUM_RAINDROPS; i++) {
-            raindrops.add(new Raindrop());
+        // Generate initial snowflakes
+        for (int i = 0; i < NUM_SNOWFLAKES; i++) {
+            snowflakes.add(new Snowflake());
         }
 
-        // Animation timer to update raindrops and render them
+        // Animation timer to update snowflakes and render them
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-                updateRaindrops();
+                updateSnowflakes();
                 render();
             }
         }.start();
     }
 
-    private void updateRaindrops() {
-        for (Raindrop raindrop : raindrops) {
-            raindrop.update();
+    private void updateSnowflakes() {
+        for (Snowflake snowflake : snowflakes) {
+            snowflake.update();
         }
     }
 
@@ -48,34 +44,36 @@ public class RainyCanvas extends Canvas {
         // Clear the canvas
         gc.clearRect(0, 0, getWidth(), getHeight());
 
-        // Render each raindrop
-        for (Raindrop raindrop : raindrops) {
-            raindrop.render(gc);
+        // Render each snowflake
+        for (Snowflake snowflake : snowflakes) {
+            snowflake.render(gc);
         }
     }
 
-    private static class Raindrop {
+    private static class Snowflake {
         private double x;
         private double y;
         private double speed;
+        private double size;
 
-        private Raindrop() {
+        private Snowflake() {
             Random random = new Random();
             x = random.nextDouble() * Config.GAMEFRAMEWIDTH; // Adjust width as needed
             y = random.nextDouble() * Config.GAMEFRAMEHEIGHT; // Adjust height as needed
-            speed = random.nextDouble() * MAX_SPEED + 1;
+            speed = random.nextDouble() * 2 + 1; // Random speed between 1 and 3
+            size = random.nextDouble() * 4 + 1; // Random size between 1 and 5
         }
 
         private void update() {
             y += speed;
-            if (y > 600) { // Adjust height as needed
+            if (y > Config.GAMEFRAMEHEIGHT) {
                 y = 0;
             }
         }
 
         private void render(GraphicsContext gc) {
             gc.setFill(Color.WHITE);
-            gc.fillRect(x, y, 2, 10); // Adjust size as needed
+            gc.fillOval(x, y, size, size);
         }
     }
 }
