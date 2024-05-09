@@ -9,6 +9,7 @@
 - เราน่าจะต้องมาตกลงกันเรื่อง weatherEffected เพิ่มด้วยๆ
 - GameController.getInstance().get() (almost done)
 - we should add growthBar for each veggie
+- implement efficient collideBox for every CollidableEntity
 
 # Update 6/5/24
 - เราย้ายตัว timer มาที่ timerThread ใน main
