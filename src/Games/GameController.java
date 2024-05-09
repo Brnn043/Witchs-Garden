@@ -12,8 +12,8 @@ import Items.Character.*;
 import Items.Inventory.Broom;
 import Items.Inventory.Clock;
 import Items.Veggies.BaseVeggies;
-import Items.Veggies.Bean;
-import Items.Veggies.Cucumber;
+import Items.Veggies.RedFlower;
+import Items.Veggies.RainbowDrake;
 import Items.Veggies.Rice;
 
 import java.util.ArrayList;
@@ -144,9 +144,9 @@ public class GameController {
         int veggieType = (int) (Math.random() * 3);
         BaseVeggies veggie;
         if (veggieType == 0) {
-            veggie = new Bean();
+            veggie = new RedFlower();
         } else if (veggieType == 1) {
-            veggie = new Cucumber();
+            veggie = new RainbowDrake();
         } else {
             veggie = new Rice();
         }

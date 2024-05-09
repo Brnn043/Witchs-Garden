@@ -87,8 +87,8 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
 
     @Override
     public void draw(GraphicsContext gc) {
-        if(this instanceof Bean){ gc.setFill(Color.GREEN); }
-        if(this instanceof Cucumber){ gc.setFill(Color.LIGHTGREEN); }
+        if(this instanceof RedFlower){ gc.setFill(Color.GREEN); }
+        if(this instanceof RainbowDrake){ gc.setFill(Color.LIGHTGREEN); }
         if(this instanceof Rice){ gc.setFill(Color.DARKGREEN); }
 
         gc.fillArc(getX() - getWidth(), getY() - getHeight(), getWidth(), getHeight(), 0, 360, ArcType.OPEN);
