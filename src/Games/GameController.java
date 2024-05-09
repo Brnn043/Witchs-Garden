@@ -34,6 +34,9 @@ public class GameController {
     private final SunnyBackground sunnyBackground;
     private final SnowyBackground snowyBackground;
     private final RainyBackground rainyBackground;
+    private final int MAXREDFLOWER;
+    private final int MAXRAINBOWDRAKE;
+    private final int MAXRICE;
 
     public GameController() {
         player = new Player(400, 300, 5, 5, 3);
@@ -47,6 +50,11 @@ public class GameController {
         broomOnGround = new ArrayList<Broom>();
         trees = new ArrayList<>();
         bushes = new ArrayList<>();
+
+        // based on each game
+        MAXREDFLOWER = 3;
+        MAXRAINBOWDRAKE = 2;
+        MAXRICE = 5;
 
         //left side
         trees.add(new Tree(-30, 270, 120, 155, 20, 4));
@@ -209,6 +217,12 @@ public class GameController {
         }
         return !house.collideWith(x, y, width, height);
     }
+
+    public int getMAXREDFLOWER() { return MAXREDFLOWER; }
+
+    public int getMAXRAINBOWDRAKE() { return MAXRAINBOWDRAKE; }
+
+    public int getMAXRICE() { return MAXRICE; }
 
     public ArrayList<Slime> getSlimeList() {
         return slimeList;

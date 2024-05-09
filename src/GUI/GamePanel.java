@@ -8,6 +8,8 @@ import Games.GameController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -15,12 +17,17 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.control.ProgressBar;
 
+
 public class GamePanel extends HBox {
     private final GameController gameController;
     private final GameScreen gameScreen;
     private final StackPane gameScreenWithEffect;
     private final ProgressBar timerBar;
     private final Text clockTimer;
+    private final Text gameModeLabel;
+    private final Text redFlowerCount;
+    private final Text rainbowDrakeCount;
+    private final Text riceCount;
 
     public GamePanel(GameController gameController,GameScreen gameScreen,StackPane gameScreenWithEffect) {
         super();
@@ -36,7 +43,7 @@ public class GamePanel extends HBox {
         timerBar.setStyle("-fx-accent: violet;");
         timerBar.setProgress(1);
 
-        Text gameModeLabel = new Text("Potion no.2");
+        gameModeLabel = new Text("Make the potion no.2");
 
         HBox TimerLabel = new HBox(timerText,timerBar);
 
@@ -56,19 +63,49 @@ public class GamePanel extends HBox {
         VBox weatherContainer = new VBox(clockTimer,buttonContainer);
         weatherContainer.setAlignment(Pos.CENTER);
 
+        ImageView redFlowerIcon = new ImageView(ClassLoader.getSystemResource("Veggie/RedFlower_Icon.png").toString());
+        ImageView rainbowDrakeIcon = new ImageView(ClassLoader.getSystemResource("Veggie/RainbowDrake_Icon.png").toString());
+        ImageView riceIcon = new ImageView(ClassLoader.getSystemResource("Veggie/RedFlower_Icon.png").toString());
+
+        redFlowerIcon.setPreserveRatio(true);
+        rainbowDrakeIcon.setPreserveRatio(true);
+        riceIcon.setPreserveRatio(true);
+        redFlowerIcon.setFitWidth(35);
+        rainbowDrakeIcon.setFitWidth(35);
+        riceIcon.setFitWidth(35);
+        
+        redFlowerCount = new Text();
+        rainbowDrakeCount = new Text();
+        riceCount = new Text();
+
+        updateRedFlowerCount(0);
+        updateRainbowDrakeCount(0);
+        updateRiceCount(0);
+
+        HBox targetRedFlower = new HBox(redFlowerIcon,redFlowerCount);
+        HBox targetRainbowDrake = new HBox(rainbowDrakeIcon,rainbowDrakeCount);
+        HBox targetRice = new HBox(riceIcon,riceCount);
+
+        HBox targetVeggie = new HBox(targetRedFlower,targetRainbowDrake,targetRice);
+
+        Text veggieTitle = new Text("Collect the following veggies");
+
+        VBox targetVeggieContainer = new VBox(veggieTitle,targetVeggie);
+
         sunnyButton.setOnAction(event -> handleSunnyButton());
         snowyButton.setOnAction(event -> handleSnowyButton());
         rainyButton.setOnAction(event -> handleRainyButton());
 
-        getChildren().addAll(gameModeandTimer,weatherContainer);
+        getChildren().addAll(targetVeggieContainer,gameModeandTimer,weatherContainer);
 
+        setSpacing(50);
         setBackground(new Background(new BackgroundFill(Color.web("#8F6F5C"), CornerRadii.EMPTY, Insets.EMPTY)));
 
-        clockTimer.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 16));
+        clockTimer.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
         clockTimer.setFill(Color.WHEAT);
 
         // Set font and color for timer text
-        timerText.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 16));
+        timerText.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
         timerText.setFill(Color.WHEAT);
 
         // Set font and color for game mode label
@@ -81,10 +118,34 @@ public class GamePanel extends HBox {
         rainyButton.setStyle("-fx-background-color: #D7C2F2; -fx-text-fill: #8F6F5C; -fx-font-family: 'Comic Sans MS'; -fx-font-size: 14;");
 
         // Set spacing between elements
-        setSpacing(20);
         gameModeandTimer.setSpacing(10);
         buttonContainer.setSpacing(20);
         weatherContainer.setSpacing(10);
+
+        redFlowerCount.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
+        redFlowerCount.setFill(Color.WHEAT);
+        rainbowDrakeCount.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
+        rainbowDrakeCount.setFill(Color.WHEAT);
+        riceCount.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
+        riceCount.setFill(Color.WHEAT);
+        veggieTitle.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
+        veggieTitle.setFill(Color.WHEAT);
+
+        targetVeggieContainer.setAlignment(Pos.CENTER);
+        targetVeggieContainer.setSpacing(10);
+
+        targetVeggie.setAlignment(Pos.CENTER);
+        targetVeggie.setSpacing(20);
+        targetRedFlower.setAlignment(Pos.CENTER);
+        targetRedFlower.setSpacing(10);
+        targetRainbowDrake.setAlignment(Pos.CENTER);
+        targetRainbowDrake.setSpacing(10);
+        targetRice.setAlignment(Pos.CENTER);
+        targetRice.setSpacing(10);
+    }
+
+    public void setGameModeLabel(String string) {
+        gameModeLabel.setText(string);
     }
 
     public void updateTimerBar(double time) {
@@ -95,6 +156,18 @@ public class GamePanel extends HBox {
         clockTimer.setText("You can change the weather in "
                 + gameController.getClock().getTimer()
                 + " second(s).");
+    }
+
+    public void updateRedFlowerCount(int x) {
+        redFlowerCount.setText(x+"/"+gameController.getMAXREDFLOWER());
+    }
+
+    public void updateRainbowDrakeCount(int x) {
+        rainbowDrakeCount.setText(x+"/"+gameController.getMAXRAINBOWDRAKE());
+    }
+
+    public void updateRiceCount(int x) {
+        riceCount.setText(x+"/"+gameController.getMAXRICE());
     }
 
     public void handleSunnyButton() {
