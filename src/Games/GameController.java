@@ -1,6 +1,7 @@
 package Games;
 
 import GUI.Map.BackgroundImage;
+import GUI.Map.Bush;
 import GUI.Map.House;
 import GUI.Map.Tree;
 import GUISharedObject.RenderableHolder;
@@ -26,6 +27,7 @@ public class GameController {
     private BackgroundImage backgroundImage;
     private House house;
     private final ArrayList<Tree> trees;
+    private final ArrayList<Bush> bushes;
 
     public GameController() {
         player = new Player(400,300,5,5,3);
@@ -38,14 +40,19 @@ public class GameController {
         house = new House();
         broomOnGround = new ArrayList<Broom>();
         trees = new ArrayList<>();
-        trees.add(new Tree(500,400,100,120,1));
+        bushes = new ArrayList<>();
+
+        trees.add(new Tree(500,400,100,120,20,1));
+        trees.add(new Tree(500,450,100,120,19,2));
+
+        bushes.add(new Bush(100,220,40,30,20,1));
 
         // add player in GUI
         RenderableHolder.getInstance().add(player);
         RenderableHolder.getInstance().add(backgroundImage);
         RenderableHolder.getInstance().add(house);
         for (Tree tree:trees) RenderableHolder.getInstance().add(tree);
-
+        for (Bush bush:bushes) RenderableHolder.getInstance().add(bush);
     }
 
     public static void play() throws InterruptedException {
@@ -145,6 +152,9 @@ public class GameController {
     public boolean isPositionAccesible(double x,double y,double width,double height){
         for (Tree tree:trees) {
             if (tree.collideWith(x,y,width,height)) return false;
+        }
+        for (Bush bush:bushes) {
+            if (bush.collideWith(x,y,width,height)) return false;
         }
         return !house.collideWith(x,y,width,height);
     }
