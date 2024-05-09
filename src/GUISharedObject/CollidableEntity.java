@@ -10,6 +10,10 @@ public class CollidableEntity extends Entity {
         this.height = height;
     }
 
+    protected CollidableEntity() {
+        super();
+    }
+
     public double getWidth() {
         return width;
     }

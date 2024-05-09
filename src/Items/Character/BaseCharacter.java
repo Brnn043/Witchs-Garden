@@ -16,9 +16,16 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
     private int damage;
     private int attackCooldown;
 
-    protected BaseCharacter(float positionX, float positionY, int maxspeedrate, int attackRange, int damage) {
+    protected BaseCharacter(double positionX, double positionY, int maxSpeedRate, int attackRange, int damage) {
         super(positionX,positionY,0,0);
-        this.MAXSPEEDRATE = Math.max(2,maxspeedrate);
+        this.MAXSPEEDRATE = Math.max(2,maxSpeedRate);
+        this.attackRange = Math.max(2,attackRange);
+        this.damage = Math.max(2,damage);
+    }
+
+    protected BaseCharacter(int maxSpeedRate, int attackRange, int damage) {
+        super();
+        this.MAXSPEEDRATE = Math.max(2,maxSpeedRate);
         this.attackRange = Math.max(2,attackRange);
         this.damage = Math.max(2,damage);
     }
