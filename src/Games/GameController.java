@@ -66,10 +66,6 @@ public class GameController {
                 getInstance().getPlayer().setBroom(null);
             }
         }
-        // add a slime
-        while(getInstance().getSlimeList().size() < 5){
-            getInstance().getNewSlime();
-        }
 
 
         for (int i = 0; i < instance.getSlimeList().size(); i++) {

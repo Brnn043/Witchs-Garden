@@ -17,7 +17,7 @@ public class Config {
     public static int SLIMEMAXDAMAGE = 5;
     public static float SLIMEWALKSTEP = 2;
 
-    public static final int PLAYERCOOLDOWNTIME = 1;
+    public static final int PLAYERCOOLDOWNTIME = 1000; // 1000 ms
     public static final int BROOMMAXDURABILITY = 20;
     public static final int BROOMMINDURABILITY = 10;
     public static final int BROOMMAXATTACKRANGE = 100;

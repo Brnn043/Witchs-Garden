@@ -8,6 +8,7 @@ import Items.Inventory.Broom;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
 public class Player extends BaseCharacter{
     private Broom broom;
@@ -116,7 +117,10 @@ public class Player extends BaseCharacter{
                 gc.drawImage(RenderableHolder.witchWalkBroomSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
                 gc.setStroke(Color.WHITE);
                 gc.setLineWidth(2);
-                gc.strokeOval(getX() - getBroom().getAttackRange(), getY()- getBroom().getAttackRange(), getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2);
+                float broomDegree = ((float) Config.PLAYERCOOLDOWNTIME - getAttackCooldown())/Config.PLAYERCOOLDOWNTIME * 360;
+                gc.strokeArc(getX() - getBroom().getAttackRange(), getY()- getBroom().getAttackRange(),
+                        getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2,
+                        0,broomDegree, ArcType.OPEN );
             }
         }else{
             if(getBroom()==null){
@@ -125,8 +129,10 @@ public class Player extends BaseCharacter{
                 gc.drawImage(RenderableHolder.witchBroomSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
                 gc.setStroke(Color.WHITE);
                 gc.setLineWidth(2);
-                gc.strokeOval(getX()- getBroom().getAttackRange(), getY()- getBroom().getAttackRange(), getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2);
-            }
+                float broomDegree = ((float) Config.PLAYERCOOLDOWNTIME - getAttackCooldown())/Config.PLAYERCOOLDOWNTIME * 360;
+                gc.strokeArc(getX() - getBroom().getAttackRange(), getY()- getBroom().getAttackRange(),
+                        getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2,
+                        0,broomDegree, ArcType.OPEN );            }
         }
     }
 

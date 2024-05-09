@@ -97,13 +97,15 @@ public class Main extends Application {
                         RenderableHolder.getInstance().add(broom);
                     }
 
+                    // spaw slime every 7 second
+                    if(game.getGameTimer()%7 == 0){
+                        game.getNewSlime();
+                    }
+
                     // set clock timer coolDown
                     clock.setTimer(clock.getTimer()-1);
                     gamePanel.updateClockTimer();
 
-                    // set player coolDown
-                    game.getPlayer().setAttackCooldown(
-                            game.getPlayer().getAttackCooldown() - 1);
 
                     // decrease slime attack coolDown
                     for(Slime slime: game.getSlimeList()) {
@@ -141,6 +143,7 @@ public class Main extends Application {
                     try {
                         Thread.sleep(20);
                         game.getPlayer().action();
+                        game.getPlayer().setAttackCooldown(game.getPlayer().getAttackCooldown() - 20);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
