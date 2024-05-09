@@ -43,22 +43,22 @@ public class GameController {
         bushes = new ArrayList<>();
 
         //left side
-        trees.add(new Tree(-35,400,132,158.4,20,4));
-        trees.add(new Tree(-40,550,110,160,22,2));
-        trees.add(new Tree(40,485,110,160,24,3));
+        trees.add(new Tree(-30,270,120,155,20,4));
+        trees.add(new Tree(-40,420,110,160,22,2));
+        trees.add(new Tree(40,390,110,160,24,3));
 
         //right side
-        trees.add(new Tree(1025,50,100,130,20,2));
-        trees.add(new Tree(1000,160,160,200,22,1));
-        trees.add(new Tree(980,320,99,144,24,3));
-        trees.add(new Tree(990,400,160,200,26,4));
-        trees.add(new Tree(895,420,140,210,28,5));
+        trees.add(new Tree(1025,20,90,110,20,2));
+        trees.add(new Tree(1020,110,150,180,22,1));
+        trees.add(new Tree(1000,250,99,144,24,3));
+        trees.add(new Tree(990,320,140,180,26,4));
+        trees.add(new Tree(895,340,120,190,28,5));
 
-        bushes.add(new Bush(950,160,95,60,21,1));
-        bushes.add(new Bush(940,300,95,50,23,2));
-        bushes.add(new Bush(790,565,120,80,32,1));
-        bushes.add(new Bush(850,580,100,60,34,4));
-        bushes.add(new Bush(1010,590,100,60,36,3));
+        bushes.add(new Bush(950,130,95,60,21,1));
+        bushes.add(new Bush(945,230,95,50,23,2));
+        bushes.add(new Bush(790,470,120,80,32,1));
+        bushes.add(new Bush(850,485,100,60,34,4));
+        bushes.add(new Bush(1010,495,100,60,36,3));
 
         // add player in GUI
         RenderableHolder.getInstance().add(player);

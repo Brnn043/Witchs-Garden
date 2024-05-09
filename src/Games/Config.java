@@ -5,11 +5,12 @@ public class Config {
         SUNNY, SNOWY, RAINY
     }
 
-
-//    public static int GAMEFRAMEWIDTH = 750;
-//    public static int GAMEFRAMEHEIGHT = 412;
     public static int GAMEFRAMEWIDTH = 1100;
-    public static int GAMEFRAMEHEIGHT = 650;
+//    public static int GAMEFRAMEHEIGHT = 650;
+    // adjust size for gameLabel
+    public static int GAMEFRAMEHEIGHT = 535;
+    public static int GAMELABELWIDTH = 1100;
+    public static int GAMELABELHEIGHT = 115;
     public static int GAMETIMER = 30;
     public static int SLIMEMAXSPEEDRATE = 20;
     public static int SLIMEMINSPEEDRATE = 10;
