@@ -88,8 +88,14 @@ public abstract class Slime extends BaseCharacter{
         int distance = (int) Math.floor(Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) ));
 
         if( distance - this.getAttackRange() > Config.SLIMEWALKSTEP ){
-            this.setX((float) (this.getX() - (Math.signum(disX))*(Config.SLIMEWALKSTEP * this.getSpeedRate() * 0.2)));
-            this.setY((float) (this.getY() - (Math.signum(disY))*(Config.SLIMEWALKSTEP * this.getSpeedRate() * 0.2)));
+            double posX = (float) (this.getX() - (Math.signum(disX))*(Config.SLIMEWALKSTEP * this.getSpeedRate() * 0.2));
+            double posY = (float) (this.getY() - (Math.signum(disY))*(Config.SLIMEWALKSTEP * this.getSpeedRate() * 0.2));
+
+            if (!GameController.getInstance().isPositionAccesible(posX-getWidth()/2,getY()-getHeight()/2,getWidth(),getHeight())) posX=getX();
+            if (!GameController.getInstance().isPositionAccesible(getX()-getWidth()/2,posY-getHeight()/2,getWidth(),getHeight())) posY=getY();
+
+            this.setX(posX);
+            this.setY(posY);
         }
     }
 
