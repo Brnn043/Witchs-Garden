@@ -1,3 +1,4 @@
+import GUI.GameBackground;
 import GUI.GamePanel;
 import GUI.GameScreen;
 import GUISharedObject.RenderableHolder;
@@ -9,6 +10,7 @@ import Items.Inventory.Broom;
 import Items.Veggies.BaseVeggies;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -59,8 +61,10 @@ public class Main extends Application {
 
         root.setAlignment(Pos.CENTER);
         GameController game = GameController.getInstance();
-        game.initGames();
+        GameBackground gameBackground = new GameBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
         GameScreen gameScreen = new GameScreen(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        game.setGameBackground(gameBackground);
+        gameBackground.paintComponent();
 
         StackPane gameScreenWithEffect = new StackPane();
         gameScreenWithEffect.setAlignment(Pos.CENTER);
@@ -72,7 +76,7 @@ public class Main extends Application {
 
         root.getChildren().addAll(gamePanel,gameScreenWithEffect);
         gameScreen.requestFocus();
-
+        game.initGames();
 
         stage.show();
 

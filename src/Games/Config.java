@@ -11,7 +11,7 @@ public class Config {
     public static int GAMEFRAMEHEIGHT = 535;
     public static int GAMELABELWIDTH = 1100;
     public static int GAMELABELHEIGHT = 115;
-    public static int GAMETIMER = 30;
+    public static int GAMETIMER = 60;
     public static int SLIMEMAXSPEEDRATE = 20;
     public static int SLIMEMINSPEEDRATE = 10;
     public static int SLIMEMAXDAMAGERANGE = 30;

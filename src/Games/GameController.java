@@ -1,5 +1,6 @@
 package Games;
 
+import GUI.GameBackground;
 import GUI.Map.BackgroundImage;
 import GUI.Map.Bush;
 import GUI.Map.House;
@@ -28,44 +29,45 @@ public class GameController {
     private House house;
     private final ArrayList<Tree> trees;
     private final ArrayList<Bush> bushes;
+    private GameBackground gameBackground;
 
     public GameController() {
-        player = new Player(400,300,5,5,3);
+        player = new Player(400, 300, 5, 5, 3);
         veggiesList = new ArrayList<BaseVeggies>();
         slimeList = new ArrayList<Slime>();
         clock = new Clock();
         gameover = false;
         gameTimer = Config.GAMETIMER;
         backgroundImage = new BackgroundImage();
-        house = new House(-5,-40,280,225);
+        house = new House(-5, -40, 280, 225);
         broomOnGround = new ArrayList<Broom>();
         trees = new ArrayList<>();
         bushes = new ArrayList<>();
 
         //left side
-        trees.add(new Tree(-30,270,120,155,20,4));
-        trees.add(new Tree(-40,420,110,160,22,2));
-        trees.add(new Tree(40,390,110,160,24,3));
+        trees.add(new Tree(-30, 270, 120, 155, 20, 4));
+        trees.add(new Tree(-40, 420, 110, 160, 22, 2));
+        trees.add(new Tree(40, 390, 110, 160, 24, 3));
 
         //right side
-        trees.add(new Tree(1025,20,90,110,20,2));
-        trees.add(new Tree(1020,110,150,180,22,1));
-        trees.add(new Tree(1000,250,99,144,24,3));
-        trees.add(new Tree(990,320,140,180,26,4));
-        trees.add(new Tree(895,340,120,190,28,5));
+        trees.add(new Tree(1025, 20, 90, 110, 20, 2));
+        trees.add(new Tree(1020, 110, 150, 180, 22, 1));
+        trees.add(new Tree(1000, 250, 99, 144, 24, 3));
+        trees.add(new Tree(990, 320, 140, 180, 26, 4));
+        trees.add(new Tree(895, 340, 120, 190, 28, 5));
 
-        bushes.add(new Bush(950,130,95,60,21,1));
-        bushes.add(new Bush(945,230,95,50,23,2));
-        bushes.add(new Bush(790,470,120,80,32,1));
-        bushes.add(new Bush(850,485,100,60,34,4));
-        bushes.add(new Bush(1010,495,100,60,36,3));
+        bushes.add(new Bush(950, 130, 95, 60, 21, 1));
+        bushes.add(new Bush(945, 230, 95, 50, 23, 2));
+        bushes.add(new Bush(790, 470, 120, 80, 32, 1));
+        bushes.add(new Bush(850, 485, 100, 60, 34, 4));
+        bushes.add(new Bush(1010, 495, 100, 60, 36, 3));
 
         // add player in GUI
         RenderableHolder.getInstance().add(player);
-        RenderableHolder.getInstance().add(backgroundImage);
-        RenderableHolder.getInstance().add(house);
-        for (Tree tree:trees) RenderableHolder.getInstance().add(tree);
-        for (Bush bush:bushes) RenderableHolder.getInstance().add(bush);
+        RenderableHolder.getInstance().addBackground(backgroundImage);
+        RenderableHolder.getInstance().addBackground(house);
+        for (Tree tree : trees) RenderableHolder.getInstance().addBackground(tree);
+        for (Bush bush : bushes) RenderableHolder.getInstance().addBackground(bush);
     }
 
     public static void play() throws InterruptedException {
@@ -81,8 +83,8 @@ public class GameController {
 //        }
 
         // check if broom's duration == 0
-        if(getInstance().getPlayer().getBroom() != null){
-            if(getInstance().getPlayer().getBroom().getDurability() == 0){
+        if (getInstance().getPlayer().getBroom() != null) {
+            if (getInstance().getPlayer().getBroom().getDurability() == 0) {
                 getInstance().getPlayer().setBroom(null);
             }
         }
@@ -91,7 +93,7 @@ public class GameController {
         for (int i = 0; i < instance.getSlimeList().size(); i++) {
             // delete slime if HP is < 0
             Slime slime = instance.getSlimeList().get(i);
-            if(slime.getHp() <= 0){
+            if (slime.getHp() <= 0) {
                 getInstance().getSlimeList().remove(slime);
                 RenderableHolder.getInstance().getEntities().remove(slime);
                 continue;
@@ -103,8 +105,8 @@ public class GameController {
         ArrayList<BaseVeggies> veggies = getInstance().getVeggiesList();
         ArrayList<BaseVeggies> delVeggie = new ArrayList<BaseVeggies>();
 
-        for(BaseVeggies veggie : getInstance().getVeggiesList()) {
-            if(veggie.getWaterPoint() <= 0 || veggie.getHp() <= 0) {
+        for (BaseVeggies veggie : getInstance().getVeggiesList()) {
+            if (veggie.getWaterPoint() <= 0 || veggie.getHp() <= 0) {
                 delVeggie.add(veggie);
                 RenderableHolder.getInstance().getEntities().remove(veggie);
             }
@@ -112,46 +114,47 @@ public class GameController {
         }
 
         // delete dead veggie
-        for(BaseVeggies veggie : delVeggie){
+        for (BaseVeggies veggie : delVeggie) {
             getInstance().getVeggiesList().remove(veggie);
             getInstance().getNewVeggie();
         }
 
 
-        for(Broom broom : GameController.getInstance().broomOnGround){
+        for (Broom broom : GameController.getInstance().broomOnGround) {
             broom.collected();
         }
     }
 
-    public void initGames(){
+    public void initGames() {
         getNewVeggie();
         getNewVeggie();
         getNewVeggie();
         getNewVeggie();
     }
-    public void getNewVeggie(){
-        int veggieType = (int) (Math.random()*3);
+
+    public void getNewVeggie() {
+        int veggieType = (int) (Math.random() * 3);
         BaseVeggies veggie;
         if (veggieType == 0) {
             veggie = new Bean();
-        }else if(veggieType == 1){
+        } else if (veggieType == 1) {
             veggie = new Cucumber();
-        }else{
+        } else {
             veggie = new Rice();
         }
         getVeggiesList().add(veggie);
         RenderableHolder.getInstance().add(veggie);
     }
 
-    public void getNewSlime(){
-        int slimeType = (int) (Math.random()*3);
+    public void getNewSlime() {
+        int slimeType = (int) (Math.random() * 3);
         Slime slime;
         System.out.println(slimeType);
         if (slimeType == 0) {
             slime = new NormalSlime();
-        }else if(slimeType == 1){
+        } else if (slimeType == 1) {
             slime = new TeleportSlime();
-        }else{
+        } else {
             slime = new SpeedSlime();
         }
         getInstance().getSlimeList().add(slime);
@@ -159,22 +162,27 @@ public class GameController {
     }
 
     public static GameController getInstance() {
-        if(instance == null) instance = new GameController();
+        if (instance == null) instance = new GameController();
         return instance;
     }
-    public boolean isPositionAccesible(double x,double y,double width,double height){
-        for (Tree tree:trees) {
-            if (tree.collideWith(x,y,width,height)) return false;
+
+    public boolean isPositionAccesible(double x, double y, double width, double height) {
+        for (Tree tree : trees) {
+            if (tree.collideWith(x, y, width, height)) return false;
         }
-        for (Bush bush:bushes) {
-            if (bush.collideWith(x,y,width,height)) return false;
+        for (Bush bush : bushes) {
+            if (bush.collideWith(x, y, width, height)) return false;
         }
-        return !house.collideWith(x,y,width,height);
+        return !house.collideWith(x, y, width, height);
     }
 
-    public ArrayList<Slime> getSlimeList() { return slimeList; }
+    public ArrayList<Slime> getSlimeList() {
+        return slimeList;
+    }
 
-    public void setSlimeList(ArrayList<Slime> slimeList) { this.slimeList = slimeList; }
+    public void setSlimeList(ArrayList<Slime> slimeList) {
+        this.slimeList = slimeList;
+    }
 
     public Player getPlayer() {
         return player;
@@ -236,12 +244,9 @@ public class GameController {
         return backgroundImage;
     }
 
-    public void setBackgroundImage(BackgroundImage backgroundImage) {
-        this.backgroundImage = backgroundImage;
-    }
+    public GameBackground getGameBackground() { return gameBackground; }
 
-    public void setHouse(House house) {
-        this.house = house;
+    public void setGameBackground(GameBackground gameBackground) {
+        this.gameBackground = gameBackground;
     }
-
 }
