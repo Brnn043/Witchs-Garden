@@ -95,7 +95,7 @@ public class Player extends BaseCharacter{
             setWalk(false);
             return;
         }
-        if (!GameController.getInstance().isPositionAccesible(posX-getWidth()/4,posY,getWidth()/2,getHeight()/2)) return;
+        if (!GameController.getInstance().isPositionAccesible(posX-getWidth()/4,posY,getWidth()/2,getHeight()/2,true)) return;
         setX(posX);
         setY(posY);
     }
