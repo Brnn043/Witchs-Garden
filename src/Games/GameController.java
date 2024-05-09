@@ -190,8 +190,9 @@ public class GameController {
 
             // Calculate centers
             double playerCenterX = player.getX();
-            double playerCenterY = player.getY() + playerHalfHeight/2;
-            playerHalfHeight /= 2;
+            double playerCenterY = player.getY() + playerHalfHeight * 0.75;
+            playerHalfHeight /= 4;
+            playerHalfWidth /= 2;
             double otherCenterX = x + otherHalfWidth;
             double otherCenterY = y + otherHalfHeight;
 
