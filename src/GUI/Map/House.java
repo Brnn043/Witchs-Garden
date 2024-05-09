@@ -8,8 +8,9 @@ import javafx.scene.image.Image;
 public class House extends CollidableEntity {
     private String imagePath;
 
-    public House() {
-        super(-5, -50, 250, 200);
+    public House(double x,double y,double width,double height) {
+//        super(-5, -50, 250, 200);
+        super(x,y,width,height);
         changeWeather(Config.Weather.SUNNY);
     }
 

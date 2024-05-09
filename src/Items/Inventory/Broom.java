@@ -22,8 +22,8 @@ public class Broom extends Entity implements Collectable {
         setDurability( (int) (Math.random() * (Config.BROOMMAXDURABILITY - Config.BROOMMINDURABILITY + 1) ) + Config.BROOMMINDURABILITY);
         setAttackRange( (int) (Math.random() * (Config.BROOMMAXATTACKRANGE - Config.BROOMMINATTACKRANGE + 1) ) + Config.BROOMMINATTACKRANGE);
         setDamage(Config.BROOMDAMAGEPERATTACK);
-        width = 70;
-        height = 35;
+        width = 90;
+        height = 45;
         spawnOnMap();
         this.z = this.getZ() + 800;
     }

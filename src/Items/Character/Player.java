@@ -21,8 +21,8 @@ public class Player extends BaseCharacter{
         setBroom(null);
         setMoney(0);
         setWalk(false);
-        setWidth(70);
-        setHeight(100);
+        setWidth(90);
+        setHeight(128.6);
         this.z = 999;
     }
 
