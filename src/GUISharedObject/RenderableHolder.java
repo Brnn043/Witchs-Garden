@@ -2,6 +2,7 @@ package GUISharedObject;
 
 import Items.Character.Player;
 import Items.Character.Slime;
+import Items.Inventory.Broom;
 import Items.Veggies.BaseVeggies;
 import javafx.scene.image.Image;
 
@@ -15,7 +16,15 @@ public class RenderableHolder {
 
     private List<IRenderable> entities;
     private Comparator<IRenderable> comparator;
-    public static Image playerSprite;
+    public static Image witchSprite;
+    public static Image witchWalkSprite;
+    public static Image witchBroomSprite;
+    public static Image witchWalkBroomSprite;
+    public static Image witchAttackSprite;
+    public static Image broomSprite;
+    public static Image normalSlimeSprite;
+    public static Image teleportSlimeSprite;
+    public static Image speedSprite;
 //    public static AudioClip explosionSound;
     public static Image sunnyBackground;
 
@@ -38,19 +47,26 @@ public class RenderableHolder {
 
     // use static !!
     public static void loadResource() {
-        playerSprite = new Image(ClassLoader.getSystemResource("Broom.png").toString());
+        witchSprite = new Image(ClassLoader.getSystemResource("Witch/witch.png").toString());
+        witchWalkSprite = new Image(ClassLoader.getSystemResource("Witch/witch_walk.GIF").toString());
+        witchBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_broom.png").toString());
+        witchWalkBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_walk_broom.GIF").toString());
+        witchAttackSprite = new Image(ClassLoader.getSystemResource("Witch/witch_attack.GIF").toString());
+        broomSprite = new Image(ClassLoader.getSystemResource("Broom/AnimatedBroom.gif").toString());
+        normalSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime1.png").toString());
+        teleportSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime2.png").toString());
+        speedSprite = new Image(ClassLoader.getSystemResource("Slime/slime3.png").toString());
 //        explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
     }
 
     public void add(IRenderable entity) {
-        System.out.println("add");
+        if(entity instanceof Player) System.out.println("add player");
+        if(entity instanceof Broom) System.out.println("add broom");
+        if(entity instanceof Slime) System.out.println("add slime");
+        if(entity instanceof BaseVeggies) System.out.println("add veggie");
+
         entities.add(entity);
         Collections.sort(entities, comparator);
-        for(IRenderable x: entities){
-            if(x instanceof Player) System.out.println("player");
-            if(x instanceof Slime) System.out.println("slime");
-            if(x instanceof BaseVeggies) System.out.println("veggie");
-        }
     }
 
     public void update() {
