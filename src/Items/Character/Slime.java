@@ -110,7 +110,7 @@ public abstract class Slime extends BaseCharacter{
             gc.drawImage(RenderableHolder.teleportSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
         }
         if(this instanceof SpeedSlime){
-            gc.drawImage(RenderableHolder.speedSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+            gc.drawImage(RenderableHolder.speedSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
         }
 
         // Calculate the width of the progress bar

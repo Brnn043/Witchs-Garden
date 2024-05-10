@@ -1,6 +1,7 @@
 package Items.Veggies;
 
 import GUISharedObject.Entity;
+import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
 import Items.Character.Player;
@@ -13,6 +14,7 @@ import javafx.scene.shape.ArcType;
 public abstract class BaseVeggies extends Entity implements WeatherEffectable, Collectable {
     private boolean isCollected;
     private float growthPoint;
+    private final float MAXGROWTHPOINT;
     private float growthRate;
     private final float MAXGROWTHRATE;
     private int Hp;
@@ -20,13 +22,9 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
     private float waterDroppingRate;
     private final float MAXWATERDROPPINGRATE;
     private final float MAXWATER;
-    private int price;
     private final int MAXHP;
     private final int width;
     private final int height;
-
-    // haven't implemented veggieHpBar yet
-
 
     public BaseVeggies(int hp,float maxWater,float growthRate,float waterDroppingRate,int price){
         super();
@@ -38,11 +36,12 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
         setGrowthRate(MAXGROWTHRATE);
         MAXWATERDROPPINGRATE = waterDroppingRate;
         setWaterDroppingRate(MAXWATERDROPPINGRATE);
-        setPrice(price);
         spawnOnMap();
+        setGrowthPoint(0);
+        MAXGROWTHPOINT = MAXGROWTHRATE * 20;
         z = getZ() + 600;
-        width = 10 * 2;
-        height = 10 * 2;
+        width = 30;
+        height = 30;
     }
 
     @Override
@@ -61,10 +60,8 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
 
     @Override
     public void collected() {
-        if(this.getHp()>0) return;
-        Player player = GameController.getInstance().getPlayer();
-        player.setMoney(player.getMoney()+this.getPrice());
-        // this will automatically be deleted by GameController
+        if(this.getGrowthPoint()<MAXGROWTHPOINT) return;
+        GameController.getInstance().collectVeggie(this);
     }
 
     @Override
@@ -87,19 +84,30 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
 
     @Override
     public void draw(GraphicsContext gc) {
-        if(this instanceof RedFlower){ gc.setFill(Color.GREEN); }
-        if(this instanceof RainbowDrake){ gc.setFill(Color.LIGHTGREEN); }
-        if(this instanceof Rice){ gc.setFill(Color.DARKGREEN); }
+        if(this instanceof RedFlower){
+            gc.drawImage(RenderableHolder.redFlowerIdleSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+        }
+        if(this instanceof RainbowDrake){
+            gc.drawImage(RenderableHolder.rainbowDrakeIdleSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+        }
+        if(this instanceof Rice){
+            gc.drawImage(RenderableHolder.riceIdleSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+        }
 
-        gc.fillArc(getX() - getWidth(), getY() - getHeight(), getWidth(), getHeight(), 0, 360, ArcType.OPEN);
+        gc.setStroke(Color.GREEN);
+        gc.setLineWidth(2);
+        float growthDegree = ((float) MAXGROWTHPOINT - getGrowthPoint())/MAXGROWTHPOINT * 360;
+        gc.strokeArc(getX() - getWidth(), getY() - getHeight(),
+                getWidth() * 2, getHeight() * 2,
+                0,growthDegree, ArcType.OPEN );
 
         // Calculate the width of the progress bar
         double HPPercentage = (double) getHp() / getMAXHP(); // Get HP percentage
-        double HPBarWidth = 20 * HPPercentage; // Calculate progress bar width
+        double HPBarWidth = 30 * HPPercentage; // Calculate progress bar width
 
         // Draw the progress bar
-        double HPBarX = getX() - 20; // Start of progress bar
-        double HPBarY = getY() + 12; // Position below the circle
+        double HPBarX = getX() - 17; // Start of progress bar
+        double HPBarY = getY() + 10; // Position below the circle
 
         gc.setFill(Color.GRAY);
         gc.fillRect(HPBarX, HPBarY, 20, 5);
@@ -109,11 +117,11 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
 
         // Calculate the width of the water bar
         double waterPercentage = (double) getWaterPoint() / getMAXWATER(); // Get HP percentage
-        double waterBarWidth = 20 * waterPercentage; // Calculate progress bar width
+        double waterBarWidth = 30 * waterPercentage; // Calculate progress bar width
 
         // Draw the progress bar
-        double waterBarX = getX() - 20; // Start of progress bar
-        double waterBarY = getY() + 20; // Position below the circle
+        double waterBarX = getX() - 17; // Start of progress bar
+        double waterBarY = getY() + 18; // Position below the circle
 
         gc.setFill(Color.GRAY);
         gc.fillRect(waterBarX, waterBarY, 20, 5);
@@ -127,7 +135,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
 
     public float getGrowthRate() { return growthRate; }
 
-    public void setGrowthRate(float growthRate) { this.growthRate = growthRate; }
+    public void setGrowthRate(float growthRate) { this.growthRate = Math.min(growthRate, MAXGROWTHRATE); }
 
     public void setCollected(boolean collected) { isCollected = collected; }
 
@@ -141,15 +149,11 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
 
     public float getGrowthPoint() { return growthPoint; }
 
-    public void setGrowthPoint(float growthPoint) { this.growthPoint = growthPoint; }
+    public void setGrowthPoint(float growthPoint) { this.growthPoint = Math.min(growthPoint, MAXGROWTHPOINT); }
 
     public float getWaterDroppingRate() { return waterDroppingRate; }
 
     public void setWaterDroppingRate(float waterDroppingRate) { this.waterDroppingRate = waterDroppingRate; }
-
-    public int getPrice() { return price; }
-
-    public void setPrice(int price) { this.price = price; }
 
     public int getMAXHP() {
         return MAXHP;

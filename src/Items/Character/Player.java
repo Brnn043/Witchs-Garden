@@ -5,21 +5,22 @@ import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
 import Items.Inventory.Broom;
+import Items.Veggies.BaseVeggies;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 
+import java.util.ArrayList;
+
 public class Player extends BaseCharacter{
     private Broom broom;
-    private int money;
     private boolean isWalk;
     private boolean isAttack;
 
     public Player(int positionX, int positionY, int maxSpeedRate, int attackRange, int damage) {
         super(positionX, positionY, maxSpeedRate, attackRange, damage);
         setBroom(null);
-        setMoney(0);
         setWalk(false);
         setWidth(90);
         setHeight(128.6);
@@ -44,27 +45,54 @@ public class Player extends BaseCharacter{
 
 
         for(Slime slime : GameController.getInstance().getSlimeList()) {
-            double disX = GameController.getInstance().getPlayer().getX() - slime.getX();
-            double disY = GameController.getInstance().getPlayer().getY() - slime.getY();
+            try{
+                double disX = this.getX() - slime.getX();
+                double disY = this.getY() - slime.getY();
+                double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
+                if( distance <= broom.getAttackRange() ) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                slime.setHp( slime.getHp() - broom.getDamage() );
+                                broom.setDurability(broom.getDurability() - Config.BROOMDURABILITYPERATTACK);
+                                setAttackCooldown(Config.PLAYERCOOLDOWNTIME);
+                                setAttack(true);
+                                Thread.sleep(300);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            setAttack(false);
+                        }
+                    }).start();
+                }
+            } catch (Exception e){
+                System.out.println(e);
+            }
+
+        }
+    }
+
+    public void collectVeggie() {
+        // player collect veggie
+        if (! InputUtility.getKeyPressed(KeyCode.E)) {
+            return;
+        }
+
+        if(GameController.getInstance().getVeggiesList().isEmpty()){
+            return;
+        }
+        for(BaseVeggies veggie : GameController.getInstance().getVeggiesList()) {
+            double disX = this.getX() - veggie.getX();
+            double disY = this.getY() - veggie.getY();
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
-            if( distance <= broom.getAttackRange() ) {
+            if( distance <= 70 ) {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        try {
-                            slime.setHp( slime.getHp() - broom.getDamage() );
-                            broom.setDurability(broom.getDurability() - Config.BROOMDURABILITYPERATTACK);
-                            setAttackCooldown(Config.PLAYERCOOLDOWNTIME);
-                            setAttack(true);
-                            Thread.sleep(300);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        setAttack(false);
+                        veggie.collected();
                     }
                 }).start();
-
-
             }
         }
     }
@@ -73,6 +101,7 @@ public class Player extends BaseCharacter{
         weatherEffected();
         walk();
         attack();
+        collectVeggie();
     }
     @Override
     public void walk() {
@@ -142,14 +171,6 @@ public class Player extends BaseCharacter{
 
     public void setBroom(Broom broom) {
         this.broom = broom;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = Math.max(0,money);
     }
 
     public boolean isWalk() {

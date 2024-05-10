@@ -24,7 +24,13 @@ public class RenderableHolder {
     public static Image broomSprite;
     public static Image normalSlimeSprite;
     public static Image teleportSlimeSprite;
-    public static Image speedSprite;
+    public static Image speedSlimeSprite;
+    public static Image rainbowDrakeIdleSprite;
+    public static Image rainbowDrakeDieSprite;
+    public static Image redFlowerIdleSprite;
+    public static Image redFlowerDieSprite;
+    public static Image riceIdleSprite;
+    public static Image riceDieSprite;
 //    public static AudioClip explosionSound;
     public static Image sunnyBackground;
 
@@ -56,7 +62,13 @@ public class RenderableHolder {
         broomSprite = new Image(ClassLoader.getSystemResource("Broom/AnimatedBroom.gif").toString());
         normalSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime1.png").toString());
         teleportSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime2.png").toString());
-        speedSprite = new Image(ClassLoader.getSystemResource("Slime/slime3.png").toString());
+        speedSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime3.png").toString());
+        rainbowDrakeIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/RainbowDrake_Idle.gif").toString());
+        rainbowDrakeDieSprite = new Image(ClassLoader.getSystemResource("Veggie/RainbowDrake_Dying.gif").toString());
+        redFlowerIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/RedFlower_Idle.gif").toString());
+        redFlowerDieSprite = new Image(ClassLoader.getSystemResource("Veggie/RedFlower_Dying.gif").toString());
+        riceIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/RainbowDrake_Idle.gif").toString());
+        riceDieSprite = new Image(ClassLoader.getSystemResource("Veggie/RainbowDrake_Dying.gif").toString());
 //        explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
     }
 

@@ -24,9 +24,9 @@
 
 # Update 8/5/24
 [บีม]
-- เขียนดักขอบเกม
-- implement weather
-- ดักการสุ่มเกิดในบ้าน
+- เขียนดักขอบเกม [done]
+- implement weather [done]
+- ดักการสุ่มเกิดในบ้าน [done]
 
 [นีร]
 - ทำจอให้ใหญ่ขึ้น [done]
@@ -44,4 +44,8 @@
 - ใน gamePanel มีฟังก์ชันสำหรับอัพเดทพวกveggieกับgameModeLabel ไปดูได้ๆ
 - ตอนนี้เราวาดveggieเสร็จ2อัน เดี๋ยวอีกอันจะวาดตามมาให้ มีanimationที่น่าจะใช้ได้อยู่ ปล.เปลี่ยนชื่อได้นะ คิดไม่ออก5555
 - เราเก็บจำนวนveggieที่ต้องเก็บในgameController แต่นีรแก้ได้เลยๆ
-  
+
+# Update 10/5/24
+- เค้าโยกพวก Thread ของการเล่นไปใส่ใน gameController หมดเลยนะ
+- ใน gamePanel เค้าแก้ตัว updateRedFlowerCount(int x) -> updateVeggieCount() แล้วดึงค่าที่เก็บใน gameController เลย
+- [bug] : snowy ตัวละคนจะเดินลงล่างตลอด
