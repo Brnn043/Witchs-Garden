@@ -9,7 +9,6 @@ public class House extends CollidableEntity implements WeatherChangeable {
     private String imagePath;
 
     public House(double x,double y,double width,double height) {
-//        super(-5, -50, 250, 200);
         super(x,y,width,height);
         changeWeather(Config.Weather.SUNNY);
     }

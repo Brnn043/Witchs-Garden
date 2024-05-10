@@ -1,6 +1,5 @@
 package GUI;
 
-import GUI.weatherCanvas.BlurCanvas;
 import GUI.weatherCanvas.RainyCanvas;
 import GUI.weatherCanvas.SnowyCanvas;
 import GUI.weatherCanvas.WhiteCanvas;
@@ -9,7 +8,6 @@ import Games.GameController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -188,7 +186,7 @@ public class GamePanel extends HBox {
             gameController.getBackgroundImage().changeWeather(Config.Weather.RAINY);
             gameController.getHouse().changeWeather(Config.Weather.SUNNY);
             gameScreenWithEffect.getChildren().clear();
-            WhiteCanvas whiteCanvas = new WhiteCanvas(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
+            WhiteCanvas whiteCanvas = new WhiteCanvas(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT, gameController.getLevel(), (double) gameController.getGameTimer() /gameController.getMaxGameTimer());
             gameScreenWithEffect.getChildren().addAll(gameController.getRainyBackground(),gameScreen,whiteCanvas,new RainyCanvas());
             whiteCanvas.start();
         }

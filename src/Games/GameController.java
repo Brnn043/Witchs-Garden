@@ -43,7 +43,7 @@ public class GameController {
     private int redFlowerCount;
     private int rainbowDrakeCount;
     private int riceCount;
-
+    private int level = 1;
 
     public GameController() {
         // add background
@@ -209,6 +209,8 @@ public class GameController {
         setRainbowDrakeCount(0);
         setRiceCount(0);
 
+        this.level = level;
+
         startThread();
     }
 
@@ -345,6 +347,8 @@ public class GameController {
         }
         return !house.collideWith(x, y, width, height);
     }
+
+    public int getLevel() { return level; }
 
     public int getMaxGameTimer() { return maxGameTimer; }
 
