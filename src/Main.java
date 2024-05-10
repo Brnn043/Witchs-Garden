@@ -1,7 +1,7 @@
 import GUI.GameEnd;
 import GUI.GamePanel;
 import GUI.GameScreen;
-import GUI.Manu;
+import GUI.Menu;
 import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
@@ -26,8 +26,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Manu manu = new Manu(() -> startGame(primaryStage), primaryStage);
-        Scene scene = new Scene(manu, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        Menu menu = new Menu(() -> startGame(primaryStage), primaryStage);
+        Scene scene = new Scene(menu, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Witch's Garden");
         primaryStage.setResizable(false);
@@ -54,7 +54,7 @@ public class Main extends Application {
         GameController game = GameController.getInstance();
         game.clearStats(level);
         game.initGames();
-        GameScreen gameScreen = new GameScreen(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        GameScreen gameScreen = new GameScreen(Config.GAMESCREENWIDTH, Config.GAMESCREENHEIGHT);
 
         StackPane gameScreenWithEffect = new StackPane();
         gameScreenWithEffect.setAlignment(Pos.CENTER);

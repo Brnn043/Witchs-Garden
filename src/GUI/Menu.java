@@ -10,12 +10,12 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Manu extends GridPane {
+public class Menu extends GridPane {
     @FunctionalInterface
     public interface GameStarter {
         void startGame();
     }
-    public Manu(GameStarter gameStarter, Stage stage) {
+    public Menu(GameStarter gameStarter, Stage stage) {
         Text titleText = new Text("The Witch's Garden");
         titleText.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 20)); // Set font and size
         titleText.setFill(Color.BLACK);
@@ -37,7 +37,7 @@ public class Manu extends GridPane {
         creditMenu.getChildren().addAll(
                 new Text("This project created by"),
                 new Text("Naphat Serirak 6632061321"),
-                new Text("*** Beam's name & student ID ****"),
+                new Text("Raksakul Hiranas 6632190621"),
                 new Text("                   "),
                 new Text("2110215 (2023/2)"),
                 new Text("Programming Methodology I")
@@ -77,18 +77,18 @@ public class Manu extends GridPane {
 
 
 
-        Button craditButton = new Button("Cradit");
-        craditButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
-        craditButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
-        craditButton.setPrefWidth(180);
-        craditButton.setPrefHeight(50);
-        craditButton.setOnMouseEntered(e -> {
-            craditButton.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(5), null)));
+        Button creditButton = new Button("Credit");
+        creditButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
+        creditButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
+        creditButton.setPrefWidth(180);
+        creditButton.setPrefHeight(50);
+        creditButton.setOnMouseEntered(e -> {
+            creditButton.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(5), null)));
         });
-        craditButton.setOnMouseExited(e -> {
-            craditButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
+        creditButton.setOnMouseExited(e -> {
+            creditButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
         });
-        craditButton.setOnAction(e -> {
+        creditButton.setOnAction(e -> {
             creditMenu.setVisible(true);
             howToPlayMenu.setVisible(false);
         });
@@ -114,7 +114,7 @@ public class Manu extends GridPane {
         this.add(titleText, 0, 0);
         this.add(startButton, 0, 1);
         this.add(howToPlayButton, 0, 2);
-        this.add(craditButton, 0, 3);
+        this.add(creditButton, 0, 3);
         this.add(exitButton, 0, 4);
         this.add(creditMenu, 5, 0, 75, 5);
         this.add(howToPlayMenu, 5, 0, 75, 5);

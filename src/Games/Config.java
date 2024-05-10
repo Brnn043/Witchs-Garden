@@ -6,9 +6,10 @@ public class Config {
     }
 
     public static int GAMEFRAMEWIDTH = 1100;
-//    public static int GAMEFRAMEHEIGHT = 650;
-    // adjust size for gameLabel
-    public static int GAMEFRAMEHEIGHT = 535;
+
+    public static int GAMEFRAMEHEIGHT = 650;
+    public static int GAMESCREENWIDTH = 1100;
+    public static int GAMESCREENHEIGHT = 535;
     public static int GAMELABELWIDTH = 1100;
     public static int GAMELABELHEIGHT = 115;
     public static int GAMETIMER = 60;
