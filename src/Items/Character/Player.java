@@ -5,10 +5,13 @@ import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
 import Items.Inventory.Broom;
+import Items.Veggies.BaseVeggies;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
+
+import java.util.ArrayList;
 
 public class Player extends BaseCharacter{
     private Broom broom;
@@ -42,8 +45,8 @@ public class Player extends BaseCharacter{
 
 
         for(Slime slime : GameController.getInstance().getSlimeList()) {
-            double disX = GameController.getInstance().getPlayer().getX() - slime.getX();
-            double disY = GameController.getInstance().getPlayer().getY() - slime.getY();
+            double disX = this.getX() - slime.getX();
+            double disY = this.getY() - slime.getY();
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
             if( distance <= broom.getAttackRange() ) {
                 new Thread(new Runnable() {
@@ -67,10 +70,35 @@ public class Player extends BaseCharacter{
         }
     }
 
+    public void collectVeggie() {
+        // player collect veggie
+        if (! InputUtility.getKeyPressed(KeyCode.E)) {
+            return;
+        }
+
+        if(GameController.getInstance().getVeggiesList().isEmpty()){
+            return;
+        }
+        for(BaseVeggies veggie : GameController.getInstance().getVeggiesList()) {
+            double disX = this.getX() - veggie.getX();
+            double disY = this.getY() - veggie.getY();
+            double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
+            if( distance <= 70 ) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        veggie.collected();
+                    }
+                }).start();
+            }
+        }
+    }
+
     public void action(){
         weatherEffected();
         walk();
         attack();
+        collectVeggie();
     }
     @Override
     public void walk() {

@@ -37,6 +37,9 @@ public class GameController {
     private final int MAXREDFLOWER;
     private final int MAXRAINBOWDRAKE;
     private final int MAXRICE;
+    private int redflowerCount;
+    private int rainbowDrakeCount;
+    private int riceCount;
 
     public GameController() {
         player = new Player(400, 300, 5, 5, 3);
@@ -55,6 +58,9 @@ public class GameController {
         MAXREDFLOWER = 3;
         MAXRAINBOWDRAKE = 2;
         MAXRICE = 5;
+        setRedflowerCount(0);
+        setRainbowDrakeCount(0);
+        setRiceCount(0);
 
         //left side
         trees.add(new Tree(-30, 270, 120, 155, 20, 4));
@@ -195,7 +201,7 @@ public class GameController {
             slime.weatherEffected();
         }
 
-        // veggies :
+        // veggies : check if veggie is dead
         ArrayList<BaseVeggies> veggies = getInstance().getVeggiesList();
         ArrayList<BaseVeggies> delVeggie = new ArrayList<BaseVeggies>();
 
@@ -253,6 +259,20 @@ public class GameController {
         }
         getInstance().getSlimeList().add(slime);
         RenderableHolder.getInstance().add(slime);
+    }
+
+    public void collectVeggie(BaseVeggies veggie){
+        if(veggie instanceof RainbowDrake){
+            setRainbowDrakeCount(getRainbowDrakeCount()+1);
+        }
+        if(veggie instanceof RedFlower){
+            setRedflowerCount(getRedflowerCount()+1);
+        }
+        if(veggie instanceof Rice){
+            setRiceCount(getRiceCount()+1);
+        }
+        RenderableHolder.getInstance().getEntities().remove(veggie);
+        getInstance().getVeggiesList().remove(veggie);
     }
 
     public static GameController getInstance() {
@@ -380,5 +400,29 @@ public class GameController {
 
     public RainyBackground getRainyBackground() {
         return rainyBackground;
+    }
+
+    public int getRedflowerCount() {
+        return redflowerCount;
+    }
+
+    public void setRedflowerCount(int redflowerCount) {
+        this.redflowerCount = Math.min(redflowerCount, MAXREDFLOWER);
+    }
+
+    public int getRainbowDrakeCount() {
+        return rainbowDrakeCount;
+    }
+
+    public void setRainbowDrakeCount(int rainbowDrakeCount) {
+        this.rainbowDrakeCount = Math.min(rainbowDrakeCount, MAXRAINBOWDRAKE);
+    }
+
+    public int getRiceCount() {
+        return riceCount;
+    }
+
+    public void setRiceCount(int riceCount) {
+        this.riceCount = Math.min(riceCount, MAXRICE);
     }
 }
