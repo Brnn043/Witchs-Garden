@@ -49,5 +49,9 @@
 - เค้าโยกพวก Thread ของการเล่นไปใส่ใน gameController.startThread() หมดเลยนะ
 - ใน gamePanel เค้าแก้ตัว updateRedFlowerCount(int x) -> updateVeggieCount() แล้วดึงค่าที่เก็บใน gameController เลย
 - เค้าย้ายพวก GUI หน้าต่างๆ ไปที่ Manu, GameEnging นะ ตัว main จะได้ไม่เยอะเกิน
-- [bug] : ตัวละคนจะเดินลงค้างไว้ sometime ไม่รู้เกิดจากอะไร
+-  ตัวละคนจะเดินลงค้างไว้ sometime ไม่รู้เกิดจากอะไร
 - [add] : ดักการเดินไปโดนขอบ + ต้นไม้ที่เกิดตรงขอบ
+
+# Update 10/5/24 night
+- นีร : วาดน้องเดินซ้าย-ขวา, howtoplay+cradit, teleportSlime -> hardShew
+- บีม : ปรับบาลานซ์เกมส์, ทำหน้าเนื้อเรื่อง, resize รูปภาพให้ใหญ่ขึ้น

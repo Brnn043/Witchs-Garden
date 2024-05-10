@@ -8,6 +8,7 @@ import GUI.map.Bush;
 import GUI.map.House;
 import GUI.map.Tree;
 import GUISharedObject.IRenderable;
+import GUISharedObject.InputUtility;
 import GUISharedObject.RenderableHolder;
 import Items.Character.*;
 import Items.Inventory.Broom;
@@ -145,7 +146,7 @@ public class GameController {
         if (slimeType == 0) {
             slime = new NormalSlime();
         } else if (slimeType == 1) {
-            slime = new TeleportSlime();
+            slime = new hardHitSlime();
         } else {
             slime = new SpeedSlime();
         }
@@ -178,6 +179,9 @@ public class GameController {
     }
 
     public void clearStats(int level){
+        // clear keyboard input
+        InputUtility.clearKeyPressed();
+
         // delete old entity
         ArrayList<IRenderable> delEntities = new ArrayList<IRenderable>();
         for(IRenderable entity: RenderableHolder.getInstance().getEntities()){

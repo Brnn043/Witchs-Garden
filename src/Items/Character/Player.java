@@ -108,22 +108,23 @@ public class Player extends BaseCharacter{
         // WASD to walk in map
         double posX = getX();
         double posY = getY();
+        setWalk(false);
+
         if (InputUtility.getKeyPressed(KeyCode.W)) {
             posY -= (int)this.getSpeedRate();
             setWalk(true);
-        }else if (InputUtility.getKeyPressed(KeyCode.A)) {
-            posX -= (int)this.getSpeedRate();
-            setWalk(true);
-        } else if (InputUtility.getKeyPressed(KeyCode.S)) {
+        }else if (InputUtility.getKeyPressed(KeyCode.S)) {
             posY += (int)this.getSpeedRate();
             setWalk(true);
-        }else if (InputUtility.getKeyPressed(KeyCode.D)) {
+        }
+        if (InputUtility.getKeyPressed(KeyCode.A)) {
+            posX -= (int)this.getSpeedRate();
+            setWalk(true);
+        } else  if (InputUtility.getKeyPressed(KeyCode.D)) {
             posX += (int)this.getSpeedRate();
             setWalk(true);
-        }else{
-            setWalk(false);
-            return;
         }
+
         if (!GameController.getInstance().isPositionAccesible(posX-getWidth()/4,posY,getWidth()/2,getHeight()/2,true)) return;
         setX(posX);
         setY(posY);

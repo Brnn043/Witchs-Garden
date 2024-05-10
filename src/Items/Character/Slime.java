@@ -106,8 +106,8 @@ public abstract class Slime extends BaseCharacter{
         if(this instanceof NormalSlime){
             gc.drawImage(RenderableHolder.normalSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
         }
-        if(this instanceof TeleportSlime){
-            gc.drawImage(RenderableHolder.teleportSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+        if(this instanceof hardHitSlime){
+            gc.drawImage(RenderableHolder.hardHitSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
         }
         if(this instanceof SpeedSlime){
             gc.drawImage(RenderableHolder.speedSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());

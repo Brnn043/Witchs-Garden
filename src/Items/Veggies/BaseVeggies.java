@@ -90,7 +90,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
             gc.drawImage(RenderableHolder.rainbowDrakeIdleSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
         }
         if(this instanceof Daffodil){
-            gc.drawImage(RenderableHolder.riceIdleSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+            gc.drawImage(RenderableHolder.daffodilIdleSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
         }
 
         gc.setStroke(Color.GREEN);
