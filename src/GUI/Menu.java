@@ -4,8 +4,10 @@ import Games.Config;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -154,7 +156,114 @@ public class Menu extends GridPane {
 
         StackPane creditHowtoPlay = new StackPane(creditMenu,howToPlayMenu);
 
+        // Creating an ImageView for the sunny weather icon
+        ImageView sunnyImage = new ImageView(ClassLoader.getSystemResource("MenuPage/Sunny_Icon.png").toString());
+        Button sunnyButton = new Button();
+        sunnyImage.setFitWidth(55);
+        sunnyImage.setFitHeight(55);
+
+        // Creating a Button to display the sunny weather icon
+        sunnyButton.setGraphic(sunnyImage);
+        sunnyButton.setShape(new Circle(30));
+        sunnyButton.setMinSize(60,60);
+        sunnyButton.setMaxSize(60,60);
+        sunnyButton.setStyle("-fx-background-color: transparent;");
+
+        // Creating an ImageView for the snowy weather icon
+        ImageView snowyImage = new ImageView(ClassLoader.getSystemResource("MenuPage/Snowy_Icon.png").toString());
+        snowyImage.setFitWidth(60);
+        snowyImage.setFitHeight(60);
+
+        // Creating a Button to display the snowy weather icon
+        Button snowyButton = new Button();
+        snowyButton.setGraphic(snowyImage);
+        snowyButton.setShape(new Circle(30));
+        snowyButton.setMinSize(60, 60);
+        snowyButton.setMaxSize(60, 60);
+        snowyButton.setStyle("-fx-background-color: transparent;");
+
+        // Creating an ImageView for the rainy weather icon
+        ImageView rainyImage = new ImageView(ClassLoader.getSystemResource("MenuPage/Rainy_Icon.png").toString());
+        rainyImage.setFitWidth(60);
+        rainyImage.setFitHeight(60);
+
+        // Creating a Button to display the rainy weather icon
+        Button rainyButton = new Button();
+        rainyButton.setGraphic(rainyImage);
+        rainyButton.setShape(new Circle(30));
+        rainyButton.setMinSize(60, 60);
+        rainyButton.setMaxSize(60, 60);
+        rainyButton.setStyle("-fx-background-color: transparent;");
+
+        sunnyButton.setOnAction(event -> handleSunnyButton());
+        snowyButton.setOnAction(event -> handleSnowyButton());
+        rainyButton.setOnAction(event -> handleRainyButton());
+
+        HBox weatherButton = new HBox(sunnyButton,snowyButton,rainyButton);
+        weatherButton.setSpacing(5);
+
         this.add(titleAndMenu,35,13);
         this.add(creditHowtoPlay,1,25,15,7);
+        this.add(weatherButton,44,30);
+    }
+
+    private void handleSunnyButton() {
+        Image image = new Image(ClassLoader.getSystemResource("MenuPage/Sunny_MenuPage.gif").toString());
+        BackgroundImage backgroundImage = new BackgroundImage(
+                image,
+                BackgroundRepeat.NO_REPEAT,   // Repeat settings
+                BackgroundRepeat.NO_REPEAT,
+                javafx.scene.layout.BackgroundPosition.DEFAULT,
+                new BackgroundSize(
+                        BackgroundSize.AUTO,  // Width
+                        BackgroundSize.AUTO,  // Height
+                        false,               // Preserve ratio
+                        false,               // Smooth
+                        true,                // Resize to fit
+                        false                // Repeat vertically
+                )
+        );
+        Background background = new Background(backgroundImage);
+        setBackground(background);
+    }
+
+    private void handleSnowyButton() {
+        Image image = new Image(ClassLoader.getSystemResource("MenuPage/Snowy_MenuPage.gif").toString());
+        BackgroundImage backgroundImage = new BackgroundImage(
+                image,
+                BackgroundRepeat.NO_REPEAT,   // Repeat settings
+                BackgroundRepeat.NO_REPEAT,
+                javafx.scene.layout.BackgroundPosition.DEFAULT,
+                new BackgroundSize(
+                        BackgroundSize.AUTO,  // Width
+                        BackgroundSize.AUTO,  // Height
+                        false,               // Preserve ratio
+                        false,               // Smooth
+                        true,                // Resize to fit
+                        false                // Repeat vertically
+                )
+        );
+        Background background = new Background(backgroundImage);
+        setBackground(background);
+    }
+
+    private void handleRainyButton() {
+        Image image = new Image(ClassLoader.getSystemResource("MenuPage/Rainy_MenuPage.gif").toString());
+        BackgroundImage backgroundImage = new BackgroundImage(
+                image,
+                BackgroundRepeat.NO_REPEAT,   // Repeat settings
+                BackgroundRepeat.NO_REPEAT,
+                javafx.scene.layout.BackgroundPosition.DEFAULT,
+                new BackgroundSize(
+                        BackgroundSize.AUTO,  // Width
+                        BackgroundSize.AUTO,  // Height
+                        false,               // Preserve ratio
+                        false,               // Smooth
+                        true,                // Resize to fit
+                        false                // Repeat vertically
+                )
+        );
+        Background background = new Background(backgroundImage);
+        setBackground(background);
     }
 }
