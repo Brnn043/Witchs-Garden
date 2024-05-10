@@ -106,14 +106,14 @@ public class GameController {
                     }
 
                     // spaw broom every 10 second
-                    if(game.getGameTimer()%10 == 0){
+                    if(game.getGameTimer()%15 == 0){
                         Broom broom = new Broom();
                         game.getBroomOnGround().add(broom);
                         RenderableHolder.getInstance().add(broom);
                     }
 
                     // spaw slime every 7 second
-                    if(game.getGameTimer()%7 == 0){
+                    if(game.getGameTimer()%8 == 0){
                         game.getNewSlime();
                     }
 
@@ -222,6 +222,7 @@ public class GameController {
         getNewVeggie();
         getNewVeggie();
         getNewVeggie();
+        getNewVeggie();
     }
 
     public void getNewVeggie() {
@@ -255,7 +256,6 @@ public class GameController {
 
     public void collectVeggie(BaseVeggies veggie){
         if(veggie instanceof RainbowDrake){
-            System.out.println("rainbowwwwwwwwwwwwwwwwww");
             setRainbowDrakeCount(getRainbowDrakeCount()+1);
         }
         if(veggie instanceof RedFlower){
