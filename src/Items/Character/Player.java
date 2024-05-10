@@ -12,14 +12,12 @@ import javafx.scene.shape.ArcType;
 
 public class Player extends BaseCharacter{
     private Broom broom;
-    private int money;
     private boolean isWalk;
     private boolean isAttack;
 
     public Player(int positionX, int positionY, int maxSpeedRate, int attackRange, int damage) {
         super(positionX, positionY, maxSpeedRate, attackRange, damage);
         setBroom(null);
-        setMoney(0);
         setWalk(false);
         setWidth(90);
         setHeight(128.6);
@@ -142,14 +140,6 @@ public class Player extends BaseCharacter{
 
     public void setBroom(Broom broom) {
         this.broom = broom;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = Math.max(0,money);
     }
 
     public boolean isWalk() {

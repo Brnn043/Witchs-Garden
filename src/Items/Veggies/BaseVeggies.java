@@ -61,9 +61,9 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
 
     @Override
     public void collected() {
-        if(this.getHp()>0) return;
+        if(this.getGrowthPoint()>0) return;
         Player player = GameController.getInstance().getPlayer();
-        player.setMoney(player.getMoney()+this.getPrice());
+
         // this will automatically be deleted by GameController
     }
 
