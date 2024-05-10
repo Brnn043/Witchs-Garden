@@ -45,6 +45,8 @@ public class Main extends Application {
 
         root.setAlignment(Pos.CENTER);
         GameController game = GameController.getInstance();
+        game.clearStats(level);
+        game.initGames();
         GameScreen gameScreen = new GameScreen(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
 
         StackPane gameScreenWithEffect = new StackPane();
@@ -56,8 +58,6 @@ public class Main extends Application {
         root.getChildren().addAll(gamePanel,gameScreenWithEffect);
         gameScreen.requestFocus();
 
-        game.clearStats(level);
-        game.initGames();
 
         gameStage.setResizable(false);
         gameStage.show();
@@ -89,7 +89,9 @@ public class Main extends Application {
         gameStage.close();
         Stage endingStage = new Stage();
         GameEnd gameEnd = new GameEnd(() -> {
-            level = level + 1;
+            if(GameController.getInstance().getGameTimer()!=0){
+                level = level + 1 ;
+            }
             startGame(endingStage);
         }, endingStage);
         Scene scene =new Scene(gameEnd, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);

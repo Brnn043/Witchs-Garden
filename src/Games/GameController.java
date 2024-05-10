@@ -45,8 +45,7 @@ public class GameController {
 
 
     public GameController() {
-        clearStats(1);
-
+        // add background
         backgroundImage = new BackgroundImage();
         house = new House(-5, -40, 280, 225);
 
@@ -79,100 +78,6 @@ public class GameController {
         sunnyBackground = new SunnyBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
         snowyBackground = new SnowyBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
         rainyBackground = new RainyBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
-
-        GameController game = this;
-        Thread timer = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!game.isGameover()){
-                    Clock clock = game.getClock();
-
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    // spaw broom every 10 second
-                    if(game.getGameTimer()%15 == 0){
-                        Broom broom = new Broom();
-                        game.getBroomOnGround().add(broom);
-                        RenderableHolder.getInstance().add(broom);
-                    }
-
-                    // spaw slime every 7 second
-                    if(game.getGameTimer()%8 == 0){
-                        game.getNewSlime();
-                    }
-
-                    // set clock timer coolDown
-                    clock.setTimer(clock.getTimer()-1);
-
-                    // decrease slime attack coolDown
-                    for(Slime slime: game.getSlimeList()) {
-                        slime.setAttackCooldown(slime.getAttackCooldown() - 1);
-                        slime.attack();
-                    }
-
-                    // decrease veggie water & add growth point
-                    for(BaseVeggies veggie : game.getVeggiesList()) {
-                        if (game.getClock().getWeather() == Config.Weather.RAINY) {
-                            veggie.setWaterPoint(veggie.getMAXWATER());
-                        } else {
-                            veggie.setWaterPoint(veggie.getWaterPoint() - veggie.getWaterDroppingRate());
-                        }
-                        veggie.setGrowthPoint(veggie.getGrowthPoint() + veggie.getGrowthRate());
-                    }
-
-                    // check if witch collect all veggie
-                    if(game.getRainbowDrakeCount() == maxRainbowDrake &&
-                            game.getRedflowerCount() == maxRedFlower &&
-                            game.getRiceCount() == maxRice){
-                        game.setGameover(true);
-                    }
-                    // check if gameTimer == 0
-                    game.setGameTimer(game.getGameTimer()-1);
-                    if(game.getGameTimer() == 0){
-                        game.setGameover(true);
-                    }
-
-                    System.out.println("TIMER : "+ game.getGameTimer());
-                }
-            }
-        });
-
-        // Thread for Player's action
-        Thread playerAction = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!game.isGameover()){
-                    try {
-                        Thread.sleep(20);
-                        game.getPlayer().action();
-                        game.getPlayer().setAttackCooldown(game.getPlayer().getAttackCooldown() - 20);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-        });
-        // Thread for slime walk
-        Thread slimeWalk = new Thread(()->{
-            while (!game.isGameover()) {
-                try {
-                    Thread.sleep(100);
-                    for (Slime slime : game.getSlimeList()) {
-                        slime.walk();
-                    }
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-
-        timer.start();
-        playerAction.start();
-        slimeWalk.start();
     }
 
     public static void play() throws InterruptedException {
@@ -291,8 +196,7 @@ public class GameController {
         slimeList = new ArrayList<Slime>();
         clock = new Clock();
         gameover = false;
-        gameTimer = Config.GAMETIMER * level;
-        gameTimer = 5;
+        gameTimer = Config.GAMETIMER * level /2;
         broomOnGround = new ArrayList<Broom>();
 
         // based on each game
@@ -302,7 +206,108 @@ public class GameController {
         setRedflowerCount(0);
         setRainbowDrakeCount(0);
         setRiceCount(0);
+
+        startThread();
     }
+
+    public void startThread(){
+        GameController game = GameController.getInstance();
+        Thread timer = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!game.isGameover()){
+                    Clock clock = game.getClock();
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    // spaw broom every 10 second
+                    if(game.getGameTimer()%15 == 0){
+                        Broom broom = new Broom();
+                        game.getBroomOnGround().add(broom);
+                        RenderableHolder.getInstance().add(broom);
+                    }
+
+                    // spaw slime every 7 second
+                    if(game.getGameTimer()%8 == 0){
+                        game.getNewSlime();
+                    }
+
+                    // set clock timer coolDown
+                    clock.setTimer(clock.getTimer()-1);
+
+                    // decrease slime attack coolDown
+                    for(Slime slime: game.getSlimeList()) {
+                        slime.setAttackCooldown(slime.getAttackCooldown() - 1);
+                        slime.attack();
+                    }
+
+                    // decrease veggie water & add growth point
+                    for(BaseVeggies veggie : game.getVeggiesList()) {
+                        if (game.getClock().getWeather() == Config.Weather.RAINY) {
+                            veggie.setWaterPoint(veggie.getMAXWATER());
+                        } else {
+                            veggie.setWaterPoint(veggie.getWaterPoint() - veggie.getWaterDroppingRate());
+                        }
+                        veggie.setGrowthPoint(veggie.getGrowthPoint() + veggie.getGrowthRate());
+                    }
+
+                    // check if witch collect all veggie
+                    if(game.getRainbowDrakeCount() == maxRainbowDrake &&
+                            game.getRedflowerCount() == maxRedFlower &&
+                            game.getRiceCount() == maxRice){
+                        game.setGameover(true);
+                    }
+                    // check if gameTimer == 0
+                    game.setGameTimer(game.getGameTimer()-1);
+                    if(game.getGameTimer() == 0){
+                        game.setGameover(true);
+                    }
+
+                    System.out.println("TIMER : "+ game.getGameTimer());
+                }
+            }
+        });
+
+        // Thread for Player's action
+        Thread playerAction = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!game.isGameover()){
+                    try {
+                        Thread.sleep(20);
+                        game.getPlayer().action();
+                        game.getPlayer().setAttackCooldown(game.getPlayer().getAttackCooldown() - 20);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+        // Thread for slime walk
+        Thread slimeWalk = new Thread(()->{
+            while (!game.isGameover()) {
+                try {
+                    Thread.sleep(100);
+                    for (Slime slime : game.getSlimeList()) {
+                        slime.walk();
+                    }
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+
+        // clear stat
+        timer.start();
+        playerAction.start();
+        slimeWalk.start();
+    }
+
     public boolean isPositionAccesible(double x, double y, double width, double height, boolean isPlayer) {
         for (Tree tree : trees) {
             if (tree.collideWith(x, y, width, height)) return false;
