@@ -1,5 +1,6 @@
 package Items.Character;
 
+import GUISharedObject.CollidableEntity;
 import GUISharedObject.Entity;
 import Games.Config;
 import Games.GameController;
@@ -8,21 +9,25 @@ import Items.Interfaces.Walkable;
 import Items.Interfaces.WeatherEffectable;
 import Games.Config.*;
 
-public abstract class BaseCharacter extends Entity implements Walkable, Attackable, WeatherEffectable {
-    private float positionX;
-    private float positionY;
+public abstract class BaseCharacter extends CollidableEntity implements Walkable, Attackable, WeatherEffectable {
     private float speedRate;
-    private final int MAXSPEEDRATE;
+    private final float MAXSPEEDRATE;
     private int attackRange;
     private int damage;
     private int attackCooldown;
 
-    protected BaseCharacter(float positionX, float positionY, int maxspeedrate, int attackRange, int damage) {
-        this.MAXSPEEDRATE = Math.max(2,maxspeedrate);
+    protected BaseCharacter(double positionX, double positionY, int maxSpeedRate, int attackRange, int damage) {
+        super(positionX,positionY,0,0);
+        this.MAXSPEEDRATE = Math.max(2,maxSpeedRate);
         this.attackRange = Math.max(2,attackRange);
         this.damage = Math.max(2,damage);
-        setPositionX(positionX);
-        setPositionY(positionY);
+    }
+
+    protected BaseCharacter(int maxSpeedRate, int attackRange, int damage) {
+        super();
+        this.MAXSPEEDRATE = Math.max(2,maxSpeedRate);
+        this.attackRange = Math.max(2,attackRange);
+        this.damage = Math.max(2,damage);
     }
 
     @Override
@@ -37,6 +42,11 @@ public abstract class BaseCharacter extends Entity implements Walkable, Attackab
         }
     }
 
+    public void setX(double x) { this.x = Math.max(0,Math.min(x, Config.GAMEFRAMEWIDTH)); }
+    public void setY(double y) {
+        this.y = Math.max(0,Math.min(y,Config.GAMEFRAMEHEIGHT));
+    }
+
     public int getAttackCooldown() {
         return attackCooldown;
     }
@@ -46,28 +56,8 @@ public abstract class BaseCharacter extends Entity implements Walkable, Attackab
     }
 
     @Override
-    public float getPositionX() {
-        return positionX;
-    }
-
-    @Override
-    public float getPositionY() {
-        return positionY;
-    }
-
-    @Override
     public float getSpeedRate() {
         return speedRate;
-    }
-
-    @Override
-    public void setPositionX(float positionX) {
-        this.positionX = Math.max(0,Math.min(positionX, Config.GAMEFRAMEWIDTH));
-    }
-
-    @Override
-    public void setPositionY(float positionY) {
-        this.positionY = Math.max(0,Math.min(positionY, Config.GAMEFRAMEHEIGHT));
     }
 
     @Override
@@ -90,9 +80,7 @@ public abstract class BaseCharacter extends Entity implements Walkable, Attackab
     public void walk() {
         return;
     }
-
-
-    public int getMAXSPEEDRATE() {
+    public float getMAXSPEEDRATE() {
         return MAXSPEEDRATE;
     }
 

@@ -23,4 +23,8 @@ public class InputUtility {
         }
     }
 
+    public static void clearKeyPressed(){
+        keyPressed.clear();
+    }
+
 }

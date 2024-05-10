@@ -2,6 +2,7 @@ package GUISharedObject;
 
 import Items.Character.Player;
 import Items.Character.Slime;
+import Items.Inventory.Broom;
 import Items.Veggies.BaseVeggies;
 import javafx.scene.image.Image;
 
@@ -12,10 +13,24 @@ import java.util.List;
 
 public class RenderableHolder {
     private static final RenderableHolder instance = new RenderableHolder();
-
-    private List<IRenderable> entities;
-    private Comparator<IRenderable> comparator;
-    public static Image playerSprite;
+    private final List<IRenderable> backgroundEntities;
+    private final List<IRenderable> entities;
+    private final Comparator<IRenderable> comparator;
+    public static Image witchSprite;
+    public static Image witchWalkSprite;
+    public static Image witchBroomSprite;
+    public static Image witchWalkBroomSprite;
+    public static Image witchAttackSprite;
+    public static Image broomSprite;
+    public static Image normalSlimeSprite;
+    public static Image hardHitSlimeSprite;
+    public static Image speedSlimeSprite;
+    public static Image rainbowDrakeIdleSprite;
+    public static Image rainbowDrakeDieSprite;
+    public static Image redFlowerIdleSprite;
+    public static Image redFlowerDieSprite;
+    public static Image daffodilIdleSprite;
+    public static Image daffodilDieSprite;
 //    public static AudioClip explosionSound;
     public static Image sunnyBackground;
 
@@ -25,6 +40,7 @@ public class RenderableHolder {
 
     public RenderableHolder() {
         entities = new ArrayList<IRenderable>();
+        backgroundEntities = new ArrayList<>();
         comparator = (IRenderable o1, IRenderable o2) -> {
             if (o1.getZ() > o2.getZ())
                 return 1;
@@ -38,19 +54,37 @@ public class RenderableHolder {
 
     // use static !!
     public static void loadResource() {
-        playerSprite = new Image(ClassLoader.getSystemResource("Broom.png").toString());
+        witchSprite = new Image(ClassLoader.getSystemResource("Witch/witch.png").toString());
+        witchWalkSprite = new Image(ClassLoader.getSystemResource("Witch/witch_walk.GIF").toString());
+        witchBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_broom.png").toString());
+        witchWalkBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_walk_broom.GIF").toString());
+        witchAttackSprite = new Image(ClassLoader.getSystemResource("Witch/witch_attack.GIF").toString());
+        broomSprite = new Image(ClassLoader.getSystemResource("Broom/AnimatedBroom.gif").toString());
+        normalSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime1.png").toString());
+        hardHitSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime2.png").toString());
+        speedSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime3.png").toString());
+        rainbowDrakeIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/RainbowDrake_Idle.gif").toString());
+        rainbowDrakeDieSprite = new Image(ClassLoader.getSystemResource("Veggie/RainbowDrake_Dying.gif").toString());
+        redFlowerIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/RedFlower_Idle.gif").toString());
+        redFlowerDieSprite = new Image(ClassLoader.getSystemResource("Veggie/RedFlower_Dying.gif").toString());
+        daffodilIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/Daffodil_Idle.gif").toString());
+        daffodilDieSprite = new Image(ClassLoader.getSystemResource("Veggie/RainbowDrake_Dying.gif").toString());
 //        explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
     }
 
     public void add(IRenderable entity) {
-        System.out.println("add");
+        if(entity instanceof Player) System.out.println("add player");
+        if(entity instanceof Broom) System.out.println("add broom");
+        if(entity instanceof Slime) System.out.println("add slime");
+        if(entity instanceof BaseVeggies) System.out.println("add veggie");
+
         entities.add(entity);
         Collections.sort(entities, comparator);
-        for(IRenderable x: entities){
-            if(x instanceof Player) System.out.println("player");
-            if(x instanceof Slime) System.out.println("slime");
-            if(x instanceof BaseVeggies) System.out.println("veggie");
-        }
+    }
+
+    public void addBackground(IRenderable entity) {
+        backgroundEntities.add(entity);
+        Collections.sort(backgroundEntities, comparator);
     }
 
     public void update() {
@@ -63,4 +97,6 @@ public class RenderableHolder {
     public List<IRenderable> getEntities() {
         return entities;
     }
+
+    public List<IRenderable> getBackgroundEntities() { return backgroundEntities; }
 }

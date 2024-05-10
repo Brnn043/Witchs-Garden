@@ -1,109 +1,71 @@
+import GUI.GameEnd;
+import GUI.GamePanel;
 import GUI.GameScreen;
-import GUISharedObject.InputUtility;
+import GUI.Manu;
 import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
-import Items.Character.Slime;
-import Items.Inventory.Clock;
-import Items.Veggies.BaseVeggies;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.util.concurrent.TimeUnit;
-
 public class Main extends Application {
+    private int level = 1;
     public static void main(String[] args) {
         Application.launch(args);
     }
 
     @Override
-    public void start(Stage stage) {
-        StackPane root = new StackPane();
+    public void start(Stage primaryStage) {
+        Manu manu = new Manu(() -> startGame(primaryStage), primaryStage);
+        Scene scene = new Scene(manu, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Witch's Garden");
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
+
+    private void startGame(Stage primaryStage) {
+        primaryStage.close();
+        Stage gameStage = new Stage();
+        VBox root = new VBox();
         Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Witch's Garden");
+        gameStage.setScene(scene);
+        gameStage.setTitle("Witch's Garden");
 
-        GameController.getInstance();
-
+        root.setAlignment(Pos.CENTER);
+        GameController game = GameController.getInstance();
+        game.clearStats(level);
+        game.initGames();
         GameScreen gameScreen = new GameScreen(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
-        root.getChildren().add(gameScreen);
+
+        StackPane gameScreenWithEffect = new StackPane();
+        gameScreenWithEffect.setAlignment(Pos.CENTER);
+
+        gameScreenWithEffect.getChildren().addAll(game.getSunnyBackground(),gameScreen);
+        GamePanel gamePanel = new GamePanel(game,gameScreen,gameScreenWithEffect);
+
+        root.getChildren().addAll(gamePanel,gameScreenWithEffect);
         gameScreen.requestFocus();
 
-
-        stage.show();
-
-        // Action in every 1 second
-        // ex) decrease GameTimer, Veggie's water, Zombie&Player's Cooldowm, Veggie's growth point
-        Thread timer = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!GameController.getInstance().isGameover()){
-                    Clock clock = GameController.getInstance().getClock();
-
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    // set clock timer coolDown
-                    clock.setTimer(clock.getTimer()-1);
-
-                    // set player coolDown
-                    GameController.getInstance().getPlayer().setAttackCooldown(
-                            GameController.getInstance().getPlayer().getAttackCooldown() - 1);
-
-                    // decrease slime attack coolDown
-                    for(Slime slime: GameController.getInstance().getSlimeList()) {
-                        slime.setAttackCooldown(slime.getAttackCooldown() - 1);
-                    }
-
-                    // decrease veggie water & add growth point
-                    for(BaseVeggies veggie : GameController.getInstance().getVeggiesList()) {
-                        veggie.setWaterPoint(veggie.getWaterPoint() - veggie.getWaterDroppingRate());
-                        veggie.setGrowthPoint(veggie.getGrowthPoint() + veggie.getGrowthRate());
-                    }
-
-                    // check if gameTimer == 0
-                    GameController.getInstance().setGameTimer(GameController.getInstance().getGameTimer()-1);
-                    if(GameController.getInstance().getGameTimer() == 0){
-                        GameController.getInstance().setGameover(true);
-                    }
-
-                    System.out.println("TIMER : "+ GameController.getInstance().getGameTimer());
-                }
-            }
-        });
-        timer.start();
-
-        Thread playerAction = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!GameController.getInstance().isGameover()){
-                    try {
-                        Thread.sleep(20);
-                        GameController.getInstance().getPlayer().action();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-        });
-        playerAction.start();
-
+        gameStage.setResizable(false);
+        gameStage.show();
 
         AnimationTimer animation;
         animation = new AnimationTimer() {
             public void handle(long now) {
-                if(GameController.getInstance().isGameover()){
+                if(game.isGameover()){
                     this.stop();
-
+                    gameEnd(gameStage);
                 }else {
                     try {
                         gameScreen.paintComponent();
+                        gamePanel.updateClockTimer();
+                        gamePanel.updateTimerBar(game.getGameTimer());
+                        gamePanel.updateVeggieCount();
                         GameController.play();
                         RenderableHolder.getInstance().update();
                     } catch (InterruptedException e) {
@@ -113,6 +75,22 @@ public class Main extends Application {
             }
         };
         animation.start();
+    }
+
+    private void gameEnd(Stage gameStage) {
+        gameStage.close();
+        Stage endingStage = new Stage();
+        GameEnd gameEnd = new GameEnd(() -> {
+            if(GameController.getInstance().getGameTimer()!=0){
+                level = level + 1 ;
+            }
+            startGame(endingStage);
+        }, endingStage);
+        Scene scene =new Scene(gameEnd, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        endingStage.setScene(scene);
+        endingStage.setTitle("Witch's Garden");
+        endingStage.setResizable(false);
+        endingStage.show();
     }
 }
 
