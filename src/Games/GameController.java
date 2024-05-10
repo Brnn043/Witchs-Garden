@@ -7,6 +7,8 @@ import GUI.map.BackgroundImage;
 import GUI.map.Bush;
 import GUI.map.House;
 import GUI.map.Tree;
+import GUISharedObject.Entity;
+import GUISharedObject.IRenderable;
 import GUISharedObject.RenderableHolder;
 import Items.Character.*;
 import Items.Inventory.Broom;
@@ -24,7 +26,7 @@ public class GameController {
     private ArrayList<Slime> slimeList;
     private Clock clock;
     private ArrayList<BaseVeggies> veggiesList;
-    private final ArrayList<Broom> broomOnGround;
+    private ArrayList<Broom> broomOnGround;
     private boolean gameover;
     private int gameTimer;
     private BackgroundImage backgroundImage;
@@ -34,34 +36,22 @@ public class GameController {
     private final SunnyBackground sunnyBackground;
     private final SnowyBackground snowyBackground;
     private final RainyBackground rainyBackground;
-    private final int MAXREDFLOWER;
-    private final int MAXRAINBOWDRAKE;
-    private final int MAXRICE;
+    private int maxRedFlower;
+    private int maxRainbowDrake;
+    private int maxRice;
     private int redFlowerCount;
     private int rainbowDrakeCount;
     private int riceCount;
 
+
     public GameController() {
-        player = new Player(400, 300, 5, 5, 3);
-        veggiesList = new ArrayList<BaseVeggies>();
-        slimeList = new ArrayList<Slime>();
-        clock = new Clock();
-        gameover = false;
-        gameTimer = Config.GAMETIMER;
+        clearStats(1);
+
         backgroundImage = new BackgroundImage();
         house = new House(-5, -40, 280, 225);
-        broomOnGround = new ArrayList<Broom>();
+
         trees = new ArrayList<>();
         bushes = new ArrayList<>();
-
-        // based on each game
-        MAXREDFLOWER = 2;
-        MAXRAINBOWDRAKE = 2;
-        MAXRICE = 2;
-        setRedflowerCount(0);
-        setRainbowDrakeCount(0);
-        setRiceCount(0);
-
         //left side
         trees.add(new Tree(-30, 270, 120, 155, 20, 4));
         trees.add(new Tree(-40, 420, 110, 160, 22, 2));
@@ -81,7 +71,6 @@ public class GameController {
         bushes.add(new Bush(1010, 495, 100, 60, 36, 3));
 
         // add player in GUI
-        RenderableHolder.getInstance().add(player);
         RenderableHolder.getInstance().addBackground(backgroundImage);
         RenderableHolder.getInstance().addBackground(house);
         for (Tree tree : trees) RenderableHolder.getInstance().addBackground(tree);
@@ -91,7 +80,6 @@ public class GameController {
         snowyBackground = new SnowyBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
         rainyBackground = new RainyBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
 
-        // Thread for Action in every 1 second
         GameController game = this;
         Thread timer = new Thread(new Runnable() {
             @Override
@@ -137,9 +125,9 @@ public class GameController {
                     }
 
                     // check if witch collect all veggie
-                    if(game.getRainbowDrakeCount() == MAXRAINBOWDRAKE &&
-                        game.getRedflowerCount() == MAXREDFLOWER &&
-                        game.getRiceCount() == MAXRICE){
+                    if(game.getRainbowDrakeCount() == maxRainbowDrake &&
+                            game.getRedflowerCount() == maxRedFlower &&
+                            game.getRiceCount() == maxRice){
                         game.setGameover(true);
                     }
                     // check if gameTimer == 0
@@ -152,7 +140,6 @@ public class GameController {
                 }
             }
         });
-        timer.start();
 
         // Thread for Player's action
         Thread playerAction = new Thread(new Runnable() {
@@ -169,8 +156,6 @@ public class GameController {
                 }
             }
         });
-        playerAction.start();
-
         // Thread for slime walk
         Thread slimeWalk = new Thread(()->{
             while (!game.isGameover()) {
@@ -184,6 +169,9 @@ public class GameController {
                 }
             }
         });
+
+        timer.start();
+        playerAction.start();
         slimeWalk.start();
     }
 
@@ -284,6 +272,37 @@ public class GameController {
         return instance;
     }
 
+    public void clearStats(int level){
+        // delete old entity
+        ArrayList<IRenderable> delEntities = new ArrayList<IRenderable>();
+        for(IRenderable entity: RenderableHolder.getInstance().getEntities()){
+            if(entity instanceof BaseVeggies || entity instanceof Slime || entity instanceof Broom || entity instanceof Player){
+                delEntities.add(entity);
+            }
+        }
+        for(IRenderable delEntity: delEntities){
+            RenderableHolder.getInstance().getEntities().remove(delEntity);
+        }
+
+        // set stat
+        this.player = new Player(400, 300, 5, 5, 3);
+        RenderableHolder.getInstance().add(player);
+        veggiesList = new ArrayList<BaseVeggies>();
+        slimeList = new ArrayList<Slime>();
+        clock = new Clock();
+        gameover = false;
+        gameTimer = Config.GAMETIMER * level;
+        gameTimer = 5;
+        broomOnGround = new ArrayList<Broom>();
+
+        // based on each game
+        maxRedFlower = 2 * level;
+        maxRainbowDrake = 2 * level;
+        maxRice = 2 * level;
+        setRedflowerCount(0);
+        setRainbowDrakeCount(0);
+        setRiceCount(0);
+    }
     public boolean isPositionAccesible(double x, double y, double width, double height, boolean isPlayer) {
         for (Tree tree : trees) {
             if (tree.collideWith(x, y, width, height)) return false;
@@ -320,11 +339,11 @@ public class GameController {
         return !house.collideWith(x, y, width, height);
     }
 
-    public int getMAXREDFLOWER() { return MAXREDFLOWER; }
+    public int getmaxRedFlower() { return maxRedFlower; }
 
-    public int getMAXRAINBOWDRAKE() { return MAXRAINBOWDRAKE; }
+    public int getmaxRainbowDrake() { return maxRainbowDrake; }
 
-    public int getMAXRICE() { return MAXRICE; }
+    public int getmaxRice() { return maxRice; }
 
     public ArrayList<Slime> getSlimeList() {
         return slimeList;
@@ -411,7 +430,7 @@ public class GameController {
     }
 
     public void setRedflowerCount(int redFlowerCount) {
-        this.redFlowerCount = Math.min(redFlowerCount, MAXREDFLOWER);
+        this.redFlowerCount = Math.min(redFlowerCount, maxRedFlower);
     }
 
     public int getRainbowDrakeCount() {
@@ -419,7 +438,7 @@ public class GameController {
     }
 
     public void setRainbowDrakeCount(int rainbowDrakeCount) {
-        this.rainbowDrakeCount = Math.min(rainbowDrakeCount, MAXRAINBOWDRAKE);
+        this.rainbowDrakeCount = Math.min(rainbowDrakeCount, maxRainbowDrake);
     }
 
     public int getRiceCount() {
@@ -427,6 +446,6 @@ public class GameController {
     }
 
     public void setRiceCount(int riceCount) {
-        this.riceCount = Math.min(riceCount, MAXRICE);
+        this.riceCount = Math.min(riceCount, maxRice);
     }
 }

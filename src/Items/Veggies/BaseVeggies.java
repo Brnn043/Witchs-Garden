@@ -26,7 +26,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
     private final int width;
     private final int height;
 
-    public BaseVeggies(int hp,float maxWater,float growthRate,float waterDroppingRate,int price){
+    public BaseVeggies(int hp,float maxWater,float growthRate,float waterDroppingRate,int price, int maxGrowthPoint){
         super();
         MAXHP = hp;
         setHp(MAXHP);
@@ -38,7 +38,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
         setWaterDroppingRate(MAXWATERDROPPINGRATE);
         spawnOnMap();
         setGrowthPoint(0);
-        MAXGROWTHPOINT = MAXGROWTHRATE * 20;
+        MAXGROWTHPOINT = maxGrowthPoint;
         z = getZ() + 600;
         width = 30;
         height = 30;

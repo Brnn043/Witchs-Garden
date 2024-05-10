@@ -6,6 +6,6 @@ import javafx.scene.shape.ArcType;
 
 public class Rice extends BaseVeggies{
     public Rice() {
-        super(25, 200, 3, 8, 20);
+        super(25, 200, 3, 8, 20, 33);
     }
 }

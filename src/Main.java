@@ -20,6 +20,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    private int level = 1;
     public static void main(String[] args) {
         Application.launch(args);
     }
@@ -54,6 +55,8 @@ public class Main extends Application {
 
         root.getChildren().addAll(gamePanel,gameScreenWithEffect);
         gameScreen.requestFocus();
+
+        game.clearStats(level);
         game.initGames();
 
         gameStage.setResizable(false);
@@ -85,7 +88,10 @@ public class Main extends Application {
     private void gameEnd(Stage gameStage) {
         gameStage.close();
         Stage endingStage = new Stage();
-        GameEnd gameEnd = new GameEnd(() -> startGame(endingStage), endingStage);
+        GameEnd gameEnd = new GameEnd(() -> {
+            level = level + 1;
+            startGame(endingStage);
+        }, endingStage);
         Scene scene =new Scene(gameEnd, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         endingStage.setScene(scene);
         endingStage.setTitle("Witch's Garden");
