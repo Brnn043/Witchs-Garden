@@ -91,7 +91,6 @@ public class Main extends Application {
         endingStage.setTitle("Witch's Garden");
         endingStage.setResizable(false);
         endingStage.show();
-
     }
 }
 

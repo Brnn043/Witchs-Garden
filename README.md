@@ -49,3 +49,4 @@
 - เค้าโยกพวก Thread ของการเล่นไปใส่ใน gameController หมดเลยนะ
 - ใน gamePanel เค้าแก้ตัว updateRedFlowerCount(int x) -> updateVeggieCount() แล้วดึงค่าที่เก็บใน gameController เลย
 - [bug] : snowy ตัวละคนจะเดินลงล่างตลอด
+- [bug] : can't start new game
