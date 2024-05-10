@@ -1,5 +1,7 @@
+import GUI.GameEnd;
 import GUI.GamePanel;
 import GUI.GameScreen;
+import GUI.Manu;
 import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
@@ -18,48 +20,33 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    private int level = 1;
     public static void main(String[] args) {
         Application.launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
-        Button startButton = new Button("Start Game");
-        startButton.setFont(Font.font("Consolas", 18));
-        startButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
-        startButton.setPrefWidth(180);
-        startButton.setPrefHeight(50);
-        startButton.setOnMouseEntered(e -> {
-            startButton.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(5), null)));
-        });
-        startButton.setOnMouseExited(e -> {
-            startButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
-        });
-        startButton.setOnAction(e -> startGame(primaryStage));
-
-        // Create layout and add the start button
-        VBox root = new VBox(20);
-        root.setAlignment(Pos.CENTER);
-        root.getChildren().add(startButton);
-
-        // Set scene and show the main window
-        Scene scene = new Scene(root, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        Manu manu = new Manu(() -> startGame(primaryStage), primaryStage);
+        Scene scene = new Scene(manu, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Main Menu");
+        primaryStage.setTitle("Witch's Garden");
         primaryStage.setResizable(false);
         primaryStage.show();
     }
 
     private void startGame(Stage primaryStage) {
         primaryStage.close();
-        Stage stage = new Stage();
+        Stage gameStage = new Stage();
         VBox root = new VBox();
         Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Witch's Garden");
+        gameStage.setScene(scene);
+        gameStage.setTitle("Witch's Garden");
 
         root.setAlignment(Pos.CENTER);
         GameController game = GameController.getInstance();
+        game.clearStats(level);
+        game.initGames();
         GameScreen gameScreen = new GameScreen(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
 
         StackPane gameScreenWithEffect = new StackPane();
@@ -70,31 +57,48 @@ public class Main extends Application {
 
         root.getChildren().addAll(gamePanel,gameScreenWithEffect);
         gameScreen.requestFocus();
-        game.initGames();
 
-        stage.setResizable(false);
-        stage.show();
+
+        gameStage.setResizable(false);
+        gameStage.show();
 
         AnimationTimer animation;
-            animation = new AnimationTimer() {
-                public void handle(long now) {
-                    if(game.isGameover()){
-                        this.stop();
-                    }else {
-                        try {
-                            gameScreen.paintComponent();
-                            gamePanel.updateClockTimer();
-                            gamePanel.updateTimerBar(game.getGameTimer());
-                            gamePanel.updateVeggieCount();
-                            GameController.play();
-                            RenderableHolder.getInstance().update();
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
+        animation = new AnimationTimer() {
+            public void handle(long now) {
+                if(game.isGameover()){
+                    this.stop();
+                    gameEnd(gameStage);
+                }else {
+                    try {
+                        gameScreen.paintComponent();
+                        gamePanel.updateClockTimer();
+                        gamePanel.updateTimerBar(game.getGameTimer());
+                        gamePanel.updateVeggieCount();
+                        GameController.play();
+                        RenderableHolder.getInstance().update();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
                     }
                 }
-            };
-            animation.start();
+            }
+        };
+        animation.start();
+    }
+
+    private void gameEnd(Stage gameStage) {
+        gameStage.close();
+        Stage endingStage = new Stage();
+        GameEnd gameEnd = new GameEnd(() -> {
+            if(GameController.getInstance().getGameTimer()!=0){
+                level = level + 1 ;
+            }
+            startGame(endingStage);
+        }, endingStage);
+        Scene scene =new Scene(gameEnd, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        endingStage.setScene(scene);
+        endingStage.setTitle("Witch's Garden");
+        endingStage.setResizable(false);
+        endingStage.show();
     }
 }
 

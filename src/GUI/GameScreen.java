@@ -2,6 +2,7 @@ package GUI;
 
 import GUISharedObject.IRenderable;
 import GUISharedObject.InputUtility;
+import Items.Character.Player;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
