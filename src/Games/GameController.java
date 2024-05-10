@@ -29,6 +29,7 @@ public class GameController {
     private ArrayList<Broom> broomOnGround;
     private boolean gameover;
     private int gameTimer;
+    private int maxGameTimer;
     private BackgroundImage backgroundImage;
     private House house;
     private final ArrayList<Tree> trees;
@@ -158,7 +159,7 @@ public class GameController {
             setRainbowDrakeCount(getRainbowDrakeCount()+1);
         }
         if(veggie instanceof RedFlower){
-            setRedflowerCount(getRedflowerCount()+1);
+            setRedFlowerCount(getRedFlowerCount()+1);
         }
         if(veggie instanceof Rice){
             setRiceCount(getRiceCount()+1);
@@ -196,14 +197,15 @@ public class GameController {
         slimeList = new ArrayList<Slime>();
         clock = new Clock();
         gameover = false;
-        gameTimer = Config.GAMETIMER * level /2;
+        maxGameTimer = Config.GAMETIMER * level /2;
+        gameTimer = maxGameTimer;
         broomOnGround = new ArrayList<Broom>();
 
         // based on each game
         maxRedFlower = 2 * level;
         maxRainbowDrake = 2 * level;
         maxRice = 2 * level;
-        setRedflowerCount(0);
+        setRedFlowerCount(0);
         setRainbowDrakeCount(0);
         setRiceCount(0);
 
@@ -257,7 +259,7 @@ public class GameController {
 
                     // check if witch collect all veggie
                     if(game.getRainbowDrakeCount() == maxRainbowDrake &&
-                            game.getRedflowerCount() == maxRedFlower &&
+                            game.getRedFlowerCount() == maxRedFlower &&
                             game.getRiceCount() == maxRice){
                         game.setGameover(true);
                     }
@@ -343,6 +345,8 @@ public class GameController {
         }
         return !house.collideWith(x, y, width, height);
     }
+
+    public int getMaxGameTimer() { return maxGameTimer; }
 
     public int getmaxRedFlower() { return maxRedFlower; }
 
@@ -430,11 +434,11 @@ public class GameController {
         return rainyBackground;
     }
 
-    public int getRedflowerCount() {
+    public int getRedFlowerCount() {
         return redFlowerCount;
     }
 
-    public void setRedflowerCount(int redFlowerCount) {
+    public void setRedFlowerCount(int redFlowerCount) {
         this.redFlowerCount = Math.min(redFlowerCount, maxRedFlower);
     }
 

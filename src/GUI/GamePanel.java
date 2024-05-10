@@ -41,7 +41,6 @@ public class GamePanel extends HBox {
         timerBar = new ProgressBar();
         timerBar.setPrefWidth(300);
         timerBar.setStyle("-fx-accent: violet;");
-        timerBar.setProgress(1);
 
         gameModeLabel = new Text("Make the potion no.2");
 
@@ -147,7 +146,7 @@ public class GamePanel extends HBox {
     }
 
     public void updateTimerBar(double time) {
-        timerBar.setProgress(time/Config.GAMETIMER);
+        timerBar.setProgress(time/gameController.getMaxGameTimer());
     }
 
     public void updateClockTimer() {
@@ -157,7 +156,7 @@ public class GamePanel extends HBox {
     }
 
     public void updateVeggieCount() {
-        redFlowerCount.setText(GameController.getInstance().getRedflowerCount()+"/"+gameController.getmaxRedFlower());
+        redFlowerCount.setText(GameController.getInstance().getRedFlowerCount()+"/"+gameController.getmaxRedFlower());
         rainbowDrakeCount.setText(GameController.getInstance().getRainbowDrakeCount()+"/"+gameController.getmaxRainbowDrake());
         riceCount.setText(GameController.getInstance().getRiceCount()+"/"+gameController.getmaxRice());
     }
