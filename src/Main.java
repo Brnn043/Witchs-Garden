@@ -9,6 +9,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -95,9 +96,41 @@ public class Main extends Application {
             if(GameController.getInstance().getGameTimer()!=0){
                 level = level + 1 ;
             }
-            startGame(primaryStage);
+            if(level == 2){
+                ConpleteGame(primaryStage);
+            }else{
+                startGame(primaryStage);
+            }
         }, primaryStage);
         Scene scene =new Scene(gameEnd, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        primaryStage.setScene(scene);
+    }
+
+    private void ConpleteGame(Stage primaryStage) {
+        VBox completeGame = new VBox();
+        completeGame.setAlignment(Pos.CENTER);
+        Text completeText = new Text("Well Done! The Witch regain all her power. You had clear this game!!!");
+        completeText.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 14));
+        completeGame.setBackground(new Background(new BackgroundFill(Color.web("#8F6F5C"), null, null)));
+
+        Button exitButton = new Button("Exit");
+        exitButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
+        exitButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
+        exitButton.setPrefWidth(180);
+        exitButton.setPrefHeight(50);
+        exitButton.setOnMouseEntered(e -> {
+            exitButton.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(5), null)));
+        });
+        exitButton.setOnMouseExited(e -> {
+            exitButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
+        });
+        exitButton.setOnAction(e -> primaryStage.close());
+
+        Scene scene =new Scene(completeGame, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        completeGame.setSpacing(20);
+        completeGame.getChildren().add(completeText);
+        completeGame.getChildren().add(exitButton);
+
         primaryStage.setScene(scene);
     }
 }

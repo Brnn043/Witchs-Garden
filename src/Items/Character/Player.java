@@ -34,7 +34,7 @@ public class Player extends BaseCharacter{
             return;
         }
 
-        if (! InputUtility.getKeyPressed(KeyCode.Q)) {
+        if (! InputUtility.getKeyPressed(KeyCode.SPACE)) {
             return;
         }
 
