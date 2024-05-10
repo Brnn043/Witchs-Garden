@@ -66,7 +66,6 @@ public class Main extends Application {
         gameScreenWithEffect.setAlignment(Pos.CENTER);
 
         gameScreenWithEffect.getChildren().addAll(game.getSunnyBackground(),gameScreen);
-
         GamePanel gamePanel = new GamePanel(game,gameScreen,gameScreenWithEffect);
 
         root.getChildren().addAll(gamePanel,gameScreenWithEffect);
@@ -76,114 +75,25 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.show();
 
-        // Action in every 1 second
-        // ex) decrease GameTimer, Veggie's water, Zombie&Player's Cooldowm, Veggie's growth point
-        Thread timer = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!game.isGameover()){
-                    Clock clock = game.getClock();
-
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    // spaw broom every 10 second
-                    if(game.getGameTimer()%10 == 0){
-                        Broom broom = new Broom();
-                        game.getBroomOnGround().add(broom);
-                        RenderableHolder.getInstance().add(broom);
-                    }
-
-                    // spaw slime every 7 second
-                    if(game.getGameTimer()%7 == 0){
-                        game.getNewSlime();
-                    }
-
-                    // set clock timer coolDown
-                    clock.setTimer(clock.getTimer()-1);
-                    gamePanel.updateClockTimer();
-
-
-                    // decrease slime attack coolDown
-                    for(Slime slime: game.getSlimeList()) {
-                        slime.setAttackCooldown(slime.getAttackCooldown() - 1);
-                        slime.attack();
-                    }
-
-                    // decrease veggie water & add growth point
-                    for(BaseVeggies veggie : game.getVeggiesList()) {
-                        if (game.getClock().getWeather() == Config.Weather.RAINY) {
-                            veggie.setWaterPoint(veggie.getMAXWATER());
-                        } else {
-                            veggie.setWaterPoint(veggie.getWaterPoint() - veggie.getWaterDroppingRate());
+        AnimationTimer animation;
+            animation = new AnimationTimer() {
+                public void handle(long now) {
+                    if(game.isGameover()){
+                        this.stop();
+                    }else {
+                        try {
+                            gameScreen.paintComponent();
+                            gamePanel.updateClockTimer();
+                            gamePanel.updateTimerBar(game.getGameTimer());
+                            GameController.play();
+                            RenderableHolder.getInstance().update();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
                         }
-                        veggie.setGrowthPoint(veggie.getGrowthPoint() + veggie.getGrowthRate());
-                    }
-
-                    // check if gameTimer == 0
-                    game.setGameTimer(game.getGameTimer()-1);
-                    if(game.getGameTimer() == 0){
-                        game.setGameover(true);
-                    }
-
-                    gamePanel.updateTimerBar(game.getGameTimer());
-                    System.out.println("TIMER : "+ game.getGameTimer());
-                }
-            }
-        });
-        timer.start();
-
-        Thread playerAction = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!game.isGameover()){
-                    try {
-                        Thread.sleep(20);
-                        game.getPlayer().action();
-                        game.getPlayer().setAttackCooldown(game.getPlayer().getAttackCooldown() - 20);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
                     }
                 }
-            }
-        });
-        playerAction.start();
-
-        Thread slimeWalk = new Thread(()->{
-            while (!game.isGameover()) {
-                try {
-                    Thread.sleep(100);
-                    for (Slime slime : game.getSlimeList()) {
-                        slime.walk();
-                    }
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-        slimeWalk.start();
-
-
-    AnimationTimer animation;
-        animation = new AnimationTimer() {
-            public void handle(long now) {
-                if(game.isGameover()){
-                    this.stop();
-                }else {
-                    try {
-                        gameScreen.paintComponent();
-                        GameController.play();
-                        RenderableHolder.getInstance().update();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-        };
-        animation.start();
+            };
+            animation.start();
     }
 }
 
