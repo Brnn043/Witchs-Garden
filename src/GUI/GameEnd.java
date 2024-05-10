@@ -61,6 +61,7 @@ public class GameEnd extends VBox {
         }
 
         // Create layout and add the start button
+        this.setBackground(new Background(new BackgroundFill(Color.web("#8F6F5C"), null, null)));
         this.setAlignment(Pos.CENTER);
         this.setSpacing(20);
         this.getChildren().add(endingText);
