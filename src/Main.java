@@ -46,6 +46,7 @@ public class Main extends Application {
         Scene scene = new Scene(root, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Main Menu");
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
@@ -59,21 +60,20 @@ public class Main extends Application {
 
         root.setAlignment(Pos.CENTER);
         GameController game = GameController.getInstance();
-        game.initGames();
         GameScreen gameScreen = new GameScreen(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
 
         StackPane gameScreenWithEffect = new StackPane();
         gameScreenWithEffect.setAlignment(Pos.CENTER);
 
-        gameScreenWithEffect.getChildren().addAll(gameScreen);
-        // add more with sunny snowy rainy effect
+        gameScreenWithEffect.getChildren().addAll(game.getSunnyBackground(),gameScreen);
 
         GamePanel gamePanel = new GamePanel(game,gameScreen,gameScreenWithEffect);
 
         root.getChildren().addAll(gamePanel,gameScreenWithEffect);
         gameScreen.requestFocus();
+        game.initGames();
 
-
+        stage.setResizable(false);
         stage.show();
 
         // Action in every 1 second

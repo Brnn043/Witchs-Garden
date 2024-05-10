@@ -1,11 +1,11 @@
-package GUI.Map;
+package GUI.map;
 
 import GUISharedObject.CollidableEntity;
 import Games.Config;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class House extends CollidableEntity {
+public class House extends CollidableEntity implements WeatherChangeable {
     private String imagePath;
 
     public House(double x,double y,double width,double height) {

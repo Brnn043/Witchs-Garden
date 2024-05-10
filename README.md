@@ -9,6 +9,7 @@
 - เราน่าจะต้องมาตกลงกันเรื่อง weatherEffected เพิ่มด้วยๆ
 - GameController.getInstance().get() (almost done)
 - we should add growthBar for each veggie
+- implement efficient collideBox for every CollidableEntity
 
 # Update 6/5/24
 - เราย้ายตัว timer มาที่ timerThread ใน main
@@ -35,17 +36,11 @@
   - broom 8**
   - slime 4**
   - veggie 6**
-- ใส่ภาพสไลม์&พีช [done]
-- สไลม์ 3 สายพันธ์ [done]
-
-# Update 9/5/24
-[บีม]
-- ทำให้ชนสไลม์ไม่ได้
-- ปรับ GUI
-- GUI นอกเกมส์
-
-[นีร]
-- ปรับผักให้เก็บได้
-- ทำหน้า load, how to play, game over
-- ด่าน (ถ้าเวลาเหลือ)
-- เดินซ้าย-ขวา
+- ใส่ภาพสไลม์&พีช
+- สไลม์ 3 สายพันธ์
+  
+# Update 9/5/24 (night)
+- เรามีอัพเดท GUI เพิ่มเติมละ แต่คิดว่าจะเขียนใหม่อีกทีตอนที่วาดทุกอย่างเสร็จแล้ว
+- ใน gamePanel มีฟังก์ชันสำหรับอัพเดทพวกveggieกับgameModeLabel ไปดูได้ๆ
+- ตอนนี้เราวาดveggieเสร็จ2อัน เดี๋ยวอีกอันจะวาดตามมาให้ มีanimationที่น่าจะใช้ได้อยู่ ปล.เปลี่ยนชื่อได้นะ คิดไม่ออก5555
+- เราเก็บจำนวนveggieที่ต้องเก็บในgameController แต่นีรแก้ได้เลยๆ

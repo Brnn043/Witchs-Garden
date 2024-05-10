@@ -27,7 +27,7 @@ public abstract class Slime extends BaseCharacter{
         setHeight(30);
         double posX = (Math.random()*100)*Config.GAMEFRAMEWIDTH/100;
         double posY = (Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
-        while (!GameController.getInstance().isPositionAccesible(posX-getWidth()/2,posY-getHeight()/2,getWidth(),getHeight())){
+        while (!GameController.getInstance().isPositionAccesible(posX-getWidth()/2,posY-getHeight()/2,getWidth(),getHeight(),false)){
             posX = (Math.random()*100)*Config.GAMEFRAMEWIDTH/100;
             posY = (Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
             System.out.println("Slime cannot be spawn here. Find new pos...");
@@ -92,8 +92,8 @@ public abstract class Slime extends BaseCharacter{
             double posX = (float) (this.getX() - (Math.signum(disX))*(Config.SLIMEWALKSTEP * this.getSpeedRate() * 0.2));
             double posY = (float) (this.getY() - (Math.signum(disY))*(Config.SLIMEWALKSTEP * this.getSpeedRate() * 0.2));
 
-            if (!GameController.getInstance().isPositionAccesible(posX-getWidth()/2,getY()-getHeight()/2,getWidth(),getHeight())) posX=getX();
-            if (!GameController.getInstance().isPositionAccesible(getX()-getWidth()/2,posY-getHeight()/2,getWidth(),getHeight())) posY=getY();
+            if (!GameController.getInstance().isPositionAccesible(posX-getWidth()/2,getY()-getHeight()/2,getWidth(),getHeight(),false)) posX=getX();
+            if (!GameController.getInstance().isPositionAccesible(getX()-getWidth()/2,posY-getHeight()/2,getWidth(),getHeight(),false)) posY=getY();
 
             this.setX(posX);
             this.setY(posY);

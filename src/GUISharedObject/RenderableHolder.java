@@ -13,9 +13,9 @@ import java.util.List;
 
 public class RenderableHolder {
     private static final RenderableHolder instance = new RenderableHolder();
-
-    private List<IRenderable> entities;
-    private Comparator<IRenderable> comparator;
+    private final List<IRenderable> backgroundEntities;
+    private final List<IRenderable> entities;
+    private final Comparator<IRenderable> comparator;
     public static Image witchSprite;
     public static Image witchWalkSprite;
     public static Image witchBroomSprite;
@@ -34,6 +34,7 @@ public class RenderableHolder {
 
     public RenderableHolder() {
         entities = new ArrayList<IRenderable>();
+        backgroundEntities = new ArrayList<>();
         comparator = (IRenderable o1, IRenderable o2) -> {
             if (o1.getZ() > o2.getZ())
                 return 1;
@@ -69,6 +70,11 @@ public class RenderableHolder {
         Collections.sort(entities, comparator);
     }
 
+    public void addBackground(IRenderable entity) {
+        backgroundEntities.add(entity);
+        Collections.sort(backgroundEntities, comparator);
+    }
+
     public void update() {
         for (int i = entities.size() - 1; i >= 0; i--) {
             if (entities.get(i).isDestroyed())
@@ -79,4 +85,6 @@ public class RenderableHolder {
     public List<IRenderable> getEntities() {
         return entities;
     }
+
+    public List<IRenderable> getBackgroundEntities() { return backgroundEntities; }
 }

@@ -1,12 +1,11 @@
-package GUI.Map;
+package GUI.map;
 
 import GUISharedObject.Entity;
-import GUISharedObject.RenderableHolder;
 import Games.Config;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class BackgroundImage extends Entity {
+public class BackgroundImage extends Entity implements WeatherChangeable {
     private String imagePath;
 
     public BackgroundImage() {
