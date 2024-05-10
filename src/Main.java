@@ -10,7 +10,12 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 
 public class Main extends Application {
     private int level = 1;
@@ -29,12 +34,20 @@ public class Main extends Application {
     }
 
     private void startGame(Stage primaryStage) {
-        primaryStage.close();
-        Stage gameStage = new Stage();
+        // download scene
+        VBox downloadRoot = new VBox();
+        Scene dowloadScene = new Scene(downloadRoot, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        downloadRoot.setAlignment(Pos.CENTER);
+        Text downloadText = new Text("Please wait while we are casting a spell...");
+        downloadText.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 14));
+        downloadRoot.getChildren().add(downloadText);
+
+        downloadRoot.setBackground(new Background(new BackgroundFill(Color.web("#8F6F5C"), null, null)));
+        primaryStage.setScene(dowloadScene);
+
+        // game scene
         VBox root = new VBox();
         Scene scene = new Scene(root);
-        gameStage.setScene(scene);
-        gameStage.setTitle("Witch's Garden");
 
         root.setAlignment(Pos.CENTER);
         GameController game = GameController.getInstance();
@@ -51,15 +64,15 @@ public class Main extends Application {
         root.getChildren().addAll(gamePanel,gameScreenWithEffect);
         gameScreen.requestFocus();
 
-        gameStage.setResizable(false);
-        gameStage.show();
+        primaryStage.setScene(scene);
+
 
         AnimationTimer animation;
         animation = new AnimationTimer() {
             public void handle(long now) {
                 if(game.isGameover()){
                     this.stop();
-                    gameEnd(gameStage);
+                    gameEnd(primaryStage);
                 }else {
                     try {
                         gameScreen.paintComponent();
@@ -77,20 +90,15 @@ public class Main extends Application {
         animation.start();
     }
 
-    private void gameEnd(Stage gameStage) {
-        gameStage.close();
-        Stage endingStage = new Stage();
+    private void gameEnd(Stage primaryStage) {
         GameEnd gameEnd = new GameEnd(() -> {
             if(GameController.getInstance().getGameTimer()!=0){
                 level = level + 1 ;
             }
-            startGame(endingStage);
-        }, endingStage);
+            startGame(primaryStage);
+        }, primaryStage);
         Scene scene =new Scene(gameEnd, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
-        endingStage.setScene(scene);
-        endingStage.setTitle("Witch's Garden");
-        endingStage.setResizable(false);
-        endingStage.show();
+        primaryStage.setScene(scene);
     }
 }
 

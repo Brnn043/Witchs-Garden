@@ -1,18 +1,16 @@
 package GUI;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Manu extends VBox {
+public class Manu extends GridPane {
     @FunctionalInterface
     public interface GameStarter {
         void startGame();
@@ -21,6 +19,31 @@ public class Manu extends VBox {
         Text titleText = new Text("The Witch's Garden");
         titleText.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 20)); // Set font and size
         titleText.setFill(Color.BLACK);
+
+        // howToPlayMenu
+        VBox howToPlayMenu = new VBox();
+        howToPlayMenu.setAlignment(Pos.CENTER);
+        howToPlayMenu.setSpacing(5);
+        howToPlayMenu.getChildren().addAll(
+                new Text("Will insert Image Later")
+        );
+        howToPlayMenu.setVisible(false);
+        howToPlayMenu.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
+
+        // creditMenu
+        VBox creditMenu = new VBox();
+        creditMenu.setAlignment(Pos.CENTER);
+        creditMenu.setSpacing(5);
+        creditMenu.getChildren().addAll(
+                new Text("This project created by"),
+                new Text("Naphat Serirak 6632061321"),
+                new Text("*** Beam's name & student ID ****"),
+                new Text("                   "),
+                new Text("2110215 (2023/2)"),
+                new Text("Programming Methodology I")
+        );
+        creditMenu.setVisible(false);
+        creditMenu.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
 
         // Add important Button
         Button startButton = new Button("Start Game");
@@ -47,7 +70,12 @@ public class Manu extends VBox {
         howToPlayButton.setOnMouseExited(e -> {
             howToPlayButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
         });
-//        howToPlayButton.setOnAction(e -> gameStarter.startGame());
+        howToPlayButton.setOnAction(e -> {
+            creditMenu.setVisible(false);
+            howToPlayMenu.setVisible(true);
+        });
+
+
 
         Button craditButton = new Button("Cradit");
         craditButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
@@ -60,7 +88,10 @@ public class Manu extends VBox {
         craditButton.setOnMouseExited(e -> {
             craditButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
         });
-//        craditButton.setOnAction(e -> gameStarter.startGame());
+        craditButton.setOnAction(e -> {
+            creditMenu.setVisible(true);
+            howToPlayMenu.setVisible(false);
+        });
 
         Button exitButton = new Button("Exit");
         exitButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
@@ -76,12 +107,16 @@ public class Manu extends VBox {
         exitButton.setOnAction(e -> stage.close());
 
         // Create layout and add the start button
-        this.setAlignment(Pos.CENTER);
-        this.setSpacing(20);
-        this.getChildren().add(titleText);
-        this.getChildren().add(startButton);
-        this.getChildren().add(howToPlayButton);
-        this.getChildren().add(craditButton);
-        this.getChildren().add(exitButton);
+        this.setAlignment(Pos.BOTTOM_LEFT);
+        this.setHgap(10);
+        this.setVgap(10);
+        this.setPadding(new Insets(20, 0, 30, 30));
+        this.add(titleText, 0, 0);
+        this.add(startButton, 0, 1);
+        this.add(howToPlayButton, 0, 2);
+        this.add(craditButton, 0, 3);
+        this.add(exitButton, 0, 4);
+        this.add(creditMenu, 5, 0, 75, 5);
+        this.add(howToPlayMenu, 5, 0, 75, 5);
     }
 }
