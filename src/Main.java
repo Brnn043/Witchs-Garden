@@ -5,18 +5,11 @@ import GUI.Manu;
 import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
-import Items.Character.Slime;
-import Items.Inventory.Clock;
-import Items.Inventory.Broom;
-import Items.Veggies.BaseVeggies;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -57,7 +50,6 @@ public class Main extends Application {
 
         root.getChildren().addAll(gamePanel,gameScreenWithEffect);
         gameScreen.requestFocus();
-
 
         gameStage.setResizable(false);
         gameStage.show();

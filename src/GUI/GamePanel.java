@@ -3,6 +3,7 @@ package GUI;
 import GUI.weatherCanvas.BlurCanvas;
 import GUI.weatherCanvas.RainyCanvas;
 import GUI.weatherCanvas.SnowyCanvas;
+import GUI.weatherCanvas.WhiteCanvas;
 import Games.Config;
 import Games.GameController;
 import javafx.geometry.Insets;
@@ -187,7 +188,9 @@ public class GamePanel extends HBox {
             gameController.getBackgroundImage().changeWeather(Config.Weather.RAINY);
             gameController.getHouse().changeWeather(Config.Weather.SUNNY);
             gameScreenWithEffect.getChildren().clear();
-            gameScreenWithEffect.getChildren().addAll(gameController.getRainyBackground(),gameScreen,new BlurCanvas(),new RainyCanvas());
+            WhiteCanvas whiteCanvas = new WhiteCanvas(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
+            gameScreenWithEffect.getChildren().addAll(gameController.getRainyBackground(),gameScreen,whiteCanvas,new RainyCanvas());
+            whiteCanvas.start();
         }
         gameScreen.requestFocus();
     }
