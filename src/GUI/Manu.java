@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Manu extends VBox {
@@ -17,6 +18,10 @@ public class Manu extends VBox {
         void startGame();
     }
     public Manu(GameStarter gameStarter, Stage stage) {
+        Text titleText = new Text("The Witch's Garden");
+        titleText.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 20)); // Set font and size
+        titleText.setFill(Color.BLACK);
+
         // Add important Button
         Button startButton = new Button("Start Game");
         startButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
@@ -73,6 +78,7 @@ public class Manu extends VBox {
         // Create layout and add the start button
         this.setAlignment(Pos.CENTER);
         this.setSpacing(20);
+        this.getChildren().add(titleText);
         this.getChildren().add(startButton);
         this.getChildren().add(howToPlayButton);
         this.getChildren().add(craditButton);

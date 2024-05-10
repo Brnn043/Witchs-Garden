@@ -48,5 +48,6 @@
 # Update 10/5/24
 - เค้าโยกพวก Thread ของการเล่นไปใส่ใน gameController หมดเลยนะ
 - ใน gamePanel เค้าแก้ตัว updateRedFlowerCount(int x) -> updateVeggieCount() แล้วดึงค่าที่เก็บใน gameController เลย
+- เค้าย้ายพวก GUI หน้าต่างๆ ไปที่ Manu, GameEnging นะ ตัว main จะได้ไม่เยอะเกิน
 - [bug] : snowy ตัวละคนจะเดินลงล่างตลอด
 - [bug] : can't start new game

@@ -55,9 +55,9 @@ public class GameController {
         bushes = new ArrayList<>();
 
         // based on each game
-        MAXREDFLOWER = 3;
+        MAXREDFLOWER = 2;
         MAXRAINBOWDRAKE = 2;
-        MAXRICE = 5;
+        MAXRICE = 2;
         setRedflowerCount(0);
         setRainbowDrakeCount(0);
         setRiceCount(0);
@@ -136,6 +136,12 @@ public class GameController {
                         veggie.setGrowthPoint(veggie.getGrowthPoint() + veggie.getGrowthRate());
                     }
 
+                    // check if witch collect all veggie
+                    if(game.getRainbowDrakeCount() == MAXRAINBOWDRAKE &&
+                        game.getRedflowerCount() == MAXREDFLOWER &&
+                        game.getRiceCount() == MAXRICE){
+                        game.setGameover(true);
+                    }
                     // check if gameTimer == 0
                     game.setGameTimer(game.getGameTimer()-1);
                     if(game.getGameTimer() == 0){
