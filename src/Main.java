@@ -85,6 +85,7 @@ public class Main extends Application {
                             gameScreen.paintComponent();
                             gamePanel.updateClockTimer();
                             gamePanel.updateTimerBar(game.getGameTimer());
+                            gamePanel.updateVeggieCount();
                             GameController.play();
                             RenderableHolder.getInstance().update();
                         } catch (InterruptedException e) {

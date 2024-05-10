@@ -78,9 +78,7 @@ public class GamePanel extends HBox {
         rainbowDrakeCount = new Text();
         riceCount = new Text();
 
-        updateRedFlowerCount();
-        updateRainbowDrakeCount();
-        updateRiceCount();
+        updateVeggieCount();
 
         HBox targetRedFlower = new HBox(redFlowerIcon,redFlowerCount);
         HBox targetRainbowDrake = new HBox(rainbowDrakeIcon,rainbowDrakeCount);
@@ -158,17 +156,12 @@ public class GamePanel extends HBox {
                 + " second(s).");
     }
 
-    public void updateRedFlowerCount() {
+    public void updateVeggieCount() {
         redFlowerCount.setText(GameController.getInstance().getRedflowerCount()+"/"+gameController.getMAXREDFLOWER());
-    }
-
-    public void updateRainbowDrakeCount() {
         rainbowDrakeCount.setText(GameController.getInstance().getRainbowDrakeCount()+"/"+gameController.getMAXRAINBOWDRAKE());
-    }
-
-    public void updateRiceCount() {
         riceCount.setText(GameController.getInstance().getRiceCount()+"/"+gameController.getMAXRICE());
     }
+
 
     public void handleSunnyButton() {
         if (gameController.getClock().changeSeason(Config.Weather.SUNNY)) {

@@ -45,28 +45,31 @@ public class Player extends BaseCharacter{
 
 
         for(Slime slime : GameController.getInstance().getSlimeList()) {
-            double disX = this.getX() - slime.getX();
-            double disY = this.getY() - slime.getY();
-            double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
-            if( distance <= broom.getAttackRange() ) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            slime.setHp( slime.getHp() - broom.getDamage() );
-                            broom.setDurability(broom.getDurability() - Config.BROOMDURABILITYPERATTACK);
-                            setAttackCooldown(Config.PLAYERCOOLDOWNTIME);
-                            setAttack(true);
-                            Thread.sleep(300);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
+            try{
+                double disX = this.getX() - slime.getX();
+                double disY = this.getY() - slime.getY();
+                double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
+                if( distance <= broom.getAttackRange() ) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                slime.setHp( slime.getHp() - broom.getDamage() );
+                                broom.setDurability(broom.getDurability() - Config.BROOMDURABILITYPERATTACK);
+                                setAttackCooldown(Config.PLAYERCOOLDOWNTIME);
+                                setAttack(true);
+                                Thread.sleep(300);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            setAttack(false);
                         }
-                        setAttack(false);
-                    }
-                }).start();
-
-
+                    }).start();
+                }
+            } catch (Exception e){
+                System.out.println(e);
             }
+
         }
     }
 

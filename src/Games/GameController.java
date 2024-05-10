@@ -37,7 +37,7 @@ public class GameController {
     private final int MAXREDFLOWER;
     private final int MAXRAINBOWDRAKE;
     private final int MAXRICE;
-    private int redflowerCount;
+    private int redFlowerCount;
     private int rainbowDrakeCount;
     private int riceCount;
 
@@ -202,21 +202,13 @@ public class GameController {
         }
 
         // veggies : check if veggie is dead
-        ArrayList<BaseVeggies> veggies = getInstance().getVeggiesList();
-        ArrayList<BaseVeggies> delVeggie = new ArrayList<BaseVeggies>();
-
-        for (BaseVeggies veggie : getInstance().getVeggiesList()) {
+        for (int i = 0; i < getInstance().getVeggiesList().size();) {
+            BaseVeggies veggie = getInstance().getVeggiesList().get(i);
             if (veggie.getWaterPoint() <= 0 || veggie.getHp() <= 0) {
-                delVeggie.add(veggie);
-                RenderableHolder.getInstance().getEntities().remove(veggie);
+                deleteVeggie(veggie);
+            }else{
+                i = i+1;
             }
-
-        }
-
-        // delete dead veggie
-        for (BaseVeggies veggie : delVeggie) {
-            getInstance().getVeggiesList().remove(veggie);
-            getInstance().getNewVeggie();
         }
 
 
@@ -263,6 +255,7 @@ public class GameController {
 
     public void collectVeggie(BaseVeggies veggie){
         if(veggie instanceof RainbowDrake){
+            System.out.println("rainbowwwwwwwwwwwwwwwwww");
             setRainbowDrakeCount(getRainbowDrakeCount()+1);
         }
         if(veggie instanceof RedFlower){
@@ -271,8 +264,13 @@ public class GameController {
         if(veggie instanceof Rice){
             setRiceCount(getRiceCount()+1);
         }
+        deleteVeggie(veggie);
+    }
+
+    public static void deleteVeggie(BaseVeggies veggie){
         RenderableHolder.getInstance().getEntities().remove(veggie);
         getInstance().getVeggiesList().remove(veggie);
+        getInstance().getNewVeggie();
     }
 
     public static GameController getInstance() {
@@ -403,11 +401,11 @@ public class GameController {
     }
 
     public int getRedflowerCount() {
-        return redflowerCount;
+        return redFlowerCount;
     }
 
-    public void setRedflowerCount(int redflowerCount) {
-        this.redflowerCount = Math.min(redflowerCount, MAXREDFLOWER);
+    public void setRedflowerCount(int redFlowerCount) {
+        this.redFlowerCount = Math.min(redFlowerCount, MAXREDFLOWER);
     }
 
     public int getRainbowDrakeCount() {
