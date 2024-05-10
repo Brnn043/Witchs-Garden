@@ -96,7 +96,7 @@ public class Main extends Application {
             if(GameController.getInstance().getGameTimer()!=0){
                 level = level + 1 ;
             }
-            if(level == 2){
+            if(level == 4){
                 ConpleteGame(primaryStage);
             }else{
                 startGame(primaryStage);
