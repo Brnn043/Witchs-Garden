@@ -7,7 +7,6 @@ import GUI.map.BackgroundImage;
 import GUI.map.Bush;
 import GUI.map.House;
 import GUI.map.Tree;
-import GUISharedObject.Entity;
 import GUISharedObject.IRenderable;
 import GUISharedObject.RenderableHolder;
 import Items.Character.*;
@@ -16,7 +15,7 @@ import Items.Inventory.Clock;
 import Items.Veggies.BaseVeggies;
 import Items.Veggies.RedFlower;
 import Items.Veggies.RainbowDrake;
-import Items.Veggies.Rice;
+import Items.Veggies.Daffodil;
 
 import java.util.ArrayList;
 
@@ -39,10 +38,10 @@ public class GameController {
     private final RainyBackground rainyBackground;
     private int maxRedFlower;
     private int maxRainbowDrake;
-    private int maxRice;
+    private int maxDaffodil;
     private int redFlowerCount;
     private int rainbowDrakeCount;
-    private int riceCount;
+    private int daffodilCount;
     private int level = 1;
 
     public GameController() {
@@ -133,7 +132,7 @@ public class GameController {
         } else if (veggieType == 1) {
             veggie = new RainbowDrake();
         } else {
-            veggie = new Rice();
+            veggie = new Daffodil();
         }
         getVeggiesList().add(veggie);
         RenderableHolder.getInstance().add(veggie);
@@ -161,8 +160,8 @@ public class GameController {
         if(veggie instanceof RedFlower){
             setRedFlowerCount(getRedFlowerCount()+1);
         }
-        if(veggie instanceof Rice){
-            setRiceCount(getRiceCount()+1);
+        if(veggie instanceof Daffodil){
+            setDaffodilCount(getDaffodilCount()+1);
         }
         deleteVeggie(veggie);
     }
@@ -204,10 +203,10 @@ public class GameController {
         // based on each game
         maxRedFlower = 2 * level;
         maxRainbowDrake = 2 * level;
-        maxRice = 2 * level;
+        maxDaffodil = 2 * level;
         setRedFlowerCount(0);
         setRainbowDrakeCount(0);
-        setRiceCount(0);
+        setDaffodilCount(0);
 
         this.level = level;
 
@@ -262,7 +261,7 @@ public class GameController {
                     // check if witch collect all veggie
                     if(game.getRainbowDrakeCount() == maxRainbowDrake &&
                             game.getRedFlowerCount() == maxRedFlower &&
-                            game.getRiceCount() == maxRice){
+                            game.getDaffodilCount() == maxDaffodil){
                         game.setGameover(true);
                     }
                     // check if gameTimer == 0
@@ -356,7 +355,7 @@ public class GameController {
 
     public int getmaxRainbowDrake() { return maxRainbowDrake; }
 
-    public int getmaxRice() { return maxRice; }
+    public int getmaxDaffodil() { return maxDaffodil; }
 
     public ArrayList<Slime> getSlimeList() {
         return slimeList;
@@ -454,11 +453,11 @@ public class GameController {
         this.rainbowDrakeCount = Math.min(rainbowDrakeCount, maxRainbowDrake);
     }
 
-    public int getRiceCount() {
-        return riceCount;
+    public int getDaffodilCount() {
+        return daffodilCount;
     }
 
-    public void setRiceCount(int riceCount) {
-        this.riceCount = Math.min(riceCount, maxRice);
+    public void setDaffodilCount(int daffodilCount) {
+        this.daffodilCount = Math.min(daffodilCount, maxDaffodil);
     }
 }

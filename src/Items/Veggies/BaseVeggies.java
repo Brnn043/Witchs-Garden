@@ -4,7 +4,6 @@ import GUISharedObject.Entity;
 import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
-import Items.Character.Player;
 import Items.Interfaces.Collectable;
 import Items.Interfaces.WeatherEffectable;
 import javafx.scene.canvas.GraphicsContext;
@@ -90,7 +89,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
         if(this instanceof RainbowDrake){
             gc.drawImage(RenderableHolder.rainbowDrakeIdleSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
         }
-        if(this instanceof Rice){
+        if(this instanceof Daffodil){
             gc.drawImage(RenderableHolder.riceIdleSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
         }
 

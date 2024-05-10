@@ -26,7 +26,7 @@ public class GamePanel extends HBox {
     private final Text gameModeLabel;
     private final Text redFlowerCount;
     private final Text rainbowDrakeCount;
-    private final Text riceCount;
+    private final Text daffodilCount;
 
     public GamePanel(GameController gameController,GameScreen gameScreen,StackPane gameScreenWithEffect) {
         super();
@@ -61,28 +61,28 @@ public class GamePanel extends HBox {
         VBox weatherContainer = new VBox(clockTimer,buttonContainer);
         weatherContainer.setAlignment(Pos.CENTER);
 
-        ImageView redFlowerIcon = new ImageView(ClassLoader.getSystemResource("Veggie/RedFlower_Icon.png").toString());
-        ImageView rainbowDrakeIcon = new ImageView(ClassLoader.getSystemResource("Veggie/RainbowDrake_Icon.png").toString());
-        ImageView riceIcon = new ImageView(ClassLoader.getSystemResource("Veggie/RedFlower_Icon.png").toString());
+        ImageView redFlowerIcon = new ImageView(ClassLoader.getSystemResource("Veggie/RedFlower_Idle.gif").toString());
+        ImageView rainbowDrakeIcon = new ImageView(ClassLoader.getSystemResource("Veggie/RainbowDrake_Idle.gif").toString());
+        ImageView daffodilIcon = new ImageView(ClassLoader.getSystemResource("Veggie/Daffodil_Idle.gif").toString());
 
         redFlowerIcon.setPreserveRatio(true);
         rainbowDrakeIcon.setPreserveRatio(true);
-        riceIcon.setPreserveRatio(true);
+        daffodilIcon.setPreserveRatio(true);
         redFlowerIcon.setFitWidth(35);
         rainbowDrakeIcon.setFitWidth(35);
-        riceIcon.setFitWidth(35);
+        daffodilIcon.setFitWidth(35);
         
         redFlowerCount = new Text();
         rainbowDrakeCount = new Text();
-        riceCount = new Text();
+        daffodilCount = new Text();
 
         updateVeggieCount();
 
         HBox targetRedFlower = new HBox(redFlowerIcon,redFlowerCount);
         HBox targetRainbowDrake = new HBox(rainbowDrakeIcon,rainbowDrakeCount);
-        HBox targetRice = new HBox(riceIcon,riceCount);
+        HBox targetDaffodil = new HBox(daffodilIcon,daffodilCount);
 
-        HBox targetVeggie = new HBox(targetRedFlower,targetRainbowDrake,targetRice);
+        HBox targetVeggie = new HBox(targetRedFlower, targetDaffodil, targetRainbowDrake);
 
         Text veggieTitle = new Text("Collect the following veggies");
 
@@ -122,8 +122,8 @@ public class GamePanel extends HBox {
         redFlowerCount.setFill(Color.WHEAT);
         rainbowDrakeCount.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
         rainbowDrakeCount.setFill(Color.WHEAT);
-        riceCount.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
-        riceCount.setFill(Color.WHEAT);
+        daffodilCount.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
+        daffodilCount.setFill(Color.WHEAT);
         veggieTitle.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
         veggieTitle.setFill(Color.WHEAT);
 
@@ -136,8 +136,8 @@ public class GamePanel extends HBox {
         targetRedFlower.setSpacing(10);
         targetRainbowDrake.setAlignment(Pos.CENTER);
         targetRainbowDrake.setSpacing(10);
-        targetRice.setAlignment(Pos.CENTER);
-        targetRice.setSpacing(10);
+        targetDaffodil.setAlignment(Pos.CENTER);
+        targetDaffodil.setSpacing(10);
     }
 
     public void setGameModeLabel(String string) {
@@ -157,7 +157,7 @@ public class GamePanel extends HBox {
     public void updateVeggieCount() {
         redFlowerCount.setText(GameController.getInstance().getRedFlowerCount()+"/"+gameController.getmaxRedFlower());
         rainbowDrakeCount.setText(GameController.getInstance().getRainbowDrakeCount()+"/"+gameController.getmaxRainbowDrake());
-        riceCount.setText(GameController.getInstance().getRiceCount()+"/"+gameController.getmaxRice());
+        daffodilCount.setText(GameController.getInstance().getDaffodilCount()+"/"+gameController.getmaxDaffodil());
     }
 
 
