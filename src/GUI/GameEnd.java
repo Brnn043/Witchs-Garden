@@ -18,7 +18,7 @@ public class GameEnd extends VBox {
     public interface GameStarter {
         void startGame();
     }
-    public GameEnd(Menu.GameStarter gameStarter, Stage stage) {
+    public GameEnd(GameStarter gameStarter, Stage stage) {
         Text endingText = new Text();
         endingText.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 20)); // Set font and size
         endingText.setFill(Color.BLACK);

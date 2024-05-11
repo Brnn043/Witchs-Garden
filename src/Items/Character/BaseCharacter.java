@@ -42,9 +42,9 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
         }
     }
 
-    public void setX(double x) { this.x = Math.max(0,Math.min(x, Config.GAMESCREENWIDTH)); }
+    public void setX(double x) { this.x = Math.max(getWidth()/2,Math.min(x, Config.GAMESCREENWIDTH - getWidth()/2)); }
     public void setY(double y) {
-        this.y = Math.max(0,Math.min(y,Config.GAMESCREENHEIGHT));
+        this.y = Math.max(getHeight()/2,Math.min(y,Config.GAMESCREENHEIGHT - getHeight()/2));
     }
 
     public int getAttackCooldown() {

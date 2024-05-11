@@ -1,7 +1,4 @@
-import GUI.GameEnd;
-import GUI.GamePanel;
-import GUI.GameScreen;
-import GUI.Menu;
+import GUI.*;
 import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
@@ -26,12 +23,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Menu menu = new Menu(() -> startGame(primaryStage), primaryStage);
+        Menu menu = new Menu(() -> preStory(primaryStage), primaryStage);
         Scene scene = new Scene(menu, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Witch's Garden");
         primaryStage.setResizable(false);
         primaryStage.show();
+    }
+
+    private void preStory(Stage primaryStage){
+        // story scene
+        Scene storyScene = new Scene(new PreStory(() -> startGame(primaryStage)), Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        primaryStage.setScene(storyScene);
     }
 
     private void startGame(Stage primaryStage) {

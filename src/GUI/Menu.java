@@ -15,10 +15,10 @@ import javafx.stage.Stage;
 
 public class Menu extends GridPane {
     @FunctionalInterface
-    public interface GameStarter {
-        void startGame();
+    public interface PreStory {
+        void preStory();
     }
-    public Menu(GameStarter gameStarter, Stage stage) {
+    public Menu(PreStory preStory, Stage stage) {
         Text titleText = new Text("Witch's Garden");
         titleText.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 40)); // Set font and size
         titleText.setFill(Color.WHITE);
@@ -61,7 +61,7 @@ public class Menu extends GridPane {
         startButton.setOnMouseExited(e -> {
             startButton.setBackground(new Background(new BackgroundFill(Color.valueOf("#8F6F5C"), new CornerRadii(8), null)));
         });
-        startButton.setOnAction(e -> gameStarter.startGame());
+        startButton.setOnAction(e -> preStory.preStory());
 
         Button howToPlayButton = new Button("How To Play");
         howToPlayButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 18));
