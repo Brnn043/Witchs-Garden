@@ -14,13 +14,13 @@ import javafx.scene.shape.ArcType;
 
 public class Player extends BaseCharacter{
     private Broom broom;
-    private boolean isWalk;
+    private int walk; // 0 = stay 1 = front 2 = right 3 = left
     private boolean isAttack;
 
     public Player(int positionX, int positionY, int maxSpeedRate, int attackRange, int damage) {
         super(positionX, positionY, maxSpeedRate, attackRange, damage);
         setBroom(null);
-        setWalk(false);
+        setWalk(0);
         setWidth(90);
         setHeight(128.6);
         this.z = 999;
@@ -107,22 +107,30 @@ public class Player extends BaseCharacter{
         // WASD to walk in map
         double posX = getX();
         double posY = getY();
-        setWalk(false);
+        setWalk(0);
+
+        int nerfDiagonalWalk = 1;
+        if((InputUtility.getKeyPressed(KeyCode.W) || InputUtility.getKeyPressed(KeyCode.S)) &&
+                (InputUtility.getKeyPressed(KeyCode.A) || InputUtility.getKeyPressed(KeyCode.D))){
+            nerfDiagonalWalk = 2;
+        }
 
         if (InputUtility.getKeyPressed(KeyCode.W)) {
-            posY -= (int)this.getSpeedRate();
-            setWalk(true);
+            posY -= (int) (this.getSpeedRate() / nerfDiagonalWalk);
+            setWalk(1);
         }else if (InputUtility.getKeyPressed(KeyCode.S)) {
-            posY += (int)this.getSpeedRate();
-            setWalk(true);
+            posY += (int) (this.getSpeedRate() / nerfDiagonalWalk);
+            setWalk(1);
         }
+
         if (InputUtility.getKeyPressed(KeyCode.A)) {
-            posX -= (int)this.getSpeedRate();
-            setWalk(true);
+            posX -= (int) (this.getSpeedRate() / nerfDiagonalWalk);
+            setWalk(3);
         } else  if (InputUtility.getKeyPressed(KeyCode.D)) {
-            posX += (int)this.getSpeedRate();
-            setWalk(true);
+            posX += (int) (this.getSpeedRate() / nerfDiagonalWalk);
+            setWalk(2);
         }
+
 
         if (!GameController.getInstance().isPositionAccesible(posX,posY+getHeight()/4,getWidth()/2,getHeight()/2,true)) return;
         setX(posX);
@@ -131,7 +139,7 @@ public class Player extends BaseCharacter{
 
     @Override
     public void draw(GraphicsContext gc) {
-        if(isAttack() && getBroom()!=null){
+        if(isAttack() && this.getBroom()!=null){
             gc.drawImage(RenderableHolder.witchAttackSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             gc.setStroke(Color.RED);
             gc.setLineWidth(2);
@@ -139,29 +147,39 @@ public class Player extends BaseCharacter{
             return;
         }
 
-        if(isWalk()){
+        if(getWalk()==0){
             if(getBroom()==null){
                 gc.drawImage(RenderableHolder.witchWalkSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             }else{
                 gc.drawImage(RenderableHolder.witchWalkBroomSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
-                gc.setStroke(Color.WHITE);
-                gc.setLineWidth(2);
-                float broomDegree = ((float) Config.PLAYERCOOLDOWNTIME - getAttackCooldown())/Config.PLAYERCOOLDOWNTIME * 360;
-                gc.strokeArc(getX() - getBroom().getAttackRange(), getY()- getBroom().getAttackRange(),
-                        getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2,
-                        0,broomDegree, ArcType.OPEN );
             }
-        }else{
-            if(getBroom()==null){
-                gc.drawImage(RenderableHolder.witchSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
-            }else{
-                gc.drawImage(RenderableHolder.witchBroomSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
-                gc.setStroke(Color.WHITE);
-                gc.setLineWidth(2);
-                float broomDegree = ((float) Config.PLAYERCOOLDOWNTIME - getAttackCooldown())/Config.PLAYERCOOLDOWNTIME * 360;
-                gc.strokeArc(getX() - getBroom().getAttackRange(), getY()- getBroom().getAttackRange(),
-                        getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2,
-                        0,broomDegree, ArcType.OPEN );            }
+        }else if(getWalk()==1) {
+            if (getBroom() == null) {
+                gc.drawImage(RenderableHolder.witchSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
+            } else {
+                gc.drawImage(RenderableHolder.witchBroomSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
+            }
+        }else if(getWalk()==2){
+            if (getBroom() == null) {
+                gc.drawImage(RenderableHolder.witchRightSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
+            } else {
+                gc.drawImage(RenderableHolder.witchRightBroomSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
+            }
+        }else if(getWalk()==3){
+            if (getBroom() == null) {
+                gc.drawImage(RenderableHolder.witchLeftSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
+            } else {
+                gc.drawImage(RenderableHolder.witchLeftBroomSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
+            }
+        }
+
+        if(getBroom() != null){
+            gc.setStroke(Color.WHITE);
+            gc.setLineWidth(2);
+            float broomDegree = ((float) Config.PLAYERCOOLDOWNTIME - getAttackCooldown())/Config.PLAYERCOOLDOWNTIME * 360;
+            gc.strokeArc(getX() - getBroom().getAttackRange(), getY()- getBroom().getAttackRange(),
+                    getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2,
+                    0,broomDegree, ArcType.OPEN );
         }
     }
 
@@ -173,12 +191,12 @@ public class Player extends BaseCharacter{
         this.broom = broom;
     }
 
-    public boolean isWalk() {
-        return isWalk;
+    public int getWalk() {
+        return walk;
     }
 
-    public void setWalk(boolean walk) {
-        isWalk = walk;
+    public void setWalk(int walk) {
+        this.walk = walk;
     }
 
     public boolean isAttack() {
