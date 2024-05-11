@@ -29,14 +29,6 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
         this.z = this.getZ() + 300;
     }
 
-    public Broom(int durability, int attackRange) {
-        super();
-        this.setDurability(durability);
-        this.setAttackRange(attackRange);
-        this.setDamage(Config.BROOMDAMAGEPERATTACK);
-        spawnOnMap();
-    }
-
     @Override
     public void weatherEffected() {
         Config.Weather weatherNow = GameController.getInstance().getClock().getWeather();

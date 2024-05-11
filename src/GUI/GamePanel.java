@@ -155,9 +155,9 @@ public class GamePanel extends HBox {
     }
 
     public void updateVeggieCount() {
-        redFlowerCount.setText(GameController.getInstance().getRedFlowerCount()+"/"+gameController.getmaxRedFlower());
-        rainbowDrakeCount.setText(GameController.getInstance().getRainbowDrakeCount()+"/"+gameController.getmaxRainbowDrake());
-        daffodilCount.setText(GameController.getInstance().getDaffodilCount()+"/"+gameController.getmaxDaffodil());
+        redFlowerCount.setText(GameController.getInstance().getRedFlowerCount()+"/"+gameController.getMaxRedFlower());
+        rainbowDrakeCount.setText(GameController.getInstance().getRainbowDrakeCount()+"/"+gameController.getMaxRainbowDrake());
+        daffodilCount.setText(GameController.getInstance().getDaffodilCount()+"/"+gameController.getMaxDaffodil());
     }
 
 

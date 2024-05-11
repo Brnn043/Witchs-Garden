@@ -79,7 +79,6 @@ public abstract class Slime extends BaseCharacter{
             this.getTargetVeggie().setHp(this.getTargetVeggie().getHp()-this.getDamage());
             setAttackCooldown(Config.SLIMEATTACKCOOLDOWN);
             System.out.println("slime ATTACK!!!");
-            System.out.println("Veggie hp set to "+getTargetVeggie().getHp());
         }
 
     }

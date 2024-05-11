@@ -71,7 +71,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
         Config.Weather weather = GameController.getInstance().getClock().getWeather();
         if( weather == Config.Weather.SUNNY ) {
             this.setGrowthRate(MAXGROWTHRATE * (float) 0.5);
-            this.setWaterDroppingRate(MAXWATERDROPPINGRATE * (float) 0.9);
+            this.setWaterDroppingRate(MAXWATERDROPPINGRATE);
         } else if( weather == Config.Weather.SNOWY ) {
             this.setGrowthRate(MAXGROWTHRATE * (float) 0.2);
             this.setWaterDroppingRate(MAXWATERDROPPINGRATE * (float) 0.4);

@@ -34,11 +34,11 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
     public void weatherEffected() {
         Weather weatherNow = GameController.getInstance().getClock().getWeather();
         if(weatherNow == Weather.SUNNY){
-            setSpeedRate((float) 0.6 * MAXSPEEDRATE);
+            setSpeedRate((float) 0.75 * MAXSPEEDRATE);
         } else if (weatherNow == Weather.RAINY) {
-            setSpeedRate((float) 0.7 * MAXSPEEDRATE);
+            setSpeedRate((float) 0.9 * MAXSPEEDRATE);
         }else if (weatherNow == Weather.SNOWY){
-            setSpeedRate((float) 0.4 * MAXSPEEDRATE);
+            setSpeedRate((float) 0.5 * MAXSPEEDRATE);
         }
     }
 

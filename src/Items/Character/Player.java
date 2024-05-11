@@ -68,7 +68,6 @@ public class Player extends BaseCharacter{
                         public void run() {
                             try {
                                 slime.setHp( slime.getHp() - broom.getDamage() );
-                                System.out.println("Broom damage in "+GameController.getInstance().getClock().getWeather()+"= "+broom.getDamage());
                                 broom.setDurability(broom.getDurability() - Config.BROOMDURABILITYPERATTACK);
                                 setAttackCooldown(getMaxAttackCoolDown());
                                 setAttack(true);

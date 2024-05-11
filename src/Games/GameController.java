@@ -330,11 +330,11 @@ public class GameController {
 
     public int getMaxGameTimer() { return maxGameTimer; }
 
-    public int getmaxRedFlower() { return maxRedFlower; }
+    public int getMaxRedFlower() { return maxRedFlower; }
 
-    public int getmaxRainbowDrake() { return maxRainbowDrake; }
+    public int getMaxRainbowDrake() { return maxRainbowDrake; }
 
-    public int getmaxDaffodil() { return maxDaffodil; }
+    public int getMaxDaffodil() { return maxDaffodil; }
 
     public ArrayList<Slime> getSlimeList() {
         return slimeList;
