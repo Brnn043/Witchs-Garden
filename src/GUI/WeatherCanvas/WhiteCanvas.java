@@ -1,4 +1,4 @@
-package GUI.weatherCanvas;
+package GUI.WeatherCanvas;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;

@@ -1,4 +1,4 @@
-package GUI.map;
+package GUI.Map;
 
 import GUISharedObject.CollidableEntity;
 import Games.Config;

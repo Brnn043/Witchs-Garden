@@ -1,12 +1,12 @@
 package Games;
 
-import GUI.gameBackground.RainyBackground;
-import GUI.gameBackground.SnowyBackground;
-import GUI.gameBackground.SunnyBackground;
-import GUI.map.BackgroundImage;
-import GUI.map.Bush;
-import GUI.map.House;
-import GUI.map.Tree;
+import GUI.GameBackground.RainyBackground;
+import GUI.GameBackground.SnowyBackground;
+import GUI.GameBackground.SunnyBackground;
+import GUI.Map.BackgroundImage;
+import GUI.Map.Bush;
+import GUI.Map.House;
+import GUI.Map.Tree;
 import GUISharedObject.IRenderable;
 import GUISharedObject.InputUtility;
 import GUISharedObject.RenderableHolder;

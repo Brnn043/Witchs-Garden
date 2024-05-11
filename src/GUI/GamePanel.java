@@ -1,8 +1,8 @@
 package GUI;
 
-import GUI.weatherCanvas.RainyCanvas;
-import GUI.weatherCanvas.SnowyCanvas;
-import GUI.weatherCanvas.WhiteCanvas;
+import GUI.WeatherCanvas.RainyCanvas;
+import GUI.WeatherCanvas.SnowyCanvas;
+import GUI.WeatherCanvas.WhiteCanvas;
 import Games.Config;
 import Games.GameController;
 import javafx.geometry.Insets;
