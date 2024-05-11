@@ -31,7 +31,7 @@ public class Menu extends GridPane {
                 new Text("Will insert Image Later")
         );
         howToPlayMenu.setVisible(false);
-        howToPlayMenu.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
+        howToPlayMenu.setBackground(new Background(new BackgroundFill(Color.rgb(255, 153, 204, 0.9), new CornerRadii(5), null)));
 
         // creditMenu
         VBox creditMenu = new VBox();
@@ -46,7 +46,7 @@ public class Menu extends GridPane {
                 new Text("Programming Methodology I")
         );
         creditMenu.setVisible(false);
-        creditMenu.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(8), null)));
+        creditMenu.setBackground(new Background(new BackgroundFill(Color.rgb(255, 153, 204, 0.9), new CornerRadii(8), null)));
 
         // Add important Button
         Button startButton = new Button("Start Game");
@@ -203,7 +203,7 @@ public class Menu extends GridPane {
         weatherButton.setSpacing(5);
 
         this.add(titleAndMenu,35,13);
-        this.add(creditHowtoPlay,1,25,15,7);
+        this.add(creditHowtoPlay,1,22,53,10);
         this.add(weatherButton,44,30);
     }
 
