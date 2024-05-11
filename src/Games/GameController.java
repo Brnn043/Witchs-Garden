@@ -86,9 +86,10 @@ public class GameController {
         if (getInstance().getPlayer().getBroom() != null) {
             if (getInstance().getPlayer().getBroom().getDurability() == 0) {
                 getInstance().getPlayer().setBroom(null);
+            } else {
+                getInstance().getPlayer().getBroom().weatherEffected();
             }
         }
-
 
         for (int i = 0; i < instance.getSlimeList().size(); i++) {
             // delete slime if HP is < 0
@@ -193,7 +194,7 @@ public class GameController {
         }
 
         // set stat
-        this.player = new Player(400, 300, 5, 5, 50);
+        this.player = new Player(400, 300, 5, 0, 0);
         RenderableHolder.getInstance().add(player);
         veggiesList = new ArrayList<BaseVeggies>();
         slimeList = new ArrayList<Slime>();
@@ -230,14 +231,14 @@ public class GameController {
                         throw new RuntimeException(e);
                     }
 
-                    // spaw broom every 10 second
+                    // spawn broom every 15 second
                     if(game.getGameTimer() % Config.BROOMSPAWNTIME == 0){
                         Broom broom = new Broom();
                         game.getBroomOnGround().add(broom);
                         RenderableHolder.getInstance().add(broom);
                     }
 
-                    // spaw slime every 7 second
+                    // spawn slime every 3 second
                     if(game.getGameTimer() % Config.SLIMESPAWNTIME == 0){
                         game.getNewSlime();
                     }

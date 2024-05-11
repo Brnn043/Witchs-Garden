@@ -13,7 +13,7 @@ public class WhiteCanvas extends Canvas {
     private double speed;
     private int level;
     private double ratioTime;
-    private final double speedScaleFactor = 0.6; // Scale factor for speed increase
+    private final double speedScaleFactor = 0.1; // Scale factor for speed increase
 
     public WhiteCanvas(double width, double height, int level, double ratioTime) {
         super(width, height);

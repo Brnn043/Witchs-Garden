@@ -30,7 +30,7 @@ public class Config {
     public static final int BROOMMAXATTACKRANGE = 100;
     public static final int BROOMMINATTACKRANGE = 60;
     public static final int BROOMDURABILITYPERATTACK = 1;
-    public static final int BROOMDAMAGEPERATTACK = 3;
+    public static final float BROOMDAMAGEPERATTACK = 3;
     public static final int BROOMSPAWNTIME = 15;
     public static final float VEGGIESMAXGROWTHPOINT = 25;
     public static final int CLOCKCOOLDOWNTIME = 5;

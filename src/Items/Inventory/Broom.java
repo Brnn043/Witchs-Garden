@@ -7,14 +7,15 @@ import Games.Config;
 import Games.GameController;
 import Items.Character.Player;
 import Items.Interfaces.Collectable;
+import Items.Interfaces.WeatherEffectable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 
-public class Broom extends Entity implements Collectable {
+public class Broom extends Entity implements Collectable, WeatherEffectable {
     private boolean isCollected;
     private int durability;
     private int attackRange;
-    private int damage;
+    private float damage;
     private int width,height;
 
     public Broom() { // this constructor will randomly choose durability and attack range
@@ -34,6 +35,18 @@ public class Broom extends Entity implements Collectable {
         this.setAttackRange(attackRange);
         this.setDamage(Config.BROOMDAMAGEPERATTACK);
         spawnOnMap();
+    }
+
+    @Override
+    public void weatherEffected() {
+        Config.Weather weatherNow = GameController.getInstance().getClock().getWeather();
+        if(weatherNow == Config.Weather.SUNNY){
+            setDamage( (float) ( 0.5 * Config.BROOMDAMAGEPERATTACK) );
+        } else if (weatherNow == Config.Weather.RAINY) {
+            setDamage( (float) ( 0.75 * Config.BROOMDAMAGEPERATTACK) );
+        }else if (weatherNow == Config.Weather.SNOWY){
+            setDamage( (float) ( 1.0 * Config.BROOMDAMAGEPERATTACK) );
+        }
     }
 
     @Override
@@ -65,9 +78,9 @@ public class Broom extends Entity implements Collectable {
 
     public int getHeight() { return height; }
 
-    public int getDamage() { return damage; }
+    public float getDamage() { return damage; }
 
-    public void setDamage(int damage) { this.damage = damage; }
+    public void setDamage(float damage) { this.damage = damage; }
 
     public int getDurability() { return durability; }
 
