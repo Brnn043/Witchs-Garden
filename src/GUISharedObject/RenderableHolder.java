@@ -21,6 +21,10 @@ public class RenderableHolder {
     public static Image witchBroomSprite;
     public static Image witchWalkBroomSprite;
     public static Image witchAttackSprite;
+    public static Image witchRightSprite;
+    public static Image witchRightBroomSprite;
+    public static Image witchLeftSprite;
+    public static Image witchLeftBroomSprite;
     public static Image broomSprite;
     public static Image normalSlimeSprite;
     public static Image hardHitSlimeSprite;
@@ -59,6 +63,10 @@ public class RenderableHolder {
         witchBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_broom.png").toString());
         witchWalkBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_walk_broom.GIF").toString());
         witchAttackSprite = new Image(ClassLoader.getSystemResource("Witch/witch_attack.GIF").toString());
+        witchRightSprite = new Image(ClassLoader.getSystemResource("Witch/witch_r.GIF").toString());
+        witchRightBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_r_b.GIF").toString());
+        witchLeftSprite = new Image(ClassLoader.getSystemResource("Witch/witch_l.GIF").toString());
+        witchLeftBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_l_b.GIF").toString());
         broomSprite = new Image(ClassLoader.getSystemResource("Broom/AnimatedBroom.gif").toString());
         normalSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime1.png").toString());
         hardHitSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime3.png").toString());
