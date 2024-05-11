@@ -18,7 +18,7 @@ public class RainyCanvas extends Canvas {
     private List<Raindrop> raindrops = new ArrayList<>();
 
     public RainyCanvas() {
-        super(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        super(Config.GAMESCREENWIDTH, Config.GAMESCREENHEIGHT);
 
         // Generate initial raindrops
         for (int i = 0; i < NUM_RAINDROPS; i++) {
@@ -61,8 +61,8 @@ public class RainyCanvas extends Canvas {
 
         private Raindrop() {
             Random random = new Random();
-            x = random.nextDouble() * Config.GAMEFRAMEWIDTH; // Adjust width as needed
-            y = random.nextDouble() * Config.GAMEFRAMEHEIGHT; // Adjust height as needed
+            x = random.nextDouble() * Config.GAMESCREENWIDTH; // Adjust width as needed
+            y = random.nextDouble() * Config.GAMESCREENHEIGHT; // Adjust height as needed
             speed = random.nextDouble() * MAX_SPEED + 1;
         }
 

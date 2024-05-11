@@ -14,7 +14,7 @@ public class SnowyCanvas extends Canvas {
     private List<Snowflake> snowflakes = new ArrayList<>();
 
     public SnowyCanvas() {
-        super(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        super(Config.GAMESCREENWIDTH, Config.GAMESCREENHEIGHT);
 
         // Generate initial snowflakes
         for (int i = 0; i < NUM_SNOWFLAKES; i++) {
@@ -58,15 +58,15 @@ public class SnowyCanvas extends Canvas {
 
         private Snowflake() {
             Random random = new Random();
-            x = random.nextDouble() * Config.GAMEFRAMEWIDTH; // Adjust width as needed
-            y = random.nextDouble() * Config.GAMEFRAMEHEIGHT; // Adjust height as needed
+            x = random.nextDouble() * Config.GAMESCREENWIDTH; // Adjust width as needed
+            y = random.nextDouble() * Config.GAMESCREENHEIGHT; // Adjust height as needed
             speed = random.nextDouble() * 2 + 1; // Random speed between 1 and 3
             size = random.nextDouble() * 4 + 1; // Random size between 1 and 5
         }
 
         private void update() {
             y += speed;
-            if (y > Config.GAMEFRAMEHEIGHT) {
+            if (y > Config.GAMESCREENHEIGHT) {
                 y = 0;
             }
         }

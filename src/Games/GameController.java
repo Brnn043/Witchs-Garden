@@ -48,27 +48,28 @@ public class GameController {
     public GameController() {
         // add background
         backgroundImage = new BackgroundImage();
-        house = new House(-5, -40, 280, 225);
+        house = new House(135, 72, 280, 225);
 
         trees = new ArrayList<>();
         bushes = new ArrayList<>();
+
         //left side
-        trees.add(new Tree(-30, 270, 120, 155, 20, 4));
-        trees.add(new Tree(-40, 420, 110, 160, 22, 2));
-        trees.add(new Tree(40, 390, 110, 160, 24, 3));
+        trees.add(new Tree(30, 327.5, 120, 155, 20, 4));
+        trees.add(new Tree(130, 440, 110, 160, 24, 3));
+        trees.add(new Tree(15, 500, 110, 160, 27, 2));
 
         //right side
-        trees.add(new Tree(1025, 20, 90, 110, 20, 2));
-        trees.add(new Tree(1020, 110, 150, 180, 22, 1));
-        trees.add(new Tree(1000, 250, 99, 144, 24, 3));
-        trees.add(new Tree(990, 320, 140, 180, 26, 4));
-        trees.add(new Tree(895, 340, 120, 190, 28, 5));
+        trees.add(new Tree(1050, 75, 90, 110, 20, 2));
+        trees.add(new Tree(1075, 200, 150, 180, 22, 1));
+        trees.add(new Tree(1029.5, 322, 99, 144, 24, 3));
+        trees.add(new Tree(940, 420, 105, 160, 28, 5));
+        trees.add(new Tree(1050,425,130,170,29,3));
 
-        bushes.add(new Bush(950, 130, 95, 60, 21, 1));
-        bushes.add(new Bush(945, 230, 95, 50, 23, 2));
-        bushes.add(new Bush(790, 470, 120, 80, 32, 1));
-        bushes.add(new Bush(850, 485, 100, 60, 34, 4));
-        bushes.add(new Bush(1010, 495, 100, 60, 36, 3));
+        bushes.add(new Bush(999.5, 160, 95, 60, 21, 1));
+        bushes.add(new Bush(994.5, 255, 95, 50, 23, 2));
+        bushes.add(new Bush(850, 510, 110, 60, 32, 1));
+        bushes.add(new Bush(900, 515, 100, 60, 34, 4));
+        bushes.add(new Bush(1060, 525, 100, 60, 36, 3));
 
         // add player in GUI
         RenderableHolder.getInstance().addBackground(backgroundImage);
