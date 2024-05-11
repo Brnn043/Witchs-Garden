@@ -38,7 +38,7 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
         } else if (weatherNow == Weather.RAINY) {
             setSpeedRate((float) 0.7 * MAXSPEEDRATE);
         }else if (weatherNow == Weather.SNOWY){
-            setSpeedRate((float) 0.5 * MAXSPEEDRATE);
+            setSpeedRate((float) 0.4 * MAXSPEEDRATE);
         }
     }
 

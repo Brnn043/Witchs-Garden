@@ -5,9 +5,7 @@ import Games.Config;
 import Games.GameController;
 import Items.Veggies.BaseVeggies;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
 
 import java.util.ArrayList;
 
@@ -133,7 +131,7 @@ public abstract class Slime extends BaseCharacter{
         if(this instanceof NormalSlime){
             gc.drawImage(RenderableHolder.normalSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
         }
-        if(this instanceof hardHitSlime){
+        if(this instanceof HardHitSlime){
             gc.drawImage(RenderableHolder.hardHitSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
         }
         if(this instanceof SpeedSlime){
