@@ -16,6 +16,7 @@ public class Player extends BaseCharacter{
     private Broom broom;
     private int walk; // 0 = stay 1 = front 2 = right 3 = left
     private boolean isAttack;
+    private int maxAttackCoolDown;
 
     public Player(int positionX, int positionY, int maxSpeedRate, int attackRange, int damage) {
         super(positionX, positionY, maxSpeedRate, attackRange, damage);
@@ -24,6 +25,19 @@ public class Player extends BaseCharacter{
         setWidth(90);
         setHeight(128.6);
         this.z = 999;
+    }
+
+    @Override
+    public void weatherEffected() {
+        super.weatherEffected();
+        Config.Weather weatherNow = GameController.getInstance().getClock().getWeather();
+        if(weatherNow == Config.Weather.SUNNY){
+            setMaxAttackCoolDown( (int) ( 0.5 * Config.PLAYERCOOLDOWNTIME) );
+        } else if (weatherNow == Config.Weather.RAINY) {
+            setMaxAttackCoolDown( (int) ( 0.7 * Config.PLAYERCOOLDOWNTIME) );
+        }else if (weatherNow == Config.Weather.SNOWY){
+            setMaxAttackCoolDown( (int) ( 1.0 * Config.PLAYERCOOLDOWNTIME) );
+        }
     }
 
     @Override
@@ -55,7 +69,7 @@ public class Player extends BaseCharacter{
                             try {
                                 slime.setHp( slime.getHp() - broom.getDamage() );
                                 broom.setDurability(broom.getDurability() - Config.BROOMDURABILITYPERATTACK);
-                                setAttackCooldown(Config.PLAYERCOOLDOWNTIME);
+                                setAttackCooldown(getMaxAttackCoolDown());
                                 setAttack(true);
                                 Thread.sleep(300);
                             } catch (InterruptedException e) {
@@ -132,7 +146,7 @@ public class Player extends BaseCharacter{
         }
 
 
-        if (!GameController.getInstance().isPositionAccesible(posX,posY+getHeight()/4,getWidth()/2,getHeight()/2,true)) return;
+        if (!GameController.getInstance().isPositionAccesible(posX,posY + getHeight()/4,getWidth()/2,getHeight()/2,true)) return;
         setX(posX);
         setY(posY);
     }
@@ -176,12 +190,16 @@ public class Player extends BaseCharacter{
         if(getBroom() != null){
             gc.setStroke(Color.WHITE);
             gc.setLineWidth(2);
-            float broomDegree = ((float) Config.PLAYERCOOLDOWNTIME - getAttackCooldown())/Config.PLAYERCOOLDOWNTIME * 360;
+            float broomDegree = ((float) getMaxAttackCoolDown() - getAttackCooldown())/getMaxAttackCoolDown() * 360;
             gc.strokeArc(getX() - getBroom().getAttackRange(), getY()- getBroom().getAttackRange(),
                     getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2,
                     0,broomDegree, ArcType.OPEN );
         }
     }
+
+    public int getMaxAttackCoolDown() { return maxAttackCoolDown; }
+
+    public void setMaxAttackCoolDown(int maxAttackCoolDown) { this.maxAttackCoolDown = maxAttackCoolDown; }
 
     public Broom getBroom() {
         return broom;

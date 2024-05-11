@@ -86,9 +86,10 @@ public class GameController {
         if (getInstance().getPlayer().getBroom() != null) {
             if (getInstance().getPlayer().getBroom().getDurability() == 0) {
                 getInstance().getPlayer().setBroom(null);
+            } else {
+                getInstance().getPlayer().getBroom().weatherEffected();
             }
         }
-
 
         for (int i = 0; i < instance.getSlimeList().size(); i++) {
             // delete slime if HP is < 0
@@ -119,11 +120,9 @@ public class GameController {
     }
 
     public void initGames() {
-        getNewVeggie();
-        getNewVeggie();
-        getNewVeggie();
-        getNewVeggie();
-        getNewVeggie();
+        for (int i = 0; i < 4; i++) {
+            getNewVeggie();
+        }
     }
 
     public void getNewVeggie() {
@@ -147,7 +146,7 @@ public class GameController {
         if (slimeType == 0) {
             slime = new NormalSlime();
         } else if (slimeType == 1) {
-            slime = new hardHitSlime();
+            slime = new HardHitSlime();
         } else {
             slime = new SpeedSlime();
         }
@@ -195,7 +194,7 @@ public class GameController {
         }
 
         // set stat
-        this.player = new Player(400, 300, 5, 5, 50);
+        this.player = new Player(400, 300, 5, 0, 0);
         RenderableHolder.getInstance().add(player);
         veggiesList = new ArrayList<BaseVeggies>();
         slimeList = new ArrayList<Slime>();
@@ -232,20 +231,20 @@ public class GameController {
                         throw new RuntimeException(e);
                     }
 
-                    // spaw broom every 10 second
-                    if(game.getGameTimer()%15 == 0){
+                    // spawn broom every 15 second
+                    if(game.getGameTimer() % Config.BROOMSPAWNTIME == 0){
                         Broom broom = new Broom();
                         game.getBroomOnGround().add(broom);
                         RenderableHolder.getInstance().add(broom);
                     }
 
-                    // spaw slime every 7 second
-                    if(game.getGameTimer()%8 == 0){
+                    // spawn slime every 3 second
+                    if(game.getGameTimer() % Config.SLIMESPAWNTIME == 0){
                         game.getNewSlime();
                     }
 
                     // set clock timer coolDown
-                    clock.setTimer(clock.getTimer()-1);
+                    clock.setTimer(clock.getTimer() - 1);
 
                     // decrease slime attack coolDown
                     for(Slime slime: game.getSlimeList()) {
@@ -270,7 +269,7 @@ public class GameController {
                         game.setGameover(true);
                     }
                     // check if gameTimer == 0
-                    game.setGameTimer(game.getGameTimer()-1);
+                    game.setGameTimer(game.getGameTimer() - 1);
                     if(game.getGameTimer() == 0){
                         game.setGameover(true);
                     }
@@ -331,11 +330,11 @@ public class GameController {
 
     public int getMaxGameTimer() { return maxGameTimer; }
 
-    public int getmaxRedFlower() { return maxRedFlower; }
+    public int getMaxRedFlower() { return maxRedFlower; }
 
-    public int getmaxRainbowDrake() { return maxRainbowDrake; }
+    public int getMaxRainbowDrake() { return maxRainbowDrake; }
 
-    public int getmaxDaffodil() { return maxDaffodil; }
+    public int getMaxDaffodil() { return maxDaffodil; }
 
     public ArrayList<Slime> getSlimeList() {
         return slimeList;
