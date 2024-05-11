@@ -11,7 +11,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 
-import java.util.ArrayList;
 
 public class Player extends BaseCharacter{
     private Broom broom;
@@ -125,15 +124,13 @@ public class Player extends BaseCharacter{
             setWalk(true);
         }
 
-        if (!GameController.getInstance().isPositionAccesible(posX,posY+getHeight(),getWidth(),getHeight(),true)) return;
+        if (!GameController.getInstance().isPositionAccesible(posX,posY+getHeight()/4,getWidth()/2,getHeight()/2,true)) return;
         setX(posX);
         setY(posY);
     }
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.setFill(Color.BLUE);
-        gc.fillRect(getX()-getWidth()/2,getY()-getHeight()/2,getWidth(),getHeight());
         if(isAttack() && getBroom()!=null){
             gc.drawImage(RenderableHolder.witchAttackSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             gc.setStroke(Color.RED);

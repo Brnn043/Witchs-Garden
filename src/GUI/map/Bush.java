@@ -4,7 +4,6 @@ import GUISharedObject.CollidableEntity;
 import Games.Config;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 
 public class Bush extends CollidableEntity implements WeatherChangeable {
     private String imagePath;
@@ -27,7 +26,5 @@ public class Bush extends CollidableEntity implements WeatherChangeable {
     public void draw(GraphicsContext gc) {
         Image bushImage = new Image(ClassLoader.getSystemResource(imagePath).toString());
         gc.drawImage(bushImage,getX() - getWidth()/2,getY() - getHeight()/2,getWidth(),getHeight());
-        gc.setFill(Color.RED);
-        gc.fillRect(x-width/2,y-height/2,width,height);
     }
 }

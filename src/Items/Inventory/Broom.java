@@ -83,11 +83,11 @@ public class Broom extends Entity implements Collectable {
 
     @Override
     public void spawnOnMap() {
-        double posX = ((float)Math.random()*100)* Config.GAMEFRAMEWIDTH/100;
-        double posY = ((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
+        double posX = ((float)Math.random()*100)* Config.GAMESCREENWIDTH/100;
+        double posY = ((float)Math.random()*100)*Config.GAMESCREENHEIGHT/100;
         while (!GameController.getInstance().isPositionAccesible(posX, posY, getWidth(), getHeight(), false)) {
-            posX = ((float)Math.random()*100)* Config.GAMEFRAMEWIDTH/100;
-            posY = ((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
+            posX = ((float)Math.random()*100)* Config.GAMESCREENWIDTH/100;
+            posY = ((float)Math.random()*100)*Config.GAMESCREENHEIGHT/100;
             System.out.println("Broom cannot be spawn here. Find new pos...");
         }
         setX(posX);

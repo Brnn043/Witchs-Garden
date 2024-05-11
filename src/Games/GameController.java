@@ -70,18 +70,15 @@ public class GameController {
         bushes.add(new Bush(850, 485, 100, 60, 34, 4));
         bushes.add(new Bush(1010, 495, 100, 60, 36, 3));
 
-        //for testing
-        bushes.add(new Bush(300,200,95,60,21,1));
-
         // add player in GUI
         RenderableHolder.getInstance().addBackground(backgroundImage);
         RenderableHolder.getInstance().addBackground(house);
         for (Tree tree : trees) RenderableHolder.getInstance().addBackground(tree);
         for (Bush bush : bushes) RenderableHolder.getInstance().addBackground(bush);
 
-        sunnyBackground = new SunnyBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
-        snowyBackground = new SnowyBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
-        rainyBackground = new RainyBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
+        sunnyBackground = new SunnyBackground(Config.GAMESCREENWIDTH,Config.GAMESCREENHEIGHT);
+        snowyBackground = new SnowyBackground(Config.GAMESCREENWIDTH,Config.GAMESCREENHEIGHT);
+        rainyBackground = new RainyBackground(Config.GAMESCREENWIDTH,Config.GAMESCREENHEIGHT);
     }
 
     public static void play() throws InterruptedException {
