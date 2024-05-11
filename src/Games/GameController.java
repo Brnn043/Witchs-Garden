@@ -70,6 +70,9 @@ public class GameController {
         bushes.add(new Bush(850, 485, 100, 60, 34, 4));
         bushes.add(new Bush(1010, 495, 100, 60, 36, 3));
 
+        //for testing
+        bushes.add(new Bush(300,200,95,60,21,1));
+
         // add player in GUI
         RenderableHolder.getInstance().addBackground(backgroundImage);
         RenderableHolder.getInstance().addBackground(house);
@@ -322,32 +325,7 @@ public class GameController {
         for (Bush bush : bushes) {
             if (bush.collideWith(x, y, width, height)) return false;
         }
-        if (!isPlayer) {
-            // Calculate half widths and heights
-            double playerHalfWidth = player.getWidth() / 2;
-            double playerHalfHeight = player.getHeight() / 2;
-            double otherHalfWidth = width / 2;
-            double otherHalfHeight = height / 2;
-
-            // Calculate centers
-            double playerCenterX = player.getX();
-            double playerCenterY = player.getY() + playerHalfHeight * 0.75;
-            playerHalfHeight /= 4;
-            playerHalfWidth /= 2;
-            double otherCenterX = x + otherHalfWidth;
-            double otherCenterY = y + otherHalfHeight;
-
-            // Calculate distances between centers
-            double deltaX = playerCenterX - otherCenterX;
-            double deltaY = playerCenterY - otherCenterY;
-
-            // Calculate minimum distances between centers where collision is possible
-            double minDistanceX = playerHalfWidth + otherHalfWidth;
-            double minDistanceY = playerHalfHeight + otherHalfHeight;
-
-            // Check collision
-            if( Math.abs(deltaX) < minDistanceX && Math.abs(deltaY) < minDistanceY ) return false;
-        }
+        if (!isPlayer && player.collideWith(x,y,width,height)) return false;
         return !house.collideWith(x, y, width, height);
     }
 

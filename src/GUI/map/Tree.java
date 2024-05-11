@@ -25,7 +25,7 @@ public class Tree extends CollidableEntity implements WeatherChangeable{
 
     @Override
     public void draw(GraphicsContext gc) {
-        Image treeImage = new Image(ClassLoader.getSystemResource(imagePath).toString(), Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT,true,false);
-        gc.drawImage(treeImage,getX(),getY(),getWidth(),getHeight());
+        Image treeImage = new Image(ClassLoader.getSystemResource(imagePath).toString());
+        gc.drawImage(treeImage,getX() - getWidth()/2,getY() -getHeight()/2,getWidth(),getHeight());
     }
 }

@@ -47,7 +47,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
     public void spawnOnMap() {
         double posX = ((float)Math.random()*100)* Config.GAMEFRAMEWIDTH/100;
         double posY = ((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
-        while (!GameController.getInstance().isPositionAccesible(posX- (double) getWidth() /2,posY- (double) getHeight() /2,getWidth(),getHeight(),false)) {
+        while (!GameController.getInstance().isPositionAccesible(posX,posY,getWidth(),getHeight(),false)) {
             posX = ((float)Math.random()*100)* Config.GAMEFRAMEWIDTH/100;
             posY = ((float)Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
             System.out.println("Veggie cannot be spawn here. Find new pos...");

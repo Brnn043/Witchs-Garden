@@ -125,13 +125,15 @@ public class Player extends BaseCharacter{
             setWalk(true);
         }
 
-        if (!GameController.getInstance().isPositionAccesible(posX-getWidth()/4,posY,getWidth()/2,getHeight()/2,true)) return;
+        if (!GameController.getInstance().isPositionAccesible(posX,posY+getHeight(),getWidth(),getHeight(),true)) return;
         setX(posX);
         setY(posY);
     }
 
     @Override
     public void draw(GraphicsContext gc) {
+        gc.setFill(Color.BLUE);
+        gc.fillRect(getX()-getWidth()/2,getY()-getHeight()/2,getWidth(),getHeight());
         if(isAttack() && getBroom()!=null){
             gc.drawImage(RenderableHolder.witchAttackSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             gc.setStroke(Color.RED);
