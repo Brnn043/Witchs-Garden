@@ -71,7 +71,6 @@ public class GameController {
         bushes.add(new Bush(900, 515, 100, 60, 34, 4));
         bushes.add(new Bush(1060, 525, 100, 60, 36, 3));
 
-        // add player in GUI
         RenderableHolder.getInstance().addBackground(backgroundImage);
         RenderableHolder.getInstance().addBackground(house);
         for (Tree tree : trees) RenderableHolder.getInstance().addBackground(tree);
@@ -110,6 +109,7 @@ public class GameController {
             }else{
                 i = i+1;
             }
+            veggie.weatherEffected();
         }
 
 
@@ -195,7 +195,7 @@ public class GameController {
         }
 
         // set stat
-        this.player = new Player(400, 300, 5, 5, 3);
+        this.player = new Player(400, 300, 5, 5, 50);
         RenderableHolder.getInstance().add(player);
         veggiesList = new ArrayList<BaseVeggies>();
         slimeList = new ArrayList<Slime>();

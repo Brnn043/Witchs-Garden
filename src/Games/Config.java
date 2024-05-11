@@ -16,7 +16,7 @@ public class Config {
     public static int HEIGHTPERROW = 20;
     public static int GAMETIMER = 60;
     public static int SLIMEMAXSPEEDRATE = 20;
-    public static int SLIMEMINSPEEDRATE = 10;
+    public static int SLIMEMINSPEEDRATE = 15;
     public static int SLIMEMAXDAMAGERANGE = 30;
     public static int SLIMEMAXDAMAGE = 5;
     public static float SLIMEWALKSTEP = 2;

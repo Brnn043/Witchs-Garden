@@ -68,7 +68,7 @@ public class RenderableHolder {
         redFlowerIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/RedFlower_Idle.gif").toString());
         redFlowerDieSprite = new Image(ClassLoader.getSystemResource("Veggie/RedFlower_Dying.gif").toString());
         daffodilIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/Daffodil_Idle.gif").toString());
-        daffodilDieSprite = new Image(ClassLoader.getSystemResource("Veggie/RainbowDrake_Dying.gif").toString());
+        daffodilDieSprite = new Image(ClassLoader.getSystemResource("Veggie/Daffodil_Dying.gif").toString());
 //        explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
     }
 

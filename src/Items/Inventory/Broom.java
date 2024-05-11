@@ -25,7 +25,7 @@ public class Broom extends Entity implements Collectable {
         width = 90;
         height = 45;
         spawnOnMap();
-        this.z = this.getZ() + 800;
+        this.z = this.getZ() + 300;
     }
 
     public Broom(int durability, int attackRange) {

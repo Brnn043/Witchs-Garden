@@ -25,7 +25,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
     private final int width;
     private final int height;
 
-    public BaseVeggies(int hp,float maxWater,float growthRate,float waterDroppingRate,int price, int maxGrowthPoint){
+    public BaseVeggies(int hp, float maxWater, float growthRate, float waterDroppingRate, int maxGrowthPoint){
         super();
         MAXHP = hp;
         setHp(MAXHP);
@@ -71,10 +71,10 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
         Config.Weather weather = GameController.getInstance().getClock().getWeather();
         if( weather == Config.Weather.SUNNY ) {
             this.setGrowthRate(MAXGROWTHRATE * (float) 0.5);
-            this.setWaterDroppingRate(MAXWATERDROPPINGRATE * (float) 1.0);
+            this.setWaterDroppingRate(MAXWATERDROPPINGRATE * (float) 0.9);
         } else if( weather == Config.Weather.SNOWY ) {
             this.setGrowthRate(MAXGROWTHRATE * (float) 0.2);
-            this.setWaterDroppingRate(MAXWATERDROPPINGRATE * (float) 0.3);
+            this.setWaterDroppingRate(MAXWATERDROPPINGRATE * (float) 0.4);
         } else if( weather == Config.Weather.RAINY) {
             this.setGrowthRate(MAXGROWTHRATE * (float) 0.7);
             this.setWaterDroppingRate(MAXWATERDROPPINGRATE * (float) 0.0);
@@ -84,13 +84,13 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
     @Override
     public void draw(GraphicsContext gc) {
         if(this instanceof RedFlower){
-            gc.drawImage(RenderableHolder.redFlowerIdleSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+            gc.drawImage(RenderableHolder.redFlowerIdleSprite, getX() - (double) getWidth() /2, getY() - (double) getHeight() /2, getWidth(), getHeight());
         }
         if(this instanceof RainbowDrake){
-            gc.drawImage(RenderableHolder.rainbowDrakeIdleSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+            gc.drawImage(RenderableHolder.rainbowDrakeIdleSprite, getX() - (double) getWidth() /2, getY() - (double) getHeight() /2, getWidth(), getHeight());
         }
         if(this instanceof Daffodil){
-            gc.drawImage(RenderableHolder.daffodilIdleSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+            gc.drawImage(RenderableHolder.daffodilIdleSprite, getX() - (double) getWidth() /2, getY() - (double) getHeight() /2, getWidth(), getHeight());
         }
 
         gc.setStroke(Color.GREEN);
