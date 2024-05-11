@@ -13,17 +13,17 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
     private float speedRate;
     private final float MAXSPEEDRATE;
     private int attackRange;
-    private int damage;
+    private float damage;
     private int attackCooldown;
 
-    protected BaseCharacter(double positionX, double positionY, int maxSpeedRate, int attackRange, int damage) {
+    public BaseCharacter(double positionX, double positionY, int maxSpeedRate, int attackRange, float damage) {
         super(positionX,positionY,0,0);
         this.MAXSPEEDRATE = Math.max(2,maxSpeedRate);
         this.attackRange = Math.max(2,attackRange);
         this.damage = Math.max(2,damage);
     }
 
-    protected BaseCharacter(int maxSpeedRate, int attackRange, int damage) {
+    public BaseCharacter(int maxSpeedRate, int attackRange, float damage) {
         super();
         this.MAXSPEEDRATE = Math.max(2,maxSpeedRate);
         this.attackRange = Math.max(2,attackRange);
@@ -47,9 +47,7 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
         this.y = Math.max(0,Math.min(y,Config.GAMESCREENHEIGHT));
     }
 
-    public int getAttackCooldown() {
-        return attackCooldown;
-    }
+    public int getAttackCooldown() { return attackCooldown; }
 
     public void setAttackCooldown(int attackCooldown) {
         this.attackCooldown = Math.max(0,attackCooldown);
@@ -82,11 +80,11 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
         return MAXSPEEDRATE;
     }
 
-    public int getDamage() {
+    public float getDamage() {
         return damage;
     }
 
-    public void setDamage(int damage) {
+    public void setDamage(float damage) {
         this.damage = damage;
     }
 }

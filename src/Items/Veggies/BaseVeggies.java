@@ -16,7 +16,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
     private final float MAXGROWTHPOINT;
     private float growthRate;
     private final float MAXGROWTHRATE;
-    private int Hp;
+    private float Hp;
     private float waterPoint;
     private float waterDroppingRate;
     private final float MAXWATERDROPPINGRATE;
@@ -138,9 +138,9 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
 
     public void setCollected(boolean collected) { isCollected = collected; }
 
-    public int getHp() { return Hp; }
+    public float getHp() { return Hp; }
 
-    public void setHp(int hp) { Hp = hp; }
+    public void setHp(float hp) { Hp = hp; }
 
     public float getWaterPoint() { return waterPoint; }
 

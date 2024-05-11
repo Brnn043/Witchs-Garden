@@ -119,11 +119,9 @@ public class GameController {
     }
 
     public void initGames() {
-        getNewVeggie();
-        getNewVeggie();
-        getNewVeggie();
-        getNewVeggie();
-        getNewVeggie();
+        for (int i = 0; i < 4; i++) {
+            getNewVeggie();
+        }
     }
 
     public void getNewVeggie() {
@@ -233,19 +231,19 @@ public class GameController {
                     }
 
                     // spaw broom every 10 second
-                    if(game.getGameTimer()%15 == 0){
+                    if(game.getGameTimer() % Config.BROOMSPAWNTIME == 0){
                         Broom broom = new Broom();
                         game.getBroomOnGround().add(broom);
                         RenderableHolder.getInstance().add(broom);
                     }
 
                     // spaw slime every 7 second
-                    if(game.getGameTimer()%8 == 0){
+                    if(game.getGameTimer() % Config.SLIMESPAWNTIME == 0){
                         game.getNewSlime();
                     }
 
                     // set clock timer coolDown
-                    clock.setTimer(clock.getTimer()-1);
+                    clock.setTimer(clock.getTimer() - 1);
 
                     // decrease slime attack coolDown
                     for(Slime slime: game.getSlimeList()) {
@@ -270,7 +268,7 @@ public class GameController {
                         game.setGameover(true);
                     }
                     // check if gameTimer == 0
-                    game.setGameTimer(game.getGameTimer()-1);
+                    game.setGameTimer(game.getGameTimer() - 1);
                     if(game.getGameTimer() == 0){
                         game.setGameover(true);
                     }
