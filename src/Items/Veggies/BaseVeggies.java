@@ -109,7 +109,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
         double HPBarY = getY() + 10; // Position below the circle
 
         gc.setFill(Color.GRAY);
-        gc.fillRect(HPBarX, HPBarY, 20, 5);
+        gc.fillRect(HPBarX, HPBarY, 30, 5);
         gc.setFill(Color.ORANGERED);
         gc.fillRect(HPBarX, HPBarY, HPBarWidth, 5);
 
@@ -123,7 +123,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
         double waterBarY = getY() + 18; // Position below the circle
 
         gc.setFill(Color.GRAY);
-        gc.fillRect(waterBarX, waterBarY, 20, 5);
+        gc.fillRect(waterBarX, waterBarY, 30, 5);
         gc.setFill(Color.CORNFLOWERBLUE);
         gc.fillRect(waterBarX, waterBarY, waterBarWidth, 5);
     }
