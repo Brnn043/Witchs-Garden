@@ -25,11 +25,11 @@ public abstract class Slime extends BaseCharacter{
         setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
         setWidth(30);
         setHeight(30);
-        double posX = (Math.random()*100)*Config.GAMEFRAMEWIDTH/100;
-        double posY = (Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
+        double posX = (Math.random()*100)*Config.GAMESCREENWIDTH/100;
+        double posY = (Math.random()*100)*Config.GAMESCREENHEIGHT/100;
         while (!GameController.getInstance().isPositionAccesible(posX-getWidth()/2,posY-getHeight()/2,getWidth(),getHeight(),false)){
-            posX = (Math.random()*100)*Config.GAMEFRAMEWIDTH/100;
-            posY = (Math.random()*100)*Config.GAMEFRAMEHEIGHT/100;
+            posX = (Math.random()*100)*Config.GAMESCREENWIDTH/100;
+            posY = (Math.random()*100)*Config.GAMESCREENHEIGHT/100;
             System.out.println("Slime cannot be spawn here. Find new pos...");
         }
         setX(posX);

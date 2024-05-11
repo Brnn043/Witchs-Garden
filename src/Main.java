@@ -57,9 +57,10 @@ public class Main extends Application {
         GameScreen gameScreen = new GameScreen(Config.GAMESCREENWIDTH, Config.GAMESCREENHEIGHT);
 
         StackPane gameScreenWithEffect = new StackPane();
+        gameScreenWithEffect.setPrefSize(Config.GAMESCREENWIDTH,Config.GAMESCREENHEIGHT);
         gameScreenWithEffect.setAlignment(Pos.CENTER);
-
         gameScreenWithEffect.getChildren().addAll(game.getSunnyBackground(),gameScreen);
+
         GamePanel gamePanel = new GamePanel(game,gameScreen,gameScreenWithEffect);
 
         root.getChildren().addAll(gamePanel,gameScreenWithEffect);

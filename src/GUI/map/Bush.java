@@ -24,7 +24,7 @@ public class Bush extends CollidableEntity implements WeatherChangeable {
 
     @Override
     public void draw(GraphicsContext gc) {
-        Image bushImage = new Image(ClassLoader.getSystemResource(imagePath).toString(), Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT,true,false);
+        Image bushImage = new Image(ClassLoader.getSystemResource(imagePath).toString(), Config.GAMESCREENWIDTH, Config.GAMESCREENHEIGHT,true,false);
         gc.drawImage(bushImage,getX(),getY(),getWidth(),getHeight());
     }
 }

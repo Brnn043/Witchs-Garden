@@ -24,7 +24,7 @@ public class House extends CollidableEntity implements WeatherChangeable {
 
     @Override
     public void draw(GraphicsContext gc) {
-        Image houseImage = new Image(ClassLoader.getSystemResource(imagePath).toString(), Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT,true,false);
+        Image houseImage = new Image(ClassLoader.getSystemResource(imagePath).toString(), Config.GAMESCREENWIDTH, Config.GAMESCREENHEIGHT,true,false);
         gc.drawImage(houseImage,getX(),getY(),getWidth(),getHeight());
     }
 }

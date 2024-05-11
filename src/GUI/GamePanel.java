@@ -186,7 +186,7 @@ public class GamePanel extends HBox {
             gameController.getBackgroundImage().changeWeather(Config.Weather.RAINY);
             gameController.getHouse().changeWeather(Config.Weather.SUNNY);
             gameScreenWithEffect.getChildren().clear();
-            WhiteCanvas whiteCanvas = new WhiteCanvas(Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT, gameController.getLevel(), (double) gameController.getGameTimer() /gameController.getMaxGameTimer());
+            WhiteCanvas whiteCanvas = new WhiteCanvas(Config.GAMESCREENWIDTH, Config.GAMESCREENHEIGHT, gameController.getLevel(), (double) gameController.getGameTimer() /gameController.getMaxGameTimer());
             gameScreenWithEffect.getChildren().addAll(gameController.getRainyBackground(),gameScreen,whiteCanvas,new RainyCanvas());
             whiteCanvas.start();
         }

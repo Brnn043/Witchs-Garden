@@ -76,9 +76,9 @@ public class GameController {
         for (Tree tree : trees) RenderableHolder.getInstance().addBackground(tree);
         for (Bush bush : bushes) RenderableHolder.getInstance().addBackground(bush);
 
-        sunnyBackground = new SunnyBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
-        snowyBackground = new SnowyBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
-        rainyBackground = new RainyBackground(Config.GAMEFRAMEWIDTH,Config.GAMEFRAMEHEIGHT);
+        sunnyBackground = new SunnyBackground(Config.GAMESCREENWIDTH,Config.GAMESCREENHEIGHT);
+        snowyBackground = new SnowyBackground(Config.GAMESCREENWIDTH,Config.GAMESCREENHEIGHT);
+        rainyBackground = new RainyBackground(Config.GAMESCREENWIDTH,Config.GAMESCREENHEIGHT);
     }
 
     public static void play() throws InterruptedException {
