@@ -149,15 +149,15 @@ public class Player extends BaseCharacter{
 
         if(getWalk()==0){
             if(getBroom()==null){
-                gc.drawImage(RenderableHolder.witchWalkSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+                gc.drawImage(RenderableHolder.witchSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             }else{
-                gc.drawImage(RenderableHolder.witchWalkBroomSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+                gc.drawImage(RenderableHolder.witchBroomSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             }
         }else if(getWalk()==1) {
             if (getBroom() == null) {
-                gc.drawImage(RenderableHolder.witchSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
+                gc.drawImage(RenderableHolder.witchWalkSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
             } else {
-                gc.drawImage(RenderableHolder.witchBroomSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
+                gc.drawImage(RenderableHolder.witchWalkBroomSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
             }
         }else if(getWalk()==2){
             if (getBroom() == null) {
