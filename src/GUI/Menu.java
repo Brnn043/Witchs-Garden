@@ -27,9 +27,9 @@ public class Menu extends GridPane {
         VBox howToPlayMenu = new VBox();
         howToPlayMenu.setAlignment(Pos.CENTER);
         howToPlayMenu.setSpacing(5);
-        howToPlayMenu.getChildren().addAll(
-                new Text("Will insert Image Later")
-        );
+        ImageView imageView =  new ImageView(ClassLoader.getSystemResource("MenuPage/HowToPlay.png").toString());
+        imageView.setFitHeight(270);
+        howToPlayMenu.getChildren().add(imageView);
         howToPlayMenu.setVisible(false);
         howToPlayMenu.setBackground(new Background(new BackgroundFill(Color.rgb(255, 153, 204, 0.9), new CornerRadii(5), null)));
 
@@ -202,9 +202,9 @@ public class Menu extends GridPane {
         HBox weatherButton = new HBox(sunnyButton,snowyButton,rainyButton);
         weatherButton.setSpacing(5);
 
-        this.add(titleAndMenu,35,13);
-        this.add(creditHowtoPlay,1,22,53,10);
-        this.add(weatherButton,44,30);
+        this.add(titleAndMenu,35,8);
+        this.add(creditHowtoPlay,1,20,53,10);
+        this.add(weatherButton,44,25);
     }
 
     private void handleSunnyButton() {
