@@ -4,6 +4,7 @@ import Games.Config;
 import Games.GameController;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 
 public class Main extends Application {
@@ -20,6 +22,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         Application.launch(args);
     }
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -29,6 +32,12 @@ public class Main extends Application {
         primaryStage.setTitle("Witch's Garden");
         primaryStage.setResizable(false);
         primaryStage.show();
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                System.exit(0);
+            }
+        });
     }
 
     private void preStory(Stage primaryStage){
@@ -142,7 +151,7 @@ public class Main extends Application {
         exitButton.setOnAction(e -> {
             RenderableHolder.storySong.stop();
             primaryStage.close();
-        };
+        });
 
         Scene scene =new Scene(completeGame, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         completeGame.setSpacing(20);
