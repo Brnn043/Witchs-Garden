@@ -159,7 +159,7 @@ public class GameController {
         if (slimeType == 0) {
             slime = new NormalSlime();
         } else if (slimeType == 1) {
-            slime = new HardHitSlime();
+            slime = new HitHardSlime();
         } else {
             slime = new SpeedSlime();
         }

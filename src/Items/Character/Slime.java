@@ -19,8 +19,6 @@ public abstract class Slime extends BaseCharacter{
         super(speedRate
                 ,(int) ( (float) Math.max(Config.SLIMEMAXSPEEDRATE, (Math.random())*Config.SLIMEMAXDAMAGERANGE) )
                 , maxDamage);
-//        this.SLIMEMAXHP = Math.max(10,(int) ((float)Math.random()*20));
-//        setHp(SLIMEMAXHP);
         setMaxHp(maxHp);
         setHp(maxHp);
         setMaxDamage(maxDamage);
@@ -130,8 +128,8 @@ public abstract class Slime extends BaseCharacter{
         if(this instanceof NormalSlime){
             gc.drawImage(RenderableHolder.normalSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
         }
-        if(this instanceof HardHitSlime){
-            gc.drawImage(RenderableHolder.hardHitSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
+        if(this instanceof HitHardSlime){
+            gc.drawImage(RenderableHolder.hitHardSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
         }
         if(this instanceof SpeedSlime){
             gc.drawImage(RenderableHolder.speedSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
