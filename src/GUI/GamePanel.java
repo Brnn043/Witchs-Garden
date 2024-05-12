@@ -3,6 +3,7 @@ package GUI;
 import GUI.WeatherCanvas.RainyCanvas;
 import GUI.WeatherCanvas.SnowyCanvas;
 import GUI.WeatherCanvas.WhiteCanvas;
+import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;
 import javafx.geometry.Insets;
@@ -163,6 +164,7 @@ public class GamePanel extends HBox {
 
     public void handleSunnyButton() {
         if (gameController.getClock().changeSeason(Config.Weather.SUNNY)) {
+            RenderableHolder.clockSound.play();
             gameController.getBackgroundImage().changeWeather(Config.Weather.SUNNY);
             gameController.getHouse().changeWeather(Config.Weather.SUNNY);
             gameScreenWithEffect.getChildren().clear();
@@ -173,6 +175,7 @@ public class GamePanel extends HBox {
 
     public void handleSnowyButton() {
         if (gameController.getClock().changeSeason(Config.Weather.SNOWY)) {
+            RenderableHolder.clockSound.play();
             gameController.getBackgroundImage().changeWeather(Config.Weather.SNOWY);
             gameController.getHouse().changeWeather(Config.Weather.SNOWY);
             gameScreenWithEffect.getChildren().clear();
@@ -183,6 +186,7 @@ public class GamePanel extends HBox {
 
     public void handleRainyButton() {
         if (gameController.getClock().changeSeason(Config.Weather.RAINY)) {
+            RenderableHolder.clockSound.play();
             gameController.getBackgroundImage().changeWeather(Config.Weather.RAINY);
             gameController.getHouse().changeWeather(Config.Weather.SUNNY);
             gameScreenWithEffect.getChildren().clear();

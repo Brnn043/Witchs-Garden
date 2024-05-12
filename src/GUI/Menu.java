@@ -1,5 +1,6 @@
 package GUI;
 
+import GUISharedObject.RenderableHolder;
 import Games.Config;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -205,6 +206,8 @@ public class Menu extends GridPane {
         this.add(titleAndMenu,35,8);
         this.add(creditHowtoPlay,1,20,53,10);
         this.add(weatherButton,44,25);
+
+        RenderableHolder.mainManuSong.play();
     }
 
     private void handleSunnyButton() {

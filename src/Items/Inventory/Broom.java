@@ -57,6 +57,7 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
             System.out.println("Player already have BROOM");
             return;
         }
+        RenderableHolder.collectSound.play();
         player.setBroom(this);
         this.setCollected(true);
         RenderableHolder.getInstance().getEntities().remove(this);
