@@ -4,15 +4,18 @@ import Games.Config;
 import Games.GameController;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 
 public class Main extends Application {
@@ -21,14 +24,23 @@ public class Main extends Application {
         Application.launch(args);
     }
 
+
     @Override
     public void start(Stage primaryStage) {
         Menu menu = new Menu(() -> preStory(primaryStage), primaryStage);
         Scene scene = new Scene(menu, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         primaryStage.setScene(scene);
+        Image icon = new Image(ClassLoader.getSystemResource("Slime/Slime2.png").toString());
+        primaryStage.getIcons().add(icon);
         primaryStage.setTitle("Witch's Garden");
         primaryStage.setResizable(false);
         primaryStage.show();
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                System.exit(0);
+            }
+        });
     }
 
     private void preStory(Stage primaryStage){
@@ -139,7 +151,10 @@ public class Main extends Application {
         exitButton.setOnMouseExited(e -> {
             exitButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
         });
-        exitButton.setOnAction(e -> primaryStage.close());
+        exitButton.setOnAction(e -> {
+            RenderableHolder.storySong.stop();
+            primaryStage.close();
+        });
 
         Scene scene =new Scene(completeGame, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         completeGame.setSpacing(20);
