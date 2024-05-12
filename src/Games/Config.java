@@ -23,13 +23,13 @@ public class Config {
 
     public static int SLIMEATTACKCOOLDOWN = 1;
 
-    public static int SLIMESPAWNTIME = 3;
+    public static int SLIMESPAWNTIME = 5;
     public static final int PLAYERCOOLDOWNTIME = 1000; // 1000 ms
     public static final int BROOMMAXDURABILITY = 20;
     public static final int BROOMMINDURABILITY = 10;
     public static final int BROOMMAXATTACKRANGE = 100;
     public static final int BROOMMINATTACKRANGE = 60;
-    public static final int BROOMDURABILITYPERATTACK = 1;
+    public static final float BROOMDURABILITYPERATTACK = 1.5F;
     public static final float BROOMDAMAGEPERATTACK = 3;
     public static final int BROOMSPAWNTIME = 15;
     public static final float VEGGIESMAXGROWTHPOINT = 25;
