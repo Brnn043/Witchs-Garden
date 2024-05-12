@@ -39,14 +39,14 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
         setGrowthPoint(0);
         MAXGROWTHPOINT = maxGrowthPoint;
         z = getZ() + 600;
-        width = 30;
-        height = 30;
+        width = 40;
+        height = 40;
     }
 
     @Override
     public void spawnOnMap() {
-        double posX = ((float)Math.random()*100)* Config.GAMESCREENWIDTH/100;
-        double posY = ((float)Math.random()*100)*Config.GAMESCREENHEIGHT/100;
+        double posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
+        double posY = Math.random() * Config.GAMESCREENHEIGHT;
         while (!GameController.getInstance().isPositionAccesible(posX,posY,getWidth(),getHeight(),false)) {
             posX = ((float)Math.random()*100)* Config.GAMESCREENWIDTH/100;
             posY = ((float)Math.random()*100)*Config.GAMESCREENHEIGHT/100;
@@ -107,7 +107,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
 
         // Draw the progress bar
         double HPBarX = getX() - 17; // Start of progress bar
-        double HPBarY = getY() + 10; // Position below the circle
+        double HPBarY = getY() + (double) getHeight() / 2; // Position below the circle
 
         gc.setFill(Color.GRAY);
         gc.fillRect(HPBarX, HPBarY, 30, 5);
@@ -121,7 +121,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
 
         // Draw the progress bar
         double waterBarX = getX() - 17; // Start of progress bar
-        double waterBarY = getY() + 18; // Position below the circle
+        double waterBarY = getY() + (double) getHeight() / 2 + 8; // Position below the circle
 
         gc.setFill(Color.GRAY);
         gc.fillRect(waterBarX, waterBarY, 30, 5);

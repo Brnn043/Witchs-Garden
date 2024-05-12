@@ -67,6 +67,11 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
         gc.drawImage(RenderableHolder.broomSprite, getX() - (double) getWidth() /2, getY() - (double) getHeight() /2,getWidth(),getHeight());
     }
 
+    @Override
+    public void setX(double x) { this.x = Math.max((double) getWidth() /2,Math.min(x, Config.GAMESCREENWIDTH - (double) getWidth() /2)); }
+    @Override
+    public void setY(double y) { this.y = Math.max((double) getHeight() /2,Math.min(y,Config.GAMESCREENHEIGHT - (double) getHeight() /2)); }
+
     public int getWidth() { return width; }
 
     public int getHeight() { return height; }
@@ -89,8 +94,8 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
 
     @Override
     public void spawnOnMap() {
-        double posX = ((float)Math.random()*100)* Config.GAMESCREENWIDTH/100;
-        double posY = ((float)Math.random()*100)*Config.GAMESCREENHEIGHT/100;
+        double posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
+        double posY = Math.random() * Config.GAMESCREENHEIGHT;
         while (!GameController.getInstance().isPositionAccesible(posX, posY, getWidth(), getHeight(), false)) {
             posX = ((float)Math.random()*100)* Config.GAMESCREENWIDTH/100;
             posY = ((float)Math.random()*100)*Config.GAMESCREENHEIGHT/100;
