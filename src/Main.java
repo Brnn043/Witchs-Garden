@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -29,6 +30,8 @@ public class Main extends Application {
         Menu menu = new Menu(() -> preStory(primaryStage), primaryStage);
         Scene scene = new Scene(menu, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         primaryStage.setScene(scene);
+        Image icon = new Image(ClassLoader.getSystemResource("Slime/Slime2.png").toString());
+        primaryStage.getIcons().add(icon);
         primaryStage.setTitle("Witch's Garden");
         primaryStage.setResizable(false);
         primaryStage.show();
