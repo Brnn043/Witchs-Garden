@@ -108,13 +108,15 @@ public class GameController {
 
         // veggies : check if veggie is dead
         for (int i = 0; i < getInstance().getVeggiesList().size();) {
-            BaseVeggies veggie = getInstance().getVeggiesList().get(i);
-            if (veggie.getWaterPoint() <= 0 || veggie.getHp() <= 0) {
-                deleteVeggie(veggie);
-            }else{
-                i = i+1;
-            }
-            veggie.weatherEffected();
+            try {
+                BaseVeggies veggie = getInstance().getVeggiesList().get(i);
+                if (veggie.getWaterPoint() <= 0 || veggie.getHp() <= 0) {
+                    deleteVeggie(veggie);
+                }else{
+                    i = i+1;
+                }
+                veggie.weatherEffected();
+            } catch (Exception ignored) {}
         }
 
 
