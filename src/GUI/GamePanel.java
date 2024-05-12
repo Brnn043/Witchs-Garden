@@ -43,9 +43,9 @@ public class GamePanel extends HBox {
         timerBar.setStyle("-fx-accent: violet;");
 
         String potionName = "...";
-        if (level == 1) potionName = "Love potion";
-        else if (level == 2) potionName = "Star potion";
-        else if (level == 3) potionName = "Luna potion";
+        if (level == 1) potionName = "LOVE POTION";
+        else if (level == 2) potionName = "STAR POTION";
+        else if (level == 3) potionName = "LUNA POTION";
 
         gameModeLabel = new Text("Make the "+potionName);
 
