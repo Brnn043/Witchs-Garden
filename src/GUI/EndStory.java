@@ -1,5 +1,6 @@
 package GUI;
 
+import GUISharedObject.RenderableHolder;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -71,9 +72,10 @@ public class EndStory extends GridPane {
         this.setVgap(0);
         this.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 
-
-
         showLog(count);
+        RenderableHolder.gameSong.stop();
+        RenderableHolder.mainManuSong.stop();
+        RenderableHolder.storySong.play();
     }
 
     public void showLog(int logCount){

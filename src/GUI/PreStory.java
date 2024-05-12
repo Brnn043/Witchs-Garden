@@ -1,5 +1,6 @@
 package GUI;
 
+import GUISharedObject.RenderableHolder;
 import Games.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -75,9 +76,11 @@ public class PreStory extends GridPane {
         this.setVgap(0);
         this.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 
-
-
         showLog(count);
+
+        RenderableHolder.gameSong.stop();
+        RenderableHolder.mainManuSong.stop();
+        RenderableHolder.storySong.play();
     }
 
     public void showLog(int logCount){

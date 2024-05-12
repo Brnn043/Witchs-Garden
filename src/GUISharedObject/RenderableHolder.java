@@ -5,6 +5,7 @@ import Items.Character.Slime;
 import Items.Inventory.Broom;
 import Items.Veggies.BaseVeggies;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,8 +36,12 @@ public class RenderableHolder {
     public static Image redFlowerDieSprite;
     public static Image daffodilIdleSprite;
     public static Image daffodilDieSprite;
-//    public static AudioClip explosionSound;
-    public static Image sunnyBackground;
+    public static AudioClip hitSound;
+    public static AudioClip collectSound;
+    public static AudioClip clockSound;
+    public static AudioClip mainManuSong;
+    public static AudioClip storySong;
+    public static AudioClip gameSong;
 
     static {
         loadResource();
@@ -77,7 +82,12 @@ public class RenderableHolder {
         redFlowerDieSprite = new Image(ClassLoader.getSystemResource("Veggie/RedFlower_Dying.gif").toString());
         daffodilIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/Daffodil_Idle.gif").toString());
         daffodilDieSprite = new Image(ClassLoader.getSystemResource("Veggie/Daffodil_Dying.gif").toString());
-//        explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
+        hitSound = new AudioClip(ClassLoader.getSystemResource("Sound/hit.wav").toString());
+        collectSound = new AudioClip(ClassLoader.getSystemResource("Sound/collect.wav").toString());
+        clockSound = new AudioClip(ClassLoader.getSystemResource("Sound/clock.wav").toString());
+        mainManuSong = new AudioClip(ClassLoader.getSystemResource("Sound/mainManuSong.mp3").toString());
+        storySong = new AudioClip(ClassLoader.getSystemResource("Sound/storySong.mp3").toString());
+        gameSong = new AudioClip(ClassLoader.getSystemResource("Sound/gameSong.mp3").toString());
     }
 
     public void add(IRenderable entity) {

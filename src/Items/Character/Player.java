@@ -67,6 +67,7 @@ public class Player extends BaseCharacter{
                         @Override
                         public void run() {
                             try {
+                                RenderableHolder.hitSound.play();
                                 slime.setHp( slime.getHp() - broom.getDamage() );
                                 broom.setDurability(broom.getDurability() - Config.BROOMDURABILITYPERATTACK);
                                 setAttackCooldown(getMaxAttackCoolDown());
@@ -95,7 +96,9 @@ public class Player extends BaseCharacter{
         if(GameController.getInstance().getVeggiesList().isEmpty()){
             return;
         }
+
         for(BaseVeggies veggie : GameController.getInstance().getVeggiesList()) {
+
             double disX = this.getX() - veggie.getX();
             double disY = this.getY() - veggie.getY();
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
