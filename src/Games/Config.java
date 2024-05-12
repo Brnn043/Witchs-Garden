@@ -6,7 +6,6 @@ public class Config {
     }
 
     public static int GAMEFRAMEWIDTH = 1100;
-
     public static int GAMEFRAMEHEIGHT = 650;
     public static int GAMESCREENWIDTH = 1100;
     public static int GAMESCREENHEIGHT = 535;
@@ -15,13 +14,12 @@ public class Config {
     public static int WIDTHPERROW = 20;
     public static int HEIGHTPERROW = 20;
     public static int GAMETIMER = 120;
+    public static final int PLAYERCOLLECTRANGE = 70;
     public static int SLIMEMAXSPEEDRATE = 20;
     public static int SLIMEMINSPEEDRATE = 15;
     public static int SLIMEMAXDAMAGERANGE = 30;
     public static float SLIMEWALKSTEP = 2;
-
     public static int SLIMEATTACKCOOLDOWN = 1;
-
     public static int SLIMESPAWNTIME = 5;
     public static final int PLAYERCOOLDOWNTIME = 1000; // 1000 ms
     public static final int BROOMMAXDURABILITY = 20;

@@ -102,7 +102,7 @@ public class Player extends BaseCharacter{
             double disX = this.getX() - veggie.getX();
             double disY = this.getY() - veggie.getY();
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
-            if( distance <= 70 ) {
+            if( distance <= Config.PLAYERCOLLECTRANGE ) {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
