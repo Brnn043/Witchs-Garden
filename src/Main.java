@@ -62,6 +62,7 @@ public class Main extends Application {
         downloadRoot.setAlignment(Pos.CENTER);
         Text downloadText = new Text("Please wait while we are casting a spell...");
         downloadText.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 14));
+        downloadText.setFill(Color.WHITE);
         downloadRoot.getChildren().add(downloadText);
 
         downloadRoot.setBackground(new Background(new BackgroundFill(Color.web("#8F6F5C"), null, null)));
@@ -138,10 +139,12 @@ public class Main extends Application {
         completeGame.setAlignment(Pos.CENTER);
         Text completeText = new Text("Well Done! The Witch regain all her power. You had clear this game!!!");
         completeText.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 14));
+        completeText.setFill(Color.WHITE);
         completeGame.setBackground(new Background(new BackgroundFill(Color.web("#8F6F5C"), null, null)));
 
         Button exitButton = new Button("Exit");
         exitButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
+        exitButton.setTextFill(Color.web("#695244"));
         exitButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
         exitButton.setPrefWidth(180);
         exitButton.setPrefHeight(50);

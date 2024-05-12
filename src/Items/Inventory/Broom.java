@@ -95,10 +95,10 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
     @Override
     public void spawnOnMap() {
         double posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
-        double posY = Math.random() * Config.GAMESCREENHEIGHT;
+        double posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
         while (!GameController.getInstance().isPositionAccesible(posX, posY, getWidth(), getHeight(), false)) {
-            posX = ((float)Math.random()*100)* Config.GAMESCREENWIDTH/100;
-            posY = ((float)Math.random()*100)*Config.GAMESCREENHEIGHT/100;
+            posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
+            posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
             System.out.println("Broom cannot be spawn here. Find new pos...");
         }
         setX(posX);

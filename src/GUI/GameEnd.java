@@ -21,10 +21,11 @@ public class GameEnd extends VBox {
     public GameEnd(GameStarter gameStarter, Stage stage) {
         Text endingText = new Text();
         endingText.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 20)); // Set font and size
-        endingText.setFill(Color.BLACK);
+        endingText.setFill(Color.WHITE);
 
         Button startButton = new Button("Start Game");
         startButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
+        startButton.setTextFill(Color.web("#695244"));
         startButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
         startButton.setPrefWidth(180);
         startButton.setPrefHeight(50);
@@ -38,6 +39,7 @@ public class GameEnd extends VBox {
 
         Button exitButton = new Button("Exit");
         exitButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
+        exitButton.setTextFill(Color.web("#695244"));
         exitButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
         exitButton.setPrefWidth(180);
         exitButton.setPrefHeight(50);

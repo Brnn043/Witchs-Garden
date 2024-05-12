@@ -18,7 +18,6 @@ public class Config {
     public static int SLIMEMAXSPEEDRATE = 20;
     public static int SLIMEMINSPEEDRATE = 15;
     public static int SLIMEMAXDAMAGERANGE = 30;
-    public static int SLIMEMAXDAMAGE = 5;
     public static float SLIMEWALKSTEP = 2;
 
     public static int SLIMEATTACKCOOLDOWN = 1;
@@ -32,9 +31,10 @@ public class Config {
     public static final float BROOMDURABILITYPERATTACK = 1.5F;
     public static final float BROOMDAMAGEPERATTACK = 3;
     public static final int BROOMSPAWNTIME = 15;
-    public static final float VEGGIESMAXGROWTHPOINT = 25;
     public static final int CLOCKCOOLDOWNTIME = 5;
-    public static final double SPAWNLEFTBOUND = 30;
-    public static final double SPAWNRIGHTBOUND = 1029;
+    public static final double SPAWNLEFTBOUND = 80;
+    public static final double SPAWNRIGHTBOUND = 980;
+    public static final double SPAWNTOPBOUND = 50;
+    public static final double SPAWNBOTTOMBOUND = GAMESCREENHEIGHT - 50;
 
 }
