@@ -2,6 +2,7 @@ package GUI;
 
 import GUISharedObject.RenderableHolder;
 import Games.Config;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -24,30 +25,57 @@ public class Menu extends GridPane {
         titleText.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 40)); // Set font and size
         titleText.setFill(Color.WHITE);
 
+        Button closeHowToButton = new Button("Close");
+        closeHowToButton.setPrefWidth(70);
+        closeHowToButton.setPrefHeight(30);
+        closeHowToButton.setTextFill(Color.WHITE);
+        closeHowToButton.setBackground(new Background(new BackgroundFill(Color.DEEPPINK, null, null)));
+        closeHowToButton.setAlignment(Pos.CENTER);
+
+        Button closeCraditButton = new Button("Close");
+        closeCraditButton.setPrefWidth(70);
+        closeCraditButton.setPrefHeight(30);
+        closeCraditButton.setTextFill(Color.WHITE);
+        closeCraditButton.setBackground(new Background(new BackgroundFill(Color.DEEPPINK, null, null)));
+        closeCraditButton.setAlignment(Pos.CENTER);
+
         // howToPlayMenu
-        VBox howToPlayMenu = new VBox();
+        GridPane howToPlayMenu = new GridPane();
         howToPlayMenu.setAlignment(Pos.CENTER);
-        howToPlayMenu.setSpacing(5);
+        howToPlayMenu.setVgap(15);
+        howToPlayMenu.setHgap(10);
+        howToPlayMenu.setPadding(new Insets(10));
         ImageView imageView =  new ImageView(ClassLoader.getSystemResource("MenuPage/HowToPlay.png").toString());
-        imageView.setFitHeight(270);
-        howToPlayMenu.getChildren().add(imageView);
+        imageView.setFitHeight(240);
+        imageView.setPreserveRatio(true);
+        howToPlayMenu.add(imageView,0,0);
+        howToPlayMenu.add(closeHowToButton,1,0);
         howToPlayMenu.setVisible(false);
         howToPlayMenu.setBackground(new Background(new BackgroundFill(Color.rgb(255, 153, 204, 0.9), new CornerRadii(5), null)));
 
         // creditMenu
-        VBox creditMenu = new VBox();
+        GridPane creditMenu = new GridPane();
         creditMenu.setAlignment(Pos.CENTER);
-        creditMenu.setSpacing(5);
-        creditMenu.getChildren().addAll(
-                new Text("This project created by"),
-                new Text("Naphat Serirak 6632061321"),
-                new Text("Raksakul Hiranas 6632190621"),
-                new Text("                   "),
-                new Text("2110215 (2023/2)"),
-                new Text("Programming Methodology I")
-        );
+        creditMenu.setPadding(new Insets(10));
+        creditMenu.setVgap(15);
+        creditMenu.setHgap(300);
+        creditMenu.add(new Text("This project created by"), 0,0);
+        creditMenu.add(new Text("Naphat Serirak 6632061321"), 0,1);
+        creditMenu.add(new Text("Raksakul Hiranas 6632190621"), 0,2);
+        creditMenu.add(new Text("2110215 (2023/2)"), 0,4);
+        creditMenu.add(new Text("Programming Methodology I"), 0,5);
+        creditMenu.add(closeCraditButton, 1,0);
+
         creditMenu.setVisible(false);
         creditMenu.setBackground(new Background(new BackgroundFill(Color.rgb(255, 153, 204, 0.9), new CornerRadii(8), null)));
+
+        // set action to closeButton
+        closeCraditButton.setOnAction(e -> {
+            creditMenu.setVisible(false);
+        });
+        closeHowToButton.setOnAction(e -> {
+            howToPlayMenu.setVisible(false);
+        });
 
         // Add important Button
         Button startButton = new Button("Start Game");
@@ -205,7 +233,7 @@ public class Menu extends GridPane {
 
         this.add(titleAndMenu,35,8);
         this.add(creditHowtoPlay,1,20,53,10);
-        this.add(weatherButton,44,25);
+        this.add(weatherButton,44,30);
 
         RenderableHolder.mainManuSong.play();
     }
