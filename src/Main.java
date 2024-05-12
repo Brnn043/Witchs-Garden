@@ -82,7 +82,7 @@ public class Main extends Application {
         gameScreenWithEffect.setAlignment(Pos.CENTER);
         gameScreenWithEffect.getChildren().addAll(game.getSunnyBackground(),gameScreen);
 
-        GamePanel gamePanel = new GamePanel(game,gameScreen,gameScreenWithEffect);
+        GamePanel gamePanel = new GamePanel(game,gameScreen,gameScreenWithEffect,level);
 
         root.getChildren().addAll(gamePanel,gameScreenWithEffect);
         gameScreen.requestFocus();

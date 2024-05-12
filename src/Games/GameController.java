@@ -43,7 +43,7 @@ public class GameController {
     private int redFlowerCount;
     private int rainbowDrakeCount;
     private int daffodilCount;
-    private int level = 1;
+    private int level;
 
     public GameController() {
         // add background

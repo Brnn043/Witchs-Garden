@@ -29,7 +29,7 @@ public class GamePanel extends HBox {
     private final Text rainbowDrakeCount;
     private final Text daffodilCount;
 
-    public GamePanel(GameController gameController,GameScreen gameScreen,StackPane gameScreenWithEffect) {
+    public GamePanel(GameController gameController, GameScreen gameScreen, StackPane gameScreenWithEffect, int level) {
         super();
         this.gameController = gameController;
         this.gameScreen = gameScreen;
@@ -42,12 +42,17 @@ public class GamePanel extends HBox {
         timerBar.setPrefWidth(300);
         timerBar.setStyle("-fx-accent: violet;");
 
-        gameModeLabel = new Text("Make the potion no.2");
+        String potionName = "...";
+        if (level == 1) potionName = "Love potion";
+        else if (level == 2) potionName = "Star potion";
+        else if (level == 3) potionName = "Luna potion";
+
+        gameModeLabel = new Text("Make the "+potionName);
 
         HBox TimerLabel = new HBox(timerText,timerBar);
 
-        VBox gameModeandTimer = new VBox(gameModeLabel,TimerLabel);
-        gameModeandTimer.setAlignment(Pos.CENTER);
+        VBox gameModeAndTimer = new VBox(gameModeLabel,TimerLabel);
+        gameModeAndTimer.setAlignment(Pos.CENTER);
 
         clockTimer = new Text();
         updateClockTimer();
@@ -93,7 +98,7 @@ public class GamePanel extends HBox {
         snowyButton.setOnAction(event -> handleSnowyButton());
         rainyButton.setOnAction(event -> handleRainyButton());
 
-        getChildren().addAll(targetVeggieContainer,gameModeandTimer,weatherContainer);
+        getChildren().addAll(targetVeggieContainer,gameModeAndTimer,weatherContainer);
 
         setSpacing(50);
         setBackground(new Background(new BackgroundFill(Color.web("#8F6F5C"), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -106,7 +111,7 @@ public class GamePanel extends HBox {
         timerText.setFill(Color.WHEAT);
 
         // Set font and color for game mode label
-        gameModeLabel.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 16));
+        gameModeLabel.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 19));
         gameModeLabel.setFill(Color.WHEAT);
 
         // Set cute style for buttons
@@ -115,7 +120,7 @@ public class GamePanel extends HBox {
         rainyButton.setStyle("-fx-background-color: #D7C2F2; -fx-text-fill: #8F6F5C; -fx-font-family: 'Comic Sans MS'; -fx-font-size: 14;");
 
         // Set spacing between elements
-        gameModeandTimer.setSpacing(10);
+        gameModeAndTimer.setSpacing(10);
         buttonContainer.setSpacing(20);
         weatherContainer.setSpacing(10);
 
@@ -139,10 +144,6 @@ public class GamePanel extends HBox {
         targetRainbowDrake.setSpacing(10);
         targetDaffodil.setAlignment(Pos.CENTER);
         targetDaffodil.setSpacing(10);
-    }
-
-    public void setGameModeLabel(String string) {
-        gameModeLabel.setText(string);
     }
 
     public void updateTimerBar(double time) {
