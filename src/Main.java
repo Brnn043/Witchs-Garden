@@ -37,6 +37,12 @@ public class Main extends Application {
         primaryStage.setScene(storyScene);
     }
 
+    private void EndStory(Stage primaryStage){
+        // story scene
+        Scene storyScene = new Scene(new EndStory(() -> ConpleteGame(primaryStage)), Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        primaryStage.setScene(storyScene);
+    }
+
     private void startGame(Stage primaryStage) {
         // download scene
         VBox downloadRoot = new VBox();
@@ -101,7 +107,7 @@ public class Main extends Application {
                 level = level + 1 ;
             }
             if(level == 4){
-                ConpleteGame(primaryStage);
+                EndStory(primaryStage);
             }else{
                 startGame(primaryStage);
             }
