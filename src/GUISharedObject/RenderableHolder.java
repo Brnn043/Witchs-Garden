@@ -74,8 +74,8 @@ public class RenderableHolder {
         witchLeftBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_l_b.GIF").toString());
         broomSprite = new Image(ClassLoader.getSystemResource("Broom/AnimatedBroom.gif").toString());
         normalSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime1.png").toString());
-        hardHitSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime2.png").toString());
-        speedSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime3.png").toString());
+        hardHitSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime3.png").toString());
+        speedSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime2.png").toString());
         rainbowDrakeIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/RainbowDrake_Idle.gif").toString());
         rainbowDrakeDieSprite = new Image(ClassLoader.getSystemResource("Veggie/RainbowDrake_Dying.gif").toString());
         redFlowerIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/RedFlower_Idle.gif").toString());
