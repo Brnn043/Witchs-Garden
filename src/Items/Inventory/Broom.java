@@ -13,7 +13,7 @@ import javafx.scene.input.KeyCode;
 
 public class Broom extends Entity implements Collectable, WeatherEffectable {
     private boolean isCollected;
-    private int durability;
+    private float durability;
     private int attackRange;
     private float damage;
     private int width,height;
@@ -74,9 +74,9 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
 
     public void setDamage(float damage) { this.damage = damage; }
 
-    public int getDurability() { return durability; }
+    public float getDurability() { return durability; }
 
-    public void setDurability(int durability) {
+    public void setDurability(float durability) {
         this.durability = Math.max(0,durability);
     }
 

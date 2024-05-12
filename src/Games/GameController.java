@@ -126,15 +126,22 @@ public class GameController {
     }
 
     public void getNewVeggie() {
-        int veggieType = (int) (Math.random() * 3);
-        BaseVeggies veggie;
-        if (veggieType == 0) {
-            veggie = new RedFlower();
-        } else if (veggieType == 1) {
-            veggie = new RainbowDrake();
-        } else {
-            veggie = new Daffodil();
-        }
+        // Check if the player has already collected the maximum number of each veggie type
+        boolean isRedFlowerMaxed = getRedFlowerCount() >= getMaxRedFlower();
+        boolean isRainbowDrakeMaxed = getRainbowDrakeCount() >= getMaxRainbowDrake();
+        boolean isDaffodilMaxed = getDaffodilCount() >= getMaxDaffodil();
+
+        // Randomly choose the type of veggie to spawn
+        int veggieType;
+        do {
+            veggieType = (int) (Math.random() * 3);
+        } while ((veggieType == 0 && isRedFlowerMaxed) || (veggieType == 1 && isRainbowDrakeMaxed) || (veggieType == 2 && isDaffodilMaxed));
+
+        BaseVeggies veggie = switch (veggieType) {
+            case 0 -> new RedFlower();
+            case 1 -> new RainbowDrake();
+            default -> new Daffodil();
+        };
         getVeggiesList().add(veggie);
         RenderableHolder.getInstance().add(veggie);
     }
