@@ -1,6 +1,5 @@
 package GUI;
 
-import Games.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -8,31 +7,28 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
-public class PreStory extends GridPane {
+public class EndStory extends GridPane {
     private ArrayList<String> analogs;
     private int count;
     private Text analog;
+
     private ImageView backgroundImage;
     @FunctionalInterface
-    public interface GameStarter {
-        void startGame();
+    public interface GameEnding {
+        void ConpleteGame();
     }
-    public PreStory(GameStarter gameStarter) {
+    public EndStory(GameEnding gameEnding) {
         count = 0;
         analog = new Text();
         analogs = new ArrayList<String>();
-        analogs.add("Once upon a time, in a forest far, far away, there lived a witch with extraordinary powers.");
-        analogs.add("One morning, she woke up to a surprising discovery - her magic had disappeared!");
-        analogs.add("Feeling sad, she thought \"Hmm, maybe I can make three magic potions from special veggies to get my power back\"");
-        analogs.add("Off she went to her garden. But unexpectedly , her garden was full of slimy slimes!");
-        analogs.add("She didn't give up! With a determined smile, she started her journey!");
+        analogs.add("The witch ate up all her potions.");
+        analogs.add("Afterward, her power returned in a rush.");
         backgroundImage =  new ImageView();
 
         Button nextButton = new Button("Next...");
@@ -49,7 +45,7 @@ public class PreStory extends GridPane {
         });
         nextButton.setOnAction(e -> {
             if(count == analogs.size()){
-                gameStarter.startGame();
+                gameEnding.ConpleteGame();
             }else{
                 showLog(count);
             }
@@ -84,7 +80,7 @@ public class PreStory extends GridPane {
         analog.setText(analogs.get(logCount));
 
         //set default background image
-        Image image = new Image(ClassLoader.getSystemResource("Story/BeginStory_" + Integer.toString(logCount+1) + ".png").toString());
+        Image image = new Image(ClassLoader.getSystemResource("Story/EndStory_" + Integer.toString(logCount+1) + ".png").toString());
         backgroundImage.setImage(image);
         backgroundImage.setFitHeight(450);
         backgroundImage.setFitWidth(1100);
