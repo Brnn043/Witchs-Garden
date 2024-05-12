@@ -28,11 +28,11 @@ public abstract class Slime extends BaseCharacter{
         ArrayList<BaseVeggies> veggiesList= GameController.getInstance().getVeggiesList();
         setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
 
-        setWidth(30);
-        setHeight(30);
+        setWidth(38);
+        setHeight(34);
 
-        double posX = (Math.random()*100)*Config.GAMESCREENWIDTH/100;
-        double posY = (Math.random()*100)*Config.GAMESCREENHEIGHT/100;
+        double posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
+        double posY = Math.random() * Config.GAMESCREENHEIGHT;
         while (!GameController.getInstance().isPositionAccesible(posX-getWidth()/2,posY-getHeight()/2,getWidth(),getHeight(),false)){
             posX = (Math.random()*100)*Config.GAMESCREENWIDTH/100;
             posY = (Math.random()*100)*Config.GAMESCREENHEIGHT/100;
@@ -143,7 +143,7 @@ public abstract class Slime extends BaseCharacter{
 
         // Draw the progress bar
         double HPBarX = getX() - 10; // Start of progress bar
-        double HPBarY = getY() + 15; // Position below the circle
+        double HPBarY = getY() + getHeight() / 2; // Position below the circle
 
         gc.setFill(Color.GRAY);
         gc.fillRect(HPBarX, HPBarY, 20, 5);

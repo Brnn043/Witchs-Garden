@@ -58,6 +58,9 @@ public class GameController {
         trees.add(new Tree(130, 440, 110, 160, 24, 3));
         trees.add(new Tree(15, 500, 110, 160, 27, 2));
 
+        bushes.add(new Bush(65, 410, 85, 45, 21, 3));
+        bushes.add(new Bush(95, 530, 110, 60, 26, 1));
+
         //right side
         trees.add(new Tree(1050, 75, 90, 110, 20, 2));
         trees.add(new Tree(1075, 200, 150, 180, 22, 1));
@@ -67,9 +70,10 @@ public class GameController {
 
         bushes.add(new Bush(999.5, 160, 95, 60, 21, 1));
         bushes.add(new Bush(994.5, 255, 95, 50, 23, 2));
-        bushes.add(new Bush(850, 510, 110, 60, 32, 1));
-        bushes.add(new Bush(900, 515, 100, 60, 34, 4));
+        bushes.add(new Bush(1090, 320, 95, 60, 23, 4));
+        bushes.add(new Bush(895, 515, 100, 60, 34, 4));
         bushes.add(new Bush(1060, 525, 100, 60, 36, 3));
+        bushes.add(new Bush(1000, 525, 80, 50, 36, 1));
 
         RenderableHolder.getInstance().addBackground(backgroundImage);
         RenderableHolder.getInstance().addBackground(house);
