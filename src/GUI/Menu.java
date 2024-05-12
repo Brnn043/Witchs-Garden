@@ -13,6 +13,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class Menu extends GridPane {
@@ -29,15 +30,17 @@ public class Menu extends GridPane {
         closeHowToButton.setPrefWidth(70);
         closeHowToButton.setPrefHeight(30);
         closeHowToButton.setTextFill(Color.WHITE);
-        closeHowToButton.setBackground(new Background(new BackgroundFill(Color.DEEPPINK, null, null)));
+        closeHowToButton.setBackground(new Background(new BackgroundFill(Color.DEEPPINK, new CornerRadii(5), null)));
         closeHowToButton.setAlignment(Pos.CENTER);
+        closeHowToButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
 
-        Button closeCraditButton = new Button("Close");
-        closeCraditButton.setPrefWidth(70);
-        closeCraditButton.setPrefHeight(30);
-        closeCraditButton.setTextFill(Color.WHITE);
-        closeCraditButton.setBackground(new Background(new BackgroundFill(Color.DEEPPINK, null, null)));
-        closeCraditButton.setAlignment(Pos.CENTER);
+        Button closeCreditButton = new Button("Close");
+        closeCreditButton.setPrefWidth(70);
+        closeCreditButton.setPrefHeight(30);
+        closeCreditButton.setTextFill(Color.WHITE);
+        closeCreditButton.setBackground(new Background(new BackgroundFill(Color.DEEPPINK, new CornerRadii(5), null)));
+        closeCreditButton.setAlignment(Pos.CENTER);
+        closeCreditButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
 
         // howToPlayMenu
         GridPane howToPlayMenu = new GridPane();
@@ -51,7 +54,7 @@ public class Menu extends GridPane {
         howToPlayMenu.add(imageView,0,0);
         howToPlayMenu.add(closeHowToButton,1,0);
         howToPlayMenu.setVisible(false);
-        howToPlayMenu.setBackground(new Background(new BackgroundFill(Color.rgb(255, 153, 204, 0.9), new CornerRadii(5), null)));
+        howToPlayMenu.setBackground(new Background(new BackgroundFill(Color.rgb(255, 153, 204, 0.9), new CornerRadii(10), null)));
 
         // creditMenu
         GridPane creditMenu = new GridPane();
@@ -59,18 +62,26 @@ public class Menu extends GridPane {
         creditMenu.setPadding(new Insets(10));
         creditMenu.setVgap(15);
         creditMenu.setHgap(300);
-        creditMenu.add(new Text("This project created by"), 0,0);
-        creditMenu.add(new Text("Naphat Serirak 6632061321"), 0,1);
-        creditMenu.add(new Text("Raksakul Hiranas 6632190621"), 0,2);
-        creditMenu.add(new Text("2110215 (2023/2)"), 0,4);
-        creditMenu.add(new Text("Programming Methodology I"), 0,5);
-        creditMenu.add(closeCraditButton, 1,0);
+        Text creditContent = new Text();
+        creditContent.setText("""
+                This project is created by
+                
+                Naphat Serirak 6632061321
+                Raksakul Hiranas 6632190621
+                
+                2110215 (2023/2)
+                Programming Methodology I""");
+        creditContent.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
+        creditContent.setFill(Color.WHITE);
+        creditContent.setTextAlignment(TextAlignment.CENTER);
+        creditMenu.add(creditContent,0,0);
+        creditMenu.add(closeCreditButton, 1,0);
 
         creditMenu.setVisible(false);
-        creditMenu.setBackground(new Background(new BackgroundFill(Color.rgb(255, 153, 204, 0.9), new CornerRadii(8), null)));
+        creditMenu.setBackground(new Background(new BackgroundFill(Color.rgb(255, 153, 204, 0.9), new CornerRadii(10), null)));
 
         // set action to closeButton
-        closeCraditButton.setOnAction(e -> {
+        closeCreditButton.setOnAction(e -> {
             creditMenu.setVisible(false);
         });
         closeHowToButton.setOnAction(e -> {
@@ -161,8 +172,6 @@ public class Menu extends GridPane {
         Background background = new Background(backgroundImage);
         setBackground(background);
 
-//        setGridLinesVisible(true);
-
         // Set fixed sizes for each column and row
         for (int i = 0; i < Config.GAMEFRAMEWIDTH / Config.WIDTHPERROW; i++) {
             ColumnConstraints columnConstraints = new ColumnConstraints(Config.WIDTHPERROW);
@@ -231,8 +240,8 @@ public class Menu extends GridPane {
         HBox weatherButton = new HBox(sunnyButton,snowyButton,rainyButton);
         weatherButton.setSpacing(5);
 
-        this.add(titleAndMenu,35,8);
-        this.add(creditHowtoPlay,1,20,53,10);
+        this.add(titleAndMenu,35,11);
+        this.add(creditHowtoPlay,1,22,53,7);
         this.add(weatherButton,44,30);
 
         RenderableHolder.mainManuSong.play();
