@@ -120,7 +120,7 @@ public class GameController {
     }
 
     public void initGames() {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < level + 2; i++) {
             getNewVeggie();
         }
     }
@@ -239,7 +239,7 @@ public class GameController {
                     }
 
                     // spawn slime every 3 second
-                    if(game.getGameTimer() % Config.SLIMESPAWNTIME == 0){
+                    if(game.getGameTimer() % Config.SLIMESPAWNTIME == 0 && game.getSlimeList().size() <= 5){
                         game.getNewSlime();
                     }
 
