@@ -11,6 +11,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 
+import java.util.ArrayList;
+
 
 public class Player extends BaseCharacter{
     private Broom broom;
@@ -97,20 +99,20 @@ public class Player extends BaseCharacter{
             return;
         }
 
+        ArrayList<BaseVeggies> delVeggie = new ArrayList<BaseVeggies>();
         for(BaseVeggies veggie : GameController.getInstance().getVeggiesList()) {
 
             double disX = this.getX() - veggie.getX();
             double disY = this.getY() - veggie.getY();
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
             if( distance <= 70 ) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        veggie.collected();
-                    }
-                }).start();
+                delVeggie.add(veggie);
             }
         }
+        new Thread(() -> {
+            for(BaseVeggies veggie: delVeggie){
+                veggie.collected();
+        }}).start();
     }
 
     public void action(){
