@@ -250,7 +250,7 @@ public class GameController {
                     }
 
                     // spawn slime every 3 second
-                    if(game.getGameTimer() % Config.SLIMESPAWNTIME == 0 && game.getSlimeList().size() <= 5){
+                    if(game.getGameTimer() % Config.SLIMESPAWNTIME == 0 && game.getSlimeList().size() <= 2 * getLevel() + 3){
                         game.getNewSlime();
                     }
 
