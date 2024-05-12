@@ -139,7 +139,10 @@ public class Main extends Application {
         exitButton.setOnMouseExited(e -> {
             exitButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
         });
-        exitButton.setOnAction(e -> primaryStage.close());
+        exitButton.setOnAction(e -> {
+            RenderableHolder.storySong.stop();
+            primaryStage.close();
+        };
 
         Scene scene =new Scene(completeGame, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         completeGame.setSpacing(20);
