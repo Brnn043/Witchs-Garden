@@ -77,6 +77,11 @@ public class Main extends Application {
 
         primaryStage.setScene(scene);
 
+        RenderableHolder.gameSong.stop();
+        RenderableHolder.mainManuSong.stop();
+        RenderableHolder.storySong.stop();
+
+        RenderableHolder.gameSong.play();
 
         AnimationTimer animation;
         animation = new AnimationTimer() {

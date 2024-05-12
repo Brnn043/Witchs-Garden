@@ -46,12 +46,6 @@ public class GameController {
     private int level = 1;
 
     public GameController() {
-        // manage sound
-        RenderableHolder.gameSong.stop();
-        RenderableHolder.mainManuSong.stop();
-        RenderableHolder.storySong.stop();
-        RenderableHolder.gameSong.play();
-
         // add background
         backgroundImage = new BackgroundImage();
         house = new House(135, 72, 280, 225);
