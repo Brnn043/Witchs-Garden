@@ -30,7 +30,7 @@ public class Menu extends GridPane {
         closeHowToButton.setPrefWidth(70);
         closeHowToButton.setPrefHeight(30);
         closeHowToButton.setTextFill(Color.WHITE);
-        closeHowToButton.setBackground(new Background(new BackgroundFill(Color.DEEPPINK, new CornerRadii(5), null)));
+        closeHowToButton.setBackground(new Background(new BackgroundFill(Color.valueOf("#d68565"), new CornerRadii(5), null)));
         closeHowToButton.setAlignment(Pos.CENTER);
         closeHowToButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
 
@@ -38,7 +38,7 @@ public class Menu extends GridPane {
         closeCreditButton.setPrefWidth(70);
         closeCreditButton.setPrefHeight(30);
         closeCreditButton.setTextFill(Color.WHITE);
-        closeCreditButton.setBackground(new Background(new BackgroundFill(Color.DEEPPINK, new CornerRadii(5), null)));
+        closeCreditButton.setBackground(new Background(new BackgroundFill(Color.valueOf("#d68565"), new CornerRadii(5), null)));
         closeCreditButton.setAlignment(Pos.CENTER);
         closeCreditButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
 
@@ -54,7 +54,7 @@ public class Menu extends GridPane {
         howToPlayMenu.add(imageView,0,0);
         howToPlayMenu.add(closeHowToButton,1,0);
         howToPlayMenu.setVisible(false);
-        howToPlayMenu.setBackground(new Background(new BackgroundFill(Color.rgb(255, 153, 204, 0.9), new CornerRadii(10), null)));
+        howToPlayMenu.setBackground(new Background(new BackgroundFill(Color.valueOf("#ffedd6"), new CornerRadii(10), null)));
 
         // creditMenu
         GridPane creditMenu = new GridPane();
@@ -72,13 +72,13 @@ public class Menu extends GridPane {
                 2110215 (2023/2)
                 Programming Methodology I""");
         creditContent.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
-        creditContent.setFill(Color.WHITE);
+        creditContent.setFill(Color.web("#695244"));
         creditContent.setTextAlignment(TextAlignment.CENTER);
         creditMenu.add(creditContent,0,0);
         creditMenu.add(closeCreditButton, 1,0);
 
         creditMenu.setVisible(false);
-        creditMenu.setBackground(new Background(new BackgroundFill(Color.rgb(255, 153, 204, 0.9), new CornerRadii(10), null)));
+        creditMenu.setBackground(new Background(new BackgroundFill(Color.valueOf("#ffedd6"), new CornerRadii(10), null)));
 
         // set action to closeButton
         closeCreditButton.setOnAction(e -> {
