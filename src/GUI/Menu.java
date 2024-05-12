@@ -17,6 +17,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class Menu extends GridPane {
+    private Button sunnyButton,snowyButton,rainyButton;
     @FunctionalInterface
     public interface PreStory {
         void preStory();
@@ -196,7 +197,7 @@ public class Menu extends GridPane {
 
         // Creating an ImageView for the sunny weather icon
         ImageView sunnyImage = new ImageView(ClassLoader.getSystemResource("MenuPage/Sunny_Icon.png").toString());
-        Button sunnyButton = new Button();
+        sunnyButton = new Button();
         sunnyImage.setFitWidth(55);
         sunnyImage.setFitHeight(55);
 
@@ -205,7 +206,7 @@ public class Menu extends GridPane {
         sunnyButton.setShape(new Circle(30));
         sunnyButton.setMinSize(60,60);
         sunnyButton.setMaxSize(60,60);
-        sunnyButton.setStyle("-fx-background-color: transparent;");
+        sunnyButton.setStyle("-fx-background-color: #e8cd92;");
 
         // Creating an ImageView for the snowy weather icon
         ImageView snowyImage = new ImageView(ClassLoader.getSystemResource("MenuPage/Snowy_Icon.png").toString());
@@ -213,7 +214,7 @@ public class Menu extends GridPane {
         snowyImage.setFitHeight(60);
 
         // Creating a Button to display the snowy weather icon
-        Button snowyButton = new Button();
+        snowyButton = new Button();
         snowyButton.setGraphic(snowyImage);
         snowyButton.setShape(new Circle(30));
         snowyButton.setMinSize(60, 60);
@@ -226,7 +227,7 @@ public class Menu extends GridPane {
         rainyImage.setFitHeight(60);
 
         // Creating a Button to display the rainy weather icon
-        Button rainyButton = new Button();
+        rainyButton = new Button();
         rainyButton.setGraphic(rainyImage);
         rainyButton.setShape(new Circle(30));
         rainyButton.setMinSize(60, 60);
@@ -265,6 +266,10 @@ public class Menu extends GridPane {
         );
         Background background = new Background(backgroundImage);
         setBackground(background);
+
+        sunnyButton.setStyle("-fx-background-color: #e8cd92;");
+        snowyButton.setStyle("-fx-background-color: transparent;");
+        rainyButton.setStyle("-fx-background-color: transparent;");
     }
 
     private void handleSnowyButton() {
@@ -285,6 +290,10 @@ public class Menu extends GridPane {
         );
         Background background = new Background(backgroundImage);
         setBackground(background);
+
+        sunnyButton.setStyle("-fx-background-color: transparent;");
+        snowyButton.setStyle("-fx-background-color: #7ca6cc;");
+        rainyButton.setStyle("-fx-background-color: transparent;");
     }
 
     private void handleRainyButton() {
@@ -305,5 +314,9 @@ public class Menu extends GridPane {
         );
         Background background = new Background(backgroundImage);
         setBackground(background);
+
+        sunnyButton.setStyle("-fx-background-color: transparent;");
+        snowyButton.setStyle("-fx-background-color: transparent;");
+        rainyButton.setStyle("-fx-background-color: #b08dc2;");
     }
 }
