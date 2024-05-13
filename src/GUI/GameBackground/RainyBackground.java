@@ -8,6 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 import static GUISharedObject.RenderableHolder.getInstance;
 
+// this is the background of game in rainy weather
 public class RainyBackground extends Canvas {
     public RainyBackground(double width, double height) {
         super(width, height);

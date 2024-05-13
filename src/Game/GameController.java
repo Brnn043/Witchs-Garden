@@ -141,7 +141,8 @@ public class GameController {
         int veggieType;
         do {
             veggieType = (int) (Math.random() * 3);
-        } while ((veggieType == 0 && isRedFlowerMaxed) || (veggieType == 1 && isRainbowDrakeMaxed) || (veggieType == 2 && isDaffodilMaxed));
+        } while ((veggieType == 0 && isRedFlowerMaxed) ||
+                (veggieType == 1 && isRainbowDrakeMaxed) || (veggieType == 2 && isDaffodilMaxed));
 
         BaseVeggie veggie = switch (veggieType) {
             case 0 -> new RedFlower();
@@ -198,7 +199,8 @@ public class GameController {
         // delete old entity
         ArrayList<Entity> delEntities = new ArrayList<>();
         for(Entity entity: RenderableHolder.getInstance().getEntities()){
-            if(entity instanceof BaseVeggie || entity instanceof Slime || entity instanceof Broom || entity instanceof Player){
+            if(entity instanceof BaseVeggie || entity instanceof Slime
+                    || entity instanceof Broom || entity instanceof Player){
                 delEntities.add(entity);
             }
         }
@@ -243,14 +245,14 @@ public class GameController {
                 }
 
                 // spawn broom every 15 second
-                if(game.getGameTimer() % Config.BROOMSPAWNTIME == 0){
+                if (game.getGameTimer() % Config.BROOMSPAWNTIME == 0){
                     Broom broom = new Broom();
                     game.getBroomOnGround().add(broom);
                     RenderableHolder.getInstance().add(broom);
                 }
 
                 // spawn slime every 3 second
-                if(game.getGameTimer() % Config.SLIMESPAWNTIME == 0 && game.getSlimeList().size() <= 2 * getLevel() + 3){
+                if (game.getGameTimer() % Config.SLIMESPAWNTIME == 0 && game.getSlimeList().size() <= 2 * getLevel() + 3){
                     game.getNewSlime();
                 }
 
@@ -258,13 +260,13 @@ public class GameController {
                 clock.setTimer(clock.getTimer() - 1);
 
                 // decrease slime attack coolDown
-                for(Slime slime: game.getSlimeList()) {
+                for (Slime slime: game.getSlimeList()) {
                     slime.setAttackCoolDown(slime.getAttackCoolDown() - 1);
                     slime.attack();
                 }
 
                 // decrease veggie water & add growth point
-                for(BaseVeggie veggie : game.getVeggiesList()) {
+                for (BaseVeggie veggie : game.getVeggiesList()) {
                     if (game.getClock().getWeather() == Config.Weather.RAINY) {
                         veggie.setWaterPoint(veggie.getMaxWater());
                     } else {
@@ -274,14 +276,14 @@ public class GameController {
                 }
 
                 // check if witch collect all veggie
-                if(game.getRainbowDrakeCount() == maxRainbowDrake &&
+                if (game.getRainbowDrakeCount() == maxRainbowDrake &&
                         game.getRedFlowerCount() == maxRedFlower &&
                         game.getDaffodilCount() == maxDaffodil){
                     game.setGameover(true);
                 }
                 // check if gameTimer == 0
                 game.setGameTimer(game.getGameTimer() - 1);
-                if(game.getGameTimer() == 0){
+                if (game.getGameTimer() == 0){
                     game.setGameover(true);
                 }
 

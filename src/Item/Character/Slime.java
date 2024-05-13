@@ -41,7 +41,7 @@ public abstract class Slime extends BaseCharacter{
         // check if this can spawn on that position ,
         // otherwise it will keep spawning until find the proper position
         while (!GameController.getInstance().isPositionAccesible(posX - getWidth() / 2,
-                posY - getHeight() / 2, getWidth(), getHeight(),false)){
+                posY - getHeight() / 2, getWidth(), getHeight(), false)){
             posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
             posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
             System.out.println("Slime cannot be spawn here. Find new pos...");

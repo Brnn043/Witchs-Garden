@@ -8,6 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 import static GUISharedObject.RenderableHolder.getInstance;
 
+// this is the background of game in snowy weather
 public class SnowyBackground extends Canvas {
     public SnowyBackground(double width, double height) {
         super(width, height);

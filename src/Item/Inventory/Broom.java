@@ -97,7 +97,7 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
     }
     @Override
     public void setY(double y) {
-        this.y = Math.max(getHeight() / 2, Math.min(y,Config.GAMESCREENHEIGHT - getHeight() /2));
+        this.y = Math.max(getHeight() / 2, Math.min(y, Config.GAMESCREENHEIGHT - getHeight() /2));
     }
 
     public double getWidth() { return width; }
@@ -111,13 +111,13 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
     public float getDurability() { return durability; }
 
     public void setDurability(float durability) {
-        this.durability = Math.max(0,durability);
+        this.durability = Math.max(0, durability);
     }
 
     public int getAttackRange() { return attackRange; }
 
     public void setAttackRange(int attackRange) {
-        this.attackRange = Math.max(0,attackRange);
+        this.attackRange = Math.max(0, attackRange);
     }
 
     @Override

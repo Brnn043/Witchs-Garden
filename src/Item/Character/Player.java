@@ -120,10 +120,10 @@ public class Player extends BaseCharacter{
         setWalkState(Config.WalkState.STAY);
 
         // if it is diagonal walk , adjust the distance for X and Y position to get the proper distance
-        int nerfDiagonalWalk = 1;
+        double nerfDiagonalWalk = 1;
         if ((InputUtility.getKeyPressed(KeyCode.W) || InputUtility.getKeyPressed(KeyCode.S)) &&
                 (InputUtility.getKeyPressed(KeyCode.A) || InputUtility.getKeyPressed(KeyCode.D))){
-            nerfDiagonalWalk = 2;
+            nerfDiagonalWalk = Math.sqrt(2);
         }
 
         if (InputUtility.getKeyPressed(KeyCode.W)) {
