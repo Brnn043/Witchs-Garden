@@ -66,7 +66,7 @@ public abstract class BaseVeggie extends Entity implements WeatherEffectable, Co
 
     @Override
     public void collected() {
-        if(getGrowthPoint() < MAXGROWTHPOINT) return;
+        if (getGrowthPoint() < MAXGROWTHPOINT) return;
         GameController.getInstance().collectVeggie(this);
         RenderableHolder.collectSound.play();
     }

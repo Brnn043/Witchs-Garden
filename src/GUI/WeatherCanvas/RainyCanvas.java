@@ -61,21 +61,21 @@ public class RainyCanvas extends Canvas {
 
         private Raindrop() {
             Random random = new Random();
-            x = random.nextDouble() * Config.GAMESCREENWIDTH; // Adjust width as needed
-            y = random.nextDouble() * Config.GAMESCREENHEIGHT; // Adjust height as needed
+            x = random.nextDouble() * Config.GAMESCREENWIDTH;
+            y = random.nextDouble() * Config.GAMESCREENHEIGHT;
             speed = random.nextDouble() * MAX_SPEED + 1;
         }
 
         private void update() {
             y += speed;
-            if (y > 600) { // Adjust height as needed
+            if (y > 600) {
                 y = 0;
             }
         }
 
         private void render(GraphicsContext gc) {
             gc.setFill(Color.WHITE);
-            gc.fillRect(x, y, 2, 10); // Adjust size as needed
+            gc.fillRect(x, y, 2, 10);
         }
     }
 }

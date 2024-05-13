@@ -24,7 +24,6 @@ public class Main extends Application {
         Application.launch(args);
     }
 
-
     @Override
     public void start(Stage primaryStage) {
         Menu menu = new Menu(() -> preStory(primaryStage), primaryStage);
@@ -58,7 +57,7 @@ public class Main extends Application {
     private void startGame(Stage primaryStage) {
         // download scene
         VBox downloadRoot = new VBox();
-        Scene dowloadScene = new Scene(downloadRoot, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        Scene downloadScene = new Scene(downloadRoot, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         downloadRoot.setAlignment(Pos.CENTER);
         Text downloadText = new Text("Please wait while we are casting a spell...");
         downloadText.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 14));
@@ -66,7 +65,7 @@ public class Main extends Application {
         downloadRoot.getChildren().add(downloadText);
 
         downloadRoot.setBackground(new Background(new BackgroundFill(Color.web("#8F6F5C"), null, null)));
-        primaryStage.setScene(dowloadScene);
+        primaryStage.setScene(downloadScene);
 
         // game scene
         VBox root = new VBox();
@@ -79,11 +78,11 @@ public class Main extends Application {
         GameScreen gameScreen = new GameScreen(Config.GAMESCREENWIDTH, Config.GAMESCREENHEIGHT);
 
         StackPane gameScreenWithEffect = new StackPane();
-        gameScreenWithEffect.setPrefSize(Config.GAMESCREENWIDTH,Config.GAMESCREENHEIGHT);
+        gameScreenWithEffect.setPrefSize(Config.GAMESCREENWIDTH, Config.GAMESCREENHEIGHT);
         gameScreenWithEffect.setAlignment(Pos.CENTER);
-        gameScreenWithEffect.getChildren().addAll(game.getSunnyBackground(),gameScreen);
+        gameScreenWithEffect.getChildren().addAll(game.getSunnyBackground(), gameScreen);
 
-        GamePanel gamePanel = new GamePanel(game,gameScreen,gameScreenWithEffect,level);
+        GamePanel gamePanel = new GamePanel(game, gameScreen, gameScreenWithEffect, level);
 
         root.getChildren().addAll(gamePanel,gameScreenWithEffect);
         gameScreen.requestFocus();
@@ -91,7 +90,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
 
         RenderableHolder.gameSong.stop();
-        RenderableHolder.mainManuSong.stop();
+        RenderableHolder.mainMenuSong.stop();
         RenderableHolder.storySong.stop();
 
         RenderableHolder.gameSong.play();

@@ -8,15 +8,16 @@ import javafx.scene.input.KeyEvent;
 
 import static GUISharedObject.RenderableHolder.*;
 
+// this is the screen of map of game
 public class GameScreen extends Canvas {
 
     public GameScreen(double width, double height) {
         super(width, height);
         this.setVisible(true);
-        addListerner();
+        addListener();
     }
 
-    public void addListerner() {
+    public void addListener() {
         this.setOnKeyPressed((KeyEvent event) -> {
             InputUtility.setKeyPressed(event.getCode(), true);
         });
@@ -30,13 +31,11 @@ public class GameScreen extends Canvas {
         GraphicsContext gc = getGraphicsContext2D();
         gc.clearRect(0, 0, getWidth(), getHeight());
 
-        for (int i =0; i < getInstance().getEntities().size(); i+=1) {
-            Entity entity = getInstance().getEntities().get(i);
+        for (Entity entity : getInstance().getEntities()) {
             if (entity.isVisible() && !entity.isDestroyed()) {
                 entity.draw(gc);
             }
         }
-
     }
 
 }
