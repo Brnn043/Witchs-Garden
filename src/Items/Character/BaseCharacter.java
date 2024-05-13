@@ -14,6 +14,7 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
     private final int attackRange;
     private float damage;
     private int attackCoolDown;
+
     public BaseCharacter(double positionX, double positionY, int maxSpeedRate, int attackRange, float damage) {
         super(positionX, positionY, 0, 0);
         this.maxSpeedRate = Math.max(2, maxSpeedRate);
@@ -28,6 +29,7 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
         this.damage = Math.max(2, damage);
     }
 
+    // the speed rate of character is based on weather
     @Override
     public void weatherEffected() {
         Weather weatherNow = GameController.getInstance().getClock().getWeather();

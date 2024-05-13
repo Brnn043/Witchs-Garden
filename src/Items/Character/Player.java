@@ -27,10 +27,13 @@ public class Player extends BaseCharacter{
         setWidth(Config.PLAYERWIDTH);
         setHeight(Config.PLAYERHEIGHT);
         this.z = 999;
+        System.out.println("Speed rate of player = "+getSpeedRate());
     }
 
+    // the speed rate and attack cool down of player is based on weather
     @Override
     public void weatherEffected() {
+        super.weatherEffected();
         Config.Weather weatherNow = GameController.getInstance().getClock().getWeather();
         if(weatherNow == Config.Weather.SUNNY){
             setMaxAttackCoolDown( (int) ( 0.5 * Config.PLAYERCOOLDOWNTIME) );
@@ -119,6 +122,7 @@ public class Player extends BaseCharacter{
         attack();
         collectVeggie();
     }
+
     @Override
     public void walk() {
         // WASD to walk in map
@@ -149,7 +153,7 @@ public class Player extends BaseCharacter{
         }
 
 
-        if (!GameController.getInstance().isPositionAccesible(posX,posY + getHeight()/4,getWidth()/2,getHeight()/2,true)) return;
+        if (!GameController.getInstance().isPositionAccesible(posX,posY + getHeight() / 4,getWidth() / 2,getHeight() / 2,true)) return;
         setX(posX);
         setY(posY);
     }
@@ -160,7 +164,7 @@ public class Player extends BaseCharacter{
             gc.drawImage(RenderableHolder.witchAttackSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             gc.setStroke(Color.RED);
             gc.setLineWidth(2);
-            gc.strokeOval(getX() - getBroom().getAttackRange(), getY()- getBroom().getAttackRange(), getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2);
+            gc.strokeOval(getX() - getBroom().getAttackRange(), getY() - getBroom().getAttackRange(), getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2);
             return;
         }
 
@@ -193,7 +197,7 @@ public class Player extends BaseCharacter{
         if(getBroom() != null){
             gc.setStroke(Color.WHITE);
             gc.setLineWidth(2);
-            float broomDegree = ((float) getMaxAttackCoolDown() - getAttackCoolDown())/getMaxAttackCoolDown() * 360;
+            float broomDegree = ((float) getMaxAttackCoolDown() - getAttackCoolDown()) / getMaxAttackCoolDown() * 360;
             gc.strokeArc(getX() - getBroom().getAttackRange(), getY()- getBroom().getAttackRange(),
                     getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2,
                     0,broomDegree, ArcType.OPEN );

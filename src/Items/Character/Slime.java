@@ -46,8 +46,10 @@ public abstract class Slime extends BaseCharacter{
         setY(posY);
     }
 
+    // the speed rate and damage of slime is based on weather
     @Override
     public void weatherEffected() {
+        super.weatherEffected();
         Config.Weather weatherNow = GameController.getInstance().getClock().getWeather();
         if(weatherNow == Config.Weather.SUNNY){
             setDamage((float) 0.6 * maxDamage);
@@ -128,16 +130,6 @@ public abstract class Slime extends BaseCharacter{
 
     @Override
     public void draw(GraphicsContext gc) {
-        // Draw slime
-        if(this instanceof NormalSlime){
-            gc.drawImage(RenderableHolder.normalSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
-        }
-        if(this instanceof HitHardSlime){
-            gc.drawImage(RenderableHolder.hitHardSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
-        }
-        if(this instanceof SpeedSlime){
-            gc.drawImage(RenderableHolder.speedSlimeSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
-        }
 
         // Calculate the width of the progress bar
         double HPPercentage = (double) getHp() / getMaxHp(); // Get HP percentage
