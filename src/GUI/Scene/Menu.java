@@ -16,6 +16,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+// this is the first scene of game
 public class Menu extends GridPane {
     private Button sunnyButton, snowyButton, rainyButton;
     private GridPane creditMenu, howToPlayMenu;

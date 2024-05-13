@@ -8,6 +8,7 @@ import javafx.scene.input.KeyEvent;
 
 import static GUISharedObject.RenderableHolder.*;
 
+// this is the screen of map of game
 public class GameScreen extends Canvas {
 
     public GameScreen(double width, double height) {

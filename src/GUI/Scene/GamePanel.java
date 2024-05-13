@@ -47,7 +47,11 @@ public class GamePanel extends HBox {
         initializeWeatherButton();
         initializeTargetVeggie();
         initializeTargetVeggieContainer();
+        setStyle();
+        addElement();
+    }
 
+    private void addElement() {
         HBox TimerLabel = new HBox(timerText,timerBar);
         VBox gameModeAndTimer = new VBox(gameModeLabel,TimerLabel);
         HBox buttonContainer = new HBox(sunnyButton,snowyButton,rainyButton);
@@ -55,20 +59,21 @@ public class GamePanel extends HBox {
 
         getChildren().addAll(targetVeggieContainer,gameModeAndTimer,weatherContainer);
 
-        // set style for this
-        setAlignment(Pos.CENTER);
-        setPrefSize(Config.GAMELABELWIDTH,Config.GAMELABELHEIGHT);
-        setSpacing(10);
-        setSpacing(50);
-        setBackground(new Background(new BackgroundFill(Color.web("#8F6F5C"), CornerRadii.EMPTY, Insets.EMPTY)));
-
-        // set style for gameModeAndTimer, buttonContainer, weatherContainer
         gameModeAndTimer.setAlignment(Pos.CENTER);
         gameModeAndTimer.setSpacing(10);
         buttonContainer.setAlignment(Pos.CENTER);
         buttonContainer.setSpacing(20);
         weatherContainer.setSpacing(10);
         weatherContainer.setAlignment(Pos.CENTER);
+    }
+
+    private void setStyle() {
+        // set style for this
+        setAlignment(Pos.CENTER);
+        setPrefSize(Config.GAMELABELWIDTH,Config.GAMELABELHEIGHT);
+        setSpacing(10);
+        setSpacing(50);
+        setBackground(new Background(new BackgroundFill(Color.web("#8F6F5C"), CornerRadii.EMPTY, Insets.EMPTY)));
 
     }
 
@@ -91,22 +96,13 @@ public class GamePanel extends HBox {
         rainbowDrakeIcon.setFitWidth(35);
         daffodilIcon.setFitWidth(35);
 
-        redFlowerCount = new Text();
-        rainbowDrakeCount = new Text();
-        daffodilCount = new Text();
-
+        initializeVeggieCount();
         updateVeggieCount();
+
         HBox targetRedFlower = new HBox(redFlowerIcon,redFlowerCount);
         HBox targetRainbowDrake = new HBox(rainbowDrakeIcon,rainbowDrakeCount);
         HBox targetDaffodil = new HBox(daffodilIcon,daffodilCount);
         targetVeggie = new HBox(targetRedFlower, targetDaffodil, targetRainbowDrake);
-
-        redFlowerCount.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
-        redFlowerCount.setFill(Color.WHEAT);
-        rainbowDrakeCount.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
-        rainbowDrakeCount.setFill(Color.WHEAT);
-        daffodilCount.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
-        daffodilCount.setFill(Color.WHEAT);
 
         targetRedFlower.setAlignment(Pos.CENTER);
         targetRedFlower.setSpacing(10);
@@ -114,6 +110,18 @@ public class GamePanel extends HBox {
         targetRainbowDrake.setSpacing(10);
         targetDaffodil.setAlignment(Pos.CENTER);
         targetDaffodil.setSpacing(10);
+    }
+
+    private void initializeVeggieCount() {
+        redFlowerCount = new Text();
+        rainbowDrakeCount = new Text();
+        daffodilCount = new Text();
+        redFlowerCount.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
+        redFlowerCount.setFill(Color.WHEAT);
+        rainbowDrakeCount.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
+        rainbowDrakeCount.setFill(Color.WHEAT);
+        daffodilCount.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
+        daffodilCount.setFill(Color.WHEAT);
     }
 
     private void initializeTargetVeggieContainer() {
