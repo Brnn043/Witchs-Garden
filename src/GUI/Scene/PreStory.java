@@ -29,6 +29,7 @@ public class PreStory extends GridPane {
         ANALOGS = new ArrayList<>();
         ANALOGS.add("Once upon a time, in a forest far, far away, there lived a witch with extraordinary powers.");
         ANALOGS.add("One morning, she woke up to a surprising discovery - her magic had disappeared!");
+        ANALOGS.add("Luckily, she can still manipulate the weather as desired.");
         ANALOGS.add("She thought \"Hmm, maybe I can make three magic potions from special veggies to get my power back\"");
         ANALOGS.add("Off she went to her garden. But unexpectedly , her garden was full of slimy slimes!");
         ANALOGS.add("She didn't give up! With a determined smile, she started her journey!");
