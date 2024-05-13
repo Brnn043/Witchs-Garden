@@ -22,7 +22,7 @@ public class EndStory extends GridPane {
 
     @FunctionalInterface
     public interface GameEnding {
-        void ConpleteGame();
+        void CompleteGame();
     }
     public EndStory(GameEnding gameEnding) {
         count = 0;
@@ -46,7 +46,7 @@ public class EndStory extends GridPane {
         });
         nextButton.setOnAction(e -> {
             if(count == ANALOGS.size()){
-                gameEnding.ConpleteGame();
+                gameEnding.CompleteGame();
             }else{
                 showLog(count);
             }
@@ -74,7 +74,7 @@ public class EndStory extends GridPane {
 
         showLog(count);
         RenderableHolder.gameSong.stop();
-        RenderableHolder.mainManuSong.stop();
+        RenderableHolder.mainMenuSong.stop();
         RenderableHolder.storySong.play();
     }
 

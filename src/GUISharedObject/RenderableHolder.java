@@ -32,15 +32,12 @@ public class RenderableHolder {
     public static Image hitHardSlimeSprite;
     public static Image speedSlimeSprite;
     public static Image rainbowDrakeIdleSprite;
-    public static Image rainbowDrakeDieSprite;
     public static Image redFlowerIdleSprite;
-    public static Image redFlowerDieSprite;
     public static Image daffodilIdleSprite;
-    public static Image daffodilDieSprite;
     public static AudioClip hitSound;
     public static AudioClip collectSound;
     public static AudioClip clockSound;
-    public static AudioClip mainManuSong;
+    public static AudioClip mainMenuSong;
     public static AudioClip storySong;
     public static AudioClip gameSong;
 
@@ -74,17 +71,14 @@ public class RenderableHolder {
         hitHardSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/Slime3.png").toString());
         speedSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/Slime2.png").toString());
         rainbowDrakeIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/RainbowDrake_Idle.gif").toString());
-        rainbowDrakeDieSprite = new Image(ClassLoader.getSystemResource("Veggie/RainbowDrake_Dying.gif").toString());
         redFlowerIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/RedFlower_Idle.gif").toString());
-        redFlowerDieSprite = new Image(ClassLoader.getSystemResource("Veggie/RedFlower_Dying.gif").toString());
         daffodilIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/Daffodil_Idle.gif").toString());
-        daffodilDieSprite = new Image(ClassLoader.getSystemResource("Veggie/Daffodil_Dying.gif").toString());
 
         //loading sounds
         hitSound = new AudioClip(ClassLoader.getSystemResource("Sound/hit.wav").toString());
         collectSound = new AudioClip(ClassLoader.getSystemResource("Sound/collect.wav").toString());
         clockSound = new AudioClip(ClassLoader.getSystemResource("Sound/clock.wav").toString());
-        mainManuSong = new AudioClip(ClassLoader.getSystemResource("Sound/mainManuSong.mp3").toString());
+        mainMenuSong = new AudioClip(ClassLoader.getSystemResource("Sound/mainMenuSong.mp3").toString());
         storySong = new AudioClip(ClassLoader.getSystemResource("Sound/storySong.mp3").toString());
         gameSong = new AudioClip(ClassLoader.getSystemResource("Sound/gameSong.mp3").toString());
     }

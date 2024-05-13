@@ -30,7 +30,7 @@ public class GameScreen extends Canvas {
         GraphicsContext gc = getGraphicsContext2D();
         gc.clearRect(0, 0, getWidth(), getHeight());
 
-        for (int i =0; i < getInstance().getEntities().size(); i+=1) {
+        for (int i = 0; i < getInstance().getEntities().size(); i+=1) {
             Entity entity = getInstance().getEntities().get(i);
             if (entity.isVisible() && !entity.isDestroyed()) {
                 entity.draw(gc);

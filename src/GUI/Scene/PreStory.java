@@ -78,7 +78,7 @@ public class PreStory extends GridPane {
         showLog(count);
 
         RenderableHolder.gameSong.stop();
-        RenderableHolder.mainManuSong.stop();
+        RenderableHolder.mainMenuSong.stop();
         RenderableHolder.storySong.play();
     }
 

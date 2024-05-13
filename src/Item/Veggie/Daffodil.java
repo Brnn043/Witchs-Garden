@@ -14,6 +14,6 @@ public class Daffodil extends BaseVeggie {
         super.draw(gc);
         double posX = getX() - getWidth() / 2;
         double posY = getY() - getHeight() / 2;
-        gc.drawImage(RenderableHolder.redFlowerIdleSprite, posX, posY, getWidth(), getHeight());
+        gc.drawImage(RenderableHolder.daffodilIdleSprite, posX, posY, getWidth(), getHeight());
     }
 }

@@ -28,7 +28,7 @@ public class Player extends BaseCharacter{
         setWidth(Config.PLAYERWIDTH);
         setHeight(Config.PLAYERHEIGHT);
         this.z = 999;
-        System.out.println("Speed rate of player = "+getSpeedRate());
+        System.out.println("Speed rate of player = " + getSpeedRate());
     }
 
     // the speed rate and attack cool down of player is based on weather
@@ -75,7 +75,7 @@ public class Player extends BaseCharacter{
                         setAttack(false);
                     }).start();
                 }
-            } catch (Exception e){ System.out.println(e); }
+            } catch (Exception e) { System.out.println(e); }
         }
     }
 
@@ -91,7 +91,6 @@ public class Player extends BaseCharacter{
 
         ArrayList<BaseVeggie> delVeggie = new ArrayList<BaseVeggie>();
         for (BaseVeggie veggie : GameController.getInstance().getVeggiesList()) {
-
             double disX = this.getX() - veggie.getX();
             double disY = this.getY() - veggie.getY();
             double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );

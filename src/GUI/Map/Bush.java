@@ -17,14 +17,14 @@ public class Bush extends CollidableEntity implements WeatherChangeable {
     }
 
     public void changeWeather(Config.Weather weather) {
-        if (weather == Config.Weather.SUNNY) imagePath = "Bush/Sunny_Bush"+option+".png";
-        else if (weather == Config.Weather.RAINY) imagePath = "Bush/Sunny_Bush"+option+".png";
-        else imagePath = "Bush/Snowy_Bush"+option+".png";
+        if (weather == Config.Weather.SUNNY) imagePath = "Bush/Sunny_Bush" + option + ".png";
+        else if (weather == Config.Weather.RAINY) imagePath = "Bush/Sunny_Bush" + option + ".png";
+        else imagePath = "Bush/Snowy_Bush" + option + ".png";
     }
 
     @Override
     public void draw(GraphicsContext gc) {
         Image bushImage = new Image(ClassLoader.getSystemResource(imagePath).toString());
-        gc.drawImage(bushImage,getX() - getWidth()/2,getY() - getHeight()/2,getWidth(),getHeight());
+        gc.drawImage(bushImage,getX() - getWidth() / 2,getY() - getHeight() / 2, getWidth(), getHeight());
     }
 }
