@@ -1,4 +1,4 @@
-package GUI;
+package GUI.Scene;
 
 import Games.GameController;
 import javafx.geometry.Pos;

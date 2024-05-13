@@ -1,9 +1,7 @@
 package Items.Interfaces;
 
-import Items.Character.BaseCharacter;
-
+// this interface implement on character that can attack others
 public interface Attackable {
-    // this interface implement on character that can attack others
     void attack();
     int getAttackRange();
 }

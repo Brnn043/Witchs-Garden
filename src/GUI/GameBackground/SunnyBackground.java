@@ -13,7 +13,7 @@ public class SunnyBackground extends Canvas {
         super(width, height);
         GraphicsContext gc = getGraphicsContext2D();
         gc.clearRect(0, 0, getWidth(), getHeight());
-        for (int i =0; i< getInstance().getBackgroundEntities().size(); i+=1) {
+        for (int i = 0; i < getInstance().getBackgroundEntities().size(); i+=1) {
             Entity entity = getInstance().getBackgroundEntities().get(i);
             ( (WeatherChangeable) entity ).changeWeather(Config.Weather.SUNNY);
             entity.draw(gc);

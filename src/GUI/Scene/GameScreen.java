@@ -1,4 +1,4 @@
-package GUI;
+package GUI.Scene;
 
 import GUISharedObject.Entity;
 import GUISharedObject.InputUtility;

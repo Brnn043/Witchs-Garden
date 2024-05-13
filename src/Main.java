@@ -1,4 +1,4 @@
-import GUI.*;
+import GUI.Scene.*;
 import GUISharedObject.RenderableHolder;
 import Games.Config;
 import Games.GameController;

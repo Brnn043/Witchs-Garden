@@ -78,29 +78,26 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
             this.setWaterDroppingRate(MAXWATERDROPPINGRATE * (float) 0.4);
         } else if( weather == Config.Weather.RAINY) {
             this.setGrowthRate(MAXGROWTHRATE * (float) 0.7);
-            this.setWaterDroppingRate(MAXWATERDROPPINGRATE * (float) 0.0);
+            this.setWaterDroppingRate(0);
         }
     }
 
     @Override
     public void draw(GraphicsContext gc) {
-        if(this instanceof RedFlower){
-            gc.drawImage(RenderableHolder.redFlowerIdleSprite, getX() - (double) getWidth() /2, getY() - (double) getHeight() /2, getWidth(), getHeight());
-        }
-        if(this instanceof RainbowDrake){
-            gc.drawImage(RenderableHolder.rainbowDrakeIdleSprite, getX() - (double) getWidth() /2, getY() - (double) getHeight() /2, getWidth(), getHeight());
-        }
-        if(this instanceof Daffodil){
-            gc.drawImage(RenderableHolder.daffodilIdleSprite, getX() - (double) getWidth() /2, getY() - (double) getHeight() /2, getWidth(), getHeight());
-        }
+        drawGrowthDegree(gc);
+        drawBar(gc);
+    }
 
+    private void drawGrowthDegree(GraphicsContext gc) {
         gc.setStroke(Color.GREEN);
         gc.setLineWidth(2);
-        float growthDegree = ((float) MAXGROWTHPOINT - getGrowthPoint())/MAXGROWTHPOINT * 360;
+        float growthDegree = (MAXGROWTHPOINT - getGrowthPoint())/MAXGROWTHPOINT * 360;
         gc.strokeArc(getX() - getWidth(), getY() - getHeight(),
                 getWidth() * 2, getHeight() * 2,
                 0,growthDegree, ArcType.OPEN );
-
+        drawBar(gc);
+    }
+    private void drawBar(GraphicsContext gc) {
         // Calculate the width of the progress bar
         double HPPercentage = (double) getHp() / getMAXHP(); // Get HP percentage
         double HPBarWidth = 30 * HPPercentage; // Calculate progress bar width

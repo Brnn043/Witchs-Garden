@@ -1,4 +1,4 @@
-package GUI;
+package GUI.Scene;
 
 import GUISharedObject.RenderableHolder;
 import Games.Config;
@@ -17,7 +17,9 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class Menu extends GridPane {
-    private Button sunnyButton,snowyButton,rainyButton;
+    private final Button sunnyButton;
+    private final Button snowyButton;
+    private final Button rainyButton;
     @FunctionalInterface
     public interface PreStory {
         void preStory();
@@ -120,8 +122,6 @@ public class Menu extends GridPane {
             creditMenu.setVisible(false);
             howToPlayMenu.setVisible(true);
         });
-
-
 
         Button creditButton = new Button("Credit");
         creditButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 18));

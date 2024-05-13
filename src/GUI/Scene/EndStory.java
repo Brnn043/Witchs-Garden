@@ -1,4 +1,4 @@
-package GUI;
+package GUI.Scene;
 
 import GUISharedObject.RenderableHolder;
 import javafx.geometry.Insets;
@@ -15,11 +15,11 @@ import javafx.scene.text.Text;
 import java.util.ArrayList;
 
 public class EndStory extends GridPane {
-    private ArrayList<String> analogs;
+    private final ArrayList<String> analogs;
     private int count;
     private Text analog;
+    private final ImageView backgroundImage;
 
-    private ImageView backgroundImage;
     @FunctionalInterface
     public interface GameEnding {
         void ConpleteGame();
@@ -87,7 +87,6 @@ public class EndStory extends GridPane {
         backgroundImage.setFitHeight(450);
         backgroundImage.setFitWidth(1100);
 
-
-        count = count + 1;
+        count++;
     }
 }

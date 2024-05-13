@@ -30,6 +30,8 @@ public class Config {
     public static int SLIMEATTACKCOOLDOWN = 1;
     public static int SLIMESPAWNTIME = 5;
     public static final int PLAYERCOOLDOWNTIME = 1000; // 1000 ms
+    public static final int BROOMWIDTH = 90;
+    public static final int BROOMHEIGHT = 45;
     public static final int BROOMMAXDURABILITY = 20;
     public static final int BROOMMINDURABILITY = 10;
     public static final int BROOMMAXATTACKRANGE = 100;

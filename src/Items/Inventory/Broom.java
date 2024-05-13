@@ -16,15 +16,16 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
     private float durability;
     private int attackRange;
     private float damage;
-    private int width,height;
+    private final int width;
+    private final int height;
 
     public Broom() { // this constructor will randomly choose durability and attack range
         super();
         setDurability( (int) (Math.random() * (Config.BROOMMAXDURABILITY - Config.BROOMMINDURABILITY + 1) ) + Config.BROOMMINDURABILITY);
         setAttackRange( (int) (Math.random() * (Config.BROOMMAXATTACKRANGE - Config.BROOMMINATTACKRANGE + 1) ) + Config.BROOMMINATTACKRANGE);
         setDamage(Config.BROOMDAMAGEPERATTACK);
-        width = 90;
-        height = 45;
+        width = Config.BROOMWIDTH;
+        height = Config.BROOMHEIGHT;
         spawnOnMap();
         this.z = 300;
     }
@@ -43,7 +44,7 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
 
     @Override
     public void collected() {
-        if (! InputUtility.getKeyPressed(KeyCode.E)) {
+        if (!InputUtility.getKeyPressed(KeyCode.E)) {
            return;
         }
         Player player = GameController.getInstance().getPlayer();
@@ -64,9 +65,22 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
     }
 
     public void draw(GraphicsContext gc) {
-        gc.drawImage(RenderableHolder.broomSprite, getX() - (double) getWidth() /2, getY() - (double) getHeight() /2,getWidth(),getHeight());
+        gc.drawImage(RenderableHolder.broomSprite, getX() - (double) getWidth() / 2, getY() - (double) getHeight() / 2,getWidth(),getHeight());
     }
 
+    @Override
+    public void spawnOnMap() {
+        double posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
+        double posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
+        while (!GameController.getInstance().isPositionAccesible(posX, posY, getWidth(), getHeight(), false)) {
+            posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
+            posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
+            System.out.println("Broom cannot be spawn here. Find new pos...");
+        }
+        setX(posX);
+        setY(posY);
+        setCollected(false);
+    }
     @Override
     public void setX(double x) { this.x = Math.max((double) getWidth() /2,Math.min(x, Config.GAMESCREENWIDTH - (double) getWidth() /2)); }
     @Override
@@ -93,21 +107,8 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
     }
 
     @Override
-    public void spawnOnMap() {
-        double posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
-        double posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
-        while (!GameController.getInstance().isPositionAccesible(posX, posY, getWidth(), getHeight(), false)) {
-            posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
-            posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
-            System.out.println("Broom cannot be spawn here. Find new pos...");
-        }
-        setX(posX);
-        setY(posY);
-        setCollected(false);
-    }
-
-    @Override
     public boolean isCollected() { return isCollected; }
+
     public void setCollected(boolean collected) { isCollected = collected; }
 
 }

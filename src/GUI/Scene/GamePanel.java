@@ -1,4 +1,4 @@
-package GUI;
+package GUI.Scene;
 
 import GUI.WeatherCanvas.RainyCanvas;
 import GUI.WeatherCanvas.SnowyCanvas;

@@ -1,4 +1,4 @@
-package GUI;
+package GUI.Scene;
 
 import GUISharedObject.RenderableHolder;
 import Games.Config;
@@ -28,7 +28,7 @@ public class PreStory extends GridPane {
     public PreStory(GameStarter gameStarter) {
         count = 0;
         analog = new Text();
-        analogs = new ArrayList<String>();
+        analogs = new ArrayList<>();
         analogs.add("Once upon a time, in a forest far, far away, there lived a witch with extraordinary powers.");
         analogs.add("One morning, she woke up to a surprising discovery - her magic had disappeared!");
         analogs.add("She thought \"Hmm, maybe I can make three magic potions from special veggies to get my power back\"");
@@ -92,7 +92,6 @@ public class PreStory extends GridPane {
         backgroundImage.setFitHeight(450);
         backgroundImage.setFitWidth(1100);
 
-
-        count = count + 1;
+        count++;
     }
 }
