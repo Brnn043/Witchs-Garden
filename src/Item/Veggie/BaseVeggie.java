@@ -14,31 +14,30 @@ import javafx.scene.shape.ArcType;
 public abstract class BaseVeggie extends Entity implements WeatherEffectable, Collectable {
     private boolean isCollected;
     private float growthPoint;
-    private final float maxGrowthPoint;
+    private final float MAXGROWTHPOINT;
     private float growthRate;
-    private final float maxGrowthRate;
+    private final float MAXGROWTHRATE;
     private float Hp;
     private float waterPoint;
     private float waterDroppingRate;
-    private final float maxWaterDroppingRate;
-    private final float maxWater;
-    private final int maxHp;
+    private final float MAXWATERDROPPINGRATE;
+    private final float MAXWATER;
+    private final int MAXHP;
     private final double width;
     private final double height;
 
     public BaseVeggie(int hp, float maxWater, float growthRate, float waterDroppingRate, int maxGrowthPoint){
         super();
-
-        maxHp = hp;
-        setHp(maxHp);
-        this.maxWater = maxWater;
-        setWaterPoint(this.maxWater);
-        maxGrowthRate = growthRate;
-        setGrowthRate(maxGrowthRate);
-        maxWaterDroppingRate = waterDroppingRate;
-        setWaterDroppingRate(maxWaterDroppingRate);
+        MAXHP = hp;
+        setHp(MAXHP);
+        MAXWATER = maxWater;
+        setWaterPoint(this.MAXWATER);
+        MAXGROWTHRATE = growthRate;
+        setGrowthRate(MAXGROWTHRATE);
+        MAXWATERDROPPINGRATE = waterDroppingRate;
+        setWaterDroppingRate(MAXWATERDROPPINGRATE);
         setGrowthPoint(0);
-        this.maxGrowthPoint = maxGrowthPoint;
+        this.MAXGROWTHPOINT = maxGrowthPoint;
 
         spawnOnMap();
         z = 600;
@@ -67,7 +66,7 @@ public abstract class BaseVeggie extends Entity implements WeatherEffectable, Co
 
     @Override
     public void collected() {
-        if(getGrowthPoint() < maxGrowthPoint) return;
+        if(getGrowthPoint() < MAXGROWTHPOINT) return;
         GameController.getInstance().collectVeggie(this);
         RenderableHolder.collectSound.play();
     }
@@ -79,13 +78,13 @@ public abstract class BaseVeggie extends Entity implements WeatherEffectable, Co
     public void weatherEffected() {
         Config.Weather weather = GameController.getInstance().getClock().getWeather();
         if ( weather == Config.Weather.SUNNY ) {
-            this.setGrowthRate(maxGrowthRate * (float) 0.5);
-            this.setWaterDroppingRate(maxWaterDroppingRate);
+            this.setGrowthRate(MAXGROWTHRATE * (float) 0.5);
+            this.setWaterDroppingRate(MAXWATERDROPPINGRATE);
         } else if ( weather == Config.Weather.SNOWY ) {
-            this.setGrowthRate(maxGrowthRate * (float) 0.2);
-            this.setWaterDroppingRate(maxWaterDroppingRate * (float) 0.4);
+            this.setGrowthRate(MAXGROWTHRATE * (float) 0.2);
+            this.setWaterDroppingRate(MAXWATERDROPPINGRATE * (float) 0.4);
         } else if ( weather == Config.Weather.RAINY) {
-            this.setGrowthRate(maxGrowthRate * (float) 0.7);
+            this.setGrowthRate(MAXGROWTHRATE * (float) 0.7);
             this.setWaterDroppingRate(0);
         }
     }
@@ -99,7 +98,7 @@ public abstract class BaseVeggie extends Entity implements WeatherEffectable, Co
     private void drawGrowthDegree(GraphicsContext gc) {
         gc.setStroke(Color.GREEN);
         gc.setLineWidth(2);
-        float growthDegree = (maxGrowthPoint - getGrowthPoint())/ maxGrowthPoint * 360;
+        float growthDegree = (MAXGROWTHPOINT - getGrowthPoint())/ MAXGROWTHPOINT * 360;
         gc.strokeArc(getX() - getWidth(), getY() - getHeight(),
                 getWidth() * 2, getHeight() * 2,
                 0,growthDegree, ArcType.OPEN );
@@ -112,7 +111,7 @@ public abstract class BaseVeggie extends Entity implements WeatherEffectable, Co
 
         // Draw the progress bar
         double HPBarX = getX() - 17; // Start of progress bar
-        double HPBarY = getY() + (double) getHeight() / 2; // Position below the circle
+        double HPBarY = getY() + getHeight() / 2; // Position below the circle
 
         gc.setFill(Color.GRAY);
         gc.fillRect(HPBarX, HPBarY, 30, 5);
@@ -126,7 +125,7 @@ public abstract class BaseVeggie extends Entity implements WeatherEffectable, Co
 
         // Draw the progress bar
         double waterBarX = getX() - 17; // Start of progress bar
-        double waterBarY = getY() + (double) getHeight() / 2 + 8; // Position below the circle
+        double waterBarY = getY() + getHeight() / 2 + 8; // Position below the circle
 
         gc.setFill(Color.GRAY);
         gc.fillRect(waterBarX, waterBarY, 30, 5);
@@ -140,7 +139,7 @@ public abstract class BaseVeggie extends Entity implements WeatherEffectable, Co
 
     public float getGrowthRate() { return growthRate; }
 
-    public void setGrowthRate(float growthRate) { this.growthRate = Math.min(growthRate, maxGrowthRate); }
+    public void setGrowthRate(float growthRate) { this.growthRate = Math.min(growthRate, MAXGROWTHRATE); }
 
     public void setCollected(boolean collected) { isCollected = collected; }
 
@@ -154,17 +153,17 @@ public abstract class BaseVeggie extends Entity implements WeatherEffectable, Co
 
     public float getGrowthPoint() { return growthPoint; }
 
-    public void setGrowthPoint(float growthPoint) { this.growthPoint = Math.min(growthPoint, maxGrowthPoint); }
+    public void setGrowthPoint(float growthPoint) { this.growthPoint = Math.min(growthPoint, MAXGROWTHPOINT); }
 
     public float getWaterDroppingRate() { return waterDroppingRate; }
 
     public void setWaterDroppingRate(float waterDroppingRate) { this.waterDroppingRate = waterDroppingRate; }
 
     public int getMaxHp() {
-        return maxHp;
+        return MAXHP;
     }
 
     public float getMaxWater() {
-        return maxWater;
+        return MAXWATER;
     }
 }

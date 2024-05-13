@@ -11,21 +11,21 @@ import Game.Config.*;
 // this is the base character of the game which can walk, attack ,and is affected by weather
 public abstract class BaseCharacter extends CollidableEntity implements Walkable, Attackable, WeatherEffectable {
     private float speedRate;
-    private final float maxSpeedRate;
-    private final int attackRange;
+    private final float MAXSPEEDRATE;
+    private int attackRange;
     private float damage;
     private int attackCoolDown;
 
     public BaseCharacter(double positionX, double positionY, int maxSpeedRate, int attackRange, float damage) {
         super(positionX, positionY, 0, 0);
-        this.maxSpeedRate = Math.max(2, maxSpeedRate);
+        this.MAXSPEEDRATE = Math.max(2, maxSpeedRate);
         this.attackRange = Math.max(2, attackRange);
         this.damage = Math.max(2, damage);
     }
 
     public BaseCharacter(int maxSpeedRate, int attackRange, float damage) {
         super();
-        this.maxSpeedRate = Math.max(2, maxSpeedRate);
+        this.MAXSPEEDRATE = Math.max(2, maxSpeedRate);
         this.attackRange = Math.max(2, attackRange);
         this.damage = Math.max(2, damage);
     }
@@ -35,11 +35,11 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
     public void weatherEffected() {
         Weather weatherNow = GameController.getInstance().getClock().getWeather();
         if (weatherNow == Weather.SUNNY){
-            setSpeedRate((float) 0.75 * maxSpeedRate);
+            setSpeedRate((float) 0.75 * MAXSPEEDRATE);
         } else if (weatherNow == Weather.RAINY) {
-            setSpeedRate((float) 0.9 * maxSpeedRate);
+            setSpeedRate((float) 0.9 * MAXSPEEDRATE);
         } else if (weatherNow == Weather.SNOWY){
-            setSpeedRate((float) 0.5 * maxSpeedRate);
+            setSpeedRate((float) 0.5 * MAXSPEEDRATE);
         }
     }
 
@@ -63,7 +63,7 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
 
     @Override
     public void setSpeedRate(float speedRate) {
-        this.speedRate = Math.max(0,Math.min(speedRate, maxSpeedRate));
+        this.speedRate = Math.max(0,Math.min(speedRate, MAXSPEEDRATE));
     }
 
     @Override

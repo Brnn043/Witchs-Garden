@@ -17,8 +17,7 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
     private float durability;
     private int attackRange;
     private float damage;
-    private final double width;
-    private final double height;
+    private double width, height;
 
     public Broom() {
         super();
