@@ -1,8 +1,12 @@
 package Games;
 
 public class Config {
-    public enum Weather{
+    public enum Weather {
         SUNNY, SNOWY, RAINY
+    }
+
+    public enum WalkState {
+        STAY, FRONT, RIGHT, LEFT
     }
 
     public static int GAMEFRAMEWIDTH = 1100;
@@ -15,6 +19,10 @@ public class Config {
     public static int HEIGHTPERROW = 20;
     public static int GAMETIMER = 120;
     public static final int PLAYERCOLLECTRANGE = 70;
+    public static final double PLAYERWIDTH = 90;
+    public static final double PLAYERHEIGHT = 128.6;
+    public static final double SLIMEWIDTH = 38;
+    public static final double SLIMEHEIGHT = 34;
     public static int SLIMEMAXSPEEDRATE = 20;
     public static int SLIMEMINSPEEDRATE = 15;
     public static int SLIMEMAXDAMAGERANGE = 30;

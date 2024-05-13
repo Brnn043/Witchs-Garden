@@ -7,7 +7,7 @@ import GUI.Map.BackgroundImage;
 import GUI.Map.Bush;
 import GUI.Map.House;
 import GUI.Map.Tree;
-import GUISharedObject.IRenderable;
+import GUISharedObject.Entity;
 import GUISharedObject.InputUtility;
 import GUISharedObject.RenderableHolder;
 import Items.Character.*;
@@ -27,11 +27,11 @@ public class GameController {
     private Clock clock;
     private ArrayList<BaseVeggies> veggiesList;
     private ArrayList<Broom> broomOnGround;
-    private boolean gameover;
+    private boolean isGameOver;
     private int gameTimer;
     private int maxGameTimer;
-    private BackgroundImage backgroundImage;
-    private House house;
+    private final BackgroundImage backgroundImage;
+    private final House house;
     private final ArrayList<Tree> trees;
     private final ArrayList<Bush> bushes;
     private final SunnyBackground sunnyBackground;
@@ -112,8 +112,8 @@ public class GameController {
                 BaseVeggies veggie = getInstance().getVeggiesList().get(i);
                 if (veggie.getWaterPoint() <= 0 || veggie.getHp() <= 0) {
                     deleteVeggie(veggie);
-                }else{
-                    i = i+1;
+                } else {
+                    i++;
                 }
                 veggie.weatherEffected();
             } catch (Exception ignored) {}
@@ -169,13 +169,13 @@ public class GameController {
 
     public void collectVeggie(BaseVeggies veggie){
         if(veggie instanceof RainbowDrake){
-            setRainbowDrakeCount(getRainbowDrakeCount()+1);
+            setRainbowDrakeCount(getRainbowDrakeCount() + 1);
         }
         if(veggie instanceof RedFlower){
-            setRedFlowerCount(getRedFlowerCount()+1);
+            setRedFlowerCount(getRedFlowerCount() + 1);
         }
         if(veggie instanceof Daffodil){
-            setDaffodilCount(getDaffodilCount()+1);
+            setDaffodilCount(getDaffodilCount() + 1);
         }
         deleteVeggie(veggie);
     }
@@ -196,26 +196,26 @@ public class GameController {
         InputUtility.clearKeyPressed();
 
         // delete old entity
-        ArrayList<IRenderable> delEntities = new ArrayList<IRenderable>();
-        for(IRenderable entity: RenderableHolder.getInstance().getEntities()){
+        ArrayList<Entity> delEntities = new ArrayList<>();
+        for(Entity entity: RenderableHolder.getInstance().getEntities()){
             if(entity instanceof BaseVeggies || entity instanceof Slime || entity instanceof Broom || entity instanceof Player){
                 delEntities.add(entity);
             }
         }
-        for(IRenderable delEntity: delEntities){
+        for(Entity delEntity: delEntities){
             RenderableHolder.getInstance().getEntities().remove(delEntity);
         }
 
         // set stat
         this.player = new Player(400, 300, 5, 0, 0);
         RenderableHolder.getInstance().add(player);
-        veggiesList = new ArrayList<BaseVeggies>();
-        slimeList = new ArrayList<Slime>();
+        veggiesList = new ArrayList<>();
+        slimeList = new ArrayList<>();
         clock = new Clock();
-        gameover = false;
+        isGameOver = false;
         maxGameTimer = Config.GAMETIMER * level /2;
         gameTimer = maxGameTimer;
-        broomOnGround = new ArrayList<Broom>();
+        broomOnGround = new ArrayList<>();
 
         // based on each game
         maxRedFlower = 2 * level;
@@ -232,84 +232,78 @@ public class GameController {
 
     public void startThread(){
         GameController game = GameController.getInstance();
-        Thread timer = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!game.isGameover()){
-                    Clock clock = game.getClock();
+        Thread timer = new Thread(() -> {
+            while (!game.isGameOver()){
+                Clock clock = game.getClock();
 
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    // spawn broom every 15 second
-                    if(game.getGameTimer() % Config.BROOMSPAWNTIME == 0){
-                        Broom broom = new Broom();
-                        game.getBroomOnGround().add(broom);
-                        RenderableHolder.getInstance().add(broom);
-                    }
-
-                    // spawn slime every 3 second
-                    if(game.getGameTimer() % Config.SLIMESPAWNTIME == 0 && game.getSlimeList().size() <= 2 * getLevel() + 3){
-                        game.getNewSlime();
-                    }
-
-                    // set clock timer coolDown
-                    clock.setTimer(clock.getTimer() - 1);
-
-                    // decrease slime attack coolDown
-                    for(Slime slime: game.getSlimeList()) {
-                        slime.setAttackCooldown(slime.getAttackCooldown() - 1);
-                        slime.attack();
-                    }
-
-                    // decrease veggie water & add growth point
-                    for(BaseVeggies veggie : game.getVeggiesList()) {
-                        if (game.getClock().getWeather() == Config.Weather.RAINY) {
-                            veggie.setWaterPoint(veggie.getMAXWATER());
-                        } else {
-                            veggie.setWaterPoint(veggie.getWaterPoint() - veggie.getWaterDroppingRate());
-                        }
-                        veggie.setGrowthPoint(veggie.getGrowthPoint() + veggie.getGrowthRate());
-                    }
-
-                    // check if witch collect all veggie
-                    if(game.getRainbowDrakeCount() == maxRainbowDrake &&
-                            game.getRedFlowerCount() == maxRedFlower &&
-                            game.getDaffodilCount() == maxDaffodil){
-                        game.setGameover(true);
-                    }
-                    // check if gameTimer == 0
-                    game.setGameTimer(game.getGameTimer() - 1);
-                    if(game.getGameTimer() == 0){
-                        game.setGameover(true);
-                    }
-
-                    System.out.println("TIMER : "+ game.getGameTimer());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
+
+                // spawn broom every 15 second
+                if(game.getGameTimer() % Config.BROOMSPAWNTIME == 0){
+                    Broom broom = new Broom();
+                    game.getBroomOnGround().add(broom);
+                    RenderableHolder.getInstance().add(broom);
+                }
+
+                // spawn slime every 3 second
+                if(game.getGameTimer() % Config.SLIMESPAWNTIME == 0 && game.getSlimeList().size() <= 2 * getLevel() + 3){
+                    game.getNewSlime();
+                }
+
+                // set clock timer coolDown
+                clock.setTimer(clock.getTimer() - 1);
+
+                // decrease slime attack coolDown
+                for(Slime slime: game.getSlimeList()) {
+                    slime.setAttackCoolDown(slime.getAttackCoolDown() - 1);
+                    slime.attack();
+                }
+
+                // decrease veggie water & add growth point
+                for(BaseVeggies veggie : game.getVeggiesList()) {
+                    if (game.getClock().getWeather() == Config.Weather.RAINY) {
+                        veggie.setWaterPoint(veggie.getMAXWATER());
+                    } else {
+                        veggie.setWaterPoint(veggie.getWaterPoint() - veggie.getWaterDroppingRate());
+                    }
+                    veggie.setGrowthPoint(veggie.getGrowthPoint() + veggie.getGrowthRate());
+                }
+
+                // check if witch collect all veggie
+                if(game.getRainbowDrakeCount() == maxRainbowDrake &&
+                        game.getRedFlowerCount() == maxRedFlower &&
+                        game.getDaffodilCount() == maxDaffodil){
+                    game.setGameover(true);
+                }
+                // check if gameTimer == 0
+                game.setGameTimer(game.getGameTimer() - 1);
+                if(game.getGameTimer() == 0){
+                    game.setGameover(true);
+                }
+
+                System.out.println("TIMER : " + game.getGameTimer());
             }
         });
 
         // Thread for Player's action
-        Thread playerAction = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!game.isGameover()){
-                    try {
-                        Thread.sleep(20);
-                        game.getPlayer().action();
-                        game.getPlayer().setAttackCooldown(game.getPlayer().getAttackCooldown() - 20);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+        Thread playerAction = new Thread(() -> {
+            while (!game.isGameOver()){
+                try {
+                    Thread.sleep(20);
+                    game.getPlayer().action();
+                    game.getPlayer().setAttackCoolDown(game.getPlayer().getAttackCoolDown() - 20);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         });
         // Thread for slime walk
         Thread slimeWalk = new Thread(()->{
-            while (!game.isGameover()) {
+            while (!game.isGameOver()) {
                 try {
                     Thread.sleep(100);
                     for (Slime slime : game.getSlimeList()) {
@@ -349,107 +343,43 @@ public class GameController {
 
     public int getMaxDaffodil() { return maxDaffodil; }
 
-    public ArrayList<Slime> getSlimeList() {
-        return slimeList;
-    }
+    public ArrayList<Slime> getSlimeList() { return slimeList; }
 
-    public void setSlimeList(ArrayList<Slime> slimeList) {
-        this.slimeList = slimeList;
-    }
+    public Player getPlayer() { return player; }
 
-    public Player getPlayer() {
-        return player;
-    }
+    public Clock getClock() { return clock; }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+    public ArrayList<BaseVeggies> getVeggiesList() { return veggiesList; }
 
-    public static void setInstance(GameController instance) {
-        GameController.instance = instance;
-    }
+    public ArrayList<Broom> getBroomOnGround() { return broomOnGround; }
 
-    public Clock getClock() {
-        return clock;
-    }
+    public void setGameover(boolean isGameOver) { this.isGameOver = isGameOver; }
 
-    public void setClock(Clock clock) {
-        this.clock = clock;
-    }
+    public boolean isGameOver() { return isGameOver; }
 
-    public ArrayList<BaseVeggies> getVeggiesList() {
-        return veggiesList;
-    }
+    public int getGameTimer() { return gameTimer; }
 
-    public void setVeggiesList(ArrayList<BaseVeggies> veggiesList) {
-        this.veggiesList = veggiesList;
-    }
+    public void setGameTimer(int gameTimer) { this.gameTimer = Math.max(0, gameTimer); }
 
-    public ArrayList<Broom> getBroomOnGround() {
-        return broomOnGround;
-    }
+    public House getHouse() { return house; }
 
-    public boolean getGameover() {
-        return gameover;
-    }
+    public BackgroundImage getBackgroundImage() { return backgroundImage; }
 
-    public void setGameover(boolean gameover) {
-        this.gameover = gameover;
-    }
+    public SunnyBackground getSunnyBackground() { return sunnyBackground; }
 
-    public boolean isGameover() {
-        return gameover;
-    }
+    public SnowyBackground getSnowyBackground() { return snowyBackground; }
 
-    public int getGameTimer() {
-        return gameTimer;
-    }
+    public RainyBackground getRainyBackground() { return rainyBackground; }
 
-    public void setGameTimer(int gameTimer) {
-        this.gameTimer = Math.max(0, gameTimer);
-    }
+    public int getRedFlowerCount() { return redFlowerCount; }
 
-    public House getHouse() {
-        return house;
-    }
+    public void setRedFlowerCount(int redFlowerCount) { this.redFlowerCount = Math.min(redFlowerCount, maxRedFlower); }
 
-    public BackgroundImage getBackgroundImage() {
-        return backgroundImage;
-    }
+    public int getRainbowDrakeCount() { return rainbowDrakeCount; }
 
-    public SunnyBackground getSunnyBackground() {
-        return sunnyBackground;
-    }
+    public void setRainbowDrakeCount(int rainbowDrakeCount) { this.rainbowDrakeCount = Math.min(rainbowDrakeCount, maxRainbowDrake); }
 
-    public SnowyBackground getSnowyBackground() {
-        return snowyBackground;
-    }
+    public int getDaffodilCount() { return daffodilCount; }
 
-    public RainyBackground getRainyBackground() {
-        return rainyBackground;
-    }
-
-    public int getRedFlowerCount() {
-        return redFlowerCount;
-    }
-
-    public void setRedFlowerCount(int redFlowerCount) {
-        this.redFlowerCount = Math.min(redFlowerCount, maxRedFlower);
-    }
-
-    public int getRainbowDrakeCount() {
-        return rainbowDrakeCount;
-    }
-
-    public void setRainbowDrakeCount(int rainbowDrakeCount) {
-        this.rainbowDrakeCount = Math.min(rainbowDrakeCount, maxRainbowDrake);
-    }
-
-    public int getDaffodilCount() {
-        return daffodilCount;
-    }
-
-    public void setDaffodilCount(int daffodilCount) {
-        this.daffodilCount = Math.min(daffodilCount, maxDaffodil);
-    }
+    public void setDaffodilCount(int daffodilCount) { this.daffodilCount = Math.min(daffodilCount, maxDaffodil); }
 }

@@ -12,11 +12,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+// this class is used to manage resources and entities
 public class RenderableHolder {
     private static final RenderableHolder instance = new RenderableHolder();
-    private final List<IRenderable> backgroundEntities;
-    private final List<IRenderable> entities;
-    private final Comparator<IRenderable> comparator;
+    private final List<Entity> backgroundEntities;
+    private final List<Entity> entities;
+    private final Comparator<Entity> comparator;
     public static Image witchSprite;
     public static Image witchWalkSprite;
     public static Image witchBroomSprite;
@@ -48,21 +49,17 @@ public class RenderableHolder {
     }
 
     public RenderableHolder() {
-        entities = new ArrayList<IRenderable>();
+        entities = new ArrayList<>();
         backgroundEntities = new ArrayList<>();
-        comparator = (IRenderable o1, IRenderable o2) -> {
+        comparator = (Entity o1, Entity o2) -> {
             if (o1.getZ() > o2.getZ())
                 return 1;
             return -1;
         };
     }
 
-    public static RenderableHolder getInstance() {
-        return instance;
-    }
-
-    // use static !!
     public static void loadResource() {
+        //loading images
         witchSprite = new Image(ClassLoader.getSystemResource("Witch/witch.PNG").toString());
         witchWalkSprite = new Image(ClassLoader.getSystemResource("Witch/witch_walk.GIF").toString());
         witchBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_broom.PNG").toString());
@@ -82,6 +79,8 @@ public class RenderableHolder {
         redFlowerDieSprite = new Image(ClassLoader.getSystemResource("Veggie/RedFlower_Dying.gif").toString());
         daffodilIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/Daffodil_Idle.gif").toString());
         daffodilDieSprite = new Image(ClassLoader.getSystemResource("Veggie/Daffodil_Dying.gif").toString());
+
+        //loading sounds
         hitSound = new AudioClip(ClassLoader.getSystemResource("Sound/hit.wav").toString());
         collectSound = new AudioClip(ClassLoader.getSystemResource("Sound/collect.wav").toString());
         clockSound = new AudioClip(ClassLoader.getSystemResource("Sound/clock.wav").toString());
@@ -90,7 +89,7 @@ public class RenderableHolder {
         gameSong = new AudioClip(ClassLoader.getSystemResource("Sound/gameSong.mp3").toString());
     }
 
-    public void add(IRenderable entity) {
+    public void add(Entity entity) {
         if(entity instanceof Player) System.out.println("add player");
         if(entity instanceof Broom) System.out.println("add broom");
         if(entity instanceof Slime) System.out.println("add slime");
@@ -100,7 +99,7 @@ public class RenderableHolder {
         Collections.sort(entities, comparator);
     }
 
-    public void addBackground(IRenderable entity) {
+    public void addBackground(Entity entity) {
         backgroundEntities.add(entity);
         Collections.sort(backgroundEntities, comparator);
     }
@@ -112,9 +111,11 @@ public class RenderableHolder {
         }
     }
 
-    public List<IRenderable> getEntities() {
+    public static RenderableHolder getInstance() { return instance; }
+
+    public List<Entity> getEntities() {
         return entities;
     }
 
-    public List<IRenderable> getBackgroundEntities() { return backgroundEntities; }
+    public List<Entity> getBackgroundEntities() { return backgroundEntities; }
 }

@@ -1,7 +1,6 @@
 package Items.Character;
 
 import GUISharedObject.CollidableEntity;
-import GUISharedObject.Entity;
 import Games.Config;
 import Games.GameController;
 import Items.Interfaces.Attackable;
@@ -11,34 +10,34 @@ import Games.Config.*;
 
 public abstract class BaseCharacter extends CollidableEntity implements Walkable, Attackable, WeatherEffectable {
     private float speedRate;
-    private final float MAXSPEEDRATE;
-    private int attackRange;
+    private final float maxSpeedRate;
+    private final int attackRange;
     private float damage;
-    private int attackCooldown;
+    private int attackCoolDown;
 
     public BaseCharacter(double positionX, double positionY, int maxSpeedRate, int attackRange, float damage) {
-        super(positionX,positionY,0,0);
-        this.MAXSPEEDRATE = Math.max(2,maxSpeedRate);
-        this.attackRange = Math.max(2,attackRange);
-        this.damage = Math.max(2,damage);
+        super(positionX, positionY, 0, 0);
+        this.maxSpeedRate = Math.max(2, maxSpeedRate);
+        this.attackRange = Math.max(2, attackRange);
+        this.damage = Math.max(2, damage);
     }
 
     public BaseCharacter(int maxSpeedRate, int attackRange, float damage) {
         super();
-        this.MAXSPEEDRATE = Math.max(2,maxSpeedRate);
-        this.attackRange = Math.max(2,attackRange);
-        this.damage = Math.max(2,damage);
+        this.maxSpeedRate = Math.max(2, maxSpeedRate);
+        this.attackRange = Math.max(2, attackRange);
+        this.damage = Math.max(2, damage);
     }
 
     @Override
     public void weatherEffected() {
         Weather weatherNow = GameController.getInstance().getClock().getWeather();
         if(weatherNow == Weather.SUNNY){
-            setSpeedRate((float) 0.75 * MAXSPEEDRATE);
+            setSpeedRate((float) 0.75 * maxSpeedRate);
         } else if (weatherNow == Weather.RAINY) {
-            setSpeedRate((float) 0.9 * MAXSPEEDRATE);
+            setSpeedRate((float) 0.9 * maxSpeedRate);
         }else if (weatherNow == Weather.SNOWY){
-            setSpeedRate((float) 0.5 * MAXSPEEDRATE);
+            setSpeedRate((float) 0.5 * maxSpeedRate);
         }
     }
 
@@ -50,10 +49,10 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
         this.y = Math.max(getHeight()/2,Math.min(y,Config.GAMESCREENHEIGHT - getHeight()/2));
     }
 
-    public int getAttackCooldown() { return attackCooldown; }
+    public int getAttackCoolDown() { return attackCoolDown; }
 
-    public void setAttackCooldown(int attackCooldown) {
-        this.attackCooldown = Math.max(0,attackCooldown);
+    public void setAttackCoolDown(int attackCoolDown) {
+        this.attackCoolDown = Math.max(0, attackCoolDown);
     }
 
     @Override
@@ -61,7 +60,7 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
 
     @Override
     public void setSpeedRate(float speedRate) {
-        this.speedRate = Math.max(0,Math.min(speedRate, MAXSPEEDRATE));
+        this.speedRate = Math.max(0,Math.min(speedRate, maxSpeedRate));
     }
 
     @Override
@@ -69,18 +68,12 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
         return attackRange;
     }
 
-    public void setAttackRange(int attackRange) {
-        this.attackRange = attackRange;
-    }
 
     public abstract void attack();
 
     @Override
     public void walk() {
         return;
-    }
-    public float getMAXSPEEDRATE() {
-        return MAXSPEEDRATE;
     }
 
     public float getDamage() {

@@ -1,6 +1,6 @@
 package GUI;
 
-import GUISharedObject.IRenderable;
+import GUISharedObject.Entity;
 import GUISharedObject.InputUtility;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -30,8 +30,8 @@ public class GameScreen extends Canvas {
         GraphicsContext gc = getGraphicsContext2D();
         gc.clearRect(0, 0, getWidth(), getHeight());
 
-        for (int i =0; i< getInstance().getEntities().size(); i+=1) {
-            IRenderable entity = getInstance().getEntities().get(i);
+        for (int i =0; i < getInstance().getEntities().size(); i+=1) {
+            Entity entity = getInstance().getEntities().get(i);
             if (entity.isVisible() && !entity.isDestroyed()) {
                 entity.draw(gc);
             }

@@ -99,7 +99,7 @@ public class Main extends Application {
         AnimationTimer animation;
         animation = new AnimationTimer() {
             public void handle(long now) {
-                if(game.isGameover()){
+                if(game.isGameOver()){
                     this.stop();
                     gameEnd(primaryStage);
                 }else {

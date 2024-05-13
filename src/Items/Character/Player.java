@@ -16,16 +16,16 @@ import java.util.ArrayList;
 
 public class Player extends BaseCharacter{
     private Broom broom;
-    private int walk; // 0 = stay 1 = front 2 = right 3 = left
+    private Config.WalkState walkState; // 0 = stay, 1 = front, 2 = right, 3 = left
     private boolean isAttack;
     private int maxAttackCoolDown;
 
     public Player(int positionX, int positionY, int maxSpeedRate, int attackRange, int damage) {
         super(positionX, positionY, maxSpeedRate, attackRange, damage);
         setBroom(null);
-        setWalk(0);
-        setWidth(90);
-        setHeight(128.6);
+        setWalkState(Config.WalkState.STAY);
+        setWidth(Config.PLAYERWIDTH);
+        setHeight(Config.PLAYERHEIGHT);
         this.z = 999;
     }
 
@@ -45,7 +45,7 @@ public class Player extends BaseCharacter{
     @Override
     public void attack() {
         // player attack slime
-        if(getAttackCooldown()>0){
+        if(getAttackCoolDown()>0){
             return;
         }
 
@@ -56,7 +56,6 @@ public class Player extends BaseCharacter{
         if(this.getBroom() == null){
             return;
         }
-
 
 
         for(Slime slime : GameController.getInstance().getSlimeList()) {
@@ -72,7 +71,7 @@ public class Player extends BaseCharacter{
                                 RenderableHolder.hitSound.play();
                                 slime.setHp( slime.getHp() - broom.getDamage() );
                                 broom.setDurability(broom.getDurability() - Config.BROOMDURABILITYPERATTACK);
-                                setAttackCooldown(getMaxAttackCoolDown());
+                                setAttackCoolDown(getMaxAttackCoolDown());
                                 setAttack(true);
                                 Thread.sleep(300);
                             } catch (InterruptedException e) {
@@ -126,7 +125,7 @@ public class Player extends BaseCharacter{
         // WASD to walk in map
         double posX = getX();
         double posY = getY();
-        setWalk(0);
+        setWalkState(Config.WalkState.STAY);
 
         int nerfDiagonalWalk = 1;
         if((InputUtility.getKeyPressed(KeyCode.W) || InputUtility.getKeyPressed(KeyCode.S)) &&
@@ -136,18 +135,18 @@ public class Player extends BaseCharacter{
 
         if (InputUtility.getKeyPressed(KeyCode.W)) {
             posY -= (int) (this.getSpeedRate() / nerfDiagonalWalk);
-            setWalk(1);
+            setWalkState(Config.WalkState.FRONT);
         }else if (InputUtility.getKeyPressed(KeyCode.S)) {
             posY += (int) (this.getSpeedRate() / nerfDiagonalWalk);
-            setWalk(1);
+            setWalkState(Config.WalkState.FRONT);
         }
 
         if (InputUtility.getKeyPressed(KeyCode.A)) {
             posX -= (int) (this.getSpeedRate() / nerfDiagonalWalk);
-            setWalk(3);
+            setWalkState(Config.WalkState.LEFT);
         } else  if (InputUtility.getKeyPressed(KeyCode.D)) {
             posX += (int) (this.getSpeedRate() / nerfDiagonalWalk);
-            setWalk(2);
+            setWalkState(Config.WalkState.RIGHT);
         }
 
 
@@ -158,33 +157,33 @@ public class Player extends BaseCharacter{
 
     @Override
     public void draw(GraphicsContext gc) {
-        if(isAttack() && this.getBroom()!=null){
+        if(isAttack() && this.getBroom() != null){
             gc.drawImage(RenderableHolder.witchAttackSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             gc.setStroke(Color.RED);
             gc.setLineWidth(2);
-            gc.strokeOval(getX()- getBroom().getAttackRange(), getY()- getBroom().getAttackRange(), getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2);
+            gc.strokeOval(getX() - getBroom().getAttackRange(), getY()- getBroom().getAttackRange(), getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2);
             return;
         }
 
-        if(getWalk()==0){
+        if(getWalkState() == Config.WalkState.STAY){
             if(getBroom()==null){
                 gc.drawImage(RenderableHolder.witchSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             }else{
                 gc.drawImage(RenderableHolder.witchBroomSprite, getX() - getWidth()/2, getY() - getHeight()/2,getWidth(),getHeight());
             }
-        }else if(getWalk()==1) {
+        }else if(getWalkState() == Config.WalkState.FRONT) {
             if (getBroom() == null) {
                 gc.drawImage(RenderableHolder.witchWalkSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
             } else {
                 gc.drawImage(RenderableHolder.witchWalkBroomSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
             }
-        }else if(getWalk()==2){
+        }else if(getWalkState() == Config.WalkState.RIGHT){
             if (getBroom() == null) {
                 gc.drawImage(RenderableHolder.witchRightSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
             } else {
                 gc.drawImage(RenderableHolder.witchRightBroomSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
             }
-        }else if(getWalk()==3){
+        }else if(getWalkState() == Config.WalkState.LEFT){
             if (getBroom() == null) {
                 gc.drawImage(RenderableHolder.witchLeftSprite, getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
             } else {
@@ -195,7 +194,7 @@ public class Player extends BaseCharacter{
         if(getBroom() != null){
             gc.setStroke(Color.WHITE);
             gc.setLineWidth(2);
-            float broomDegree = ((float) getMaxAttackCoolDown() - getAttackCooldown())/getMaxAttackCoolDown() * 360;
+            float broomDegree = ((float) getMaxAttackCoolDown() - getAttackCoolDown())/getMaxAttackCoolDown() * 360;
             gc.strokeArc(getX() - getBroom().getAttackRange(), getY()- getBroom().getAttackRange(),
                     getBroom().getAttackRange() * 2, getBroom().getAttackRange() * 2,
                     0,broomDegree, ArcType.OPEN );
@@ -206,21 +205,13 @@ public class Player extends BaseCharacter{
 
     public void setMaxAttackCoolDown(int maxAttackCoolDown) { this.maxAttackCoolDown = maxAttackCoolDown; }
 
-    public Broom getBroom() {
-        return broom;
-    }
+    public Broom getBroom() { return broom; }
 
-    public void setBroom(Broom broom) {
-        this.broom = broom;
-    }
+    public void setBroom(Broom broom) { this.broom = broom; }
 
-    public int getWalk() {
-        return walk;
-    }
+    public Config.WalkState getWalkState() { return walkState; }
 
-    public void setWalk(int walk) {
-        this.walk = walk;
-    }
+    public void setWalkState(Config.WalkState walkState) { this.walkState = walkState; }
 
     public boolean isAttack() {
         return isAttack;

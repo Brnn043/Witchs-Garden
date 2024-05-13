@@ -26,9 +26,15 @@ public abstract class Slime extends BaseCharacter{
         ArrayList<BaseVeggies> veggiesList= GameController.getInstance().getVeggiesList();
         setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
 
-        setWidth(38);
-        setHeight(34);
+        setWidth(Config.SLIMEWIDTH);
+        setHeight(Config.SLIMEHEIGHT);
 
+        spawnOnMap();
+
+        this.z = 400;
+    }
+
+    private void spawnOnMap() {
         double posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
         double posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
         while (!GameController.getInstance().isPositionAccesible(posX-getWidth()/2,posY-getHeight()/2,getWidth(),getHeight(),false)){
@@ -38,7 +44,6 @@ public abstract class Slime extends BaseCharacter{
         }
         setX(posX);
         setY(posY);
-        this.z = getZ() + 400;
     }
 
     @Override
@@ -56,7 +61,7 @@ public abstract class Slime extends BaseCharacter{
 
     @Override
     public void attack() {
-        if(getAttackCooldown()>0){
+        if(getAttackCoolDown()>0){
             return;
         }
 
@@ -75,7 +80,7 @@ public abstract class Slime extends BaseCharacter{
         // attack veggie
         if( (distance - this.getAttackRange()) <= Config.SLIMEWALKSTEP ) {
             this.getTargetVeggie().setHp(this.getTargetVeggie().getHp()-this.getDamage());
-            setAttackCooldown(Config.SLIMEATTACKCOOLDOWN);
+            setAttackCoolDown(Config.SLIMEATTACKCOOLDOWN);
             System.out.println("slime ATTACK!!!");
         }
 

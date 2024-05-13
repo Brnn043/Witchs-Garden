@@ -1,7 +1,7 @@
 package GUI.GameBackground;
 
 import GUI.Map.WeatherChangeable;
-import GUISharedObject.IRenderable;
+import GUISharedObject.Entity;
 import Games.Config;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -14,7 +14,7 @@ public class SunnyBackground extends Canvas {
         GraphicsContext gc = getGraphicsContext2D();
         gc.clearRect(0, 0, getWidth(), getHeight());
         for (int i =0; i< getInstance().getBackgroundEntities().size(); i+=1) {
-            IRenderable entity = getInstance().getBackgroundEntities().get(i);
+            Entity entity = getInstance().getBackgroundEntities().get(i);
             ( (WeatherChangeable) entity ).changeWeather(Config.Weather.SUNNY);
             entity.draw(gc);
         }

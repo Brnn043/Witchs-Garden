@@ -26,7 +26,7 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
         width = 90;
         height = 45;
         spawnOnMap();
-        this.z = this.getZ() + 300;
+        this.z = 300;
     }
 
     @Override
