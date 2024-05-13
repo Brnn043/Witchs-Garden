@@ -67,9 +67,6 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
         return attackRange;
     }
 
-
-    public abstract void attack();
-
     @Override
     public void walk() {
         return;
@@ -80,6 +77,6 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
     }
 
     public void setDamage(float damage) {
-        this.damage = damage;
+        this.damage = Math.max(0, damage);
     }
 }
