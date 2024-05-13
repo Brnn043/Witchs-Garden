@@ -15,10 +15,10 @@ import javafx.scene.text.Text;
 import java.util.ArrayList;
 
 public class EndStory extends GridPane {
-    private final ArrayList<String> analogs;
+    private final ArrayList<String> ANALOGS;
     private int count;
     private Text analog;
-    private final ImageView backgroundImage;
+    private ImageView backgroundImage;
 
     @FunctionalInterface
     public interface GameEnding {
@@ -27,9 +27,9 @@ public class EndStory extends GridPane {
     public EndStory(GameEnding gameEnding) {
         count = 0;
         analog = new Text();
-        analogs = new ArrayList<String>();
-        analogs.add("The witch ate up all her potions.");
-        analogs.add("Afterward, her power returned in a rush.");
+        ANALOGS = new ArrayList<String>();
+        ANALOGS.add("The witch ate up all her potions.");
+        ANALOGS.add("Afterward, her power returned in a rush.");
         backgroundImage =  new ImageView();
 
         Button nextButton = new Button("Next...");
@@ -45,7 +45,7 @@ public class EndStory extends GridPane {
             nextButton.setBackground(new Background(new BackgroundFill(Color.valueOf("#8F6F5C"), new CornerRadii(8), null)));
         });
         nextButton.setOnAction(e -> {
-            if(count == analogs.size()){
+            if(count == ANALOGS.size()){
                 gameEnding.ConpleteGame();
             }else{
                 showLog(count);
@@ -79,7 +79,7 @@ public class EndStory extends GridPane {
     }
 
     public void showLog(int logCount){
-        analog.setText(analogs.get(logCount));
+        analog.setText(ANALOGS.get(logCount));
 
         //set default background image
         Image image = new Image(ClassLoader.getSystemResource("Story/EndStory_" + Integer.toString(logCount+1) + ".png").toString());
