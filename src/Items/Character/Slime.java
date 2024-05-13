@@ -43,7 +43,6 @@ public abstract class Slime extends BaseCharacter{
 
     @Override
     public void weatherEffected() {
-        super.weatherEffected();
         Config.Weather weatherNow = GameController.getInstance().getClock().getWeather();
         if(weatherNow == Config.Weather.SUNNY){
             setDamage((float) 0.6 * maxDamage);

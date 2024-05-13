@@ -31,7 +31,6 @@ public class Player extends BaseCharacter{
 
     @Override
     public void weatherEffected() {
-        super.weatherEffected();
         Config.Weather weatherNow = GameController.getInstance().getClock().getWeather();
         if(weatherNow == Config.Weather.SUNNY){
             setMaxAttackCoolDown( (int) ( 0.5 * Config.PLAYERCOOLDOWNTIME) );

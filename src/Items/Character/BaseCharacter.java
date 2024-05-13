@@ -30,17 +30,6 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
         this.damage = Math.max(2,damage);
     }
 
-    @Override
-    public void weatherEffected() {
-        Weather weatherNow = GameController.getInstance().getClock().getWeather();
-        if(weatherNow == Weather.SUNNY){
-            setSpeedRate((float) 0.75 * MAXSPEEDRATE);
-        } else if (weatherNow == Weather.RAINY) {
-            setSpeedRate((float) 0.9 * MAXSPEEDRATE);
-        }else if (weatherNow == Weather.SNOWY){
-            setSpeedRate((float) 0.5 * MAXSPEEDRATE);
-        }
-    }
 
     @Override
     public void setX(double x) { this.x = Math.max(getWidth()/2,Math.min(x, Config.GAMESCREENWIDTH - getWidth()/2)); }
@@ -70,17 +59,12 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
     }
 
     public void setAttackRange(int attackRange) {
-        this.attackRange = attackRange;
+        this.attackRange = Math.max(0, attackRange);
     }
-
-    public abstract void attack();
 
     @Override
     public void walk() {
         return;
-    }
-    public float getMAXSPEEDRATE() {
-        return MAXSPEEDRATE;
     }
 
     public float getDamage() {
@@ -88,6 +72,6 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
     }
 
     public void setDamage(float damage) {
-        this.damage = damage;
+        this.damage = Math.max(0, damage);
     }
 }

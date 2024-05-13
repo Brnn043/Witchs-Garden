@@ -1,5 +1,6 @@
 package GUI;
 
+import GUISharedObject.RenderableHolder;
 import Games.GameController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -49,7 +50,11 @@ public class GameEnd extends VBox {
         exitButton.setOnMouseExited(e -> {
             exitButton.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(5), null)));
         });
-        exitButton.setOnAction(e -> stage.close());
+        exitButton.setOnAction(e ->{
+                stage.close();
+                System.exit(0);
+            }
+        );
 
         // change text context
         if(GameController.getInstance().getGameTimer() == 0 ){
