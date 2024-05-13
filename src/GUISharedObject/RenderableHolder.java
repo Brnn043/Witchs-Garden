@@ -63,9 +63,9 @@ public class RenderableHolder {
 
     // use static !!
     public static void loadResource() {
-        witchSprite = new Image(ClassLoader.getSystemResource("Witch/witch.png").toString());
+        witchSprite = new Image(ClassLoader.getSystemResource("Witch/witch.PNG").toString());
         witchWalkSprite = new Image(ClassLoader.getSystemResource("Witch/witch_walk.GIF").toString());
-        witchBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_broom.png").toString());
+        witchBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_broom.PNG").toString());
         witchWalkBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_walk_broom.GIF").toString());
         witchAttackSprite = new Image(ClassLoader.getSystemResource("Witch/witch_attack.GIF").toString());
         witchRightSprite = new Image(ClassLoader.getSystemResource("Witch/witch_r.GIF").toString());
@@ -73,9 +73,9 @@ public class RenderableHolder {
         witchLeftSprite = new Image(ClassLoader.getSystemResource("Witch/witch_l.GIF").toString());
         witchLeftBroomSprite = new Image(ClassLoader.getSystemResource("Witch/witch_l_b.GIF").toString());
         broomSprite = new Image(ClassLoader.getSystemResource("Broom/AnimatedBroom.gif").toString());
-        normalSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime1.png").toString());
-        hitHardSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime3.png").toString());
-        speedSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/slime2.png").toString());
+        normalSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/Slime1.png").toString());
+        hitHardSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/Slime3.png").toString());
+        speedSlimeSprite = new Image(ClassLoader.getSystemResource("Slime/Slime2.png").toString());
         rainbowDrakeIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/RainbowDrake_Idle.gif").toString());
         rainbowDrakeDieSprite = new Image(ClassLoader.getSystemResource("Veggie/RainbowDrake_Dying.gif").toString());
         redFlowerIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/RedFlower_Idle.gif").toString());
