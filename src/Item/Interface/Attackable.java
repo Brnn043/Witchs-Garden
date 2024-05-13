@@ -1,4 +1,4 @@
-package Items.Interfaces;
+package Item.Interface;
 
 // this interface implement on character that can attack others
 public interface Attackable {

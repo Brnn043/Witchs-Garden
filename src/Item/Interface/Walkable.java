@@ -1,4 +1,4 @@
-package Items.Interfaces;
+package Item.Interface;
 
 // this interface implement on character that could move
 public interface Walkable {

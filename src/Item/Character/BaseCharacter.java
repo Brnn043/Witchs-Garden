@@ -1,13 +1,14 @@
-package Items.Character;
+package Item.Character;
 
 import GUISharedObject.CollidableEntity;
-import Games.Config;
-import Games.GameController;
-import Items.Interfaces.Attackable;
-import Items.Interfaces.Walkable;
-import Items.Interfaces.WeatherEffectable;
-import Games.Config.*;
+import Game.Config;
+import Game.GameController;
+import Item.Interface.Attackable;
+import Item.Interface.Walkable;
+import Item.Interface.WeatherEffectable;
+import Game.Config.*;
 
+// this is the base character of the game which can walk, attack ,and is affected by weather
 public abstract class BaseCharacter extends CollidableEntity implements Walkable, Attackable, WeatherEffectable {
     private float speedRate;
     private final float maxSpeedRate;
@@ -33,21 +34,22 @@ public abstract class BaseCharacter extends CollidableEntity implements Walkable
     @Override
     public void weatherEffected() {
         Weather weatherNow = GameController.getInstance().getClock().getWeather();
-        if(weatherNow == Weather.SUNNY){
+        if (weatherNow == Weather.SUNNY){
             setSpeedRate((float) 0.75 * maxSpeedRate);
         } else if (weatherNow == Weather.RAINY) {
             setSpeedRate((float) 0.9 * maxSpeedRate);
-        }else if (weatherNow == Weather.SNOWY){
+        } else if (weatherNow == Weather.SNOWY){
             setSpeedRate((float) 0.5 * maxSpeedRate);
         }
     }
 
     @Override
-    public void setX(double x) { this.x = Math.max(getWidth()/2,Math.min(x, Config.GAMESCREENWIDTH - getWidth()/2)); }
+    public void setX(double x) {
+        this.x = Math.max(getWidth() / 2, Math.min(x, Config.GAMESCREENWIDTH - getWidth() / 2)); }
 
     @Override
     public void setY(double y) {
-        this.y = Math.max(getHeight()/2,Math.min(y,Config.GAMESCREENHEIGHT - getHeight()/2));
+        this.y = Math.max(getHeight() / 2, Math.min(y, Config.GAMESCREENHEIGHT - getHeight() / 2));
     }
 
     public int getAttackCoolDown() { return attackCoolDown; }

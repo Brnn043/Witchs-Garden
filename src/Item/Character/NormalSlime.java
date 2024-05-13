@@ -1,9 +1,10 @@
-package Items.Character;
+package Item.Character;
 
 import GUISharedObject.RenderableHolder;
-import Games.Config;
+import Game.Config;
 import javafx.scene.canvas.GraphicsContext;
 
+// this is NormalSlime which is extended from Slime
 public class NormalSlime extends Slime{
     public NormalSlime() {
         super(Config.SLIMEMINSPEEDRATE, 5, 2);

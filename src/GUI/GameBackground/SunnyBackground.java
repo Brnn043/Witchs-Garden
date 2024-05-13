@@ -2,7 +2,7 @@ package GUI.GameBackground;
 
 import GUI.Map.WeatherChangeable;
 import GUISharedObject.Entity;
-import Games.Config;
+import Game.Config;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 

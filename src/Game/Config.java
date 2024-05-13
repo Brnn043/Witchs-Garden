@@ -1,4 +1,4 @@
-package Games;
+package Game;
 
 public class Config {
     public enum Weather {
@@ -30,8 +30,8 @@ public class Config {
     public static int SLIMEATTACKCOOLDOWN = 1;
     public static int SLIMESPAWNTIME = 5;
     public static final int PLAYERCOOLDOWNTIME = 1000; // 1000 ms
-    public static final int BROOMWIDTH = 90;
-    public static final int BROOMHEIGHT = 45;
+    public static final double BROOMWIDTH = 90;
+    public static final double BROOMHEIGHT = 45;
     public static final int BROOMMAXDURABILITY = 20;
     public static final int BROOMMINDURABILITY = 10;
     public static final int BROOMMAXATTACKRANGE = 100;
@@ -44,5 +44,6 @@ public class Config {
     public static final double SPAWNRIGHTBOUND = 980;
     public static final double SPAWNTOPBOUND = 50;
     public static final double SPAWNBOTTOMBOUND = GAMESCREENHEIGHT - 50;
+    public static final double VEGGIESIZE = 40;
 
 }

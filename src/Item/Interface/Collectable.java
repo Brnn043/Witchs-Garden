@@ -1,5 +1,6 @@
-package Items.Interfaces;
+package Item.Interface;
 
+// this interface implement on item that can be collected
 public interface Collectable {
     // when create item, randomly set positionX and positionY
     void spawnOnMap();

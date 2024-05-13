@@ -1,6 +1,6 @@
 package GUI.Map;
 
-import Games.Config;
+import Game.Config;
 
 public interface WeatherChangeable {
     void changeWeather(Config.Weather weather);

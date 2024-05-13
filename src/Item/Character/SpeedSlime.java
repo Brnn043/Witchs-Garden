@@ -1,9 +1,10 @@
-package Items.Character;
+package Item.Character;
 
 import GUISharedObject.RenderableHolder;
-import Games.Config;
+import Game.Config;
 import javafx.scene.canvas.GraphicsContext;
 
+// this is SpeedSlime which is extended from Slime
 public class SpeedSlime extends Slime{
     public SpeedSlime() {
         super(Config.SLIMEMINSPEEDRATE + 10, 5, 1);

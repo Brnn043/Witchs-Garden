@@ -1,53 +1,61 @@
-package Items.Veggies;
+package Item.Veggie;
 
 import GUISharedObject.Entity;
 import GUISharedObject.RenderableHolder;
-import Games.Config;
-import Games.GameController;
-import Items.Interfaces.Collectable;
-import Items.Interfaces.WeatherEffectable;
+import Game.Config;
+import Game.GameController;
+import Item.Interface.Collectable;
+import Item.Interface.WeatherEffectable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 
-public abstract class BaseVeggies extends Entity implements WeatherEffectable, Collectable {
+// this is base veggie which has water point ,growth rate ,and hp
+public abstract class BaseVeggie extends Entity implements WeatherEffectable, Collectable {
     private boolean isCollected;
     private float growthPoint;
-    private final float MAXGROWTHPOINT;
+    private final float maxGrowthPoint;
     private float growthRate;
-    private final float MAXGROWTHRATE;
+    private final float maxGrowthRate;
     private float Hp;
     private float waterPoint;
     private float waterDroppingRate;
-    private final float MAXWATERDROPPINGRATE;
-    private final float MAXWATER;
-    private final int MAXHP;
-    private final int width;
-    private final int height;
+    private final float maxWaterDroppingRate;
+    private final float maxWater;
+    private final int maxHp;
+    private final double width;
+    private final double height;
 
-    public BaseVeggies(int hp, float maxWater, float growthRate, float waterDroppingRate, int maxGrowthPoint){
+    public BaseVeggie(int hp, float maxWater, float growthRate, float waterDroppingRate, int maxGrowthPoint){
         super();
-        MAXHP = hp;
-        setHp(MAXHP);
-        MAXWATER = maxWater;
-        setWaterPoint(MAXWATER);
-        MAXGROWTHRATE = growthRate;
-        setGrowthRate(MAXGROWTHRATE);
-        MAXWATERDROPPINGRATE = waterDroppingRate;
-        setWaterDroppingRate(MAXWATERDROPPINGRATE);
-        spawnOnMap();
+
+        maxHp = hp;
+        setHp(maxHp);
+        this.maxWater = maxWater;
+        setWaterPoint(this.maxWater);
+        maxGrowthRate = growthRate;
+        setGrowthRate(maxGrowthRate);
+        maxWaterDroppingRate = waterDroppingRate;
+        setWaterDroppingRate(maxWaterDroppingRate);
         setGrowthPoint(0);
-        MAXGROWTHPOINT = maxGrowthPoint;
-        z = getZ() + 600;
-        width = 40;
-        height = 40;
+        this.maxGrowthPoint = maxGrowthPoint;
+
+        spawnOnMap();
+        z = 600;
+
+        width = Config.VEGGIESIZE;
+        height = Config.VEGGIESIZE;
     }
 
     @Override
     public void spawnOnMap() {
         double posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
         double posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
-        while (!GameController.getInstance().isPositionAccesible(posX,posY,getWidth(),getHeight(),false)) {
+
+        // check if this can spawn on that position ,
+        // otherwise it will keep spawning until find the proper position
+        while (!GameController.getInstance().isPositionAccesible(posX, posY,
+                getWidth(), getHeight(),false)) {
             posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
             posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
             System.out.println("Veggie cannot be spawn here. Find new pos...");
@@ -59,7 +67,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
 
     @Override
     public void collected() {
-        if(this.getGrowthPoint()<MAXGROWTHPOINT) return;
+        if(getGrowthPoint() < maxGrowthPoint) return;
         GameController.getInstance().collectVeggie(this);
         RenderableHolder.collectSound.play();
     }
@@ -70,14 +78,14 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
     @Override
     public void weatherEffected() {
         Config.Weather weather = GameController.getInstance().getClock().getWeather();
-        if( weather == Config.Weather.SUNNY ) {
-            this.setGrowthRate(MAXGROWTHRATE * (float) 0.5);
-            this.setWaterDroppingRate(MAXWATERDROPPINGRATE);
-        } else if( weather == Config.Weather.SNOWY ) {
-            this.setGrowthRate(MAXGROWTHRATE * (float) 0.2);
-            this.setWaterDroppingRate(MAXWATERDROPPINGRATE * (float) 0.4);
-        } else if( weather == Config.Weather.RAINY) {
-            this.setGrowthRate(MAXGROWTHRATE * (float) 0.7);
+        if ( weather == Config.Weather.SUNNY ) {
+            this.setGrowthRate(maxGrowthRate * (float) 0.5);
+            this.setWaterDroppingRate(maxWaterDroppingRate);
+        } else if ( weather == Config.Weather.SNOWY ) {
+            this.setGrowthRate(maxGrowthRate * (float) 0.2);
+            this.setWaterDroppingRate(maxWaterDroppingRate * (float) 0.4);
+        } else if ( weather == Config.Weather.RAINY) {
+            this.setGrowthRate(maxGrowthRate * (float) 0.7);
             this.setWaterDroppingRate(0);
         }
     }
@@ -91,7 +99,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
     private void drawGrowthDegree(GraphicsContext gc) {
         gc.setStroke(Color.GREEN);
         gc.setLineWidth(2);
-        float growthDegree = (MAXGROWTHPOINT - getGrowthPoint())/MAXGROWTHPOINT * 360;
+        float growthDegree = (maxGrowthPoint - getGrowthPoint())/ maxGrowthPoint * 360;
         gc.strokeArc(getX() - getWidth(), getY() - getHeight(),
                 getWidth() * 2, getHeight() * 2,
                 0,growthDegree, ArcType.OPEN );
@@ -99,7 +107,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
     }
     private void drawBar(GraphicsContext gc) {
         // Calculate the width of the progress bar
-        double HPPercentage = (double) getHp() / getMAXHP(); // Get HP percentage
+        double HPPercentage = (double) getHp() / getMaxHp(); // Get HP percentage
         double HPBarWidth = 30 * HPPercentage; // Calculate progress bar width
 
         // Draw the progress bar
@@ -113,7 +121,7 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
 
 
         // Calculate the width of the water bar
-        double waterPercentage = (double) getWaterPoint() / getMAXWATER(); // Get HP percentage
+        double waterPercentage = (double) getWaterPoint() / getMaxWater(); // Get HP percentage
         double waterBarWidth = 30 * waterPercentage; // Calculate progress bar width
 
         // Draw the progress bar
@@ -126,13 +134,13 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
         gc.fillRect(waterBarX, waterBarY, waterBarWidth, 5);
     }
 
-    public int getWidth() { return width; }
+    public double getWidth() { return width; }
 
-    public int getHeight() { return height; }
+    public double getHeight() { return height; }
 
     public float getGrowthRate() { return growthRate; }
 
-    public void setGrowthRate(float growthRate) { this.growthRate = Math.min(growthRate, MAXGROWTHRATE); }
+    public void setGrowthRate(float growthRate) { this.growthRate = Math.min(growthRate, maxGrowthRate); }
 
     public void setCollected(boolean collected) { isCollected = collected; }
 
@@ -146,16 +154,17 @@ public abstract class BaseVeggies extends Entity implements WeatherEffectable, C
 
     public float getGrowthPoint() { return growthPoint; }
 
-    public void setGrowthPoint(float growthPoint) { this.growthPoint = Math.min(growthPoint, MAXGROWTHPOINT); }
+    public void setGrowthPoint(float growthPoint) { this.growthPoint = Math.min(growthPoint, maxGrowthPoint); }
 
     public float getWaterDroppingRate() { return waterDroppingRate; }
 
     public void setWaterDroppingRate(float waterDroppingRate) { this.waterDroppingRate = waterDroppingRate; }
 
-    public int getMAXHP() {
-        return MAXHP;
+    public int getMaxHp() {
+        return maxHp;
     }
-    public float getMAXWATER() {
-        return MAXWATER;
+
+    public float getMaxWater() {
+        return maxWater;
     }
 }

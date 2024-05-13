@@ -1,4 +1,4 @@
-package Games;
+package Game;
 
 import GUI.GameBackground.RainyBackground;
 import GUI.GameBackground.SnowyBackground;
@@ -10,13 +10,13 @@ import GUI.Map.Tree;
 import GUISharedObject.Entity;
 import GUISharedObject.InputUtility;
 import GUISharedObject.RenderableHolder;
-import Items.Character.*;
-import Items.Inventory.Broom;
-import Items.Inventory.Clock;
-import Items.Veggies.BaseVeggies;
-import Items.Veggies.RedFlower;
-import Items.Veggies.RainbowDrake;
-import Items.Veggies.Daffodil;
+import Item.Character.*;
+import Item.Inventory.Broom;
+import Item.Inventory.Clock;
+import Item.Veggie.BaseVeggie;
+import Item.Veggie.RedFlower;
+import Item.Veggie.RainbowDrake;
+import Item.Veggie.Daffodil;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ public class GameController {
     private Player player;
     private ArrayList<Slime> slimeList;
     private Clock clock;
-    private ArrayList<BaseVeggies> veggiesList;
+    private ArrayList<BaseVeggie> veggiesList;
     private ArrayList<Broom> broomOnGround;
     private boolean isGameOver;
     private int gameTimer;
@@ -109,7 +109,7 @@ public class GameController {
         // veggies : check if veggie is dead
         for (int i = 0; i < getInstance().getVeggiesList().size();) {
             try {
-                BaseVeggies veggie = getInstance().getVeggiesList().get(i);
+                BaseVeggie veggie = getInstance().getVeggiesList().get(i);
                 if (veggie.getWaterPoint() <= 0 || veggie.getHp() <= 0) {
                     deleteVeggie(veggie);
                 } else {
@@ -143,7 +143,7 @@ public class GameController {
             veggieType = (int) (Math.random() * 3);
         } while ((veggieType == 0 && isRedFlowerMaxed) || (veggieType == 1 && isRainbowDrakeMaxed) || (veggieType == 2 && isDaffodilMaxed));
 
-        BaseVeggies veggie = switch (veggieType) {
+        BaseVeggie veggie = switch (veggieType) {
             case 0 -> new RedFlower();
             case 1 -> new RainbowDrake();
             default -> new Daffodil();
@@ -167,7 +167,7 @@ public class GameController {
         RenderableHolder.getInstance().add(slime);
     }
 
-    public void collectVeggie(BaseVeggies veggie){
+    public void collectVeggie(BaseVeggie veggie){
         if(veggie instanceof RainbowDrake){
             setRainbowDrakeCount(getRainbowDrakeCount() + 1);
         }
@@ -180,7 +180,7 @@ public class GameController {
         deleteVeggie(veggie);
     }
 
-    public static void deleteVeggie(BaseVeggies veggie){
+    public static void deleteVeggie(BaseVeggie veggie){
         RenderableHolder.getInstance().getEntities().remove(veggie);
         getInstance().getVeggiesList().remove(veggie);
         getInstance().getNewVeggie();
@@ -198,7 +198,7 @@ public class GameController {
         // delete old entity
         ArrayList<Entity> delEntities = new ArrayList<>();
         for(Entity entity: RenderableHolder.getInstance().getEntities()){
-            if(entity instanceof BaseVeggies || entity instanceof Slime || entity instanceof Broom || entity instanceof Player){
+            if(entity instanceof BaseVeggie || entity instanceof Slime || entity instanceof Broom || entity instanceof Player){
                 delEntities.add(entity);
             }
         }
@@ -264,9 +264,9 @@ public class GameController {
                 }
 
                 // decrease veggie water & add growth point
-                for(BaseVeggies veggie : game.getVeggiesList()) {
+                for(BaseVeggie veggie : game.getVeggiesList()) {
                     if (game.getClock().getWeather() == Config.Weather.RAINY) {
-                        veggie.setWaterPoint(veggie.getMAXWATER());
+                        veggie.setWaterPoint(veggie.getMaxWater());
                     } else {
                         veggie.setWaterPoint(veggie.getWaterPoint() - veggie.getWaterDroppingRate());
                     }
@@ -349,7 +349,7 @@ public class GameController {
 
     public Clock getClock() { return clock; }
 
-    public ArrayList<BaseVeggies> getVeggiesList() { return veggiesList; }
+    public ArrayList<BaseVeggie> getVeggiesList() { return veggiesList; }
 
     public ArrayList<Broom> getBroomOnGround() { return broomOnGround; }
 

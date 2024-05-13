@@ -1,7 +1,6 @@
 package GUI.Scene;
 
-import GUISharedObject.RenderableHolder;
-import Games.GameController;
+import Game.GameController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;

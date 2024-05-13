@@ -1,30 +1,30 @@
-package Items.Character;
+package Item.Character;
 
-import GUISharedObject.RenderableHolder;
-import Games.Config;
-import Games.GameController;
-import Items.Veggies.BaseVeggies;
+import Game.Config;
+import Game.GameController;
+import Item.Veggie.BaseVeggie;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
+// this is base class of slime which is extended from BaseCharacter
 public abstract class Slime extends BaseCharacter{
     private float Hp;
     private float maxHp;
-    private BaseVeggies targetVeggie;
+    private BaseVeggie targetVeggie;
     private float maxDamage;
 
     public Slime(int speedRate, float maxHp, float maxDamage) {
         super(speedRate
-                ,(int) ( (float) Math.max(Config.SLIMEMAXSPEEDRATE, (Math.random())*Config.SLIMEMAXDAMAGERANGE) )
+                ,(int) ( (float) Math.max(Config.SLIMEMAXSPEEDRATE, (Math.random()) * Config.SLIMEMAXDAMAGERANGE) )
                 , maxDamage);
         setMaxHp(maxHp);
         setHp(maxHp);
         setMaxDamage(maxDamage);
 
-        ArrayList<BaseVeggies> veggiesList= GameController.getInstance().getVeggiesList();
-        setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
+        ArrayList<BaseVeggie> veggiesList= GameController.getInstance().getVeggiesList();
+        setTargetVeggie(veggiesList.get((int) (Math.random() * veggiesList.size())));
 
         setWidth(Config.SLIMEWIDTH);
         setHeight(Config.SLIMEHEIGHT);
@@ -37,7 +37,11 @@ public abstract class Slime extends BaseCharacter{
     private void spawnOnMap() {
         double posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
         double posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
-        while (!GameController.getInstance().isPositionAccesible(posX-getWidth()/2,posY-getHeight()/2,getWidth(),getHeight(),false)){
+
+        // check if this can spawn on that position ,
+        // otherwise it will keep spawning until find the proper position
+        while (!GameController.getInstance().isPositionAccesible(posX - getWidth() / 2,
+                posY - getHeight() / 2, getWidth(), getHeight(),false)){
             posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
             posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
             System.out.println("Slime cannot be spawn here. Find new pos...");
@@ -67,7 +71,7 @@ public abstract class Slime extends BaseCharacter{
         }
 
         // check if target veggie still in game
-        ArrayList<BaseVeggies> veggiesList= GameController.getInstance().getVeggiesList();
+        ArrayList<BaseVeggie> veggiesList= GameController.getInstance().getVeggiesList();
         if(!veggiesList.contains(this.getTargetVeggie())){
             this.setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
             System.out.println("slime find new target");
@@ -101,11 +105,11 @@ public abstract class Slime extends BaseCharacter{
 
     public void setHp(float hp) { this.Hp = Math.max(0, Math.min(hp, maxHp)); }
 
-    public BaseVeggies getTargetVeggie() {
+    public BaseVeggie getTargetVeggie() {
         return targetVeggie;
     }
 
-    public void setTargetVeggie(BaseVeggies targetVeggie) {
+    public void setTargetVeggie(BaseVeggie targetVeggie) {
         this.targetVeggie = targetVeggie;
     }
 

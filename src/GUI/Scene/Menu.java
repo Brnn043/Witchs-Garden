@@ -1,7 +1,7 @@
 package GUI.Scene;
 
 import GUISharedObject.RenderableHolder;
-import Games.Config;
+import Game.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

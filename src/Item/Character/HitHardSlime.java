@@ -1,9 +1,10 @@
-package Items.Character;
+package Item.Character;
 
 import GUISharedObject.RenderableHolder;
-import Games.Config;
+import Game.Config;
 import javafx.scene.canvas.GraphicsContext;
 
+// this is HitHardSlime which is extended from Slime
 public class HitHardSlime extends Slime{
     public HitHardSlime() {
         super(Config.SLIMEMINSPEEDRATE, 12, 5);

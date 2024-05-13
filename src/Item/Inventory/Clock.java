@@ -1,7 +1,8 @@
-package Items.Inventory;
+package Item.Inventory;
 
-import Games.Config;
+import Game.Config;
 
+// this is clock which controls the weather of game
 public class Clock {
     private Config.Weather weather;
     private int timer;
@@ -19,7 +20,7 @@ public class Clock {
             System.out.println("Cooling down clock . . .");
             return false;
         }
-        if(this.getWeather() == weather) {
+        if (this.getWeather() == weather) {
             System.out.println("Cannot change into the same season!!");
             return false;
         }

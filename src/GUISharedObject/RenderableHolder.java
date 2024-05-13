@@ -1,9 +1,9 @@
 package GUISharedObject;
 
-import Items.Character.Player;
-import Items.Character.Slime;
-import Items.Inventory.Broom;
-import Items.Veggies.BaseVeggies;
+import Item.Character.Player;
+import Item.Character.Slime;
+import Item.Inventory.Broom;
+import Item.Veggie.BaseVeggie;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 
@@ -93,7 +93,7 @@ public class RenderableHolder {
         if(entity instanceof Player) System.out.println("add player");
         if(entity instanceof Broom) System.out.println("add broom");
         if(entity instanceof Slime) System.out.println("add slime");
-        if(entity instanceof BaseVeggies) System.out.println("add veggie");
+        if(entity instanceof BaseVeggie) System.out.println("add veggie");
 
         entities.add(entity);
         Collections.sort(entities, comparator);

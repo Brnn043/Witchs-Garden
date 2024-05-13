@@ -1,7 +1,7 @@
 package GUI.Map;
 
 import GUISharedObject.CollidableEntity;
-import Games.Config;
+import Game.Config;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 

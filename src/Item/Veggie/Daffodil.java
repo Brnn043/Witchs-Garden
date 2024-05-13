@@ -1,9 +1,10 @@
-package Items.Veggies;
+package Item.Veggie;
 
 import GUISharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
 
-public class Daffodil extends BaseVeggies {
+// this is Daffodil which is extended from BaseVeggie
+public class Daffodil extends BaseVeggie {
     public Daffodil() {
         super(20, 200, 6, 20, 33);
     }
@@ -11,8 +12,8 @@ public class Daffodil extends BaseVeggies {
     @Override
     public void draw(GraphicsContext gc) {
         super.draw(gc);
-        double posX = getX() - (double) getWidth() / 2;
-        double posY = getY() - (double) getHeight() / 2;
+        double posX = getX() - getWidth() / 2;
+        double posY = getY() - getHeight() / 2;
         gc.drawImage(RenderableHolder.redFlowerIdleSprite, posX, posY, getWidth(), getHeight());
     }
 }

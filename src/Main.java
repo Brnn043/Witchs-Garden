@@ -1,7 +1,7 @@
 import GUI.Scene.*;
 import GUISharedObject.RenderableHolder;
-import Games.Config;
-import Games.GameController;
+import Game.Config;
+import Game.GameController;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
