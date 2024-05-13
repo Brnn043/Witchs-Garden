@@ -15,7 +15,8 @@ import javafx.stage.Stage;
 
 // this will appear at the end of each level of game
 public class GameEnd extends VBox {
-    private Button startButton, exitButton;
+    private Button startButton;
+    private Button exitButton;
     private Text endingText;
 
     @FunctionalInterface

@@ -30,12 +30,13 @@ public class EndStory extends GridPane {
 
     public EndStory(GameEnding gameEnding) {
         count = 0;
+
         ANALOGS = new ArrayList<>();
+        storyImage = new ImageView();
+
         initializeAnalogs();
         initializeNextButton(gameEnding);
         initializeTextArea();
-
-        storyImage = new ImageView();
 
         this.add(storyImage, 0, 0, 2, 1);
         this.add(textArea, 0, 1);
@@ -101,7 +102,7 @@ public class EndStory extends GridPane {
         textArea.getChildren().add(analog);
     }
 
-    public void showLog(int logCount){
+    private void showLog(int logCount){
         analog.setText(ANALOGS.get(logCount));
 
         //set default background image

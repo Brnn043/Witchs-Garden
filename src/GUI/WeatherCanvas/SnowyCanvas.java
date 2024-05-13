@@ -58,10 +58,10 @@ public class SnowyCanvas extends Canvas {
 
         private Snowflake() {
             Random random = new Random();
-            x = random.nextDouble() * Config.GAMESCREENWIDTH; // Adjust width as needed
-            y = random.nextDouble() * Config.GAMESCREENHEIGHT; // Adjust height as needed
-            speed = random.nextDouble() * 2 + 1; // Random speed between 1 and 3
-            size = random.nextDouble() * 4 + 1; // Random size between 1 and 5
+            x = random.nextDouble() * Config.GAMESCREENWIDTH;
+            y = random.nextDouble() * Config.GAMESCREENHEIGHT;
+            speed = random.nextDouble() * 2 + 1;
+            size = random.nextDouble() * 4 + 1;
         }
 
         private void update() {

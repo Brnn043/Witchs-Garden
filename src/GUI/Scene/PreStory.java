@@ -30,11 +30,10 @@ public class PreStory extends GridPane {
     public PreStory(GameStarter gameStarter) {
         count = 0;
         ANALOGS = new ArrayList<>();
+        storyImage = new ImageView();
         initializeAnalogs();
         initializeNextButton(gameStarter);
         initializeTextArea();
-
-        storyImage = new ImageView();
 
         this.add(storyImage, 0, 0, 2, 1);
         this.add(textArea, 0, 1);
@@ -101,7 +100,7 @@ public class PreStory extends GridPane {
         });
     }
 
-    public void showLog(int logCount){
+    private void showLog(int logCount) {
         // set that time analog text
         analog.setText(ANALOGS.get(logCount));
 

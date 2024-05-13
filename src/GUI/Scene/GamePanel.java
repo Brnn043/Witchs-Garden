@@ -30,7 +30,9 @@ public class GamePanel extends HBox {
     private Text daffodilCount;
     private Text timerText;
     private int level;
-    private Button sunnyButton, snowyButton, rainyButton;
+    private Button sunnyButton;
+    private Button snowyButton;
+    private Button rainyButton;
     private VBox targetVeggieContainer;
     private HBox targetVeggie;
 

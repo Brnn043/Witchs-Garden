@@ -18,9 +18,15 @@ import javafx.stage.Stage;
 
 // this is the first scene of game
 public class Menu extends GridPane {
-    private Button sunnyButton, snowyButton, rainyButton;
-    private GridPane creditMenu, howToPlayMenu;
-    private Button creditButton, howToPlayButton, startButton, exitButton;
+    private Button sunnyButton;
+    private Button snowyButton;
+    private Button rainyButton;
+    private Button creditButton;
+    private Button howToPlayButton;
+    private Button startButton;
+    private Button exitButton;
+    private GridPane creditMenu;
+    private GridPane howToPlayMenu;
     private HBox weatherButtonContainer;
     private Text titleText;
     private VBox titleAndMenu;
@@ -67,7 +73,6 @@ public class Menu extends GridPane {
         VBox menuButton = new VBox(startButton, howToPlayButton, creditButton, exitButton);
         menuButton.setSpacing(15);
         menuButton.setAlignment(Pos.CENTER);
-
         titleAndMenu = new VBox(titleText, menuButton);
         titleAndMenu.setSpacing(40);
         titleAndMenu.setAlignment(Pos.CENTER);
@@ -174,31 +179,7 @@ public class Menu extends GridPane {
     }
     
     private void initializeHowToButton() {
-        Button closeHowToButton = new Button("Close");
-        closeHowToButton.setPrefWidth(70);
-        closeHowToButton.setPrefHeight(30);
-        closeHowToButton.setTextFill(Color.WHITE);
-        closeHowToButton.setBackground(new Background(new BackgroundFill(Color.valueOf("#d68565"), new CornerRadii(5), null)));
-        closeHowToButton.setAlignment(Pos.CENTER);
-        closeHowToButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
-        
-        // howToPlayMenu
-        howToPlayMenu = new GridPane();
-        howToPlayMenu.setAlignment(Pos.CENTER);
-        howToPlayMenu.setVgap(15);
-        howToPlayMenu.setHgap(10);
-        howToPlayMenu.setPadding(new Insets(10));
-        ImageView imageView =  new ImageView(ClassLoader.getSystemResource("MenuPage/HowToPlay.png").toString());
-        imageView.setFitHeight(240);
-        imageView.setPreserveRatio(true);
-        howToPlayMenu.add(imageView,0,0);
-        howToPlayMenu.add(closeHowToButton,1,0);
-        howToPlayMenu.setVisible(false);
-        howToPlayMenu.setBackground(new Background(new BackgroundFill(Color.valueOf("#ffedd6"), new CornerRadii(10), null)));
-        closeHowToButton.setOnAction(e -> {
-            howToPlayMenu.setVisible(false);
-        });
-
+        initializeHowToMenu();
         howToPlayButton = new Button("How To Play");
         howToPlayButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 18));
         howToPlayButton.setTextFill(Color.WHITE);
@@ -217,41 +198,33 @@ public class Menu extends GridPane {
         });
     }
 
+    private void initializeHowToMenu() {
+        Button closeHowToButton = new Button("Close");
+        closeHowToButton.setPrefWidth(70);
+        closeHowToButton.setPrefHeight(30);
+        closeHowToButton.setTextFill(Color.WHITE);
+        closeHowToButton.setBackground(new Background(new BackgroundFill(Color.valueOf("#d68565"), new CornerRadii(5), null)));
+        closeHowToButton.setAlignment(Pos.CENTER);
+        closeHowToButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
+
+        howToPlayMenu = new GridPane();
+        howToPlayMenu.setAlignment(Pos.CENTER);
+        howToPlayMenu.setVgap(15);
+        howToPlayMenu.setHgap(10);
+        howToPlayMenu.setPadding(new Insets(10));
+
+        ImageView imageView =  new ImageView(ClassLoader.getSystemResource("MenuPage/HowToPlay.png").toString());
+        imageView.setFitHeight(240);
+        imageView.setPreserveRatio(true);
+        howToPlayMenu.add(imageView,0,0);
+        howToPlayMenu.add(closeHowToButton,1,0);
+        howToPlayMenu.setVisible(false);
+        howToPlayMenu.setBackground(new Background(new BackgroundFill(Color.valueOf("#ffedd6"), new CornerRadii(10), null)));
+        closeHowToButton.setOnAction(e -> howToPlayMenu.setVisible(false));
+    }
+
     private void initializeCreditButton() {
-        creditMenu = new GridPane();
-        creditMenu.setAlignment(Pos.CENTER);
-        creditMenu.setPadding(new Insets(10));
-        creditMenu.setVgap(15);
-        creditMenu.setHgap(300);
-        
-        Button closeCreditButton = new Button("Close");
-        closeCreditButton.setPrefWidth(70);
-        closeCreditButton.setPrefHeight(30);
-        closeCreditButton.setTextFill(Color.WHITE);
-        closeCreditButton.setBackground(new Background(new BackgroundFill(Color.valueOf("#d68565"), new CornerRadii(5), null)));
-        closeCreditButton.setAlignment(Pos.CENTER);
-        closeCreditButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
-        closeCreditButton.setOnAction(e -> {
-            creditMenu.setVisible(false);
-        });
-        Text creditContent = new Text();
-        creditContent.setText("""
-                This project is created by
-                
-                Naphat Serirak 6632061321
-                Raksakul Hiranas 6632190621
-                
-                2110215 (2023/2)
-                Programming Methodology I""");
-        creditContent.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
-        creditContent.setFill(Color.web("#695244"));
-        creditContent.setTextAlignment(TextAlignment.CENTER);
-        
-        creditMenu.add(creditContent,0,0);
-        creditMenu.add(closeCreditButton, 1,0);
-        creditMenu.setVisible(false);
-        creditMenu.setBackground(new Background(new BackgroundFill(Color.valueOf("#ffedd6"), new CornerRadii(10), null)));
-        
+        initializeCreditMenu();
         creditButton = new Button("Credit");
         creditButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 18));
         creditButton.setTextFill(Color.WHITE);
@@ -268,6 +241,46 @@ public class Menu extends GridPane {
             creditMenu.setVisible(true);
             howToPlayMenu.setVisible(false);
         });
+    }
+
+    private void initializeCreditMenu() {
+        creditMenu = new GridPane();
+        creditMenu.setAlignment(Pos.CENTER);
+        creditMenu.setPadding(new Insets(10));
+        creditMenu.setVgap(15);
+        creditMenu.setHgap(300);
+
+        Button closeCreditButton = new Button("Close");
+        closeCreditButton.setPrefWidth(70);
+        closeCreditButton.setPrefHeight(30);
+        closeCreditButton.setTextFill(Color.WHITE);
+        closeCreditButton.setBackground(new Background(new BackgroundFill(Color.valueOf("#d68565"), new CornerRadii(5), null)));
+        closeCreditButton.setAlignment(Pos.CENTER);
+        closeCreditButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
+        closeCreditButton.setOnAction(e -> {
+            creditMenu.setVisible(false);
+        });
+
+        creditMenu.add(getCreditContent(),0,0);
+        creditMenu.add(closeCreditButton, 1,0);
+        creditMenu.setVisible(false);
+        creditMenu.setBackground(new Background(new BackgroundFill(Color.valueOf("#ffedd6"), new CornerRadii(10), null)));
+    }
+
+    private Text getCreditContent() {
+        Text creditContent = new Text();
+        creditContent.setText("""
+                This project is created by
+                
+                Naphat Serirak 6632061321
+                Raksakul Hiranas 6632190621
+                
+                2110215 (2023/2)
+                Programming Methodology I""");
+        creditContent.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
+        creditContent.setFill(Color.web("#695244"));
+        creditContent.setTextAlignment(TextAlignment.CENTER);
+        return creditContent;
     }
 
     private void setSunnyBackground() {

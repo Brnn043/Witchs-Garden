@@ -14,8 +14,7 @@ public class RainyBackground extends Canvas {
         super(width, height);
         GraphicsContext gc = getGraphicsContext2D();
         gc.clearRect(0, 0, getWidth(), getHeight());
-        for (int i = 0; i < getInstance().getBackgroundEntities().size(); i++) {
-            Entity entity = getInstance().getBackgroundEntities().get(i);
+        for (Entity entity : getInstance().getBackgroundEntities()) {
             ( (WeatherChangeable) entity ).changeWeather(Config.Weather.RAINY);
             entity.draw(gc);
         }
