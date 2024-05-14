@@ -5,6 +5,7 @@ import Game.Config;
 import javafx.scene.canvas.GraphicsContext;
 
 // this is SpeedSlime which is extended from Slime
+// this slime walks very fast
 public class SpeedSlime extends Slime{
     public SpeedSlime() {
         super(Config.SLIMEMINSPEEDRATE + 10, 5, 1);

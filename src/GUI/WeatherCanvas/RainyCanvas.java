@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+// this class will be called when its rainy
+// show the rains
 public class RainyCanvas extends Canvas {
 
     private static final double MAX_SPEED = 15.0;

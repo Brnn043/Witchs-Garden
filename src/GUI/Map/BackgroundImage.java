@@ -5,6 +5,7 @@ import Game.Config;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+// the background of map
 public class BackgroundImage extends Entity implements WeatherChangeable {
     private String imagePath;
 

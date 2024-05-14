@@ -4,6 +4,7 @@ import GUISharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
 
 // this is RedFlower which is extended from BaseVeggie
+// this veggie grows very fast
 public class RedFlower extends BaseVeggie {
 
     public RedFlower() {

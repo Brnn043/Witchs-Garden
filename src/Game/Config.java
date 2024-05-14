@@ -1,5 +1,6 @@
 package Game;
 
+// constant value used in this game
 public class Config {
     public enum Weather {
         SUNNY, SNOWY, RAINY

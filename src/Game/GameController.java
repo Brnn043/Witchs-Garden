@@ -20,6 +20,7 @@ import Item.Veggie.Daffodil;
 
 import java.util.ArrayList;
 
+// this class controls the game
 public class GameController {
     private static GameController instance;
     private Player player;
@@ -252,7 +253,8 @@ public class GameController {
                 }
 
                 // spawn slime every 3 second
-                if (game.getGameTimer() % Config.SLIMESPAWNTIME == 0 && game.getSlimeList().size() <= 2 * getLevel() + 3){
+                if (game.getGameTimer() % Config.SLIMESPAWNTIME == 0 &&
+                        game.getSlimeList().size() <= 2 * getLevel() + 3){
                     game.getNewSlime();
                 }
 
