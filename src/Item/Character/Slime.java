@@ -134,7 +134,6 @@ public abstract class Slime extends BaseCharacter{
 
     @Override
     public void draw(GraphicsContext gc) {
-
         // Calculate the width of the progress bar
         double HPPercentage = (double) getHp() / getMaxHp(); // Get HP percentage
         double HPBarWidth = 20 * HPPercentage; // Calculate progress bar width

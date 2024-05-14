@@ -77,13 +77,13 @@ public abstract class BaseVeggie extends Entity implements WeatherEffectable, Co
     @Override
     public void weatherEffected() {
         Config.Weather weather = GameController.getInstance().getClock().getWeather();
-        if ( weather == Config.Weather.SUNNY ) {
+        if (weather == Config.Weather.SUNNY) {
             this.setGrowthRate(MAXGROWTHRATE * (float) 0.5);
             this.setWaterDroppingRate(MAXWATERDROPPINGRATE);
-        } else if ( weather == Config.Weather.SNOWY ) {
+        } else if (weather == Config.Weather.SNOWY) {
             this.setGrowthRate(MAXGROWTHRATE * (float) 0.2);
             this.setWaterDroppingRate(MAXWATERDROPPINGRATE * (float) 0.4);
-        } else if ( weather == Config.Weather.RAINY) {
+        } else if (weather == Config.Weather.RAINY) {
             this.setGrowthRate(MAXGROWTHRATE * (float) 0.7);
             this.setWaterDroppingRate(0);
         }
