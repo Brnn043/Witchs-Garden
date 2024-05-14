@@ -1,9 +1,5 @@
 package GUISharedObject;
 
-import Item.Character.Player;
-import Item.Character.Slime;
-import Item.Inventory.Broom;
-import Item.Veggie.BaseVeggie;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 
