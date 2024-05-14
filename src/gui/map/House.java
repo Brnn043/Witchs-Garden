@@ -5,7 +5,7 @@ import game.Config;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-// the house which appear in house
+// the house which appear in map
 public class House extends CollidableEntity implements WeatherChangeable {
     private String imagePath;
 
