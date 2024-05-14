@@ -4,7 +4,7 @@ import GUISharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
 
 // this is Daffodil which is extended from BaseVeggie
-// this veggie drops water slowly
+// this veggie drops water fastest
 public class Daffodil extends BaseVeggie {
     public Daffodil() {
         super(20, 200, 6, 20, 33);

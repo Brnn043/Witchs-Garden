@@ -213,10 +213,10 @@ public class Menu extends GridPane {
         howToPlayMenu.setHgap(10);
         howToPlayMenu.setPadding(new Insets(10));
 
-        ImageView imageView =  new ImageView(ClassLoader.getSystemResource("MenuPage/HowToPlay.png").toString());
-        imageView.setFitHeight(240);
-        imageView.setPreserveRatio(true);
-        howToPlayMenu.add(imageView,0,0);
+        ImageView howToPlayImageView =  new ImageView(ClassLoader.getSystemResource("MenuPage/HowToPlay.png").toString());
+        howToPlayImageView.setFitHeight(240);
+        howToPlayImageView.setPreserveRatio(true);
+        howToPlayMenu.add(howToPlayImageView,0,0);
         howToPlayMenu.add(closeHowToButton,1,0);
         howToPlayMenu.setVisible(false);
         howToPlayMenu.setBackground(new Background(new BackgroundFill(Color.valueOf("#ffedd6"), new CornerRadii(10), null)));
