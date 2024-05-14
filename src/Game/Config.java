@@ -10,26 +10,26 @@ public class Config {
         STAY, FRONT, RIGHT, LEFT
     }
 
-    public static int GAMEFRAMEWIDTH = 1100;
-    public static int GAMEFRAMEHEIGHT = 650;
-    public static int GAMESCREENWIDTH = 1100;
-    public static int GAMESCREENHEIGHT = 535;
-    public static int GAMELABELWIDTH = 1100;
-    public static int GAMELABELHEIGHT = 115;
-    public static int WIDTHPERROW = 20;
-    public static int HEIGHTPERROW = 20;
-    public static int GAMETIMER = 120;
+    public static final int GAMEFRAMEWIDTH = 1100;
+    public static final int GAMEFRAMEHEIGHT = 650;
+    public static final int GAMESCREENWIDTH = 1100;
+    public static final int GAMESCREENHEIGHT = 535;
+    public static final int GAMELABELWIDTH = 1100;
+    public static final int GAMELABELHEIGHT = 115;
+    public static final int WIDTHPERROW = 20;
+    public static final int HEIGHTPERROW = 20;
+    public static final int GAMETIMER = 120;
     public static final int PLAYERCOLLECTRANGE = 70;
     public static final double PLAYERWIDTH = 90;
     public static final double PLAYERHEIGHT = 128.6;
     public static final double SLIMEWIDTH = 38;
     public static final double SLIMEHEIGHT = 34;
-    public static int SLIMEMAXSPEEDRATE = 20;
-    public static int SLIMEMINSPEEDRATE = 15;
-    public static int SLIMEMAXDAMAGERANGE = 30;
-    public static float SLIMEWALKSTEP = 2;
-    public static int SLIMEATTACKCOOLDOWN = 1;
-    public static int SLIMESPAWNTIME = 5;
+    public static final int SLIMEMAXSPEEDRATE = 20;
+    public static final int SLIMEMINSPEEDRATE = 15;
+    public static final int SLIMEMAXDAMAGERANGE = 30;
+    public static final float SLIMEWALKSTEP = 2;
+    public static final int SLIMEATTACKCOOLDOWN = 1;
+    public static final int SLIMESPAWNTIME = 5;
     public static final int PLAYERCOOLDOWNTIME = 1000; // 1000 ms
     public static final double BROOMWIDTH = 90;
     public static final double BROOMHEIGHT = 45;
