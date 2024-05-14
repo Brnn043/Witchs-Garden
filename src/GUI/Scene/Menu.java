@@ -257,9 +257,7 @@ public class Menu extends GridPane {
         closeCreditButton.setBackground(new Background(new BackgroundFill(Color.valueOf("#d68565"), new CornerRadii(5), null)));
         closeCreditButton.setAlignment(Pos.CENTER);
         closeCreditButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
-        closeCreditButton.setOnAction(e -> {
-            creditMenu.setVisible(false);
-        });
+        closeCreditButton.setOnAction(e -> creditMenu.setVisible(false));
 
         creditMenu.add(getCreditContent(),0,0);
         creditMenu.add(closeCreditButton, 1,0);
