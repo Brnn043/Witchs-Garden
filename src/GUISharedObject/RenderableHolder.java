@@ -1,7 +1,8 @@
 package GUISharedObject;
 
 import javafx.scene.image.Image;
-import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,12 +31,12 @@ public class RenderableHolder {
     public static Image rainbowDrakeIdleSprite;
     public static Image redFlowerIdleSprite;
     public static Image daffodilIdleSprite;
-    public static AudioClip hitSound;
-    public static AudioClip collectSound;
-    public static AudioClip clockSound;
-    public static AudioClip mainMenuSong;
-    public static AudioClip storySong;
-    public static AudioClip gameSong;
+    public static MediaPlayer hitSound;
+    public static MediaPlayer collectSound;
+    public static MediaPlayer clockSound;
+    public static MediaPlayer mainMenuSong;
+    public static MediaPlayer storySong;
+    public static MediaPlayer gameSong;
 
     static {
         loadResource();
@@ -71,12 +72,12 @@ public class RenderableHolder {
         daffodilIdleSprite = new Image(ClassLoader.getSystemResource("Veggie/Daffodil_Idle.gif").toString());
 
         //loading sounds
-        hitSound = new AudioClip(ClassLoader.getSystemResource("Sound/hit.wav").toString());
-        collectSound = new AudioClip(ClassLoader.getSystemResource("Sound/collect.wav").toString());
-        clockSound = new AudioClip(ClassLoader.getSystemResource("Sound/clock.wav").toString());
-        mainMenuSong = new AudioClip(ClassLoader.getSystemResource("Sound/mainMenuSong.mp3").toString());
-        storySong = new AudioClip(ClassLoader.getSystemResource("Sound/storySong.mp3").toString());
-        gameSong = new AudioClip(ClassLoader.getSystemResource("Sound/gameSong.mp3").toString());
+        hitSound = new MediaPlayer(new Media(ClassLoader.getSystemResource("Sound/hit.wav").toString()));
+        collectSound = new MediaPlayer(new Media(ClassLoader.getSystemResource("Sound/collect.wav").toString()));
+        clockSound = new MediaPlayer(new Media(ClassLoader.getSystemResource("Sound/clock.wav").toString()));
+        mainMenuSong = new MediaPlayer(new Media(ClassLoader.getSystemResource("Sound/mainMenuSong.mp3").toString()));
+        storySong = new MediaPlayer(new Media(ClassLoader.getSystemResource("Sound/storySong.mp3").toString()));
+        gameSong = new MediaPlayer(new Media(ClassLoader.getSystemResource("Sound/gameSong.mp3").toString()));
     }
 
     public void add(Entity entity) {

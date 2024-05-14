@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -44,6 +45,7 @@ public class PreStory extends GridPane {
 
         RenderableHolder.gameSong.stop();
         RenderableHolder.mainMenuSong.stop();
+        RenderableHolder.storySong.setCycleCount(MediaPlayer.INDEFINITE);
         RenderableHolder.storySong.play();
     }
 

@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
@@ -53,6 +55,7 @@ public class Menu extends GridPane {
         this.add(creditHowToPlay,1,22,53,7);
         this.add(weatherButtonContainer,44,30);
 
+        RenderableHolder.mainMenuSong.setCycleCount(MediaPlayer.INDEFINITE);
         RenderableHolder.mainMenuSong.play();
     }
 

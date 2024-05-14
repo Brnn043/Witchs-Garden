@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -87,6 +88,7 @@ public class Main extends Application {
         RenderableHolder.mainMenuSong.stop();
         RenderableHolder.storySong.stop();
 
+        RenderableHolder.gameSong.setCycleCount(MediaPlayer.INDEFINITE);
         RenderableHolder.gameSong.play();
 
         AnimationTimer animation;
