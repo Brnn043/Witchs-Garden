@@ -309,8 +309,8 @@ interface GUI.Scene.GameEnd$GameStarter {
 
 class GUISharedObject.RenderableHolder {
 - {static} RenderableHolder instance
-- ArrayList<Entity> backgroundEntities
-- ArrayList<Entity> entities
+- List<Entity> backgroundEntities
+- List<Entity> entities
 - Comparator<Entity> comparator
 + {static} Image witchSprite
 + {static} Image witchWalkSprite

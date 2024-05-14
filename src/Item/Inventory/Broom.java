@@ -38,11 +38,11 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
     @Override
     public void weatherEffected() {
         Config.Weather weatherNow = GameController.getInstance().getClock().getWeather();
-        if (weatherNow == Config.Weather.SUNNY){
+        if (weatherNow == Config.Weather.SUNNY) {
             setDamage( (float) ( 0.5 * Config.BROOMDAMAGEPERATTACK) );
         } else if (weatherNow == Config.Weather.RAINY) {
             setDamage( (float) ( 0.75 * Config.BROOMDAMAGEPERATTACK) );
-        } else if (weatherNow == Config.Weather.SNOWY){
+        } else if (weatherNow == Config.Weather.SNOWY) {
             setDamage(Config.BROOMDAMAGEPERATTACK);
         }
     }

@@ -4,7 +4,6 @@ import Game.Config;
 import Game.GameController;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,9 +14,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
-
+// this is main class of game
 public class Main extends Application {
     private int level = 1;
     public static void main(String[] args) {
@@ -26,6 +24,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        // menu scene
         Menu menu = new Menu(() -> preStory(primaryStage), primaryStage);
         Scene scene = new Scene(menu, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         primaryStage.setScene(scene);
@@ -114,6 +113,7 @@ public class Main extends Application {
     }
 
     private void gameEnd(Stage primaryStage) {
+        // end of each level
         GameEnd gameEnd = new GameEnd(() -> {
             if(GameController.getInstance().getGameTimer()!=0){
                 level = level + 1 ;
@@ -129,6 +129,7 @@ public class Main extends Application {
     }
 
     private void ConpleteGame(Stage primaryStage) {
+        // end of the game
         VBox completeGame = new VBox();
         completeGame.setAlignment(Pos.CENTER);
         Text completeText = new Text("Well Done! The Witch regain all her power. You had clear this game!!!");

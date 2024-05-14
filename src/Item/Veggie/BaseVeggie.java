@@ -90,6 +90,7 @@ public abstract class BaseVeggie extends Entity implements WeatherEffectable, Co
 
     @Override
     public void draw(GraphicsContext gc) {
+        // draw growth state degree and water and hp bar
         drawGrowthDegree(gc);
         drawBar(gc);
     }

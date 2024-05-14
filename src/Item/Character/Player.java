@@ -50,7 +50,7 @@ public class Player extends BaseCharacter {
         // check condition
         if (getAttackCoolDown() > 0 ||
                 !InputUtility.getKeyPressed(KeyCode.SPACE) ||
-                getBroom() == null)
+                getBroom() == null || isAttack())
             return;
 
         // attack slime that is reached by broom attack range
@@ -62,11 +62,11 @@ public class Player extends BaseCharacter {
                 if (distance <= broom.getAttackRange()) {
                     new Thread(() -> {
                         try {
+                            setAttack(true);
                             RenderableHolder.hitSound.play();
                             slime.setHp(slime.getHp() - broom.getDamage());
                             broom.setDurability(broom.getDurability() - Config.BROOMDURABILITYPERATTACK);
                             setAttackCoolDown(getMaxAttackCoolDown());
-                            setAttack(true);
                             Thread.sleep(300);
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
@@ -198,6 +198,7 @@ public class Player extends BaseCharacter {
                     0,broomDegree, ArcType.OPEN );
         }
     }
+
 
     public int getMaxAttackCoolDown() { return maxAttackCoolDown; }
 

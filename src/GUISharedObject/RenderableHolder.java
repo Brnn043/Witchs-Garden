@@ -11,8 +11,8 @@ import java.util.List;
 // this class is used to manage resources and entities
 public class RenderableHolder {
     private static RenderableHolder instance = new RenderableHolder();
-    private ArrayList<Entity> backgroundEntities;
-    private ArrayList<Entity> entities;
+    private List<Entity> backgroundEntities;
+    private List<Entity> entities;
     private Comparator<Entity> comparator;
     public static Image witchSprite;
     public static Image witchWalkSprite;
