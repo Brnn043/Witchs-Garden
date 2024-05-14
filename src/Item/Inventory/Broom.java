@@ -17,7 +17,8 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
     private float durability;
     private int attackRange;
     private float damage;
-    private double width, height;
+    private double width;
+    private double height;
 
     public Broom() {
         super();
@@ -56,12 +57,10 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
         double disX = GameController.getInstance().getPlayer().getX() - this.getX();
         double disY = GameController.getInstance().getPlayer().getY() - this.getY();
         double distance = Math.sqrt( Math.pow(disX,2) + Math.pow(disY,2) );
+
         if (distance >= Config.PLAYERCOLLECTRANGE) return;
 
-        if (player.getBroom() != null) {
-            System.out.println("Player already have BROOM");
-            return;
-        }
+        if (player.getBroom() != null) return;
 
         RenderableHolder.collectSound.play();
         player.setBroom(this);
@@ -85,7 +84,6 @@ public class Broom extends Entity implements Collectable, WeatherEffectable {
                 getWidth(), getHeight(), false)) {
             posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
             posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
-            System.out.println("Broom cannot be spawn here. Find new pos...");
         }
         setX(posX);
         setY(posY);

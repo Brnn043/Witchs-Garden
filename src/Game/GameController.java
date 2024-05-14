@@ -187,7 +187,6 @@ public class GameController {
     public void getNewSlime() {
         int slimeType = (int) (Math.random() * 3);
         Slime slime;
-        System.out.println(slimeType);
         if (slimeType == 0) {
             slime = new NormalSlime();
         } else if (slimeType == 1) {
@@ -295,21 +294,20 @@ public class GameController {
                 updateStats();
                 checkGameOver();
 
-                System.out.println("TIMER : " + game.getGameTimer());
             }
         }).start();
     }
 
     private void spawn() {
         GameController game = GameController.getInstance();
-        // spawn broom every 15 second
+        // spawn broom
         if (game.getGameTimer() % Config.BROOMSPAWNTIME == 0){
             Broom broom = new Broom();
             game.getBroomOnGround().add(broom);
             RenderableHolder.getInstance().add(broom);
         }
 
-        // spawn slime every 3 second
+        // spawn slime
         if (game.getGameTimer() % Config.SLIMESPAWNTIME == 0 &&
                 game.getSlimeList().size() <= 2 * getLevel() + 3){
             game.getNewSlime();

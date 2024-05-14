@@ -44,7 +44,6 @@ public abstract class Slime extends BaseCharacter{
                 posY - getHeight() / 2, getWidth(), getHeight(), false)){
             posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
             posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
-            System.out.println("Slime cannot be spawn here. Find new pos...");
         }
         setX(posX);
         setY(posY);
@@ -74,7 +73,6 @@ public abstract class Slime extends BaseCharacter{
         ArrayList<BaseVeggie> veggiesList= GameController.getInstance().getVeggiesList();
         if(!veggiesList.contains(this.getTargetVeggie())){
             this.setTargetVeggie(veggiesList.get((int) (Math.random()*veggiesList.size())));
-            System.out.println("slime find new target");
         }
 
         // calculate distance from target veggie
@@ -86,7 +84,6 @@ public abstract class Slime extends BaseCharacter{
         if( (distance - this.getAttackRange()) <= Config.SLIMEWALKSTEP ) {
             this.getTargetVeggie().setHp(this.getTargetVeggie().getHp()-this.getDamage());
             setAttackCoolDown(Config.SLIMEATTACKCOOLDOWN);
-            System.out.println("slime ATTACK!!!");
         }
 
     }

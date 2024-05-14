@@ -34,12 +34,7 @@ public class Main extends Application {
         primaryStage.setTitle("Witch's Garden");
         primaryStage.setResizable(false);
         primaryStage.show();
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                System.exit(0);
-            }
-        });
+        primaryStage.setOnCloseRequest(event -> System.exit(0));
     }
 
     private void preStory(Stage primaryStage){

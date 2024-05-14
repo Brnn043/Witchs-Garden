@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 // a utility class used for tracking the state of keyboard input
 public class InputUtility {
-    private static final ArrayList<KeyCode> keyPressed = new ArrayList<>();
+    private static ArrayList<KeyCode> keyPressed = new ArrayList<>();
 
     public static boolean getKeyPressed(KeyCode keycode) {
         return keyPressed.contains(keycode);

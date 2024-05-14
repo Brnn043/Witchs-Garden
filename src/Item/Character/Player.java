@@ -28,7 +28,6 @@ public class Player extends BaseCharacter{
         setWidth(Config.PLAYERWIDTH);
         setHeight(Config.PLAYERHEIGHT);
         this.z = 999;
-        System.out.println("Speed rate of player = " + getSpeedRate());
     }
 
     // the speed rate and attack cool down of player is based on weather
@@ -75,19 +74,16 @@ public class Player extends BaseCharacter{
                         setAttack(false);
                     }).start();
                 }
-            } catch (Exception e) { System.out.println(e); }
+            } catch (Exception e) {
+                System.out.println("try again");
+            }
         }
     }
 
     public void collectVeggie() {
         // player collect veggie
-        if (!InputUtility.getKeyPressed(KeyCode.E)) {
-            return;
-        }
-
-        if (GameController.getInstance().getVeggiesList().isEmpty()){
-            return;
-        }
+        if (!InputUtility.getKeyPressed(KeyCode.E)) return;
+        if (GameController.getInstance().getVeggiesList().isEmpty()) return;
 
         ArrayList<BaseVeggie> delVeggie = new ArrayList<BaseVeggie>();
         for (BaseVeggie veggie : GameController.getInstance().getVeggiesList()) {
@@ -193,7 +189,7 @@ public class Player extends BaseCharacter{
         }
 
         // draw remaining attack cool down
-        if (getBroom() != null){
+        if (getBroom() != null) {
             gc.setStroke(Color.WHITE);
             gc.setLineWidth(2);
             float broomDegree = ( (float) getMaxAttackCoolDown() - getAttackCoolDown() ) / getMaxAttackCoolDown() * 360;

@@ -14,10 +14,10 @@ import java.util.List;
 
 // this class is used to manage resources and entities
 public class RenderableHolder {
-    private static final RenderableHolder instance = new RenderableHolder();
-    private final List<Entity> backgroundEntities;
-    private final List<Entity> entities;
-    private final Comparator<Entity> comparator;
+    private static RenderableHolder instance = new RenderableHolder();
+    private List<Entity> backgroundEntities;
+    private List<Entity> entities;
+    private Comparator<Entity> comparator;
     public static Image witchSprite;
     public static Image witchWalkSprite;
     public static Image witchBroomSprite;
@@ -84,11 +84,6 @@ public class RenderableHolder {
     }
 
     public void add(Entity entity) {
-        if(entity instanceof Player) System.out.println("add player");
-        if(entity instanceof Broom) System.out.println("add broom");
-        if(entity instanceof Slime) System.out.println("add slime");
-        if(entity instanceof BaseVeggie) System.out.println("add veggie");
-
         entities.add(entity);
         Collections.sort(entities, comparator);
     }

@@ -57,7 +57,6 @@ public abstract class BaseVeggie extends Entity implements WeatherEffectable, Co
                 getWidth(), getHeight(),false)) {
             posX = Config.SPAWNLEFTBOUND + Math.random() * (Config.SPAWNRIGHTBOUND - Config.SPAWNLEFTBOUND);
             posY = Config.SPAWNTOPBOUND + Math.random() * (Config.SPAWNBOTTOMBOUND - Config.SPAWNTOPBOUND);
-            System.out.println("Veggie cannot be spawn here. Find new pos...");
         }
         setX(posX);
         setY(posY);
