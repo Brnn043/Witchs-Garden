@@ -124,7 +124,7 @@ public class Main extends Application {
                 startGame(primaryStage);
             }
         }, primaryStage);
-        Scene scene =new Scene(gameEnd, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        Scene scene = new Scene(gameEnd, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         primaryStage.setScene(scene);
     }
 

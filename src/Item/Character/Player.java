@@ -53,31 +53,32 @@ public class Player extends BaseCharacter {
                 getBroom() == null || isAttack())
             return;
 
+        ArrayList<Slime> attackedSlime = new ArrayList<>();
         // attack slime that is reached by broom attack range
         for (Slime slime : GameController.getInstance().getSlimeList()) {
-            try {
-                double disX = this.getX() - slime.getX();
-                double disY = this.getY() - slime.getY();
-                double distance = Math.sqrt(Math.pow(disX,2) + Math.pow(disY,2));
-                if (distance <= broom.getAttackRange()) {
-                    new Thread(() -> {
-                        try {
-                            setAttack(true);
-                            RenderableHolder.hitSound.play();
-                            slime.setHp(slime.getHp() - broom.getDamage());
-                            broom.setDurability(broom.getDurability() - Config.BROOMDURABILITYPERATTACK);
-                            setAttackCoolDown(getMaxAttackCoolDown());
-                            Thread.sleep(300);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        setAttack(false);
-                    }).start();
-                }
-            } catch (Exception e) {
-                System.out.println("try again");
+            double disX = this.getX() - slime.getX();
+            double disY = this.getY() - slime.getY();
+            double distance = Math.sqrt(Math.pow(disX,2) + Math.pow(disY,2));
+            if (distance <= broom.getAttackRange()) {
+                attackedSlime.add(slime);
             }
         }
+        new Thread(() -> {
+            try {
+                setAttack(true);
+                for (Slime slime: attackedSlime) {
+                    if (getBroom() == null) break;
+                    slime.setHp(slime.getHp() - broom.getDamage());
+                    broom.setDurability(broom.getDurability() - Config.BROOMDURABILITYPERATTACK);
+                    setAttackCoolDown(getMaxAttackCoolDown());
+                }
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            setAttack(false);
+        }).start();
+
     }
 
     public void collectVeggie() {
