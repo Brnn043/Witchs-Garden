@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 // this is player of the game which appear to be the witch
 // player is extended from BaseCharacter
-public class Player extends BaseCharacter{
+public class Player extends BaseCharacter {
     private Broom broom;
     private Config.WalkState walkState;
     private boolean isAttack;
@@ -201,7 +201,9 @@ public class Player extends BaseCharacter{
 
     public int getMaxAttackCoolDown() { return maxAttackCoolDown; }
 
-    public void setMaxAttackCoolDown(int maxAttackCoolDown) { this.maxAttackCoolDown = maxAttackCoolDown; }
+    public void setMaxAttackCoolDown(int maxAttackCoolDown) {
+        this.maxAttackCoolDown = maxAttackCoolDown;
+    }
 
     public Broom getBroom() { return broom; }
 

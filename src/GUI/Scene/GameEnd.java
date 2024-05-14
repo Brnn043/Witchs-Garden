@@ -29,7 +29,7 @@ public class GameEnd extends VBox {
         initializeExitButton(stage);
 
         // change text context
-        if (GameController.getInstance().getGameTimer() == 0 ){
+        if (GameController.getInstance().getGameTimer() == 0 ) {
             // GameOver cause time up
             endingText.setText("Time Up!! The witch fail to create a potion");
             startButton.setText("Try Again");

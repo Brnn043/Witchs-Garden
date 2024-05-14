@@ -6,7 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 // this is tree which appear in map
-public class Tree extends CollidableEntity implements WeatherChangeable{
+public class Tree extends CollidableEntity implements WeatherChangeable {
 
     private String imagePath;
     private int option;

@@ -102,7 +102,7 @@ public class EndStory extends GridPane {
         textArea.getChildren().add(analog);
     }
 
-    private void showLog(int logCount){
+    private void showLog(int logCount) {
         analog.setText(ANALOGS.get(logCount));
 
         //set default background image

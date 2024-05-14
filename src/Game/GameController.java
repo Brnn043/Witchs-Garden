@@ -198,7 +198,7 @@ public class GameController {
         RenderableHolder.getInstance().add(slime);
     }
 
-    public void collectVeggie(BaseVeggie veggie){
+    public void collectVeggie(BaseVeggie veggie) {
         if (veggie instanceof RainbowDrake) {
             setRainbowDrakeCount(getRainbowDrakeCount() + 1);
         }
@@ -211,7 +211,7 @@ public class GameController {
         deleteVeggie(veggie);
     }
 
-    public static void deleteVeggie(BaseVeggie veggie){
+    public static void deleteVeggie(BaseVeggie veggie) {
         RenderableHolder.getInstance().getEntities().remove(veggie);
         getInstance().getVeggiesList().remove(veggie);
         getInstance().getNewVeggie();
@@ -222,7 +222,7 @@ public class GameController {
         return instance;
     }
 
-    public void clearStats(int level){
+    public void clearStats(int level) {
         // clear keyboard input
         InputUtility.clearKeyPressed();
 

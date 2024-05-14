@@ -12,11 +12,11 @@ public class InputUtility {
     }
 
     public static void setKeyPressed(KeyCode keycode,boolean pressed) {
-        if(pressed){
-            if(!keyPressed.contains(keycode)){
+        if (pressed) {
+            if (!keyPressed.contains(keycode)) {
                 keyPressed.add(keycode);
             }
-        }else{
+        } else {
             keyPressed.remove(keycode);
         }
     }

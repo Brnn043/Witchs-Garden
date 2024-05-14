@@ -37,13 +37,13 @@ public class Main extends Application {
         primaryStage.setOnCloseRequest(event -> System.exit(0));
     }
 
-    private void preStory(Stage primaryStage){
+    private void preStory(Stage primaryStage) {
         // story scene
         Scene storyScene = new Scene(new PreStory(() -> startGame(primaryStage)), Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         primaryStage.setScene(storyScene);
     }
 
-    private void EndStory(Stage primaryStage){
+    private void EndStory(Stage primaryStage) {
         // story scene
         Scene storyScene = new Scene(new EndStory(() -> ConpleteGame(primaryStage)), Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         primaryStage.setScene(storyScene);

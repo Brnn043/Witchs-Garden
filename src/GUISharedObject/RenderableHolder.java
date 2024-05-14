@@ -42,8 +42,8 @@ public class RenderableHolder {
     }
 
     public RenderableHolder() {
-        entities = new ArrayList<Entity>();
-        backgroundEntities = new ArrayList<Entity>();
+        entities = new ArrayList<>();
+        backgroundEntities = new ArrayList<>();
         comparator = (Entity o1, Entity o2) -> {
             if (o1.getZ() > o2.getZ())
                 return 1;

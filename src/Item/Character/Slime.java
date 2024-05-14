@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 
 // this is base class of slime which is extended from BaseCharacter
-public abstract class Slime extends BaseCharacter{
+public abstract class Slime extends BaseCharacter {
     private float Hp;
     private float maxHp;
     private BaseVeggie targetVeggie;

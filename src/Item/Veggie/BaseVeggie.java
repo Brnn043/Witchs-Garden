@@ -26,7 +26,7 @@ public abstract class BaseVeggie extends Entity implements WeatherEffectable, Co
     private double width;
     private double height;
 
-    public BaseVeggie(int hp, float maxWater, float growthRate, float waterDroppingRate, int maxGrowthPoint){
+    public BaseVeggie(int hp, float maxWater, float growthRate, float waterDroppingRate, int maxGrowthPoint) {
         super();
         MAXHP = hp;
         setHp(MAXHP);
