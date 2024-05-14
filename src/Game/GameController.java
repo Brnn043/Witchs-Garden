@@ -172,14 +172,12 @@ public class GameController {
         } while ((veggieType == 0 && isRedFlowerMaxed) ||
                 (veggieType == 1 && isRainbowDrakeMaxed) || (veggieType == 2 && isDaffodilMaxed));
 
-
-
         BaseVeggie veggie;
-        if(veggieType == 0){
+        if (veggieType == 0) {
             veggie = new RedFlower();
-        }else if(veggieType == 1){
+        } else if (veggieType == 1) {
             veggie = new RainbowDrake();
-        }else{
+        } else {
             veggie = new Daffodil();
         }
         getVeggiesList().add(veggie);
