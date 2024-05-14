@@ -29,7 +29,6 @@ public class Menu extends GridPane {
     private GridPane howToPlayMenu;
     private HBox weatherButtonContainer;
     private Text titleText;
-    private Text creditContent;
     private VBox titleAndMenu;
     private StackPane creditHowToPlay;
 
@@ -260,15 +259,14 @@ public class Menu extends GridPane {
         closeCreditButton.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
         closeCreditButton.setOnAction(e -> creditMenu.setVisible(false));
 
-        initializeCreditContent();
-        creditMenu.add(creditContent,0,0);
+        creditMenu.add(getCreditContent(),0,0);
         creditMenu.add(closeCreditButton, 1,0);
         creditMenu.setVisible(false);
         creditMenu.setBackground(new Background(new BackgroundFill(Color.valueOf("#ffedd6"), new CornerRadii(10), null)));
     }
 
-    private void initializeCreditContent() {
-        creditContent = new Text();
+    private Text getCreditContent() {
+        Text creditContent = new Text();
         creditContent.setText("""
                 This project is created by
                 
@@ -280,6 +278,7 @@ public class Menu extends GridPane {
         creditContent.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
         creditContent.setFill(Color.web("#695244"));
         creditContent.setTextAlignment(TextAlignment.CENTER);
+        return creditContent;
     }
 
     private void setSunnyBackground() {
