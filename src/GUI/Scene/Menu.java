@@ -177,7 +177,7 @@ public class Menu extends GridPane {
         });
         startButton.setOnAction(e -> preStory.preStory());
     }
-    
+
     private void initializeHowToButton() {
         initializeHowToMenu();
         howToPlayButton = new Button("How To Play");
@@ -271,10 +271,10 @@ public class Menu extends GridPane {
         Text creditContent = new Text();
         creditContent.setText("""
                 This project is created by
-                
+
                 Naphat Serirak 6632061321
                 Raksakul Hiranas 6632190621
-                
+
                 2110215 (2023/2)
                 Programming Methodology I""");
         creditContent.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
