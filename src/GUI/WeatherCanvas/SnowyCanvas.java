@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+// this class will be called when its snowy
+// show the snows
 public class SnowyCanvas extends Canvas {
     private static final int NUM_SNOWFLAKES = 300;
     private List<Snowflake> snowflakes = new ArrayList<>();

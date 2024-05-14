@@ -5,6 +5,7 @@ import Game.Config;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+// the bush which appear in map
 public class Bush extends CollidableEntity implements WeatherChangeable {
     private String imagePath;
     private int option;

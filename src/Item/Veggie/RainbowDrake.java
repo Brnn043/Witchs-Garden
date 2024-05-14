@@ -4,6 +4,7 @@ import GUISharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
 
 // this is RainbowDrake which is extended from BaseVeggie
+// this veggie grows slowly
 public class RainbowDrake extends BaseVeggie {
     public RainbowDrake() {
         super(15, 200, 6, 10, 42);

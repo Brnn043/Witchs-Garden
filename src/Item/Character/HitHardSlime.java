@@ -5,6 +5,7 @@ import Game.Config;
 import javafx.scene.canvas.GraphicsContext;
 
 // this is HitHardSlime which is extended from Slime
+// this slime has very strong damage
 public class HitHardSlime extends Slime{
     public HitHardSlime() {
         super(Config.SLIMEMINSPEEDRATE, 12, 5);

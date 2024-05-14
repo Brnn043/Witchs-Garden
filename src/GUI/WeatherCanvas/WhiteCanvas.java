@@ -5,6 +5,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+// this class will be called when its rainy
+// create a gradually white vision
 public class WhiteCanvas extends Canvas {
     private final GraphicsContext gc;
     private double alpha = 0.0; // Initial alpha value
