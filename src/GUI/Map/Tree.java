@@ -1,11 +1,11 @@
 package GUI.Map;
 
 import GUISharedObject.CollidableEntity;
-import Games.Config;
+import Game.Config;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-
+// this is tree which appear in map
 public class Tree extends CollidableEntity implements WeatherChangeable{
 
     private String imagePath;
@@ -18,14 +18,14 @@ public class Tree extends CollidableEntity implements WeatherChangeable{
     }
 
     public void changeWeather(Config.Weather weather) {
-        if (weather == Config.Weather.SUNNY) imagePath = "Tree/Sunny_Tree"+option+".png";
-        else if (weather == Config.Weather.RAINY) imagePath = "Tree/Sunny_Tree"+option+".png";
-        else imagePath = "Tree/Snowy_Tree"+option+".png";
+        if (weather == Config.Weather.SUNNY) imagePath = "Tree/Sunny_Tree" + option + ".png";
+        else if (weather == Config.Weather.RAINY) imagePath = "Tree/Sunny_Tree" + option + ".png";
+        else imagePath = "Tree/Snowy_Tree" + option + ".png";
     }
 
     @Override
     public void draw(GraphicsContext gc) {
         Image treeImage = new Image(ClassLoader.getSystemResource(imagePath).toString());
-        gc.drawImage(treeImage,getX() - getWidth()/2,getY() -getHeight()/2,getWidth(),getHeight());
+        gc.drawImage(treeImage,getX() - getWidth() / 2,getY() - getHeight() / 2, getWidth(), getHeight());
     }
 }

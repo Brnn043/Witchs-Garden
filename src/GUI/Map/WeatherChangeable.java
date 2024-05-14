@@ -1,7 +1,8 @@
 package GUI.Map;
 
-import Games.Config;
+import Game.Config;
 
+// this interface is apply to backgroundEntities that is depended on weather
 public interface WeatherChangeable {
     void changeWeather(Config.Weather weather);
 }

@@ -1,5 +1,5 @@
 package GUI.WeatherCanvas;
-import Games.Config;
+import Game.Config;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+// this class will be called when its snowy
+// show the snows
 public class SnowyCanvas extends Canvas {
     private static final int NUM_SNOWFLAKES = 300;
     private List<Snowflake> snowflakes = new ArrayList<>();
@@ -58,10 +60,10 @@ public class SnowyCanvas extends Canvas {
 
         private Snowflake() {
             Random random = new Random();
-            x = random.nextDouble() * Config.GAMESCREENWIDTH; // Adjust width as needed
-            y = random.nextDouble() * Config.GAMESCREENHEIGHT; // Adjust height as needed
-            speed = random.nextDouble() * 2 + 1; // Random speed between 1 and 3
-            size = random.nextDouble() * 4 + 1; // Random size between 1 and 5
+            x = random.nextDouble() * Config.GAMESCREENWIDTH;
+            y = random.nextDouble() * Config.GAMESCREENHEIGHT;
+            speed = random.nextDouble() * 2 + 1;
+            size = random.nextDouble() * 4 + 1;
         }
 
         private void update() {

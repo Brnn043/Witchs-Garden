@@ -1,15 +1,16 @@
 package GUI.Map;
 
 import GUISharedObject.CollidableEntity;
-import Games.Config;
+import Game.Config;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+// the house which appear in house
 public class House extends CollidableEntity implements WeatherChangeable {
     private String imagePath;
 
-    public House(double x,double y,double width,double height) {
-        super(x,y,width,height);
+    public House(double x, double y, double width, double height) {
+        super(x, y, width, height);
         changeWeather(Config.Weather.SUNNY);
     }
 
@@ -25,7 +26,7 @@ public class House extends CollidableEntity implements WeatherChangeable {
     @Override
     public void draw(GraphicsContext gc) {
         Image houseImage = new Image(ClassLoader.getSystemResource(imagePath).toString());
-        gc.drawImage(houseImage,getX() - getWidth()/2,getY() - getHeight()/2,getWidth(),getHeight());
+        gc.drawImage(houseImage,getX() - getWidth() / 2,getY() - getHeight() / 2, getWidth(), getHeight());
 
     }
 }

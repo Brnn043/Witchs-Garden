@@ -1,6 +1,6 @@
 package GUI.WeatherCanvas;
 
-import Games.Config;
+import Game.Config;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+// this class will be called when its rainy
+// show the rains
 public class RainyCanvas extends Canvas {
 
     private static final double MAX_SPEED = 15.0;
@@ -61,21 +63,21 @@ public class RainyCanvas extends Canvas {
 
         private Raindrop() {
             Random random = new Random();
-            x = random.nextDouble() * Config.GAMESCREENWIDTH; // Adjust width as needed
-            y = random.nextDouble() * Config.GAMESCREENHEIGHT; // Adjust height as needed
+            x = random.nextDouble() * Config.GAMESCREENWIDTH;
+            y = random.nextDouble() * Config.GAMESCREENHEIGHT;
             speed = random.nextDouble() * MAX_SPEED + 1;
         }
 
         private void update() {
             y += speed;
-            if (y > 600) { // Adjust height as needed
+            if (y > 600) {
                 y = 0;
             }
         }
 
         private void render(GraphicsContext gc) {
             gc.setFill(Color.WHITE);
-            gc.fillRect(x, y, 2, 10); // Adjust size as needed
+            gc.fillRect(x, y, 2, 10);
         }
     }
 }

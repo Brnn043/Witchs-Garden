@@ -1,15 +1,16 @@
 package GUI.Map;
 
 import GUISharedObject.Entity;
-import Games.Config;
+import Game.Config;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+// the background of map
 public class BackgroundImage extends Entity implements WeatherChangeable {
     private String imagePath;
 
     public BackgroundImage() {
-        super(0,0);
+        super(0, 0);
         changeWeather(Config.Weather.SUNNY);
     }
 
@@ -26,7 +27,7 @@ public class BackgroundImage extends Entity implements WeatherChangeable {
 
     @Override
     public void draw(GraphicsContext gc) {
-        Image backgroundImage = new Image(ClassLoader.getSystemResource(imagePath).toString(), Config.GAMESCREENWIDTH,Config.GAMESCREENHEIGHT,true,false);
-        gc.drawImage(backgroundImage,getX(),getY(),Config.GAMESCREENWIDTH,Config.GAMESCREENHEIGHT);
+        Image backgroundImage = new Image(ClassLoader.getSystemResource(imagePath).toString(), Config.GAMESCREENWIDTH, Config.GAMESCREENHEIGHT, true, false);
+        gc.drawImage(backgroundImage, getX(), getY(), Config.GAMESCREENWIDTH, Config.GAMESCREENHEIGHT);
     }
 }
