@@ -1,7 +1,7 @@
-import GUI.Scene.*;
-import GUISharedObject.RenderableHolder;
-import Game.Config;
-import Game.GameController;
+import gui.scene.*;
+import guiSharedObject.RenderableHolder;
+import game.Config;
+import game.GameController;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -43,9 +43,9 @@ public class Main extends Application {
         primaryStage.setScene(storyScene);
     }
 
-    private void EndStory(Stage primaryStage) {
+    private void endStory(Stage primaryStage) {
         // story scene
-        Scene storyScene = new Scene(new EndStory(() -> ConpleteGame(primaryStage)), Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        Scene storyScene = new Scene(new EndStory(() -> completeGame(primaryStage)), Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         primaryStage.setScene(storyScene);
     }
 
@@ -121,7 +121,7 @@ public class Main extends Application {
                 level = level + 1 ;
             }
             if(level == 4){
-                EndStory(primaryStage);
+                endStory(primaryStage);
             }else{
                 startGame(primaryStage);
             }
@@ -130,7 +130,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
     }
 
-    private void ConpleteGame(Stage primaryStage) {
+    private void completeGame(Stage primaryStage) {
         // end of the game
         VBox completeGame = new VBox();
         completeGame.setAlignment(Pos.CENTER);
@@ -156,7 +156,7 @@ public class Main extends Application {
             primaryStage.close();
         });
 
-        Scene scene =new Scene(completeGame, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
+        Scene scene = new Scene(completeGame, Config.GAMEFRAMEWIDTH, Config.GAMEFRAMEHEIGHT);
         completeGame.setSpacing(20);
         completeGame.getChildren().add(completeText);
         completeGame.getChildren().add(exitButton);

@@ -1,5 +1,5 @@
 @startuml
-class GUISharedObject.InputUtility {
+class guiSharedObject.InputUtility {
 - {static} ArrayList<KeyCode> keyPressed
 + {static} boolean getKeyPressed(KeyCode)
 + {static} void setKeyPressed(KeyCode,boolean)
@@ -7,7 +7,7 @@ class GUISharedObject.InputUtility {
 }
 
 
-class GUI.Map.BackgroundImage {
+class gui.map.BackgroundImage {
 - String imagePath
 + <<Create>> BackgroundImage()
 + void changeWeather(Config.Weather)
@@ -16,106 +16,11 @@ class GUI.Map.BackgroundImage {
 }
 
 
-class Item.Character.SpeedSlime {
-+ <<Create>> SpeedSlime()
-+ void draw(GraphicsContext)
-}
-
-interface Item.Interface.Attackable {
-~ void attack()
-~ int getAttackRange()
-}
-
-abstract class Item.Character.Slime {
-- float Hp
-- float maxHp
-- BaseVeggie targetVeggie
-- float maxDamage
-+ <<Create>> Slime(int,float,float)
-- void spawnOnMap()
-+ void weatherEffected()
-+ void attack()
-+ float getMaxHp()
-+ void setMaxHp(float)
-+ float getMaxDamage()
-+ void setMaxDamage(float)
-+ float getHp()
-+ void setHp(float)
-+ BaseVeggie getTargetVeggie()
-+ void setTargetVeggie(BaseVeggie)
-+ void walk()
-+ void draw(GraphicsContext)
-}
-
-
-class GUI.GameBackground.SunnyBackground {
+class gui.gameBackground.SunnyBackground {
 + <<Create>> SunnyBackground(double,double)
 }
 
-interface Item.Interface.Collectable {
-~ void spawnOnMap()
-~ void collected()
-~ boolean isCollected()
-}
-
-class GUI.WeatherCanvas.RainyCanvas {
-- {static} double MAX_SPEED
-- {static} int NUM_RAINDROPS
-- List<Raindrop> raindrops
-+ <<Create>> RainyCanvas()
-- void updateRaindrops()
-- void render()
-}
-
-
-class GUI.WeatherCanvas.RainyCanvas$Raindrop {
-- double x
-- double y
-- double speed
-- <<Create>> Raindrop()
-- void update()
-- void render(GraphicsContext)
-}
-
-
-class Item.Veggie.Daffodil {
-+ <<Create>> Daffodil()
-+ void draw(GraphicsContext)
-}
-
-class GUI.Map.House {
-- String imagePath
-+ <<Create>> House(double,double,double,double)
-+ int getZ()
-+ void changeWeather(Config.Weather)
-+ void draw(GraphicsContext)
-}
-
-
-class Item.Character.Player {
-- Broom broom
-- Config.WalkState walkState
-- boolean isAttack
-- int maxAttackCoolDown
-+ <<Create>> Player(int,int,int,int,int)
-+ void weatherEffected()
-+ void attack()
-+ void collectVeggie()
-+ void action()
-+ void walk()
-+ void draw(GraphicsContext)
-+ int getMaxAttackCoolDown()
-+ void setMaxAttackCoolDown(int)
-+ Broom getBroom()
-+ void setBroom(Broom)
-+ Config.WalkState getWalkState()
-+ void setWalkState(Config.WalkState)
-+ boolean isAttack()
-+ void setAttack(boolean)
-}
-
-
-abstract class Item.Veggie.BaseVeggie {
+abstract class items.veggies.BaseVeggie {
 - boolean isCollected
 - float growthPoint
 - float MAXGROWTHPOINT
@@ -155,7 +60,95 @@ abstract class Item.Veggie.BaseVeggie {
 }
 
 
-class GUI.WeatherCanvas.WhiteCanvas {
+class items.characters.NormalSlime {
++ <<Create>> NormalSlime()
++ void draw(GraphicsContext)
+}
+
+class items.characters.HitHardSlime {
++ <<Create>> HitHardSlime()
++ void draw(GraphicsContext)
+}
+
+class items.veggies.RedFlower {
++ <<Create>> RedFlower()
++ void draw(GraphicsContext)
+}
+
+class gui.weatherCanvas.RainyCanvas {
+- {static} double MAX_SPEED
+- {static} int NUM_RAINDROPS
+- List<Raindrop> raindrops
++ <<Create>> RainyCanvas()
+- void updateRaindrops()
+- void render()
+}
+
+
+class gui.weatherCanvas.RainyCanvas$Raindrop {
+- double x
+- double y
+- double speed
+- <<Create>> Raindrop()
+- void update()
+- void render(GraphicsContext)
+}
+
+
+interface items.interfaces.Attackable {
+~ void attack()
+~ int getAttackRange()
+}
+
+class items.characters.Player {
+- Broom broom
+- Config.WalkState walkState
+- boolean isAttack
+- int maxAttackCoolDown
++ <<Create>> Player(int,int,int,int,int)
++ void weatherEffected()
++ void attack()
++ void collectVeggie()
++ void action()
++ void walk()
++ void draw(GraphicsContext)
++ int getMaxAttackCoolDown()
++ void setMaxAttackCoolDown(int)
++ Broom getBroom()
++ void setBroom(Broom)
++ Config.WalkState getWalkState()
++ void setWalkState(Config.WalkState)
++ boolean isAttack()
++ void setAttack(boolean)
+}
+
+
+class items.veggies.Daffodil {
++ <<Create>> Daffodil()
++ void draw(GraphicsContext)
+}
+
+class gui.map.House {
+- String imagePath
++ <<Create>> House(double,double,double,double)
++ int getZ()
++ void changeWeather(Config.Weather)
++ void draw(GraphicsContext)
+}
+
+
+class items.inventories.Clock {
+- Config.Weather weather
+- int timer
++ <<Create>> Clock()
++ boolean changeSeason(Config.Weather)
++ Config.Weather getWeather()
++ int getTimer()
++ void setTimer(int)
+}
+
+
+class gui.weatherCanvas.WhiteCanvas {
 - GraphicsContext gc
 - double alpha
 - double minSpeed
@@ -170,23 +163,7 @@ class GUI.WeatherCanvas.WhiteCanvas {
 }
 
 
-class Item.Inventory.Clock {
-- Config.Weather weather
-- int timer
-+ <<Create>> Clock()
-+ boolean changeSeason(Config.Weather)
-+ Config.Weather getWeather()
-+ int getTimer()
-+ void setTimer(int)
-}
-
-
-class Item.Character.NormalSlime {
-+ <<Create>> NormalSlime()
-+ void draw(GraphicsContext)
-}
-
-class GUI.Scene.PreStory {
+class gui.scene.PreStory {
 - ArrayList<String> ANALOGS
 - int count
 - Text analog
@@ -202,11 +179,17 @@ class GUI.Scene.PreStory {
 }
 
 
-interface GUI.Scene.PreStory$GameStarter {
+interface gui.scene.PreStory$GameStarter {
 ~ void startGame()
 }
 
-class GUI.Scene.Menu {
+class gui.scene.GameScreen {
++ <<Create>> GameScreen(double,double)
++ void addListener()
++ void paintComponent()
+}
+
+class gui.scene.Menu {
 - Button sunnyButton
 - Button snowyButton
 - Button rainyButton
@@ -242,17 +225,11 @@ class GUI.Scene.Menu {
 }
 
 
-interface GUI.Scene.Menu$PreStory {
+interface gui.scene.Menu$PreStory {
 ~ void preStory()
 }
 
-class GUI.Scene.GameScreen {
-+ <<Create>> GameScreen(double,double)
-+ void addListener()
-+ void paintComponent()
-}
-
-class GUISharedObject.Entity {
+class guiSharedObject.Entity {
 # double x
 # int z
 # boolean visible
@@ -269,11 +246,11 @@ class GUISharedObject.Entity {
 }
 
 
-class GUI.GameBackground.RainyBackground {
+class gui.gameBackground.RainyBackground {
 + <<Create>> RainyBackground(double,double)
 }
 
-class GUISharedObject.CollidableEntity {
+class guiSharedObject.CollidableEntity {
 # double width
 # double height
 # <<Create>> CollidableEntity(double,double,double,double)
@@ -286,13 +263,12 @@ class GUISharedObject.CollidableEntity {
 }
 
 
-interface Item.Interface.Walkable {
-~ float getSpeedRate()
-~ void setSpeedRate(float)
-~ void walk()
+class items.characters.SpeedSlime {
++ <<Create>> SpeedSlime()
++ void draw(GraphicsContext)
 }
 
-class GUI.Scene.GameEnd {
+class gui.scene.GameEnd {
 - Button startButton
 - Button exitButton
 - Text endingText
@@ -303,11 +279,11 @@ class GUI.Scene.GameEnd {
 }
 
 
-interface GUI.Scene.GameEnd$GameStarter {
+interface gui.scene.GameEnd$GameStarter {
 ~ void startGame()
 }
 
-class GUISharedObject.RenderableHolder {
+class guiSharedObject.RenderableHolder {
 - {static} RenderableHolder instance
 - List<Entity> backgroundEntities
 - List<Entity> entities
@@ -328,12 +304,12 @@ class GUISharedObject.RenderableHolder {
 + {static} Image rainbowDrakeIdleSprite
 + {static} Image redFlowerIdleSprite
 + {static} Image daffodilIdleSprite
-+ {static} AudioClip hitSound
-+ {static} AudioClip collectSound
-+ {static} AudioClip clockSound
-+ {static} AudioClip mainMenuSong
-+ {static} AudioClip storySong
-+ {static} AudioClip gameSong
++ {static} MediaPlayer hitSound
++ {static} MediaPlayer collectSound
++ {static} MediaPlayer clockSound
++ {static} MediaPlayer mainMenuSong
++ {static} MediaPlayer storySong
++ {static} MediaPlayer gameSong
 + <<Create>> RenderableHolder()
 + {static} void loadResource()
 + void add(Entity)
@@ -350,14 +326,41 @@ class Main {
 + {static} void main(String[])
 + void start(Stage)
 - void preStory(Stage)
-- void EndStory(Stage)
+- void endStory(Stage)
 - void startGame(Stage)
 - void gameEnd(Stage)
-- void ConpleteGame(Stage)
+- void completeGame(Stage)
 }
 
 
-class GUI.Map.Tree {
+class items.inventories.Broom {
+- boolean isCollected
+- float durability
+- int attackRange
+- float damage
+- double width
+- double height
++ <<Create>> Broom()
++ void weatherEffected()
++ void collected()
++ void draw(GraphicsContext)
++ void spawnOnMap()
++ void setX(double)
++ void setY(double)
++ double getWidth()
++ double getHeight()
++ float getDamage()
++ void setDamage(float)
++ float getDurability()
++ void setDurability(float)
++ int getAttackRange()
++ void setAttackRange(int)
++ boolean isCollected()
++ void setCollected(boolean)
+}
+
+
+class gui.map.Tree {
 - String imagePath
 - int option
 + <<Create>> Tree(double,double,double,double,int,int)
@@ -366,7 +369,13 @@ class GUI.Map.Tree {
 }
 
 
-class Game.GameController {
+interface items.interfaces.Walkable {
+~ float getSpeedRate()
+~ void setSpeedRate(float)
+~ void walk()
+}
+
+class game.GameController {
 - {static} GameController instance
 - Player player
 - ArrayList<Slime> slimeList
@@ -444,7 +453,38 @@ class Game.GameController {
 }
 
 
-class GUI.Scene.GamePanel {
+interface items.interfaces.WeatherEffectable {
+~ void weatherEffected()
+}
+
+class items.veggies.RainbowDrake {
++ <<Create>> RainbowDrake()
++ void draw(GraphicsContext)
+}
+
+abstract class items.characters.BaseCharacter {
+- float speedRate
+- float MAXSPEEDRATE
+- int attackRange
+- float damage
+- int attackCoolDown
++ <<Create>> BaseCharacter(double,double,int,int,float)
++ <<Create>> BaseCharacter(int,int,float)
++ void weatherEffected()
++ void setX(double)
++ void setY(double)
++ int getAttackCoolDown()
++ void setAttackCoolDown(int)
++ float getSpeedRate()
++ void setSpeedRate(float)
++ int getAttackRange()
++ void walk()
++ float getDamage()
++ void setDamage(float)
+}
+
+
+class gui.scene.GamePanel {
 - GameController gameController
 - GameScreen gameScreen
 - StackPane gameScreenWithEffect
@@ -480,39 +520,7 @@ class GUI.Scene.GamePanel {
 }
 
 
-class Item.Veggie.RainbowDrake {
-+ <<Create>> RainbowDrake()
-+ void draw(GraphicsContext)
-}
-
-class Item.Inventory.Broom {
-- boolean isCollected
-- float durability
-- int attackRange
-- float damage
-- double width
-- double height
-+ <<Create>> Broom()
-+ void weatherEffected()
-+ void collected()
-+ void draw(GraphicsContext)
-+ void spawnOnMap()
-+ void setX(double)
-+ void setY(double)
-+ double getWidth()
-+ double getHeight()
-+ float getDamage()
-+ void setDamage(float)
-+ float getDurability()
-+ void setDurability(float)
-+ int getAttackRange()
-+ void setAttackRange(int)
-+ boolean isCollected()
-+ void setCollected(boolean)
-}
-
-
-class Game.Config {
+class game.Config {
 + {static} int GAMEFRAMEWIDTH
 + {static} int GAMEFRAMEHEIGHT
 + {static} int GAMESCREENWIDTH
@@ -551,33 +559,24 @@ class Game.Config {
 + {static} double VEGGIESIZE
 }
 
-enum Game.Weather {
+enum game.Weather {
 +  SUNNY
 +  SNOWY
 +  RAINY
 }
 
-enum Game.WalkState {
+enum game.WalkState {
 +  STAY
 +  FRONT
 +  RIGHT
 +  LEFT
 }
 
-interface GUI.Map.WeatherChangeable {
+interface gui.map.WeatherChangeable {
 ~ void changeWeather(Config.Weather)
 }
 
-class Item.Character.HitHardSlime {
-+ <<Create>> HitHardSlime()
-+ void draw(GraphicsContext)
-}
-
-interface Item.Interface.WeatherEffectable {
-~ void weatherEffected()
-}
-
-class GUI.WeatherCanvas.SnowyCanvas {
+class gui.weatherCanvas.SnowyCanvas {
 - {static} int NUM_SNOWFLAKES
 - List<Snowflake> snowflakes
 + <<Create>> SnowyCanvas()
@@ -586,7 +585,7 @@ class GUI.WeatherCanvas.SnowyCanvas {
 }
 
 
-class GUI.WeatherCanvas.SnowyCanvas$Snowflake {
+class gui.weatherCanvas.SnowyCanvas$Snowflake {
 - double x
 - double y
 - double speed
@@ -597,11 +596,17 @@ class GUI.WeatherCanvas.SnowyCanvas$Snowflake {
 }
 
 
-class GUI.GameBackground.SnowyBackground {
+interface items.interfaces.Collectable {
+~ void spawnOnMap()
+~ void collected()
+~ boolean isCollected()
+}
+
+class gui.gameBackground.SnowyBackground {
 + <<Create>> SnowyBackground(double,double)
 }
 
-class GUI.Map.Bush {
+class gui.map.Bush {
 - String imagePath
 - int option
 + <<Create>> Bush(double,double,double,double,int,int)
@@ -610,7 +615,29 @@ class GUI.Map.Bush {
 }
 
 
-class GUI.Scene.EndStory {
+abstract class items.characters.Slime {
+- float Hp
+- float maxHp
+- BaseVeggie targetVeggie
+- float maxDamage
++ <<Create>> Slime(int,float,float)
+- void spawnOnMap()
++ void weatherEffected()
++ void attack()
++ float getMaxHp()
++ void setMaxHp(float)
++ float getMaxDamage()
++ void setMaxDamage(float)
++ float getHp()
++ void setHp(float)
++ BaseVeggie getTargetVeggie()
++ void setTargetVeggie(BaseVeggie)
++ void walk()
++ void draw(GraphicsContext)
+}
+
+
+class gui.scene.EndStory {
 - ArrayList<String> ANALOGS
 - int count
 - Text analog
@@ -626,83 +653,56 @@ class GUI.Scene.EndStory {
 }
 
 
-interface GUI.Scene.EndStory$GameEnding {
+interface gui.scene.EndStory$GameEnding {
 ~ void CompleteGame()
 }
 
-abstract class Item.Character.BaseCharacter {
-- float speedRate
-- float MAXSPEEDRATE
-- int attackRange
-- float damage
-- int attackCoolDown
-+ <<Create>> BaseCharacter(double,double,int,int,float)
-+ <<Create>> BaseCharacter(int,int,float)
-+ void weatherEffected()
-+ void setX(double)
-+ void setY(double)
-+ int getAttackCoolDown()
-+ void setAttackCoolDown(int)
-+ float getSpeedRate()
-+ void setSpeedRate(float)
-+ int getAttackRange()
-+ void walk()
-+ float getDamage()
-+ void setDamage(float)
-}
 
 
-class Item.Veggie.RedFlower {
-+ <<Create>> RedFlower()
-+ void draw(GraphicsContext)
-}
-
-
-
-GUI.Map.WeatherChangeable <|.. GUI.Map.BackgroundImage
-GUISharedObject.Entity <|-- GUI.Map.BackgroundImage
-Item.Character.Slime <|-- Item.Character.SpeedSlime
-Item.Character.BaseCharacter <|-- Item.Character.Slime
-javafx.scene.canvas.Canvas <|-- GUI.GameBackground.SunnyBackground
-javafx.scene.canvas.Canvas <|-- GUI.WeatherCanvas.RainyCanvas
-GUI.WeatherCanvas.RainyCanvas +.. GUI.WeatherCanvas.RainyCanvas$Raindrop
-Item.Veggie.BaseVeggie <|-- Item.Veggie.Daffodil
-GUI.Map.WeatherChangeable <|.. GUI.Map.House
-GUISharedObject.CollidableEntity <|-- GUI.Map.House
-Item.Character.BaseCharacter <|-- Item.Character.Player
-Item.Interface.WeatherEffectable <|.. Item.Veggie.BaseVeggie
-Item.Interface.Collectable <|.. Item.Veggie.BaseVeggie
-GUISharedObject.Entity <|-- Item.Veggie.BaseVeggie
-javafx.scene.canvas.Canvas <|-- GUI.WeatherCanvas.WhiteCanvas
-Item.Character.Slime <|-- Item.Character.NormalSlime
-GUI.Scene.GridPane <|-- GUI.Scene.PreStory
-GUI.Scene.PreStory +.. GUI.Scene.PreStory$GameStarter
-GUI.Scene.GridPane <|-- GUI.Scene.Menu
-GUI.Scene.Menu +.. GUI.Scene.Menu$PreStory
-javafx.scene.canvas.Canvas <|-- GUI.Scene.GameScreen
-javafx.scene.canvas.Canvas <|-- GUI.GameBackground.RainyBackground
-GUISharedObject.Entity <|-- GUISharedObject.CollidableEntity
-javafx.scene.layout.VBox <|-- GUI.Scene.GameEnd
-GUI.Scene.GameEnd +.. GUI.Scene.GameEnd$GameStarter
+gui.map.WeatherChangeable <|.. gui.map.BackgroundImage
+guiSharedObject.Entity <|-- gui.map.BackgroundImage
+javafx.scene.canvas.Canvas <|-- gui.gameBackground.SunnyBackground
+items.interfaces.WeatherEffectable <|.. items.veggies.BaseVeggie
+items.interfaces.Collectable <|.. items.veggies.BaseVeggie
+guiSharedObject.Entity <|-- items.veggies.BaseVeggie
+items.characters.Slime <|-- items.characters.NormalSlime
+items.characters.Slime <|-- items.characters.HitHardSlime
+items.veggies.BaseVeggie <|-- items.veggies.RedFlower
+javafx.scene.canvas.Canvas <|-- gui.weatherCanvas.RainyCanvas
+gui.weatherCanvas.RainyCanvas +.. gui.weatherCanvas.RainyCanvas$Raindrop
+items.characters.BaseCharacter <|-- items.characters.Player
+items.veggies.BaseVeggie <|-- items.veggies.Daffodil
+gui.map.WeatherChangeable <|.. gui.map.House
+guiSharedObject.CollidableEntity <|-- gui.map.House
+javafx.scene.canvas.Canvas <|-- gui.weatherCanvas.WhiteCanvas
+gui.scene.GridPane <|-- gui.scene.PreStory
+gui.scene.PreStory +.. gui.scene.PreStory$GameStarter
+javafx.scene.canvas.Canvas <|-- gui.scene.GameScreen
+gui.scene.GridPane <|-- gui.scene.Menu
+gui.scene.Menu +.. gui.scene.Menu$PreStory
+javafx.scene.canvas.Canvas <|-- gui.gameBackground.RainyBackground
+guiSharedObject.Entity <|-- guiSharedObject.CollidableEntity
+items.characters.Slime <|-- items.characters.SpeedSlime
+javafx.scene.layout.VBox <|-- gui.scene.GameEnd
+gui.scene.GameEnd +.. gui.scene.GameEnd$GameStarter
 javafx.application.Application <|-- Main
-GUI.Map.WeatherChangeable <|.. GUI.Map.Tree
-GUISharedObject.CollidableEntity <|-- GUI.Map.Tree
-GUI.Scene.HBox <|-- GUI.Scene.GamePanel
-Item.Veggie.BaseVeggie <|-- Item.Veggie.RainbowDrake
-Item.Interface.Collectable <|.. Item.Inventory.Broom
-Item.Interface.WeatherEffectable <|.. Item.Inventory.Broom
-GUISharedObject.Entity <|-- Item.Inventory.Broom
-Item.Character.Slime <|-- Item.Character.HitHardSlime
-javafx.scene.canvas.Canvas <|-- GUI.WeatherCanvas.SnowyCanvas
-GUI.WeatherCanvas.SnowyCanvas +.. GUI.WeatherCanvas.SnowyCanvas$Snowflake
-javafx.scene.canvas.Canvas <|-- GUI.GameBackground.SnowyBackground
-GUI.Map.WeatherChangeable <|.. GUI.Map.Bush
-GUISharedObject.CollidableEntity <|-- GUI.Map.Bush
-GUI.Scene.GridPane <|-- GUI.Scene.EndStory
-GUI.Scene.EndStory +.. GUI.Scene.EndStory$GameEnding
-Item.Interface.Walkable <|.. Item.Character.BaseCharacter
-Item.Interface.Attackable <|.. Item.Character.BaseCharacter
-Item.Interface.WeatherEffectable <|.. Item.Character.BaseCharacter
-GUISharedObject.CollidableEntity <|-- Item.Character.BaseCharacter
-Item.Veggie.BaseVeggie <|-- Item.Veggie.RedFlower
+items.interfaces.Collectable <|.. items.inventories.Broom
+items.interfaces.WeatherEffectable <|.. items.inventories.Broom
+guiSharedObject.Entity <|-- items.inventories.Broom
+gui.map.WeatherChangeable <|.. gui.map.Tree
+guiSharedObject.CollidableEntity <|-- gui.map.Tree
+items.veggies.BaseVeggie <|-- items.veggies.RainbowDrake
+items.interfaces.Walkable <|.. items.characters.BaseCharacter
+items.interfaces.Attackable <|.. items.characters.BaseCharacter
+items.interfaces.WeatherEffectable <|.. items.characters.BaseCharacter
+guiSharedObject.CollidableEntity <|-- items.characters.BaseCharacter
+gui.scene.HBox <|-- gui.scene.GamePanel
+javafx.scene.canvas.Canvas <|-- gui.weatherCanvas.SnowyCanvas
+gui.weatherCanvas.SnowyCanvas +.. gui.weatherCanvas.SnowyCanvas$Snowflake
+javafx.scene.canvas.Canvas <|-- gui.gameBackground.SnowyBackground
+gui.map.WeatherChangeable <|.. gui.map.Bush
+guiSharedObject.CollidableEntity <|-- gui.map.Bush
+items.characters.BaseCharacter <|-- items.characters.Slime
+gui.scene.GridPane <|-- gui.scene.EndStory
+gui.scene.EndStory +.. gui.scene.EndStory$GameEnding
 @enduml
